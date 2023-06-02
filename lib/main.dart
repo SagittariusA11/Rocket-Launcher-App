@@ -6,6 +6,10 @@ import 'package:rocket_launcher_app/utils/routes.dart';
 
 void main() {
   runApp(const MyApp());
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.landscapeLeft,
+    DeviceOrientation.landscapeRight,
+  ]);
 }
 
 class MyApp extends StatefulWidget {

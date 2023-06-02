@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.rocket_launcher_app">
    <application
-        android:label="rocket_launcher_app"
+        android:label="Rocket Launcher App"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
