@@ -44,6 +44,8 @@ dependencies:
   animated_text_kit: ^4.2.2
   path_provider: ^2.0.15
   flutter_translate: ^4.0.4
+  provider: ^6.0.5
+  localization: ^2.1.0
 
 dev_dependencies:
   flutter_test:

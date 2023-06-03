@@ -90,8 +90,8 @@ class _LGActionsView extends State<LGActionsView> {
                                   children: <Widget>[
                                     Text(
                                         isSuccess
-                                            ? translate('continue')
-                                            : translate('dismiss'),
+                                            ? 'continue'
+                                            : 'dismiss',
                                         style: TextStyle(
                                             fontSize: 20, color: Colors.black)),
                                   ],
@@ -174,8 +174,8 @@ class _LGActionsView extends State<LGActionsView> {
                                     }).catchError((onError) {
                                       print('oh no $onError');
                                       showAlertDialog(
-                                          translate("Tasks.alert5"),
-                                          translate("Tasks.alert6"),
+                                          "Tasks.alert5",
+                                          "Tasks.alert6",
                                           false,
                                           blackandwhite);
                                     });
@@ -187,8 +187,8 @@ class _LGActionsView extends State<LGActionsView> {
                                     }).catchError((onError) {
                                       print('oh no $onError');
                                       showAlertDialog(
-                                          translate("Tasks.alert5"),
-                                          translate("Tasks.alert6"),
+                                          "Tasks.alert5",
+                                          "Tasks.alert6",
                                           false,
                                           blackandwhite);
                                     });
@@ -200,8 +200,8 @@ class _LGActionsView extends State<LGActionsView> {
                                     }).catchError((onError) {
                                       print('oh no $onError');
                                       showAlertDialog(
-                                          translate("Tasks.alert5"),
-                                          translate("Tasks.alert6"),
+                                          "Tasks.alert5",
+                                          "Tasks.alert6",
                                           false,
                                           blackandwhite);
                                     });
@@ -210,7 +210,7 @@ class _LGActionsView extends State<LGActionsView> {
                                 },
                                 child: Wrap(
                                   children: <Widget>[
-                                    Text(translate('Tasks.Yes'),
+                                    Text('Tasks.Yes',
                                         style: TextStyle(
                                             fontSize: 20, color: Colors.black)),
                                   ],
@@ -238,7 +238,7 @@ class _LGActionsView extends State<LGActionsView> {
                                 },
                                 child: Wrap(
                                   children: <Widget>[
-                                    Text(translate('Tasks.No'),
+                                    Text('Tasks.No',
                                         style: TextStyle(
                                           fontSize: 20,
                                           color: Color.fromARGB(
@@ -308,36 +308,54 @@ class _LGActionsView extends State<LGActionsView> {
                         SizedBox(
                           width: ScreenConfig.widthPercent*10,
                         ),
-                        TaskButton(
-                          task: 'Clean Logo',
-                          onPressed: () async {
+                        ElevatedButton(
+                          onPressed: () {
                             LGConnection()
                                 .cleanlogos()
                                 .catchError((onError) {
                               print('oh no $onError');
                               if (onError == 'nogeodata') {
                                 showAlertDialog(
-                                    translate('Track.alert'),
-                                    translate('Track.alert2'),
+                                    'Track.alert',
+                                    'Track.alert2',
                                     false,
                                     false
                                 );
                               }
                               showAlertDialog(
-                                  translate('Track.alert3'),
-                                  translate('Track.alert4'),
+                                  'Track.alert3',
+                                  'Track.alert4',
                                   false,
                                   false
                               );
                             });
                           },
+                          style: ElevatedButton.styleFrom(
+                            elevation: 10,
+                            shadowColor: Colors.grey,
+                            primary: Color.fromARGB(255, 62, 130, 232),
+                            padding: EdgeInsets.all(15),
+                            shape: StadiumBorder(),
+                          ),
+                          child: SizedBox(
+                            width: ScreenConfig.widthPercent*20,
+                            height: ScreenConfig.widthPercent*20*0.3,
+                            child: Center(
+                              child: Text(
+                                  'Clean Logo',
+                                  style: TextStyle(
+                                      fontSize: 30,
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold
+                                  )),
+                            ),
+                          ),
                         ),
                         SizedBox(
                           width: ScreenConfig.widthPercent*5,
                         ),
-                        TaskButton(
-                          task: 'Clean KML',
-                          onPressed: () async {
+                        ElevatedButton(
+                          onPressed: () {
                             LGConnection()
                                 .cleanVisualization()
                                 .then((value) {
@@ -348,13 +366,33 @@ class _LGActionsView extends State<LGActionsView> {
                             }).catchError((onError) {
                               print('oh no $onError');
                               showAlertDialog(
-                                  translate("Tasks.alert5"),
-                                  translate("Tasks.alert6"),
+                                  "Tasks.alert5",
+                                  "Tasks.alert6",
                                   false,
                                   false
                               );
                             });
                           },
+                          style: ElevatedButton.styleFrom(
+                            elevation: 10,
+                            shadowColor: Colors.grey,
+                            primary: Color.fromARGB(255, 62, 130, 232),
+                            padding: EdgeInsets.all(15),
+                            shape: StadiumBorder(),
+                          ),
+                          child: SizedBox(
+                            width: ScreenConfig.widthPercent*20,
+                            height: ScreenConfig.widthPercent*20*0.3,
+                            child: Center(
+                              child: Text(
+                                  'Clean KML',
+                                  style: TextStyle(
+                                      fontSize: 30,
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold
+                                  )),
+                            ),
+                          ),
                         ),
                       ],
                     ),
@@ -367,28 +405,66 @@ class _LGActionsView extends State<LGActionsView> {
                         SizedBox(
                           width: ScreenConfig.widthPercent*10,
                         ),
-                        TaskButton(
-                          task: 'Reboot LG',
+                        ElevatedButton(
                           onPressed: () {
                             showThinkDialog(
-                                translate("Tasks.LGReboot"),
-                                translate("Tasks.sure"),
+                                "Tasks.LGReboot",
+                                "Tasks.sure",
                                 false,
                                 "Reboot");
                           },
+                          style: ElevatedButton.styleFrom(
+                            elevation: 10,
+                            shadowColor: Colors.grey,
+                            primary: Color.fromARGB(255, 62, 130, 232),
+                            padding: EdgeInsets.all(15),
+                            shape: StadiumBorder(),
+                          ),
+                          child: SizedBox(
+                            width: ScreenConfig.widthPercent*20,
+                            height: ScreenConfig.widthPercent*20*0.3,
+                            child: Center(
+                              child: Text(
+                                  'Reboot LG',
+                                  style: TextStyle(
+                                      fontSize: 30,
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold
+                                  )),
+                            ),
+                          ),
                         ),
                         SizedBox(
                           width: ScreenConfig.widthPercent*5,
                         ),
-                        TaskButton(
-                          task: 'Relaunch LG',
+                        ElevatedButton(
                           onPressed: () {
                             showThinkDialog(
-                                translate("Tasks.LGRelaunch"),
-                                translate("Tasks.sure"),
+                                "Tasks.LGRelaunch",
+                                "Tasks.sure",
                                 false,
                                 "Relaunch");
                           },
+                          style: ElevatedButton.styleFrom(
+                            elevation: 10,
+                            shadowColor: Colors.grey,
+                            primary: Color.fromARGB(255, 62, 130, 232),
+                            padding: EdgeInsets.all(15),
+                            shape: StadiumBorder(),
+                          ),
+                          child: SizedBox(
+                            width: ScreenConfig.widthPercent*20,
+                            height: ScreenConfig.widthPercent*20*0.3,
+                            child: Center(
+                              child: Text(
+                                  'Relaunch LG',
+                                  style: TextStyle(
+                                      fontSize: 30,
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold
+                                  )),
+                            ),
+                          ),
                         ),
                       ],
                     ),
@@ -401,15 +477,34 @@ class _LGActionsView extends State<LGActionsView> {
                         SizedBox(
                           width: ScreenConfig.widthPercent*10,
                         ),
-                        TaskButton(
-                          task: 'Shut Down LG',
+                        ElevatedButton(
                           onPressed: () {
                             showThinkDialog(
-                                translate("Tasks.LGShutdown"),
-                                translate("Tasks.sure"),
+                                "Tasks.LGShutdown",
+                                "Tasks.sure",
                                 false,
                                 "Shutdown");
                           },
+                          style: ElevatedButton.styleFrom(
+                            elevation: 10,
+                            shadowColor: Colors.grey,
+                            primary: Color.fromARGB(255, 62, 130, 232),
+                            padding: EdgeInsets.all(15),
+                            shape: StadiumBorder(),
+                          ),
+                          child: SizedBox(
+                            width: ScreenConfig.widthPercent*20,
+                            height: ScreenConfig.widthPercent*20*0.3,
+                            child: Center(
+                              child: Text(
+                                  'Shut Down LG',
+                                  style: TextStyle(
+                                      fontSize: 30,
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold
+                                  )),
+                            ),
+                          ),
                         ),
                       ],
                     )
@@ -419,37 +514,6 @@ class _LGActionsView extends State<LGActionsView> {
             ],
           ),
         )
-    );
-  }
-
-  static Widget TaskButton (
-      {required String task,
-        Function? onPressed}
-      ) {
-    return ElevatedButton(
-      onPressed: () {
-        onPressed;
-      },
-      style: ElevatedButton.styleFrom(
-        elevation: 10,
-        shadowColor: Colors.grey,
-        primary: Color.fromARGB(255, 62, 130, 232),
-        padding: EdgeInsets.all(15),
-        shape: StadiumBorder(),
-      ),
-      child: SizedBox(
-        width: ScreenConfig.widthPercent*20,
-        height: ScreenConfig.widthPercent*20*0.3,
-        child: Center(
-          child: Text(
-              task,
-              style: TextStyle(
-                  fontSize: 30,
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold
-              )),
-        ),
-      ),
     );
   }
 
