@@ -21,7 +21,7 @@ class _ConnectionManagerViewState extends State<ConnectionManagerView> {
   bool obscurePassword = true;
   bool loaded = false;
   bool isSuccess = false;
-  bool onBoarding = false;
+  // bool onBoarding = false;
 
   TextEditingController username = TextEditingController();
   TextEditingController ipAddress = TextEditingController();
@@ -380,60 +380,61 @@ class _ConnectionManagerViewState extends State<ConnectionManagerView> {
                   ),
                   Padding(
                     padding: EdgeInsets.symmetric(vertical: 20.0),
-                    child: onBoarding? Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        ElevatedButton(
-                          onPressed: () {
-                            connect();
-                            FocusManager.instance.primaryFocus?.unfocus();
-                          },
-                          style: ElevatedButton.styleFrom(
-                            elevation: 2,
-                            shadowColor: Colors.grey.withOpacity(0.5),
-                            primary: Colors.white,
-                            padding: EdgeInsets.all(15),
-                            shape: StadiumBorder(),
-                          ),
-                          child: SizedBox(
-                            width: ScreenConfig.widthPercent*30,
-                            child: Text(
-                                'CONNECT',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    fontSize: 25,
-                                    color: Colors.black,
-                                )),
-                          ),
-                        ),
-                        SizedBox(
-                          width: ScreenConfig.widthPercent*10,
-                        ),
-                        ElevatedButton(
-                          onPressed: () {
-                            Navigator.of(context).pushNamed(RouteNames.homeView);
-                          },
-                          style: ElevatedButton.styleFrom(
-                            elevation: 2,
-                            shadowColor: Colors.grey.withOpacity(0.5),
-                            primary: Colors.white,
-                            padding: EdgeInsets.all(15),
-                            shape: StadiumBorder(),
-                          ),
-                          child: SizedBox(
-                            width: ScreenConfig.widthPercent*30,
-                            child: Text(
-                                'SKIP',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  fontSize: 25,
-                                  color: Colors.black,
-                                )),
-                          ),
-                        ),
-                      ],
-                    )
-                    : ElevatedButton(
+                    child:
+                    // onBoarding? Row(
+                    //   mainAxisAlignment: MainAxisAlignment.center,
+                    //   children: [
+                    //     ElevatedButton(
+                    //       onPressed: () {
+                    //         connect();
+                    //         FocusManager.instance.primaryFocus?.unfocus();
+                    //       },
+                    //       style: ElevatedButton.styleFrom(
+                    //         elevation: 2,
+                    //         shadowColor: Colors.grey.withOpacity(0.5),
+                    //         primary: Colors.white,
+                    //         padding: EdgeInsets.all(15),
+                    //         shape: StadiumBorder(),
+                    //       ),
+                    //       child: SizedBox(
+                    //         width: ScreenConfig.widthPercent*30,
+                    //         child: Text(
+                    //             'CONNECT',
+                    //             textAlign: TextAlign.center,
+                    //             style: TextStyle(
+                    //                 fontSize: 25,
+                    //                 color: Colors.black,
+                    //             )),
+                    //       ),
+                    //     ),
+                    //     SizedBox(
+                    //       width: ScreenConfig.widthPercent*10,
+                    //     ),
+                    //     ElevatedButton(
+                    //       onPressed: () {
+                    //         Navigator.of(context).pushNamed(RouteNames.homeView);
+                    //       },
+                    //       style: ElevatedButton.styleFrom(
+                    //         elevation: 2,
+                    //         shadowColor: Colors.grey.withOpacity(0.5),
+                    //         primary: Colors.white,
+                    //         padding: EdgeInsets.all(15),
+                    //         shape: StadiumBorder(),
+                    //       ),
+                    //       child: SizedBox(
+                    //         width: ScreenConfig.widthPercent*30,
+                    //         child: Text(
+                    //             'SKIP',
+                    //             textAlign: TextAlign.center,
+                    //             style: TextStyle(
+                    //               fontSize: 25,
+                    //               color: Colors.black,
+                    //             )),
+                    //       ),
+                    //     ),
+                    //   ],
+                    // )
+                    ElevatedButton(
                       onPressed: () {
                         connect();
                         FocusManager.instance.primaryFocus?.unfocus();

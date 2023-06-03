@@ -28,6 +28,7 @@ class ImagePaths{
   //images
   static const fleet_of_rockets = "assets/images/FleetOfRocketOnBoardingPage.png";
   static const lg_demo = "assets/images/LGDemo.png";
+  static const lg_tasks_bg = "assets/images/lg_tasks_background.png";
 
 
 
