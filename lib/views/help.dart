@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class Help extends StatefulWidget {
-  const Help({Key? key}) : super(key: key);
+class HelpView extends StatefulWidget {
+  const HelpView({Key? key}) : super(key: key);
 
   @override
-  State<Help> createState() => _HelpState();
+  State<HelpView> createState() => _HelpViewState();
 }
 
-class _HelpState extends State<Help> {
+class _HelpViewState extends State<HelpView> {
   @override
   Widget build(BuildContext context) {
     return Center(

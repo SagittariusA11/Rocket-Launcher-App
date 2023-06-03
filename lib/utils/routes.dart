@@ -5,12 +5,13 @@ import 'package:rocket_launcher_app/utils/routeNames.dart';
 import '../views/connectionManager.dart';
 import '../views/errorView.dart';
 import '../views/help.dart';
+import '../views/homeView/home.dart';
+import '../views/homeView/launch.dart';
+import '../views/homeView/launchInfo.dart';
+import '../views/homeView/launchList.dart';
 import '../views/inventory.dart';
-import '../views/launchInfo.dart';
-import '../views/launchList.dart';
-import '../views/launchMap.dart';
+import '../views/homeView/launchMap.dart';
 import '../views/lgActions.dart';
-import '../views/menu.dart';
 import '../views/onBoarding.dart';
 import '../views/rocketInfo.dart';
 import '../views/settings.dart';
@@ -38,43 +39,33 @@ class Routes {
     //Help
       case RouteNames.help:
         return MaterialPageRoute(builder:
-            (BuildContext context)=>Help()
+            (BuildContext context)=>HelpView()
         );
 
-    //Help
+    //Connection Manager
       case RouteNames.connectionManager:
         return MaterialPageRoute(builder:
-            (BuildContext context)=>ConnectionManager()
+            (BuildContext context)=>ConnectionManagerView()
         );
 
       case RouteNames.inventory:
         return MaterialPageRoute(builder:
-            (BuildContext context)=>Inventory()
+            (BuildContext context)=>InventoryView()
         );
 
-      case RouteNames.launchInfo:
+      case RouteNames.launchView:
         return MaterialPageRoute(builder:
-            (BuildContext context)=>LaunchInfo()
+            (BuildContext context)=>LaunchView()
         );
 
-      case RouteNames.launchList:
+      case RouteNames.homeView:
         return MaterialPageRoute(builder:
-            (BuildContext context)=>LaunchList()
-        );
-
-      case RouteNames.launchMap:
-        return MaterialPageRoute(builder:
-            (BuildContext context)=>LaunchMap()
+            (BuildContext context)=>homeView()
         );
 
       case RouteNames.lgActions:
         return MaterialPageRoute(builder:
-            (BuildContext context)=>LGActions()
-        );
-
-      case RouteNames.menu:
-        return MaterialPageRoute(builder:
-            (BuildContext context)=>Menu()
+            (BuildContext context)=>LGActionsView()
         );
 
       case RouteNames.onBoarding:
@@ -89,7 +80,7 @@ class Routes {
 
       case RouteNames.settings:
         return MaterialPageRoute(builder:
-            (BuildContext context)=>Settings()
+            (BuildContext context)=>SettingsView()
         );
 
       case RouteNames.ytLive:

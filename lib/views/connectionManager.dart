@@ -4,14 +4,14 @@ import 'package:ssh2/ssh2.dart';
 
 import 'errorView.dart';
 
-class ConnectionManager extends StatefulWidget {
-  const ConnectionManager({Key? key}) : super(key: key);
+class ConnectionManagerView extends StatefulWidget {
+  const ConnectionManagerView({Key? key}) : super(key: key);
 
   @override
-  State<ConnectionManager> createState() => _ConnectionManagerState();
+  State<ConnectionManagerView> createState() => _ConnectionManagerViewState();
 }
 
-class _ConnectionManagerState extends State<ConnectionManager> {
+class _ConnectionManagerViewState extends State<ConnectionManagerView> {
   Color _iconColor = Color.fromARGB(255, 74, 74, 74);
   bool isLoggedIn = false;
   bool obscurePassword = true;

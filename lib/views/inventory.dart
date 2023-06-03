@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 
-class Inventory extends StatefulWidget {
-  const Inventory({Key? key}) : super(key: key);
+class InventoryView extends StatefulWidget {
+  const InventoryView({Key? key}) : super(key: key);
 
   @override
-  State<Inventory> createState() => _InventoryState();
+  State<InventoryView> createState() => _InventoryViewState();
 }
 
-class _InventoryState extends State<Inventory> {
+class _InventoryViewState extends State<InventoryView> {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Text("Inventoryr"),
+      child: Text("Inventory"),
     );
   }
 }

@@ -151,39 +151,33 @@ class _OnBoardingState extends State<OnBoarding> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                        ElevatedButton(
-                            onPressed: () {
-                              Navigator.of(context).pushNamed(RouteNames.connectionManager);
-                            },
-                          style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.transparent,
-                              shadowColor: Colors.transparent
-                          ),
-                            child: Container(
-                              height: ScreenConfig.heightPercent*10,
-                              width: ScreenConfig.heightPercent*10*1.58,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.only(
-                                  topRight: Radius.circular(ScreenConfig.heightPercent*10),
-                                  bottomLeft: Radius.circular(ScreenConfig.heightPercent*7),
-                                  bottomRight: Radius.circular(ScreenConfig.heightPercent*7),
-                                ),
-                                color: const Color.fromARGB(255, 51, 84, 202)
+                        GestureDetector(
+                          onTap: () {Navigator.of(context).pushNamed(RouteNames.homeView);},
+                          child: Container(
+                            height: ScreenConfig.heightPercent*10,
+                            width: ScreenConfig.heightPercent*10*1.58,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.only(
+                                topRight: Radius.circular(ScreenConfig.heightPercent*10),
+                                bottomLeft: Radius.circular(ScreenConfig.heightPercent*7),
+                                bottomRight: Radius.circular(ScreenConfig.heightPercent*7),
                               ),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                children: [
-                                  SizedBox(
-                                    height: ScreenConfig.heightPercent*5,
-                                    width: ScreenConfig.heightPercent*5,
-                                    child: Image.asset(ImagePaths.right_arrow)
-                                  ),
-                                  SizedBox(
-                                    width: ScreenConfig.heightPercent*10*1.58*0.2,
-                                  )
-                                ],
-                              ),
+                              color: const Color.fromARGB(255, 51, 84, 202)
                             ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                SizedBox(
+                                  height: ScreenConfig.heightPercent*5,
+                                  width: ScreenConfig.heightPercent*5,
+                                  child: Image.asset(ImagePaths.right_arrow)
+                                ),
+                                SizedBox(
+                                  width: ScreenConfig.heightPercent*10*1.58*0.2,
+                                )
+                              ],
+                            ),
+                          ),
                         ),
                         SizedBox(
                           width: ScreenConfig.widthPercent*5,

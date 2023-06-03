@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class LGActions extends StatefulWidget {
-  const LGActions({Key? key}) : super(key: key);
+class LGActionsView extends StatefulWidget {
+  const LGActionsView({Key? key}) : super(key: key);
 
   @override
-  State<LGActions> createState() => _LGActionsState();
+  State<LGActionsView> createState() => _LGActionsViewState();
 }
 
-class _LGActionsState extends State<LGActions> {
+class _LGActionsViewState extends State<LGActionsView> {
   @override
   Widget build(BuildContext context) {
     return Center(

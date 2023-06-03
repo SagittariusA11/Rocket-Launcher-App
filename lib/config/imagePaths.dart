@@ -15,6 +15,15 @@ class ImagePaths{
 
   //icons
   static const right_arrow = "assets/icons/right-arrow.png";
+  static const shuttle = "assets/icons/shuttle.png";
+  static const about = "assets/icons/text-document.png";
+  static const info = "assets/icons/information-button.png";
+  static const tasks = "assets/icons/clipboard.png";
+  static const connection = "assets/icons/url.png";
+  static const settings = "assets/icons/gear.png";
+  static const tour = "assets/icons/walking.png";
+  static const inventory = "assets/icons/warehouse.png";
+  static const logout = "assets/icons/logout.png";
 
   //images
   static const fleet_of_rockets = "assets/images/FleetOfRocketOnBoardingPage.png";
