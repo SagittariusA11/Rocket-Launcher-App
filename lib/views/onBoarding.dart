@@ -97,7 +97,8 @@ class _OnBoardingState extends State<OnBoarding> {
                             Utils.images(
                                 ScreenConfig.heightPercent*18,
                                 ScreenConfig.heightPercent*18,
-                                ImagePaths.rla_icon)
+                                ImagePaths.rla_icon
+                            )
                           ],
                         ),
                         Row(

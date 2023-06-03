@@ -68,7 +68,7 @@ class _homeViewState extends State<homeView> with SingleTickerProviderStateMixin
                     onPressed: _onDrawerTapped,
                     icon: AnimatedIcon(
                       icon: AnimatedIcons.menu_close,
-                      color: Color.fromARGB(255, 36, 83, 248),
+                      color: Color.fromARGB(255, 255, 255, 255),
                       size: 33,
                       progress: drawerAnimationController.view,
                     ),
