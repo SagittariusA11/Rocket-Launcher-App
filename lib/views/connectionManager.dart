@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_translate/flutter_translate.dart';
+import 'package:provider/provider.dart';
 import 'package:rocket_launcher_app/config/screenConfig.dart';
 import 'package:rocket_launcher_app/utils/routeNames.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:ssh2/ssh2.dart';
-
+import 'dart:ui' as ui;
+import '../config/appTheme.dart';
 import '../config/imagePaths.dart';
 import '../utils/utils.dart';
 import 'errorView.dart';
@@ -47,25 +50,17 @@ class _ConnectionManagerViewState extends State<ConnectionManagerView> {
         passwordOrKey: password.text,
       );
       await client.connect();
-
-      // print("Hua...");
-      // print('master_ip: ${ipAddress.text}');
-      // print('master_password: ${password.text}');
-      // print('master_portNumber: ${portNumber.text}');
-      // print('numberofrigs: ${numberofrigs.text}');
+      showAlertDialog("Connected!",
+          '${ipAddress.text} ' + "host is reachable", true);
       setState(() {
         connectionStatus = true;
       });
       // open logos
-      // await LGConnection().openDemoLogos();
+      await LGConnection().openDemoLogos();
       await client.disconnect();
     } catch (e) {
-      ErrorView();
-      // print("nhiHua...");
-      // print('master_ip: ${ipAddress.text}');
-      // print('master_password: ${password.text}');
-      // print('master_portNumber: ${portNumber.text}');
-      // print('numberofrigs: ${numberofrigs.text}');
+      showAlertDialog("Oops!",
+          '${ipAddress.text} ' + "host is reachable. Check if the information filled is correct and if the host can be reached.", false);
       setState(() {
         connectionStatus = false;
       });
@@ -474,6 +469,90 @@ class _ConnectionManagerViewState extends State<ConnectionManagerView> {
       ),
     );
   }
+
+  showAlertDialog(String title, String msg, bool isSuccess) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return BackdropFilter(
+            filter: ui.ImageFilter.blur(sigmaX: 4, sigmaY: 3),
+            child: AlertDialog(
+              backgroundColor: Color.fromARGB(255, 33, 33, 33),
+              title: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Padding(
+                      padding: EdgeInsets.only(left: 10),
+                      child: Image.asset(
+                        isSuccess
+                            ? "assets/happy.png"
+                            : "assets/sad.png",
+                        width: 250,
+                        height: 250,
+                      )),
+                  Text(
+                    '$title',
+                    style: TextStyle(
+                      fontSize: 25,
+                      color: Color.fromARGB(255, 204, 204, 204),
+                    ),
+                  ),
+                ],
+              ),
+              content: SizedBox(
+                width: 320,
+                height: 180,
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text('$msg',
+                          style: TextStyle(
+                            fontSize: 18,
+                            color: Color.fromARGB(
+                              255,
+                              204,
+                              204,
+                              204,
+                            ),
+                          ),
+                          textAlign: TextAlign.center),
+                      SizedBox(
+                          width: 300,
+                          child: Padding(
+                              padding: EdgeInsets.only(top: 10),
+                              child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  elevation: 2,
+                                  shadowColor: Colors.black,
+                                  primary: ui.Color.fromARGB(
+                                      255, 220, 220, 220),
+                                  padding: EdgeInsets.all(15),
+                                  shape: StadiumBorder(),
+                                ),
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                                child: Wrap(
+                                  children: <Widget>[
+                                    Text(
+                                        isSuccess
+                                            ? 'continue'
+                                            : 'dismiss',
+                                        style: TextStyle(
+                                            fontSize: 20,
+                                            color: Colors.black)),
+                                  ],
+                                ),
+                              ))),
+                    ]),
+              ),
+            ));
+      },
+    );
+  }
+
 }
 
 class LGConnection {

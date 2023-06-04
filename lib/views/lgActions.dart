@@ -22,16 +22,14 @@ bool isOpen = false;
 
 class _LGActionsView extends State<LGActionsView> {
   showAlertDialog(
-      String title, String msg, bool isSuccess, bool blackandwhite) {
+      String title, String msg, bool isSuccess) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
         return BackdropFilter(
             filter: ui.ImageFilter.blur(sigmaX: 4, sigmaY: 3),
             child: AlertDialog(
-              backgroundColor: blackandwhite
-                  ? Color.fromARGB(255, 16, 16, 16)
-                  : Color.fromARGB(255, 33, 33, 33),
+              backgroundColor: Color.fromARGB(255, 33, 33, 33),
               title: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -39,7 +37,7 @@ class _LGActionsView extends State<LGActionsView> {
                   Padding(
                       padding: EdgeInsets.only(left: 10),
                       child: Image.asset(
-                        isSuccess ? "assets/happy.png" : "assets/sad.png",
+                        isSuccess ? "assets/images/happy.png" : "assets/images/sad.png",
                         width: 250,
                         height: 250,
                       )),
@@ -105,23 +103,21 @@ class _LGActionsView extends State<LGActionsView> {
   }
 
   showThinkDialog(
-      String title, String msg, bool blackandwhite, String operation) {
+      String title, String msg, String operation) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
         return BackdropFilter(
             filter: ui.ImageFilter.blur(sigmaX: 4, sigmaY: 3),
             child: AlertDialog(
-              backgroundColor: blackandwhite
-                  ? Color.fromARGB(255, 16, 16, 16)
-                  : Color.fromARGB(255, 33, 33, 33),
+              backgroundColor: Color.fromARGB(255, 33, 33, 33),
               title: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Padding(
                       padding: EdgeInsets.only(left: 10),
-                      child: Image.asset("assets/sure.png",
+                      child: Image.asset("assets/images/sure.png",
                           width: 250,
                           height: 250,
                           opacity: AlwaysStoppedAnimation<double>(0.8))),
@@ -174,10 +170,9 @@ class _LGActionsView extends State<LGActionsView> {
                                     }).catchError((onError) {
                                       print('oh no $onError');
                                       showAlertDialog(
-                                          "Tasks.alert5",
-                                          "Tasks.alert6",
-                                          false,
-                                          blackandwhite);
+                                          "alert5",
+                                          "alert6",
+                                          false);
                                     });
                                   } else if (operation == "Reboot") {
                                     LGConnection().rebootLG().then((value) {
@@ -187,10 +182,9 @@ class _LGActionsView extends State<LGActionsView> {
                                     }).catchError((onError) {
                                       print('oh no $onError');
                                       showAlertDialog(
-                                          "Tasks.alert5",
-                                          "Tasks.alert6",
-                                          false,
-                                          blackandwhite);
+                                          "alert5",
+                                          "alert6",
+                                          false);
                                     });
                                   } else if (operation == "Shutdown") {
                                     LGConnection().shutdownLG().then((value) {
@@ -200,17 +194,16 @@ class _LGActionsView extends State<LGActionsView> {
                                     }).catchError((onError) {
                                       print('oh no $onError');
                                       showAlertDialog(
-                                          "Tasks.alert5",
-                                          "Tasks.alert6",
-                                          false,
-                                          blackandwhite);
+                                          "alert5",
+                                          "alert6",
+                                          false);
                                     });
                                   }
                                   Navigator.of(context).pop();
                                 },
                                 child: Wrap(
                                   children: <Widget>[
-                                    Text('Tasks.Yes',
+                                    Text('Yes',
                                         style: TextStyle(
                                             fontSize: 20, color: Colors.black)),
                                   ],
@@ -238,7 +231,7 @@ class _LGActionsView extends State<LGActionsView> {
                                 },
                                 child: Wrap(
                                   children: <Widget>[
-                                    Text('Tasks.No',
+                                    Text('No',
                                         style: TextStyle(
                                           fontSize: 20,
                                           color: Color.fromARGB(
@@ -319,14 +312,12 @@ class _LGActionsView extends State<LGActionsView> {
                                     'Track.alert',
                                     'Track.alert2',
                                     false,
-                                    false
                                 );
                               }
                               showAlertDialog(
                                   'Track.alert3',
                                   'Track.alert4',
                                   false,
-                                  false
                               );
                             });
                           },
@@ -369,7 +360,6 @@ class _LGActionsView extends State<LGActionsView> {
                                   "Tasks.alert5",
                                   "Tasks.alert6",
                                   false,
-                                  false
                               );
                             });
                           },
@@ -408,9 +398,8 @@ class _LGActionsView extends State<LGActionsView> {
                         ElevatedButton(
                           onPressed: () {
                             showThinkDialog(
-                                "Tasks.LGReboot",
-                                "Tasks.sure",
-                                false,
+                                "Reboot LG",
+                                "Are you sure you want to perform this task?",
                                 "Reboot");
                           },
                           style: ElevatedButton.styleFrom(
@@ -440,9 +429,8 @@ class _LGActionsView extends State<LGActionsView> {
                         ElevatedButton(
                           onPressed: () {
                             showThinkDialog(
-                                "Tasks.LGRelaunch",
-                                "Tasks.sure",
-                                false,
+                                "Relaunch LG",
+                                "Are you sure you want to perform this task?",
                                 "Relaunch");
                           },
                           style: ElevatedButton.styleFrom(
@@ -480,9 +468,8 @@ class _LGActionsView extends State<LGActionsView> {
                         ElevatedButton(
                           onPressed: () {
                             showThinkDialog(
-                                "Tasks.LGShutdown",
-                                "Tasks.sure",
-                                false,
+                                "Shutdown LG",
+                                "Are you sure you want to perform this task?",
                                 "Shutdown");
                           },
                           style: ElevatedButton.styleFrom(
