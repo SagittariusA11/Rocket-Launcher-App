@@ -5,6 +5,7 @@ import 'package:rocket_launcher_app/views/translate.dart';
 import '../config/imagePaths.dart';
 import '../config/screenConfig.dart';
 import '../utils/utils.dart';
+import '../config/appTheme.dart';
 
 class SettingsView extends StatefulWidget {
   const SettingsView({Key? key}) : super(key: key);
@@ -20,6 +21,18 @@ class _SettingsViewState extends State<SettingsView> {
   bool _haptic = false;
   bool _voice_command = false;
   double _currentValue =  25;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    ScreenConfig.init(context);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -238,7 +251,16 @@ class _SettingsViewState extends State<SettingsView> {
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
                                 ElevatedButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    setState(() {
+                                      selectedAppTheme.isDarkMode = false;
+                                      selectedAppTheme.isLightMode = true;
+                                      selectedAppTheme.isRedMode = false;
+                                      selectedAppTheme.isGreenMode = false;
+                                      selectedAppTheme.isBlueMode = false;
+                                      selectedAppTheme.saveMode('light');
+                                    });
+                                  },
                                   style: ElevatedButton.styleFrom(
                                     elevation: 10,
                                     shadowColor: Colors.grey,
@@ -277,7 +299,16 @@ class _SettingsViewState extends State<SettingsView> {
                                   )
                                 ),
                                 ElevatedButton(
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      setState(() {
+                                        selectedAppTheme.isDarkMode = true;
+                                        selectedAppTheme.isLightMode = false;
+                                        selectedAppTheme.isRedMode = false;
+                                        selectedAppTheme.isGreenMode = false;
+                                        selectedAppTheme.isBlueMode = false;
+                                        selectedAppTheme.saveMode('dark');
+                                      });
+                                    },
                                     style: ElevatedButton.styleFrom(
                                       elevation: 10,
                                       shadowColor: Colors.grey,
@@ -316,7 +347,16 @@ class _SettingsViewState extends State<SettingsView> {
                                     )
                                 ),
                                 ElevatedButton(
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      setState(() {
+                                        selectedAppTheme.isDarkMode = false;
+                                        selectedAppTheme.isLightMode = false;
+                                        selectedAppTheme.isRedMode = true;
+                                        selectedAppTheme.isGreenMode = false;
+                                        selectedAppTheme.isBlueMode = false;
+                                        selectedAppTheme.saveMode('red');
+                                      });
+                                    },
                                     style: ElevatedButton.styleFrom(
                                       elevation: 10,
                                       shadowColor: Colors.grey,
@@ -355,7 +395,16 @@ class _SettingsViewState extends State<SettingsView> {
                                     )
                                 ),
                                 ElevatedButton(
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      setState(() {
+                                        selectedAppTheme.isDarkMode = false;
+                                        selectedAppTheme.isLightMode = false;
+                                        selectedAppTheme.isRedMode = false;
+                                        selectedAppTheme.isGreenMode = true;
+                                        selectedAppTheme.isBlueMode = false;
+                                        selectedAppTheme.saveMode('green');
+                                      });
+                                    },
                                     style: ElevatedButton.styleFrom(
                                       elevation: 10,
                                       shadowColor: Colors.grey,
@@ -394,7 +443,16 @@ class _SettingsViewState extends State<SettingsView> {
                                     )
                                 ),
                                 ElevatedButton(
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      setState(() {
+                                        selectedAppTheme.isDarkMode = false;
+                                        selectedAppTheme.isLightMode = false;
+                                        selectedAppTheme.isRedMode = false;
+                                        selectedAppTheme.isGreenMode = false;
+                                        selectedAppTheme.isBlueMode = true;
+                                        selectedAppTheme.saveMode('blue');
+                                      });
+                                    },
                                     style: ElevatedButton.styleFrom(
                                       elevation: 10,
                                       shadowColor: Colors.grey,

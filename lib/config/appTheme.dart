@@ -3,48 +3,46 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AppTheme{
-  final headText2 =  GoogleFonts.catamaran(
-    color: Colors.white,
-    decoration: TextDecoration
-        .none,
 
-    fontSize: 16,
+  /// TODO: Colour Pallet to be added for different themes
+
+  static final darkTheme = ThemeData(
+
   );
+
+  static final lightTheme = ThemeData(
+
+  );
+
+  static final redTheme = ThemeData(
+
+  );
+
+  static final greenTheme = ThemeData(
+
+  );
+
+  static final blueTheme = ThemeData(
+
+  );
+
 }
 
-class ThemePreferences {
-  static const PREF_KEY = "pref_key";
+class selectedAppTheme {
 
-  setTheme(bool value) async {
-    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    sharedPreferences.setBool(PREF_KEY, value);
-  }
+  static SharedPreferences? _preferences;
 
-  getTheme() async {
-    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    return sharedPreferences.getBool(PREF_KEY) ?? false;
-  }
-}
+  static Future init() async =>
+      _preferences = await SharedPreferences.getInstance();
 
-class ThemeModel extends ChangeNotifier {
-  late bool _isDark;
-  late ThemePreferences _preferences;
-  bool get isDark => _isDark;
+  static Future saveMode(String theme) async =>
+      await _preferences?.setString('theme', theme);
 
-  ThemeModel() {
-    _isDark = false;
-    _preferences = ThemePreferences();
-    getPreferences();
-  }
-//Switching themes in the flutter apps - Flutterant
-  set isDark(bool value) {
-    _isDark = value;
-    _preferences.setTheme(value);
-    notifyListeners();
-  }
+  static String? getMode() => _preferences?.getString('theme');
+  static bool isDarkMode = selectedAppTheme.getMode() == 'dark'?true:false;
+  static bool isLightMode = selectedAppTheme.getMode() == 'light'?true:false;
+  static bool isRedMode = selectedAppTheme.getMode() == 'red'?true:false;
+  static bool isGreenMode = selectedAppTheme.getMode() == 'green'?true:false;
+  static bool isBlueMode = selectedAppTheme.getMode() == 'blue'?true:false;
 
-  getPreferences() async {
-    _isDark = await _preferences.getTheme();
-    notifyListeners();
-  }
 }
