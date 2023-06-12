@@ -17,14 +17,17 @@
     "tour": "hacer un recorrido",
     "inventory": "Inventario"
   },
-  "Tasks": {
+  "tasks": {
     "LG_tasks": "Tareas de Liquid Galaxy",
-    "Relaunch": "Relanzar\n    de LG",
-    "Reboot": "Reiniciar \n      LG",
-    "Shutdown": "Apagar \n    LG",
-    "Logo": "Limpiar  \n Logotipo",
-    "Clean": "Limpio \n   KML",
+    "Relaunch": "Relanzar",
+    "Reboot": "Reiniciar",
+    "Shutdown": "Apagar",
+    "Logo": "Limpiar Logotipo",
+    "Clean": "Limpio KML",
     "alert": "¡Éxito!",
+    "alert2": "Puede encontrar un KML que contenga los datos del mapa del proyecto en su carpeta de Descargas",
+    "alert3": "¡Ups!",
+    "alert4": "Asegúrese de habilitar los permisos de administración de almacenamiento para descargar el archivo KML del proyecto. También verifique que haya leído datos KML.",
     "alert5": "¡Error de lanzamiento!",
     "alert6": "Ocurrió un error al intentar conectarse a LG",
     "LGRelaunch": "Relanzamiento de LG",
@@ -78,5 +81,13 @@
     },
     "fs": "Tamaño de fuente",
     "vc": "Comando de voz"
+  },
+  "abox": {
+    "continue": "continuar",
+    "dismiss": "despedir"
+  },
+  "tbox": {
+    "yes": "Sí",
+    "no": "No"
   }
 }

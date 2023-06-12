@@ -17,15 +17,17 @@
     "tour": "Take a tour",
     "inventory": "Inventory"
   },
-  "Tasks": {
+  "tasks": {
     "LG_tasks": "Liquid Galaxy Tasks",
-    "Relaunch": "Relaunch \n      LG",
-    "Shutdown": "Shutdown \n       LG",
-    "Reboot": "Reboot \n    LG",
-    "Logo": "Clean \n Logo",
-    "Clean": "Clean \n KML",
+    "Relaunch": "Relaunch",
+    "Shutdown": "Shutdown",
+    "Reboot": "Reboot",
+    "Logo": "Clean Logo",
+    "Clean": "Clean KML",
     "alert": "Success!",
+    "alert2": "You can find a KML containing the map data of the project in your Downloads folder",
     "alert3": "Oops!",
+    "alert4": "Make sure to enable storage managing permissions to download the project KML. Also check that you have read KML data",
     "alert5": "Error launching!",
     "alert6": "An error occurred while trying to connect to LG",
     "LGRelaunch": "Relaunch LG",
@@ -79,5 +81,13 @@
     },
     "fs": "Font Size",
     "vc": "Voice Command"
+  },
+  "abox": {
+    "continue": "continue",
+    "dismiss": "dismiss"
+  },
+  "tbox": {
+    "yes": "Yes",
+    "no": "No"
   }
 }

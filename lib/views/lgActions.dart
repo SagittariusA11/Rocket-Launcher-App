@@ -88,8 +88,8 @@ class _LGActionsView extends State<LGActionsView> {
                                   children: <Widget>[
                                     Text(
                                         isSuccess
-                                            ? 'continue'
-                                            : 'dismiss',
+                                            ? translate('abox.continue')
+                                            : translate('abox.dismiss'),
                                         style: TextStyle(
                                             fontSize: 20, color: Colors.black)),
                                   ],
@@ -203,7 +203,7 @@ class _LGActionsView extends State<LGActionsView> {
                                 },
                                 child: Wrap(
                                   children: <Widget>[
-                                    Text('Yes',
+                                    Text(translate('tbox.yes'),
                                         style: TextStyle(
                                             fontSize: 20, color: Colors.black)),
                                   ],
@@ -231,7 +231,7 @@ class _LGActionsView extends State<LGActionsView> {
                                 },
                                 child: Wrap(
                                   children: <Widget>[
-                                    Text('No',
+                                    Text(translate('tbox.no'),
                                         style: TextStyle(
                                           fontSize: 20,
                                           color: Color.fromARGB(
@@ -275,7 +275,7 @@ class _LGActionsView extends State<LGActionsView> {
                       width: ScreenConfig.widthPercent*2,
                     ),
                     Text(
-                      "Liquid Galaxy Tasks",
+                      translate('tasks.LG_tasks'),
                       style: TextStyle(
                           fontFamily: 'GoogleSans',
                           fontSize: 30,
@@ -333,7 +333,7 @@ class _LGActionsView extends State<LGActionsView> {
                             height: ScreenConfig.widthPercent*20*0.3,
                             child: Center(
                               child: Text(
-                                  'Clean Logo',
+                                  translate('tasks.Logo'),
                                   style: TextStyle(
                                       fontSize: 30,
                                       color: Colors.white,
@@ -375,7 +375,7 @@ class _LGActionsView extends State<LGActionsView> {
                             height: ScreenConfig.widthPercent*20*0.3,
                             child: Center(
                               child: Text(
-                                  'Clean KML',
+                                  translate('tasks.Clean'),
                                   style: TextStyle(
                                       fontSize: 30,
                                       color: Colors.white,
@@ -398,9 +398,9 @@ class _LGActionsView extends State<LGActionsView> {
                         ElevatedButton(
                           onPressed: () {
                             showThinkDialog(
-                                "Reboot LG",
-                                "Are you sure you want to perform this task?",
-                                "Reboot");
+                              translate('tasks.LGReboot'),
+                              translate('tasks.sure'),
+                              translate('tasks.Reboot'));
                           },
                           style: ElevatedButton.styleFrom(
                             elevation: 10,
@@ -414,7 +414,7 @@ class _LGActionsView extends State<LGActionsView> {
                             height: ScreenConfig.widthPercent*20*0.3,
                             child: Center(
                               child: Text(
-                                  'Reboot LG',
+                                  translate('tasks.LGReboot'),
                                   style: TextStyle(
                                       fontSize: 30,
                                       color: Colors.white,
@@ -429,9 +429,9 @@ class _LGActionsView extends State<LGActionsView> {
                         ElevatedButton(
                           onPressed: () {
                             showThinkDialog(
-                                "Relaunch LG",
-                                "Are you sure you want to perform this task?",
-                                "Relaunch");
+                                translate('tasks.LGRelaunch'),
+                                translate('tasks.sure'),
+                                translate('tasks.Relaunch'));
                           },
                           style: ElevatedButton.styleFrom(
                             elevation: 10,
@@ -445,7 +445,7 @@ class _LGActionsView extends State<LGActionsView> {
                             height: ScreenConfig.widthPercent*20*0.3,
                             child: Center(
                               child: Text(
-                                  'Relaunch LG',
+                                  translate('tasks.LGRelaunch'),
                                   style: TextStyle(
                                       fontSize: 30,
                                       color: Colors.white,
@@ -468,9 +468,9 @@ class _LGActionsView extends State<LGActionsView> {
                         ElevatedButton(
                           onPressed: () {
                             showThinkDialog(
-                                "Shutdown LG",
-                                "Are you sure you want to perform this task?",
-                                "Shutdown");
+                                translate('tasks.LGShutdown'),
+                                translate('tasks.sure'),
+                                translate('tasks.Shutdown'));
                           },
                           style: ElevatedButton.styleFrom(
                             elevation: 10,
@@ -484,7 +484,7 @@ class _LGActionsView extends State<LGActionsView> {
                             height: ScreenConfig.widthPercent*20*0.3,
                             child: Center(
                               child: Text(
-                                  'Shut Down LG',
+                                  translate('tasks.LGShutdown'),
                                   style: TextStyle(
                                       fontSize: 30,
                                       color: Colors.white,
