@@ -43,8 +43,10 @@ dependencies:
   shared_preferences: ^2.0.15
   animated_text_kit: ^4.2.2
   path_provider: ^2.0.15
-  flutter_translate: ^4.0.4
+  flutter_translate: ^3.0.0
   provider: ^6.0.5
+  flutter_localizations:
+    sdk: flutter
   localization: ^2.1.0
 
 dev_dependencies:

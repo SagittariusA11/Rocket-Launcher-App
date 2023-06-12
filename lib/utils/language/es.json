@@ -1,0 +1,60 @@
+{
+  "title": {
+    "name": "Aplicación Lanzacohetes"
+  },
+  "tabs": {
+    "track": " Lanzamiento ",
+    "map": " Mapa ",
+    "info": "Información"
+  },
+  "drawer": {
+    "home": "Hogar",
+    "help": "Ayudar",
+    "about": "Acerca de",
+    "task": "Tareas Liquid Galaxy",
+    "connection": "Administrador de conexión",
+    "settings": "Ajustes",
+    "tour": "hacer un recorrido",
+    "inventory": "Inventario"
+  },
+  "Tasks": {
+    "LG_tasks": "Tareas de Liquid Galaxy",
+    "Relaunch": "Relanzar\n    de LG",
+    "Reboot": "Reiniciar \n      LG",
+    "Shutdown": "Apagar \n    LG",
+    "Logo": "Limpiar  \n Logotipo",
+    "Clean": "Limpio \n   KML",
+    "alert": "¡Éxito!",
+    "alert5": "¡Error de lanzamiento!",
+    "alert6": "Ocurrió un error al intentar conectarse a LG",
+    "LGRelaunch": "Relanzamiento de LG",
+    "LGReboot": "Reinicia LG",
+    "LGShutdown": "Apaga LG",
+    "sure": "¿Estás seguro de que quieres realizar esta tarea?",
+    "Yes": "Sí",
+    "No": "No"
+  },
+  "button": {
+    "cancel": "Cancelar"
+  },
+  "language": {
+    "name": {
+      "en": "Inglés (Estados Unidos)",
+      "es": "Español",
+      "hi": "Hindi",
+      "ar": "Arábica",
+      "ru": "Ruso",
+      "ja": "Japonés",
+      "zh": "Chino (Simplificado)",
+      "sq": "Albanés",
+      "de": "Alemán",
+      "pt": "Portugués"
+    },
+    "flag": "🇪🇸",
+    "selected_message": "El idioma seleccionado actualmente es {language}",
+    "selection": {
+      "message": "Por favor seleccione un idioma de la lista",
+      "title": "Selección de idioma"
+    }
+  }
+}

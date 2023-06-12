@@ -1,0 +1,61 @@
+{
+  "title": {
+    "name": "Rocket Launcher App"
+  },
+  "tabs": {
+    "track": " Launch ",
+    "map": " Map ",
+    "info": " Info "
+  },
+  "drawer": {
+    "home": "Home",
+    "help": "Help",
+    "about": "About",
+    "task": "Liquid Galaxy Tasks",
+    "connection": "Connection Manager",
+    "settings": "Settings",
+    "tour": "Take a tour",
+    "inventory": "Inventory"
+  },
+  "Tasks": {
+    "LG_tasks": "Liquid Galaxy Tasks",
+    "Relaunch": "Relaunch \n      LG",
+    "Shutdown": "Shutdown \n       LG",
+    "Reboot": "Reboot \n    LG",
+    "Logo": "Clean \n Logo",
+    "Clean": "Clean \n KML",
+    "alert": "Success!",
+    "alert3": "Oops!",
+    "alert5": "Error launching!",
+    "alert6": "An error occurred while trying to connect to LG",
+    "LGRelaunch": "Relaunch LG",
+    "LGReboot": "Reboot LG",
+    "LGShutdown": "Shutdown LG",
+    "sure": "Are you sure you want to perform this task?",
+    "Yes": "Yes",
+    "No": "No"
+  },
+  "button": {
+    "cancel": "Cancel"
+  },
+  "language": {
+    "name": {
+      "en": "English (US)",
+      "es": "Spanish",
+      "hi": "Hindi",
+      "ar": "Arabic",
+      "ru": "Russian",
+      "ja": "Japanese",
+      "zh": "Chinese (Simplified)",
+      "sq": "Albanian",
+      "de": "German",
+      "pt": "Portuguese"
+    },
+    "flag": "🇺🇸",
+    "selected_message": "Currently selected language is {language}",
+    "selection": {
+      "message": "Please select a language from the list",
+      "title": "Language Selection"
+    }
+  }
+}
