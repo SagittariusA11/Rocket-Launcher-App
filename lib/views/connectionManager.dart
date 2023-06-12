@@ -50,8 +50,8 @@ class _ConnectionManagerViewState extends State<ConnectionManagerView> {
         passwordOrKey: password.text,
       );
       await client.connect();
-      showAlertDialog("Connected!",
-          '${ipAddress.text} ' + "host is reachable", true);
+      showAlertDialog(translate("connection.alert"),
+          '${ipAddress.text} ' + translate("connection.alert2"), true);
       setState(() {
         connectionStatus = true;
       });
@@ -59,8 +59,8 @@ class _ConnectionManagerViewState extends State<ConnectionManagerView> {
       await LGConnection().openDemoLogos();
       await client.disconnect();
     } catch (e) {
-      showAlertDialog("Oops!",
-          '${ipAddress.text} ' + "host is reachable. Check if the information filled is correct and if the host can be reached.", false);
+      showAlertDialog(translate("connection.alert3"),
+          '${ipAddress.text} ' + translate("connection.alert4"), false);
       setState(() {
         connectionStatus = false;
       });
@@ -135,7 +135,7 @@ class _ConnectionManagerViewState extends State<ConnectionManagerView> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "Rocket Launcher App",
+                            translate('connection.label_l1'),
                             style: TextStyle(
                                 fontFamily: 'GoogleSans',
                                 fontSize: 25,
@@ -143,7 +143,7 @@ class _ConnectionManagerViewState extends State<ConnectionManagerView> {
                             ),
                           ),
                           Text(
-                            "Using Liquid Galaxy Rig",
+                            translate('connection.label_l2'),
                             style: TextStyle(
                               fontFamily: 'GoogleSans',
                               fontSize: 15,
@@ -155,10 +155,10 @@ class _ConnectionManagerViewState extends State<ConnectionManagerView> {
                     ],
                   ),
                 ),
-                const Padding(
+                Padding(
                   padding: EdgeInsets.only(bottom: 20.0, top: 50),
                   child: Text(
-                    'Connection Manager',
+                    translate('connection.title'),
                     textAlign: TextAlign.center,
                     style: TextStyle(
                         fontSize: 40, fontWeight: FontWeight.bold),
@@ -185,15 +185,15 @@ class _ConnectionManagerViewState extends State<ConnectionManagerView> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Text(
-                          'Status: ',
+                          translate('connection.status'),
                           textAlign: TextAlign.start,
                           style: TextStyle(
                               fontSize: 20, fontWeight: FontWeight.bold),
                         ),
                         Text(
                           connectionStatus
-                              ? 'Connected '
-                              : 'Disconnected ',
+                              ? translate('connection.connected')
+                              : translate('connection.disconnected'),
                           style: TextStyle(fontSize: 20),
                         ),
                         connectionStatus
@@ -232,7 +232,7 @@ class _ConnectionManagerViewState extends State<ConnectionManagerView> {
                             fillColor: Colors.transparent,
                             border: InputBorder.none,
                             hintText: 'lg',
-                            labelText: 'Master machine Username',
+                            labelText: translate('connection.mmu'),
                             labelStyle: TextStyle(
                                 color: Color.fromARGB(255, 74, 74, 74)),
                           ),
@@ -262,7 +262,7 @@ class _ConnectionManagerViewState extends State<ConnectionManagerView> {
                             fillColor: Colors.transparent,
                             border: InputBorder.none,
                             hintText: '192.168.56.103',
-                            labelText: 'Master machine IP Address',
+                            labelText: translate('connection.mmip'),
                             labelStyle: TextStyle(
                                 color: Color.fromARGB(255, 74, 74, 74)),
                           ),
@@ -292,7 +292,7 @@ class _ConnectionManagerViewState extends State<ConnectionManagerView> {
                             fillColor: Colors.transparent,
                             border: InputBorder.none,
                             hintText: '22',
-                            labelText: 'Master machine Port Number',
+                            labelText: translate('connection.mmpn'),
                             labelStyle: TextStyle(
                                 color: Color.fromARGB(255, 74, 74, 74)),
                           ),
@@ -320,7 +320,7 @@ class _ConnectionManagerViewState extends State<ConnectionManagerView> {
                           fillColor: Colors.transparent,
                           border: InputBorder.none,
                           hintText: '****',
-                          labelText: 'Master machine Password',
+                          labelText: translate('connection.mmp'),
                           labelStyle: TextStyle(
                               color: Color.fromARGB(255, 74, 74, 74)),
                           suffixIcon: IconButton(
@@ -365,7 +365,7 @@ class _ConnectionManagerViewState extends State<ConnectionManagerView> {
                             fillColor: Colors.transparent,
                             border: InputBorder.none,
                             hintText: '3',
-                            labelText: 'Total Machines in the LG Rig',
+                            labelText: translate('connection.number'),
                             labelStyle: TextStyle(
                                 color: Color.fromARGB(255, 74, 74, 74)),
                           ),
@@ -444,13 +444,13 @@ class _ConnectionManagerViewState extends State<ConnectionManagerView> {
                       child: SizedBox(
                         width: 100,
                         child: Wrap(
-                          children: const <Widget>[
+                          children: [
                             SizedBox(
                               width: 10,
                             ),
                             FittedBox(
                               child: Text(
-                                  'CONNECT',
+                                  translate('connection.connect'),
                                   style: TextStyle(
                                       fontSize: 25,
                                       color: Colors.black

@@ -91,5 +91,23 @@
   "tbox": {
     "yes": "Yes",
     "no": "No"
+  },
+  "connection": {
+    "title": "Connection Manager",
+    "label_l1": "Rocket Launcher App",
+    "label_l2": "Using Liquid Galaxy Rig",
+    "status": "Status: ",
+    "connected": "Connected ",
+    "disconnected": "Disconnected ",
+    "mmu": "Master machine Username",
+    "mmip": "Master machine IP Address",
+    "mmpn": "Master machine Port Number",
+    "mmp": "Master machine Password",
+    "number": "Total Machines in the LG Rig",
+    "connect": "CONNECT",
+    "alert": "Connected!",
+    "alert2": "Host is reachable",
+    "alert3": "Oops!",
+    "alert4": "Host is not reachable. Check if the information given is correct and if the host can be reached"
   }
 }

@@ -91,5 +91,23 @@
   "tbox": {
     "yes": "Sí",
     "no": "No"
+  },
+  "connection": {
+    "title": "Administrador de conexión",
+    "label_l1": "Aplicación Lanzacohetes",
+    "label_l2": "Usando Liquid Galaxy Rig",
+    "status": "Estado: ",
+    "connected": "Conectado ",
+    "disconnected": "Desconectado ",
+    "mmu": "Nombre de usuario de la máquina maestra",
+    "mmip": "Dirección IP de la máquina maestra",
+    "mmpn": "Número de puerto de la máquina maestra",
+    "mmp": "Contraseña de la máquina maestra",
+    "number": "Máquinas totales en la plataforma LG",
+    "connect": "Conectar",
+    "alert": "¡Conectado!",
+    "alert2": "El anfitrión es alcanzable",
+    "alert3": "¡Ups!",
+    "alert4": "El anfitrión no es accesible. Compruebe si la información proporcionada es correcta y si se puede contactar con el host"
   }
 }
