@@ -30,6 +30,7 @@ class ImagePaths{
   static const lg_demo = "assets/images/LGDemo.png";
   static const lg_tasks_bg = "assets/images/lg_tasks_background.png";
   static const help_bg = "assets/images/help_background.png";
+  static const settings_bg = "assets/images/settings_background.png";
 
 
 

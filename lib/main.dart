@@ -11,7 +11,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   var delegate = await LocalizationDelegate.create(
-      preferences: TranslatePreferences(),
       fallbackLocale: 'en',
       supportedLocales: [
         'en',
@@ -19,6 +18,7 @@ Future<void> main() async {
         'hi',
       ]);
   runApp(LocalizedApp(delegate, MyApp()));
+  // runApp(const MyApp());
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.landscapeLeft,
     DeviceOrientation.landscapeRight,
@@ -42,24 +42,29 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     var localizationDelegate = LocalizedApp.of(context).delegate;
+    // LocalJsonLocalization.delegate.directories = ['assets/i18n'];
     SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
         systemNavigationBarColor: Colors.black
     ));
 
-    return MaterialApp(
-      localizationsDelegates: [
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-        LocalJsonLocalization.delegate,
-      ],
-      supportedLocales: localizationDelegate.supportedLocales,
-      locale: localizationDelegate.currentLocale,
-      title: 'Rocket Launcher Visualizer',
-      debugShowCheckedModeBanner: false,
-      themeMode: ThemeMode.system,
-      initialRoute: RouteNames.splash,
-      onGenerateRoute: Routes.generateRoute,
+    return LocalizationProvider(
+      state: LocalizationProvider.of(context).state,
+      child: MaterialApp(
+        localizationsDelegates: [
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+          localizationDelegate
+          // LocalJsonLocalization.delegate,
+        ],
+        supportedLocales: localizationDelegate.supportedLocales,
+        locale: localizationDelegate.currentLocale,
+        title: 'Rocket Launcher Visualizer',
+        debugShowCheckedModeBanner: false,
+        themeMode: ThemeMode.system,
+        initialRoute: RouteNames.splash,
+        onGenerateRoute: Routes.generateRoute,
+      ),
     );
   }
 }
