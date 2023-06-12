@@ -49,9 +49,9 @@ class _SettingsViewState extends State<SettingsView> {
                       SizedBox(
                         width: ScreenConfig.widthPercent*2,
                       ),
-                      const Text(
-                        "Settings",
-                        style: TextStyle(
+                       Text(
+                        translate('drawer.settings'),
+                        style: const TextStyle(
                             fontFamily: 'GoogleSans',
                             fontSize: 30,
                             color: Colors.white,
@@ -69,23 +69,20 @@ class _SettingsViewState extends State<SettingsView> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        // SizedBox(
-                        //   height: ScreenConfig.heightPercent*2.5,
-                        // ),
                         Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text(
-                              "Language",
-                              style: TextStyle(
+                            Text(
+                              translate('settings.language.language'),
+                              style: const TextStyle(
                                   fontFamily: 'GoogleSans',
                                   fontSize: 30,
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold
                               ),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 20,
                             ),
                             Row(
@@ -105,10 +102,10 @@ class _SettingsViewState extends State<SettingsView> {
                                   child: SizedBox(
                                     width: ScreenConfig.widthPercent*10,
                                     height: ScreenConfig.widthPercent*7*0.25,
-                                    child: const Center(
+                                    child: Center(
                                       child: Text(
-                                          'English',
-                                          style: TextStyle(
+                                          translate('language.name.en'),
+                                          style: const TextStyle(
                                               fontSize: 20,
                                               color: Colors.black,
                                               fontWeight: FontWeight.bold
@@ -130,10 +127,10 @@ class _SettingsViewState extends State<SettingsView> {
                                   child: SizedBox(
                                     width: ScreenConfig.widthPercent*10,
                                     height: ScreenConfig.widthPercent*7*0.25,
-                                    child: const Center(
+                                    child: Center(
                                       child: Text(
-                                          'Spanish',
-                                          style: TextStyle(
+                                          translate('language.name.es'),
+                                          style: const TextStyle(
                                               fontSize: 20,
                                               color: Colors.black,
                                               fontWeight: FontWeight.bold
@@ -148,16 +145,16 @@ class _SettingsViewState extends State<SettingsView> {
                                   style: ElevatedButton.styleFrom(
                                     elevation: 10,
                                     shadowColor: Colors.grey,
-                                    primary: Color.fromARGB(255, 217, 217, 217),
-                                    padding: EdgeInsets.all(15),
-                                    shape: StadiumBorder(),
+                                    primary: const Color.fromARGB(255, 217, 217, 217),
+                                    padding: const EdgeInsets.all(15),
+                                    shape: const StadiumBorder(),
                                   ),
                                   child: SizedBox(
                                     width: ScreenConfig.widthPercent*10,
                                     height: ScreenConfig.widthPercent*7*0.25,
-                                    child: const Center(
+                                    child: Center(
                                       child: Text(
-                                          'Hindi',
+                                          translate('language.name.hi'),
                                           style: TextStyle(
                                               fontSize: 20,
                                               color: Colors.black,
@@ -171,16 +168,16 @@ class _SettingsViewState extends State<SettingsView> {
                                   style: ElevatedButton.styleFrom(
                                     elevation: 10,
                                     shadowColor: Colors.grey,
-                                    primary: Color.fromARGB(255, 217, 217, 217),
-                                    padding: EdgeInsets.all(15),
-                                    shape: StadiumBorder(),
+                                    primary: const Color.fromARGB(255, 217, 217, 217),
+                                    padding: const EdgeInsets.all(15),
+                                    shape: const StadiumBorder(),
                                   ),
                                   child: SizedBox(
                                     width: ScreenConfig.widthPercent*10,
                                     height: ScreenConfig.widthPercent*7*0.25,
-                                    child: const Center(
+                                    child: Center(
                                       child: Text(
-                                          'German',
+                                          translate('language.name.de'),
                                           style: TextStyle(
                                               fontSize: 20,
                                               color: Colors.black,
@@ -203,10 +200,10 @@ class _SettingsViewState extends State<SettingsView> {
                                   child: SizedBox(
                                     width: ScreenConfig.widthPercent*10,
                                     height: ScreenConfig.widthPercent*7*0.25,
-                                    child: const Center(
+                                    child: Center(
                                       child: Text(
-                                          'More',
-                                          style: TextStyle(
+                                          translate('settings.language.more'),
+                                          style: const TextStyle(
                                               fontSize: 20,
                                               color: Colors.black,
                                               fontWeight: FontWeight.bold
@@ -219,14 +216,14 @@ class _SettingsViewState extends State<SettingsView> {
                           ],
                         ),
                         const SizedBox(
-                          height: 20,
+                          height: 30,
                         ),
                         Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text(
-                              "Colour Theme",
+                            Text(
+                              translate('settings.theme.theme'),
                               style: TextStyle(
                                   fontFamily: 'GoogleSans',
                                   fontSize: 30,
@@ -266,9 +263,9 @@ class _SettingsViewState extends State<SettingsView> {
                                       SizedBox(
                                         width: ScreenConfig.widthPercent*7,
                                         height: ScreenConfig.widthPercent*7*0.25,
-                                        child: const Center(
+                                        child: Center(
                                           child: Text(
-                                              'Light',
+                                              translate('settings.theme.light'),
                                               style: TextStyle(
                                                   fontSize: 20,
                                                   color: Colors.black,
@@ -305,9 +302,9 @@ class _SettingsViewState extends State<SettingsView> {
                                         SizedBox(
                                           width: ScreenConfig.widthPercent*7,
                                           height: ScreenConfig.widthPercent*7*0.25,
-                                          child: const Center(
+                                          child: Center(
                                             child: Text(
-                                                'Dark',
+                                                translate('settings.theme.dark'),
                                                 style: TextStyle(
                                                     fontSize: 20,
                                                     color: Colors.black,
@@ -344,9 +341,9 @@ class _SettingsViewState extends State<SettingsView> {
                                         SizedBox(
                                           width: ScreenConfig.widthPercent*7,
                                           height: ScreenConfig.widthPercent*7*0.25,
-                                          child: const Center(
+                                          child: Center(
                                             child: Text(
-                                                'Red',
+                                                translate('settings.theme.red'),
                                                 style: TextStyle(
                                                     fontSize: 20,
                                                     color: Colors.black,
@@ -383,9 +380,9 @@ class _SettingsViewState extends State<SettingsView> {
                                         SizedBox(
                                           width: ScreenConfig.widthPercent*7,
                                           height: ScreenConfig.widthPercent*7*0.25,
-                                          child: const Center(
+                                          child: Center(
                                             child: Text(
-                                                'Green',
+                                                translate('settings.theme.green'),
                                                 style: TextStyle(
                                                     fontSize: 20,
                                                     color: Colors.black,
@@ -422,9 +419,9 @@ class _SettingsViewState extends State<SettingsView> {
                                         SizedBox(
                                           width: ScreenConfig.widthPercent*7,
                                           height: ScreenConfig.widthPercent*7*0.25,
-                                          child: const Center(
+                                          child: Center(
                                             child: Text(
-                                                'Blue',
+                                                translate('settings.theme.blue'),
                                                 style: TextStyle(
                                                     fontSize: 20,
                                                     color: Colors.black,
@@ -440,14 +437,14 @@ class _SettingsViewState extends State<SettingsView> {
                           ],
                         ),
                         const SizedBox(
-                          height: 20,
+                          height: 30,
                         ),
                         Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text(
-                              "Audio",
+                            Text(
+                              translate('settings.audio.audio'),
                               style: TextStyle(
                                   fontFamily: 'GoogleSans',
                                   fontSize: 30,
@@ -469,8 +466,8 @@ class _SettingsViewState extends State<SettingsView> {
                                     Row(
                                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                       children: [
-                                        const Text(
-                                          "App audio and music",
+                                        Text(
+                                          translate('settings.audio.aam'),
                                           style: TextStyle(
                                               fontFamily: 'GoogleSans',
                                               fontSize: 25,
@@ -501,8 +498,8 @@ class _SettingsViewState extends State<SettingsView> {
                                     Row(
                                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                       children: [
-                                        const Text(
-                                          "Text to Speech",
+                                        Text(
+                                          translate('settings.audio.tts'),
                                           style: TextStyle(
                                               fontFamily: 'GoogleSans',
                                               fontSize: 25,
@@ -533,8 +530,8 @@ class _SettingsViewState extends State<SettingsView> {
                                     Row(
                                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                       children: [
-                                        const Text(
-                                          "Haptic response",
+                                        Text(
+                                          translate('settings.audio.hp'),
                                           style: TextStyle(
                                               fontFamily: 'GoogleSans',
                                               fontSize: 25,
@@ -566,14 +563,14 @@ class _SettingsViewState extends State<SettingsView> {
                           ],
                         ),
                         const SizedBox(
-                          height: 20,
+                          height: 30,
                         ),
                         Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text(
-                              "Font Size",
+                            Text(
+                              translate('settings.fs'),
                               style: TextStyle(
                                   fontFamily: 'GoogleSans',
                                   fontSize: 30,
@@ -648,15 +645,15 @@ class _SettingsViewState extends State<SettingsView> {
                           ],
                         ),
                         const SizedBox(
-                          height: 20,
+                          height: 30,
                         ),
                         SizedBox(
                           width: ScreenConfig.widthPercent*30,
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              const Text(
-                                "Voice Command",
+                              Text(
+                                translate('settings.vc'),
                                 style: TextStyle(
                                     fontFamily: 'GoogleSans',
                                     fontSize: 30,

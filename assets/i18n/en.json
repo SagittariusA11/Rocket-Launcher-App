@@ -57,5 +57,27 @@
       "message": "Please select a language from the list",
       "title": "Language Selection"
     }
+  },
+  "settings": {
+    "language": {
+      "language": "Language",
+      "more":"More"
+    },
+    "theme": {
+      "theme": "Colour Theme",
+      "light": "Light",
+      "dark": "Dark",
+      "red": "Red",
+      "green": "Green",
+      "blue": "Blue"
+    },
+    "audio": {
+      "audio": "Audio",
+      "aam": "App audio and music",
+      "tts": "Text to Speech",
+      "hp": "Haptic Response"
+    },
+    "fs": "Font Size",
+    "vc": "Voice Command"
   }
 }

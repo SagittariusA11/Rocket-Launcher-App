@@ -39,7 +39,7 @@
   },
   "language": {
     "name": {
-      "en": "Inglés (Estados Unidos)",
+      "en": "Inglés",
       "es": "Español",
       "hi": "Hindi",
       "ar": "Arábica",
@@ -56,5 +56,27 @@
       "message": "Por favor seleccione un idioma de la lista",
       "title": "Selección de idioma"
     }
+  },
+  "settings": {
+    "language": {
+      "language": "Idioma",
+      "more":"Más"
+    },
+    "theme": {
+      "theme": "Tema de color",
+      "light": "Ligero",
+      "dark": "Oscuro",
+      "red": "Rojo",
+      "green": "Verde",
+      "blue": "Azul"
+    },
+    "audio": {
+      "audio": "Audio",
+      "aam": "Aplicación de audio y música.",
+      "tts": "Texto a voz",
+      "hp": "Respuesta háptica"
+    },
+    "fs": "Tamaño de fuente",
+    "vc": "Comando de voz"
   }
 }
