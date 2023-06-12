@@ -109,5 +109,14 @@
     "alert2": "El anfitrión es alcanzable",
     "alert3": "¡Ups!",
     "alert4": "El anfitrión no es accesible. Compruebe si la información proporcionada es correcta y si se puede contactar con el host"
+  },
+  "help": {
+    "title": "Ayuda",
+    "h1": "Instrucciones para configurar la visualización:",
+    "h1des": "1. Primero, vaya a Connection Manager, que se puede encontrar en el menú, y complete las credenciales. Los ejemplos se mencionan allí como marcadores de posición.\n2. Luego, vaya a la pestaña Lista de lanzamiento y toque la Misión que desea visualizar. Espere a que aparezca el mensaje Toast 'Listo para visualizar', luego\n    presione el botón 'Visualizar en LG'. Podrá ver la visualización deseada en Liquid Galaxy Rig.\n3. Puede navegar por el LG desde la pestaña Mapa, conocer el significado de los íconos y los polígonos de colores en la 'Pestaña de información' y Limpiar el\n   visualización con la ayuda de 'LG Tasks' del menú.",
+    "h2": "Solución de problemas:",
+    "h2des": "1. Si no puede conectarse a la plataforma LG, primero asegúrese de que ambos estén en la misma red; o puedes conectarte a\n    el WiFi de un tercer dispositivo o conectar LG al punto de acceso de la Tablet. Compruebe que las credenciales estén correctamente cumplimentadas y vuelva a intentarlo.\n2. Para encontrar la dirección IP del LG (o la computadora portátil host en caso de configuración de VM), escriba 'ifconfig' en el terminal si\n   estás en Mac o Linux y 'ipconfig' para Windows.\n3. Para equipos LG de gama baja, a veces la visualización no aparece la primera vez. Presiona el botón 'Visualizar en LG'\n    una vez más para resolver esto.",
+    "h3": "Controles de mapa:",
+    "h3des": "1. Para navegar en el equipo LG, se puede usar la interfaz de la pantalla Mapa.\\n\"\n                                  \"2. Para arrastrar, podemos usar el movimiento de un dedo en cualquier dirección en la pantalla del mapa.\\n\"\n                                  \"3. Para girar en ángulo, se pueden usar dos dedos y dar un movimiento de tornillo en la pantalla del mapa.\\n\"\n                                  \"4. Para hacer zoom, se puede pellizcar la pantalla y mover los dedos hacia afuera o hacia adentro para acercar y alejar\\n, respectivamente. También podemos hacer zoom presionando los íconos + y - proporcionados en la pantalla del mapa.\\n\"\n                                  \"5. Para inclinar, uno puede usar dos dedos y darle un movimiento lineal en dirección hacia arriba."
   }
 }
