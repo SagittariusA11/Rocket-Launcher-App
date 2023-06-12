@@ -66,6 +66,83 @@ void onActionSheetPress(BuildContext context, bool blackandwhite) {
                   changeLocale(context, "hi");
                   Navigator.of(context, rootNavigator: true).pop("hi");
                 }),
+            CupertinoActionSheetAction(
+                child: Text(translate('language.name.de') + " 🇩🇪",
+                    style: TextStyle(
+                      fontWeight: FontWeight.normal,
+                      fontFamily: "GoogleSans",
+                      fontSize: 18.0,
+                    )),
+                onPressed: () {
+                  changeLocale(context, "de");
+                  Navigator.of(context, rootNavigator: true).pop("de");
+                }),
+            CupertinoActionSheetAction(
+                child: Text(translate('language.name.ar') + " 🇦🇪",
+                    style: TextStyle(
+                      fontWeight: FontWeight.normal,
+                      fontFamily: "GoogleSans",
+                      fontSize: 18.0,
+                    )),
+                onPressed: () {
+                  changeLocale(context, "ar");
+                  Navigator.of(context, rootNavigator: true).pop("ar");
+                }),
+            CupertinoActionSheetAction(
+                child: Text(translate('language.name.ru') + " 🇷🇺",
+                    style: TextStyle(
+                      fontWeight: FontWeight.normal,
+                      fontFamily: "GoogleSans",
+                      fontSize: 18.0,
+                    )),
+                onPressed: () {
+                  changeLocale(context, "ru");
+                  Navigator.of(context, rootNavigator: true).pop("ru");
+                }),
+            CupertinoActionSheetAction(
+                child: Text(translate('language.name.ja') + " 🇯🇵",
+                    style: TextStyle(
+                      fontWeight: FontWeight.normal,
+                      fontFamily: "GoogleSans",
+                      fontSize: 18.0,
+                    )),
+                onPressed: () {
+                  changeLocale(context, "ja");
+                  Navigator.of(context, rootNavigator: true).pop("ja");
+                }),
+            CupertinoActionSheetAction(
+                child: Text(translate('language.name.zh') + " 🇨🇳",
+                    style: TextStyle(
+                      fontWeight: FontWeight.normal,
+                      fontFamily: "GoogleSans",
+                      fontSize: 18.0,
+                    )),
+                onPressed: () {
+                  changeLocale(context, "zh");
+                  Navigator.of(context, rootNavigator: true).pop("zh");
+                }),
+            CupertinoActionSheetAction(
+                child: Text(translate('language.name.pt') + " 🇵🇹",
+                    style: TextStyle(
+                      fontWeight: FontWeight.normal,
+                      fontFamily: "GoogleSans",
+                      fontSize: 18.0,
+                    )),
+                onPressed: () {
+                  changeLocale(context, "pt");
+                  Navigator.of(context, rootNavigator: true).pop("pt");
+                }),
+            CupertinoActionSheetAction(
+                child: Text(translate('language.name.sq') + " 🇦🇱",
+                    style: TextStyle(
+                      fontWeight: FontWeight.normal,
+                      fontFamily: "GoogleSans",
+                      fontSize: 18.0,
+                    )),
+                onPressed: () {
+                  changeLocale(context, "sq");
+                  Navigator.of(context, rootNavigator: true).pop("sq");
+                })
           ],
           cancelButton: CupertinoActionSheetAction(
             child: Text(translate('button.cancel'),

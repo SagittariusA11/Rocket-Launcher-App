@@ -487,7 +487,7 @@ class _SettingsViewState extends State<SettingsView> {
                                                 _app_audio_and_music = value; // Update the switch state
                                               });
                                             },
-                                            activeColor: Colors.blue,
+                                            activeColor: Colors.white,
                                             inactiveThumbColor: Colors.grey,
                                             activeTrackColor: Colors.lightBlueAccent,
                                             inactiveTrackColor: Colors.grey.shade300,
@@ -519,7 +519,7 @@ class _SettingsViewState extends State<SettingsView> {
                                                 _text_to_speech = value; // Update the switch state
                                               });
                                             },
-                                            activeColor: Colors.blue,
+                                            activeColor: Colors.white,
                                             inactiveThumbColor: Colors.grey,
                                             activeTrackColor: Colors.lightBlueAccent,
                                             inactiveTrackColor: Colors.grey.shade300,
@@ -551,7 +551,7 @@ class _SettingsViewState extends State<SettingsView> {
                                                 _haptic = value; // Update the switch state
                                               });
                                             },
-                                            activeColor: Colors.blue,
+                                            activeColor: Colors.white,
                                             inactiveThumbColor: Colors.grey,
                                             activeTrackColor: Colors.lightBlueAccent,
                                             inactiveTrackColor: Colors.grey.shade300,
@@ -624,6 +624,7 @@ class _SettingsViewState extends State<SettingsView> {
                                             });
                                           },
                                           activeColor: Colors.white,
+                                          inactiveColor: Colors.grey.shade300,
                                           label: _currentValue.round().toString(),
                                         ),
                                       ),
@@ -664,7 +665,7 @@ class _SettingsViewState extends State<SettingsView> {
                                 ),
                               ),
                               Transform.scale(
-                                scale: 1.25,
+                                scale: 1.35,
                                 child: Switch(
                                   value: _voice_command,
                                   onChanged: (bool value) {
@@ -672,7 +673,7 @@ class _SettingsViewState extends State<SettingsView> {
                                       _voice_command = value; // Update the switch state
                                     });
                                   },
-                                  activeColor: Colors.blue,
+                                  activeColor: Colors.white,
                                   inactiveThumbColor: Colors.grey,
                                   activeTrackColor: Colors.lightBlueAccent,
                                   inactiveTrackColor: Colors.grey.shade300,
