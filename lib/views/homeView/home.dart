@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:rocket_launcher_app/views/connectionManager.dart';
 
@@ -150,9 +151,9 @@ class _homeViewState extends State<homeView> with SingleTickerProviderStateMixin
                     SizedBox(
                       width: ScreenConfig.widthPercent*1.5,
                     ),
-                    const FittedBox(
+                    FittedBox(
                       child: Text(
-                        "Rocket Launcher\nVisualiser App",
+                        translate('drawer.title'),
                         style: TextStyle(
                             fontFamily: 'GoogleSans',
                             fontSize: 30,
@@ -196,8 +197,8 @@ class _homeViewState extends State<homeView> with SingleTickerProviderStateMixin
                 // ),
                 ListTile(
                   onTap: () => homeViewController.changeSelectedView(0),
-                  title: const Text(
-                    "Home",
+                  title: Text(
+                    translate('drawer.home'),
                     style: TextStyle(
                         fontFamily: 'GoogleSans',
                         fontSize: 25,
@@ -213,8 +214,8 @@ class _homeViewState extends State<homeView> with SingleTickerProviderStateMixin
                 ),
                 ListTile(
                   onTap: () => homeViewController.changeSelectedView(1),
-                  title: const Text(
-                    "About",
+                  title: Text(
+                    translate('drawer.about'),
                     style: TextStyle(
                         fontFamily: 'GoogleSans',
                         fontSize: 25,
@@ -230,8 +231,8 @@ class _homeViewState extends State<homeView> with SingleTickerProviderStateMixin
                 ),
                 ListTile(
                   onTap: () => homeViewController.changeSelectedView(2),
-                  title: const Text(
-                    "Help",
+                  title: Text(
+                    translate('drawer.help'),
                     style: TextStyle(
                         fontFamily: 'GoogleSans',
                         fontSize: 25,
@@ -247,8 +248,8 @@ class _homeViewState extends State<homeView> with SingleTickerProviderStateMixin
                 ),
                 ListTile(
                   onTap: () => homeViewController.changeSelectedView(3),
-                  title: const Text(
-                    "Liquig Galaxy Tasks",
+                  title: Text(
+                    translate('drawer.task'),
                     style: TextStyle(
                         fontFamily: 'GoogleSans',
                         fontSize: 25,
@@ -264,8 +265,8 @@ class _homeViewState extends State<homeView> with SingleTickerProviderStateMixin
                 ),
                 ListTile(
                   onTap: () => homeViewController.changeSelectedView(4),
-                  title: const Text(
-                    "Connection Manager",
+                  title: Text(
+                    translate('drawer.connection'),
                     style: TextStyle(
                         fontFamily: 'GoogleSans',
                         fontSize: 25,
@@ -281,8 +282,8 @@ class _homeViewState extends State<homeView> with SingleTickerProviderStateMixin
                 ),
                 ListTile(
                   onTap: () => homeViewController.changeSelectedView(5),
-                  title: const Text(
-                    "Settings",
+                  title: Text(
+                    translate('drawer.settings'),
                     style: TextStyle(
                         fontFamily: 'GoogleSans',
                         fontSize: 25,
@@ -298,8 +299,8 @@ class _homeViewState extends State<homeView> with SingleTickerProviderStateMixin
                 ),
                 ListTile(
                   onTap: () => homeViewController.changeSelectedView(6),
-                  title: const Text(
-                    "Take a tour",
+                  title: Text(
+                    translate('drawer.tour'),
                     style: TextStyle(
                         fontFamily: 'GoogleSans',
                         fontSize: 25,
@@ -315,8 +316,8 @@ class _homeViewState extends State<homeView> with SingleTickerProviderStateMixin
                 ),
                 ListTile(
                   onTap: () => homeViewController.changeSelectedView(7),
-                  title: const Text(
-                    "Inventory",
+                  title: Text(
+                    translate('drawer.inventory'),
                     style: TextStyle(
                         fontFamily: 'GoogleSans',
                         fontSize: 25,
@@ -355,8 +356,8 @@ class _homeViewState extends State<homeView> with SingleTickerProviderStateMixin
                         SizedBox(
                           width: 15,
                         ),
-                        const Text(
-                          "Exit App",
+                        Text(
+                          translate('drawer.exit'),
                           style: TextStyle(
                               fontFamily: 'GoogleSans',
                               fontSize: 25,

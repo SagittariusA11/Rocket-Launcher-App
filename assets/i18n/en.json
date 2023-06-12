@@ -8,6 +8,7 @@
     "info": " Info "
   },
   "drawer": {
+    "title": "Rocket Launcher\nVisualiser App",
     "home": "Home",
     "help": "Help",
     "about": "About",
@@ -15,7 +16,8 @@
     "connection": "Connection Manager",
     "settings": "Settings",
     "tour": "Take a tour",
-    "inventory": "Inventory"
+    "inventory": "Inventory",
+    "exit": "Exit App"
   },
   "tasks": {
     "LG_tasks": "Liquid Galaxy Tasks",

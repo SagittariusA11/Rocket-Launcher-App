@@ -8,6 +8,7 @@
     "info": "Información"
   },
   "drawer": {
+    "title": "Lanzacohetes\nAplicación Visualizador",
     "home": "Hogar",
     "help": "Ayudar",
     "about": "Acerca de",
@@ -15,7 +16,8 @@
     "connection": "Administrador de conexión",
     "settings": "Ajustes",
     "tour": "hacer un recorrido",
-    "inventory": "Inventario"
+    "inventory": "Inventario",
+    "exit": "Salida"
   },
   "tasks": {
     "LG_tasks": "Tareas de Liquid Galaxy",
