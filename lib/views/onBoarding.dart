@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 import 'package:rocket_launcher_app/config/imagePaths.dart';
 import 'package:rocket_launcher_app/config/screenConfig.dart';
 
@@ -44,9 +45,9 @@ class _OnBoardingState extends State<OnBoarding> {
                     // ),
                     SizedBox(
                       height: ScreenConfig.heightPercent*22,
-                      child: const FittedBox(
+                      child: FittedBox(
                         child: Text(
-                          "Rocket\nLauncher\nApp",
+                          translate('on_board.app'),
                           style: TextStyle(
                               fontFamily: 'GoogleSans',
                               fontSize: 55,
@@ -80,9 +81,9 @@ class _OnBoardingState extends State<OnBoarding> {
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            const FittedBox(
+                            FittedBox(
                               child: Text(
-                                "Welcome OnBoard !",
+                                translate('on_board.title'),
                                 style: TextStyle(
                                     fontFamily: 'GoogleSans',
                                     fontSize: 50,
@@ -104,9 +105,9 @@ class _OnBoardingState extends State<OnBoarding> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
-                            const FittedBox(
+                            FittedBox(
                               child: Text(
-                                "Ready for liftoff? Blast off to a whole\nnew level with our rocket launcher app!",
+                                translate('on_board.h1'),
                                 style: TextStyle(
                                     fontFamily: 'GoogleSans',
                                     fontSize: 25,
@@ -138,9 +139,9 @@ class _OnBoardingState extends State<OnBoarding> {
                     // SizedBox(
                     //   height: ScreenConfig.heightPercent*1.5,
                     // ),
-                    const FittedBox(
+                    FittedBox(
                       child: Text(
-                        "Visualize any launch event from SpaceX in\nspectacular panoramic virtually real view using\nLiquid Galaxy Rigs and Google Maps",
+                        translate('on_board.h2'),
                         style: TextStyle(
                             fontFamily: 'GoogleSans',
                             fontSize: 25,

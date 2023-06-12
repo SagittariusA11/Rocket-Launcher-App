@@ -1,5 +1,6 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 
 import '../config/imagePaths.dart';
 import '../config/screenConfig.dart';
@@ -129,7 +130,7 @@ class _SplashState extends State<Splash> {
                   child: AnimatedTextKit(
                       animatedTexts: [
                         TypewriterAnimatedText(
-                          "Rocket Launcher App",
+                          translate('title.name'),
                           textStyle: const TextStyle(
                               fontFamily: 'GoogleSans',
                               fontSize: 55,
