@@ -22,6 +22,12 @@ class _SettingsViewState extends State<SettingsView> {
   bool _voice_command = false;
   double _currentValue =  25;
 
+  bool _isEnPressed = true;
+  bool _isEsPressed = true;
+  bool _isHiPressed = true;
+  bool _isDePressed = true;
+  bool _isMorePressed = true;
+
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
@@ -103,6 +109,13 @@ class _SettingsViewState extends State<SettingsView> {
                               children: [
                                 ElevatedButton(
                                   onPressed: () {
+                                    setState(() {
+                                      _isEnPressed = true;
+                                      _isEsPressed = false;
+                                      _isHiPressed = false;
+                                      _isDePressed = false;
+                                      _isMorePressed = false;
+                                    });
                                     changeLocale(context, "en");
                                   },
                                   style: ElevatedButton.styleFrom(
@@ -110,7 +123,12 @@ class _SettingsViewState extends State<SettingsView> {
                                     shadowColor: Colors.grey,
                                     primary: Color.fromARGB(255, 217, 217, 217),
                                     padding: EdgeInsets.all(15),
-                                    shape: StadiumBorder(),
+                                    shape: StadiumBorder(
+                                      side: BorderSide(
+                                        color: _isEnPressed ? Colors.red : Colors.transparent,
+                                        width: 5.0,
+                                      ),
+                                    ),
                                   ),
                                   child: SizedBox(
                                     width: ScreenConfig.widthPercent*10,
@@ -129,13 +147,25 @@ class _SettingsViewState extends State<SettingsView> {
                                 ElevatedButton(
                                   onPressed: () {
                                     changeLocale(context, "es");
+                                    setState(() {
+                                      _isEnPressed = false;
+                                      _isEsPressed = true;
+                                      _isHiPressed = false;
+                                      _isDePressed = false;
+                                      _isMorePressed = false;
+                                    });
                                   },
                                   style: ElevatedButton.styleFrom(
                                     elevation: 10,
                                     shadowColor: Colors.grey,
                                     primary: Color.fromARGB(255, 217, 217, 217),
                                     padding: EdgeInsets.all(15),
-                                    shape: StadiumBorder(),
+                                    shape: StadiumBorder(
+                                      side: BorderSide(
+                                        color: _isEsPressed ? Colors.red : Colors.transparent,
+                                        width: 5.0,
+                                      ),
+                                    ),
                                   ),
                                   child: SizedBox(
                                     width: ScreenConfig.widthPercent*10,
@@ -154,13 +184,25 @@ class _SettingsViewState extends State<SettingsView> {
                                 ElevatedButton(
                                   onPressed: () {
                                     changeLocale(context, "hi");
+                                    setState(() {
+                                      _isEnPressed = false;
+                                      _isEsPressed = false;
+                                      _isHiPressed = true;
+                                      _isDePressed = false;
+                                      _isMorePressed = false;
+                                    });
                                   },
                                   style: ElevatedButton.styleFrom(
                                     elevation: 10,
                                     shadowColor: Colors.grey,
                                     primary: const Color.fromARGB(255, 217, 217, 217),
                                     padding: const EdgeInsets.all(15),
-                                    shape: const StadiumBorder(),
+                                    shape: StadiumBorder(
+                                      side: BorderSide(
+                                        color: _isHiPressed ? Colors.red : Colors.transparent,
+                                        width: 5.0,
+                                      ),
+                                    ),
                                   ),
                                   child: SizedBox(
                                     width: ScreenConfig.widthPercent*10,
@@ -177,13 +219,26 @@ class _SettingsViewState extends State<SettingsView> {
                                   ),
                                 ),
                                 ElevatedButton(
-                                  onPressed: () { },
+                                  onPressed: () {
+                                    setState(() {
+                                      _isEnPressed = false;
+                                      _isEsPressed = false;
+                                      _isHiPressed = false;
+                                      _isDePressed = true;
+                                      _isMorePressed = false;
+                                    });
+                                  },
                                   style: ElevatedButton.styleFrom(
                                     elevation: 10,
                                     shadowColor: Colors.grey,
                                     primary: const Color.fromARGB(255, 217, 217, 217),
                                     padding: const EdgeInsets.all(15),
-                                    shape: const StadiumBorder(),
+                                    shape: StadiumBorder(
+                                      side: BorderSide(
+                                        color: _isDePressed ? Colors.red : Colors.transparent,
+                                        width: 5.0,
+                                      ),
+                                    ),
                                   ),
                                   child: SizedBox(
                                     width: ScreenConfig.widthPercent*10,
@@ -202,13 +257,25 @@ class _SettingsViewState extends State<SettingsView> {
                                 ElevatedButton(
                                   onPressed: () {
                                     onActionSheetPress(context, false);
+                                    setState(() {
+                                      _isEnPressed = false;
+                                      _isEsPressed = false;
+                                      _isHiPressed = false;
+                                      _isDePressed = false;
+                                      _isMorePressed = true;
+                                    });
                                   },
                                   style: ElevatedButton.styleFrom(
                                     elevation: 10,
                                     shadowColor: Colors.grey,
                                     primary: Color.fromARGB(255, 217, 217, 217),
                                     padding: EdgeInsets.all(15),
-                                    shape: StadiumBorder(),
+                                    shape: StadiumBorder(
+                                      side: BorderSide(
+                                        color: _isMorePressed ? Colors.red : Colors.transparent,
+                                        width: 5.0,
+                                      ),
+                                    ),
                                   ),
                                   child: SizedBox(
                                     width: ScreenConfig.widthPercent*10,
@@ -266,7 +333,12 @@ class _SettingsViewState extends State<SettingsView> {
                                     shadowColor: Colors.grey,
                                     primary: Color.fromARGB(255, 217, 217, 217),
                                     padding: EdgeInsets.all(15),
-                                    shape: StadiumBorder(),
+                                    shape: StadiumBorder(
+                                      side: BorderSide(
+                                        color: selectedAppTheme.isLightMode ? Colors.red : Colors.transparent,
+                                        width: 5.0,
+                                      ),
+                                    ),
                                   ),
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
@@ -314,7 +386,12 @@ class _SettingsViewState extends State<SettingsView> {
                                       shadowColor: Colors.grey,
                                       primary: Color.fromARGB(255, 217, 217, 217),
                                       padding: EdgeInsets.all(15),
-                                      shape: StadiumBorder(),
+                                      shape: StadiumBorder(
+                                        side: BorderSide(
+                                          color: selectedAppTheme.isDarkMode ? Colors.red : Colors.transparent,
+                                          width: 5.0,
+                                        ),
+                                      ),
                                     ),
                                     child: Row(
                                       mainAxisAlignment: MainAxisAlignment.center,
@@ -362,7 +439,12 @@ class _SettingsViewState extends State<SettingsView> {
                                       shadowColor: Colors.grey,
                                       primary: Color.fromARGB(255, 217, 217, 217),
                                       padding: EdgeInsets.all(15),
-                                      shape: StadiumBorder(),
+                                      shape: StadiumBorder(
+                                        side: BorderSide(
+                                          color: selectedAppTheme.isRedMode ? Colors.red : Colors.transparent,
+                                          width: 5.0,
+                                        ),
+                                      ),
                                     ),
                                     child: Row(
                                       mainAxisAlignment: MainAxisAlignment.center,
@@ -410,7 +492,12 @@ class _SettingsViewState extends State<SettingsView> {
                                       shadowColor: Colors.grey,
                                       primary: Color.fromARGB(255, 217, 217, 217),
                                       padding: EdgeInsets.all(15),
-                                      shape: StadiumBorder(),
+                                      shape: StadiumBorder(
+                                        side: BorderSide(
+                                          color: selectedAppTheme.isGreenMode ? Colors.red : Colors.transparent,
+                                          width: 5.0,
+                                        ),
+                                      ),
                                     ),
                                     child: Row(
                                       mainAxisAlignment: MainAxisAlignment.center,
@@ -458,7 +545,12 @@ class _SettingsViewState extends State<SettingsView> {
                                       shadowColor: Colors.grey,
                                       primary: Color.fromARGB(255, 217, 217, 217),
                                       padding: EdgeInsets.all(15),
-                                      shape: StadiumBorder(),
+                                      shape: StadiumBorder(
+                                        side: BorderSide(
+                                          color: selectedAppTheme.isBlueMode ? Colors.red : Colors.transparent,
+                                          width: 5.0,
+                                        ),
+                                      ),
                                     ),
                                     child: Row(
                                       mainAxisAlignment: MainAxisAlignment.center,

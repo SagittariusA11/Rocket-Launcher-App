@@ -34,50 +34,6 @@ void onActionSheetPress(BuildContext context, bool blackandwhite) {
                   fontFamily: "GoogleSans")),
           actions: <Widget>[
             CupertinoActionSheetAction(
-                child: Text(translate('language.name.en') + " 🇺🇸",
-                    style: TextStyle(
-                      fontWeight: FontWeight.normal,
-                      fontFamily: "GoogleSans",
-                      fontSize: 18.0,
-                    )),
-                onPressed: () {
-                  changeLocale(context, "en");
-                  Navigator.of(context, rootNavigator: true).pop("en");
-                }),
-            CupertinoActionSheetAction(
-                child: Text(translate('language.name.es') + " 🇪🇸",
-                    style: TextStyle(
-                      fontWeight: FontWeight.normal,
-                      fontFamily: "GoogleSans",
-                      fontSize: 18.0,
-                    )),
-                onPressed: () {
-                  changeLocale(context, "es");
-                  Navigator.of(context, rootNavigator: true).pop("es");
-                }),
-            CupertinoActionSheetAction(
-                child: Text(translate('language.name.hi') + " 🇮🇳",
-                    style: TextStyle(
-                      fontWeight: FontWeight.normal,
-                      fontFamily: "GoogleSans",
-                      fontSize: 18.0,
-                    )),
-                onPressed: () {
-                  changeLocale(context, "hi");
-                  Navigator.of(context, rootNavigator: true).pop("hi");
-                }),
-            CupertinoActionSheetAction(
-                child: Text(translate('language.name.de') + " 🇩🇪",
-                    style: TextStyle(
-                      fontWeight: FontWeight.normal,
-                      fontFamily: "GoogleSans",
-                      fontSize: 18.0,
-                    )),
-                onPressed: () {
-                  changeLocale(context, "de");
-                  Navigator.of(context, rootNavigator: true).pop("de");
-                }),
-            CupertinoActionSheetAction(
                 child: Text(translate('language.name.ar') + " 🇦🇪",
                     style: TextStyle(
                       fontWeight: FontWeight.normal,
