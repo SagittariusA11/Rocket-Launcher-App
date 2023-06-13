@@ -65,7 +65,7 @@ class _HelpViewState extends State<HelpView> {
                       style: TextStyle(
                           fontFamily: 'GoogleSans',
                           fontSize: 30,
-                          color: AppTheme().hh1,
+                          color: AppTheme().text,
                           fontWeight: FontWeight.bold
                       ),
                     ),
@@ -88,7 +88,7 @@ class _HelpViewState extends State<HelpView> {
                           style: TextStyle(
                               fontFamily: 'GoogleSans',
                               fontSize: 25,
-                              color: AppTheme().hh1,
+                              color: AppTheme().text,
                               fontWeight: FontWeight.bold
                           ),
                         ),
@@ -102,7 +102,7 @@ class _HelpViewState extends State<HelpView> {
                             style: TextStyle(
                               fontFamily: 'GoogleSans',
                               fontSize: 15,
-                              color: AppTheme().hh1,
+                              color: AppTheme().text,
                             ),
                           ),
                         )
@@ -127,7 +127,7 @@ class _HelpViewState extends State<HelpView> {
                           style: TextStyle(
                               fontFamily: 'GoogleSans',
                               fontSize: 25,
-                              color: AppTheme().hh1,
+                              color: AppTheme().text,
                               fontWeight: FontWeight.bold
                           ),
                         ),
@@ -141,7 +141,7 @@ class _HelpViewState extends State<HelpView> {
                             style: TextStyle(
                               fontFamily: 'GoogleSans',
                               fontSize: 15,
-                              color: AppTheme().hh1,
+                              color: AppTheme().text,
                             ),
                           ),
                         )
@@ -165,7 +165,7 @@ class _HelpViewState extends State<HelpView> {
                           style: TextStyle(
                               fontFamily: 'GoogleSans',
                               fontSize: 25,
-                              color: AppTheme().hh1,
+                              color: AppTheme().text,
                               fontWeight: FontWeight.bold
                           ),
                         ),
@@ -179,7 +179,7 @@ class _HelpViewState extends State<HelpView> {
                             style: TextStyle(
                               fontFamily: 'GoogleSans',
                               fontSize: 15,
-                              color: AppTheme().hh1,
+                              color: AppTheme().text,
                             ),
                           ),
                         )

@@ -64,10 +64,10 @@ class _homeViewState extends State<homeView> with SingleTickerProviderStateMixin
             appBar: AppBar(
                 elevation: 0,
                 backgroundColor: selectedAppTheme.isLightMode? Colors.blue.withOpacity(opacityAnimation.value):
-                selectedAppTheme.isDarkMode? Color.fromARGB(255, 15, 28, 75).withOpacity(opacityAnimation.value):
+                selectedAppTheme.isDarkMode? Color.fromARGB(255, 30, 62, 155).withOpacity(opacityAnimation.value):
                 selectedAppTheme.isRedMode? Color.fromARGB(255, 128, 47, 47).withOpacity(opacityAnimation.value):
                 selectedAppTheme.isGreenMode? Color.fromARGB(255, 52, 103, 39).withOpacity(opacityAnimation.value):
-                Color.fromARGB(255, 30, 65, 138).withOpacity(opacityAnimation.value),
+                Color.fromARGB(255, 23, 72, 173).withOpacity(opacityAnimation.value),
                 actions: [
                   IconButton(
                     onPressed: _onDrawerTapped,
@@ -120,6 +120,9 @@ class _homeViewState extends State<homeView> with SingleTickerProviderStateMixin
     }else{
       drawerAnimationController.forward();
     }
+    setState(() {
+      AppTheme().menu_bg_color; // Set the desired color value
+    });
   }
 
   Widget Menu() {
@@ -133,7 +136,8 @@ class _homeViewState extends State<homeView> with SingleTickerProviderStateMixin
           width: ScreenConfig.widthPercent*35,
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(60),
-              color: Color.fromARGB(204, 106, 161, 244)),
+              color: AppTheme().menu_bg_color
+          ),
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10)
                 .copyWith(bottom: 18),
@@ -156,13 +160,16 @@ class _homeViewState extends State<homeView> with SingleTickerProviderStateMixin
                       width: ScreenConfig.widthPercent*1.5,
                     ),
                     FittedBox(
-                      child: Text(
-                        translate('drawer.title'),
-                        style: TextStyle(
-                            fontFamily: 'GoogleSans',
-                            fontSize: 30,
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold
+                      child: SizedBox(
+                        width: ScreenConfig.widthPercent*23,
+                        child: Text(
+                          translate('drawer.title'),
+                          style: TextStyle(
+                              fontFamily: 'GoogleSans',
+                              fontSize: 30,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold
+                          ),
                         ),
                       ),
                     )
@@ -213,7 +220,7 @@ class _homeViewState extends State<homeView> with SingleTickerProviderStateMixin
                   leading: Utils.images(
                       ScreenConfig.widthPercent*2,
                       ScreenConfig.widthPercent*2,
-                      ImagePaths.shuttle
+                      selectedAppTheme.isLightMode?ImagePaths.shuttle_light:ImagePaths.shuttle_dark
                   ),
                 ),
                 ListTile(
@@ -230,7 +237,7 @@ class _homeViewState extends State<homeView> with SingleTickerProviderStateMixin
                   leading: Utils.images(
                       ScreenConfig.widthPercent*2,
                       ScreenConfig.widthPercent*2,
-                      ImagePaths.about
+                      selectedAppTheme.isLightMode?ImagePaths.about_light:ImagePaths.about_dark
                   ),
                 ),
                 ListTile(
@@ -247,7 +254,7 @@ class _homeViewState extends State<homeView> with SingleTickerProviderStateMixin
                   leading: Utils.images(
                       ScreenConfig.widthPercent*2,
                       ScreenConfig.widthPercent*2,
-                      ImagePaths.info
+                      selectedAppTheme.isLightMode?ImagePaths.info_light:ImagePaths.info_dark
                   ),
                 ),
                 ListTile(
@@ -264,7 +271,7 @@ class _homeViewState extends State<homeView> with SingleTickerProviderStateMixin
                   leading: Utils.images(
                       ScreenConfig.widthPercent*2,
                       ScreenConfig.widthPercent*2,
-                      ImagePaths.tasks
+                      selectedAppTheme.isLightMode?ImagePaths.tasks_light:ImagePaths.tasks_dark
                   ),
                 ),
                 ListTile(
@@ -281,7 +288,7 @@ class _homeViewState extends State<homeView> with SingleTickerProviderStateMixin
                   leading: Utils.images(
                       ScreenConfig.widthPercent*2,
                       ScreenConfig.widthPercent*2,
-                      ImagePaths.connection
+                      selectedAppTheme.isLightMode?ImagePaths.connection_light:ImagePaths.connection_dark
                   ),
                 ),
                 ListTile(
@@ -298,7 +305,7 @@ class _homeViewState extends State<homeView> with SingleTickerProviderStateMixin
                   leading: Utils.images(
                       ScreenConfig.widthPercent*2,
                       ScreenConfig.widthPercent*2,
-                      ImagePaths.settings
+                      selectedAppTheme.isLightMode?ImagePaths.settings_light:ImagePaths.settings_dark
                   ),
                 ),
                 ListTile(
@@ -315,7 +322,7 @@ class _homeViewState extends State<homeView> with SingleTickerProviderStateMixin
                   leading: Utils.images(
                       ScreenConfig.widthPercent*2,
                       ScreenConfig.widthPercent*2,
-                      ImagePaths.tour
+                      selectedAppTheme.isLightMode?ImagePaths.tour_light:ImagePaths.tour_dark
                   ),
                 ),
                 ListTile(
@@ -332,7 +339,7 @@ class _homeViewState extends State<homeView> with SingleTickerProviderStateMixin
                   leading: Utils.images(
                       ScreenConfig.widthPercent*2,
                       ScreenConfig.widthPercent*2,
-                      ImagePaths.inventory
+                      selectedAppTheme.isLightMode?ImagePaths.inventory_light:ImagePaths.inventory_dark
                   ),
                 ),
                 const SizedBox(
@@ -347,7 +354,13 @@ class _homeViewState extends State<homeView> with SingleTickerProviderStateMixin
                     width: ScreenConfig.heightPercent*26,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.all(Radius.circular(ScreenConfig.heightPercent*6.5)),
-                        color: const Color.fromARGB(255, 61, 92, 255)
+                        color: selectedAppTheme.isLightMode? Color.fromARGB(255, 61, 92, 255):
+                        selectedAppTheme.isDarkMode? Color.fromARGB(255, 9, 17, 47):
+                        selectedAppTheme.isRedMode? Color.fromARGB(
+                            255, 75, 27, 27):
+                        selectedAppTheme.isGreenMode? Color.fromARGB(
+                            255, 20, 42, 16):
+                        Color.fromARGB(255, 12, 28, 63)
                     ),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -355,7 +368,7 @@ class _homeViewState extends State<homeView> with SingleTickerProviderStateMixin
                         Utils.images(
                             ScreenConfig.widthPercent*2.25,
                             ScreenConfig.widthPercent*2.25,
-                            ImagePaths.logout
+                            selectedAppTheme.isLightMode?ImagePaths.logout_light:ImagePaths.logout_dark
                         ),
                         SizedBox(
                           width: 15,

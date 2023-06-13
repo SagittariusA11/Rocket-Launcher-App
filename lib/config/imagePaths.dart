@@ -16,15 +16,24 @@ class ImagePaths{
 
   //icons
   static const right_arrow = "assets/icons/right-arrow.png";
-  static const shuttle = "assets/icons/shuttle.png";
-  static const about = "assets/icons/text-document.png";
-  static const info = "assets/icons/information-button.png";
-  static const tasks = "assets/icons/clipboard.png";
-  static const connection = "assets/icons/url.png";
-  static const settings = "assets/icons/gear.png";
-  static const tour = "assets/icons/walking.png";
-  static const inventory = "assets/icons/warehouse.png";
-  static const logout = "assets/icons/logout.png";
+  static const shuttle_light = "assets/icons/menu_icons/shuttle_light.png";
+  static const shuttle_dark = "assets/icons/menu_icons/shuttle_dark.png";
+  static const about_light = "assets/icons/menu_icons/file_light.png";
+  static const about_dark = "assets/icons/menu_icons/file_dark.png";
+  static const info_light = "assets/icons/menu_icons/information-button_light.png";
+  static const info_dark = "assets/icons/menu_icons/information-button_dark.png";
+  static const tasks_light = "assets/icons/menu_icons/clipboard_light.png";
+  static const tasks_dark = "assets/icons/menu_icons/clipboard_dark.png";
+  static const connection_light = "assets/icons/menu_icons/url_light.png";
+  static const connection_dark = "assets/icons/menu_icons/url_dark.png";
+  static const settings_light = "assets/icons/menu_icons/settings_light.png";
+  static const settings_dark = "assets/icons/menu_icons/settings_dark.png";
+  static const tour_light = "assets/icons/menu_icons/walking_light.png";
+  static const tour_dark = "assets/icons/menu_icons/walking_dark.png";
+  static const inventory_light = "assets/icons/menu_icons/warehouse_light.png";
+  static const inventory_dark = "assets/icons/menu_icons/warehouse_dark.png";
+  static const logout_light = "assets/icons/menu_icons/logout_light.png";
+  static const logout_dark = "assets/icons/menu_icons/logout_dark.png";
 
   //images
   static const fleet_of_rockets = "assets/images/FleetOfRocketOnBoardingPage.png";

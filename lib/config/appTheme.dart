@@ -5,11 +5,18 @@ import 'package:shared_preferences/shared_preferences.dart';
 class AppTheme{
 
   //help_screen
-  Color hh1 = selectedAppTheme.isLightMode?
+  Color text = selectedAppTheme.isLightMode?
   Colors.white:selectedAppTheme.isDarkMode?
   Color.fromARGB(255, 201, 201, 201):selectedAppTheme.isRedMode?
   Color.fromARGB(255, 225, 167, 167):selectedAppTheme.isGreenMode?
   Color.fromARGB(255, 181, 227, 167):Color.fromARGB(255, 136, 165, 218);
+
+  //menu background color
+  Color menu_bg_color = selectedAppTheme.isLightMode? Color.fromARGB(204, 106, 161, 244):
+  selectedAppTheme.isDarkMode? Color.fromARGB(255, 15, 28, 75):
+  selectedAppTheme.isRedMode? Color.fromARGB(255, 128, 47, 47):
+  selectedAppTheme.isGreenMode? Color.fromARGB(255, 52, 103, 39):
+  Color.fromARGB(255, 30, 65, 138);
 
   static final darkTheme = ThemeData(
 
