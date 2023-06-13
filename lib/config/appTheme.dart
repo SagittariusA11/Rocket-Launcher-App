@@ -4,7 +4,12 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class AppTheme{
 
-  /// TODO: Colour Pallet to be added for different themes
+  //help_screen
+  Color hh1 = selectedAppTheme.isLightMode?
+  Colors.white:selectedAppTheme.isDarkMode?
+  Color.fromARGB(255, 201, 201, 201):selectedAppTheme.isRedMode?
+  Color.fromARGB(255, 225, 167, 167):selectedAppTheme.isGreenMode?
+  Color.fromARGB(255, 181, 227, 167):Color.fromARGB(255, 136, 165, 218);
 
   static final darkTheme = ThemeData(
 

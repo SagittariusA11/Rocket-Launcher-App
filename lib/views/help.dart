@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 
+import '../config/appTheme.dart';
 import '../config/imagePaths.dart';
 import '../config/screenConfig.dart';
 import '../utils/utils.dart';
@@ -13,6 +14,18 @@ class HelpView extends StatefulWidget {
 }
 
 class _HelpViewState extends State<HelpView> {
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    ScreenConfig.init(context);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,7 +34,13 @@ class _HelpViewState extends State<HelpView> {
         height: ScreenConfig.height,
         decoration: BoxDecoration(
             image: DecorationImage(
-                image: AssetImage(ImagePaths.help_bg),
+                image: AssetImage(
+                    selectedAppTheme.isLightMode? ImagePaths.help_bg_light:
+                    selectedAppTheme.isDarkMode? ImagePaths.help_bg_dark:
+                    selectedAppTheme.isRedMode? ImagePaths.help_bg_red:
+                    selectedAppTheme.isGreenMode? ImagePaths.help_bg_green:
+                    ImagePaths.help_bg_blue,
+                ),
                 fit: BoxFit.cover
             )
         ),
@@ -46,7 +65,7 @@ class _HelpViewState extends State<HelpView> {
                       style: TextStyle(
                           fontFamily: 'GoogleSans',
                           fontSize: 30,
-                          color: Colors.white,
+                          color: AppTheme().hh1,
                           fontWeight: FontWeight.bold
                       ),
                     ),
@@ -69,7 +88,7 @@ class _HelpViewState extends State<HelpView> {
                           style: TextStyle(
                               fontFamily: 'GoogleSans',
                               fontSize: 25,
-                              color: Colors.white,
+                              color: AppTheme().hh1,
                               fontWeight: FontWeight.bold
                           ),
                         ),
@@ -83,7 +102,7 @@ class _HelpViewState extends State<HelpView> {
                             style: TextStyle(
                               fontFamily: 'GoogleSans',
                               fontSize: 15,
-                              color: Colors.white,
+                              color: AppTheme().hh1,
                             ),
                           ),
                         )
@@ -108,7 +127,7 @@ class _HelpViewState extends State<HelpView> {
                           style: TextStyle(
                               fontFamily: 'GoogleSans',
                               fontSize: 25,
-                              color: Colors.white,
+                              color: AppTheme().hh1,
                               fontWeight: FontWeight.bold
                           ),
                         ),
@@ -122,7 +141,7 @@ class _HelpViewState extends State<HelpView> {
                             style: TextStyle(
                               fontFamily: 'GoogleSans',
                               fontSize: 15,
-                              color: Colors.white,
+                              color: AppTheme().hh1,
                             ),
                           ),
                         )
@@ -146,7 +165,7 @@ class _HelpViewState extends State<HelpView> {
                           style: TextStyle(
                               fontFamily: 'GoogleSans',
                               fontSize: 25,
-                              color: Colors.white,
+                              color: AppTheme().hh1,
                               fontWeight: FontWeight.bold
                           ),
                         ),
@@ -160,7 +179,7 @@ class _HelpViewState extends State<HelpView> {
                             style: TextStyle(
                               fontFamily: 'GoogleSans',
                               fontSize: 15,
-                              color: Colors.white,
+                              color: AppTheme().hh1,
                             ),
                           ),
                         )

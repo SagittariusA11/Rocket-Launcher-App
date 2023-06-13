@@ -77,6 +77,7 @@ flutter:
     - assets/
     - assets/logos/
     - assets/icons/
+    - assets/images/help_view/
     - assets/images/
     - assets/i18n/
     - assets/kml/

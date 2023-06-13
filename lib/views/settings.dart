@@ -22,12 +22,6 @@ class _SettingsViewState extends State<SettingsView> {
   bool _voice_command = false;
   double _currentValue =  25;
 
-  bool _isEnPressed = true;
-  bool _isEsPressed = true;
-  bool _isHiPressed = true;
-  bool _isDePressed = true;
-  bool _isMorePressed = true;
-
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
@@ -110,11 +104,11 @@ class _SettingsViewState extends State<SettingsView> {
                                 ElevatedButton(
                                   onPressed: () {
                                     setState(() {
-                                      _isEnPressed = true;
-                                      _isEsPressed = false;
-                                      _isHiPressed = false;
-                                      _isDePressed = false;
-                                      _isMorePressed = false;
+                                      selectedAppLanguage.isEn = true;
+                                      selectedAppLanguage.isEs = false;
+                                      selectedAppLanguage.isHi = false;
+                                      selectedAppLanguage.isDe = false;
+                                      selectedAppLanguage.isMore = false;
                                     });
                                     changeLocale(context, "en");
                                   },
@@ -125,7 +119,7 @@ class _SettingsViewState extends State<SettingsView> {
                                     padding: EdgeInsets.all(15),
                                     shape: StadiumBorder(
                                       side: BorderSide(
-                                        color: _isEnPressed ? Colors.red : Colors.transparent,
+                                        color: selectedAppLanguage.isEn ? Colors.red : Colors.transparent,
                                         width: 5.0,
                                       ),
                                     ),
@@ -148,11 +142,11 @@ class _SettingsViewState extends State<SettingsView> {
                                   onPressed: () {
                                     changeLocale(context, "es");
                                     setState(() {
-                                      _isEnPressed = false;
-                                      _isEsPressed = true;
-                                      _isHiPressed = false;
-                                      _isDePressed = false;
-                                      _isMorePressed = false;
+                                      selectedAppLanguage.isEn = false;
+                                      selectedAppLanguage.isEs = true;
+                                      selectedAppLanguage.isHi = false;
+                                      selectedAppLanguage.isDe = false;
+                                      selectedAppLanguage.isMore = false;
                                     });
                                   },
                                   style: ElevatedButton.styleFrom(
@@ -162,7 +156,7 @@ class _SettingsViewState extends State<SettingsView> {
                                     padding: EdgeInsets.all(15),
                                     shape: StadiumBorder(
                                       side: BorderSide(
-                                        color: _isEsPressed ? Colors.red : Colors.transparent,
+                                        color: selectedAppLanguage.isEs ? Colors.red : Colors.transparent,
                                         width: 5.0,
                                       ),
                                     ),
@@ -185,11 +179,11 @@ class _SettingsViewState extends State<SettingsView> {
                                   onPressed: () {
                                     changeLocale(context, "hi");
                                     setState(() {
-                                      _isEnPressed = false;
-                                      _isEsPressed = false;
-                                      _isHiPressed = true;
-                                      _isDePressed = false;
-                                      _isMorePressed = false;
+                                      selectedAppLanguage.isEn = false;
+                                      selectedAppLanguage.isEs = false;
+                                      selectedAppLanguage.isHi = true;
+                                      selectedAppLanguage.isDe = false;
+                                      selectedAppLanguage.isMore = false;
                                     });
                                   },
                                   style: ElevatedButton.styleFrom(
@@ -199,7 +193,7 @@ class _SettingsViewState extends State<SettingsView> {
                                     padding: const EdgeInsets.all(15),
                                     shape: StadiumBorder(
                                       side: BorderSide(
-                                        color: _isHiPressed ? Colors.red : Colors.transparent,
+                                        color: selectedAppLanguage.isHi ? Colors.red : Colors.transparent,
                                         width: 5.0,
                                       ),
                                     ),
@@ -221,11 +215,11 @@ class _SettingsViewState extends State<SettingsView> {
                                 ElevatedButton(
                                   onPressed: () {
                                     setState(() {
-                                      _isEnPressed = false;
-                                      _isEsPressed = false;
-                                      _isHiPressed = false;
-                                      _isDePressed = true;
-                                      _isMorePressed = false;
+                                      selectedAppLanguage.isEn = false;
+                                      selectedAppLanguage.isEs = false;
+                                      selectedAppLanguage.isHi = false;
+                                      selectedAppLanguage.isDe = true;
+                                      selectedAppLanguage.isMore = false;
                                     });
                                   },
                                   style: ElevatedButton.styleFrom(
@@ -235,7 +229,7 @@ class _SettingsViewState extends State<SettingsView> {
                                     padding: const EdgeInsets.all(15),
                                     shape: StadiumBorder(
                                       side: BorderSide(
-                                        color: _isDePressed ? Colors.red : Colors.transparent,
+                                        color: selectedAppLanguage.isDe ? Colors.red : Colors.transparent,
                                         width: 5.0,
                                       ),
                                     ),
@@ -258,11 +252,11 @@ class _SettingsViewState extends State<SettingsView> {
                                   onPressed: () {
                                     onActionSheetPress(context, false);
                                     setState(() {
-                                      _isEnPressed = false;
-                                      _isEsPressed = false;
-                                      _isHiPressed = false;
-                                      _isDePressed = false;
-                                      _isMorePressed = true;
+                                      selectedAppLanguage.isEn = false;
+                                      selectedAppLanguage.isEs = false;
+                                      selectedAppLanguage.isHi = false;
+                                      selectedAppLanguage.isDe = false;
+                                      selectedAppLanguage.isMore = true;
                                     });
                                   },
                                   style: ElevatedButton.styleFrom(
@@ -272,7 +266,7 @@ class _SettingsViewState extends State<SettingsView> {
                                     padding: EdgeInsets.all(15),
                                     shape: StadiumBorder(
                                       side: BorderSide(
-                                        color: _isMorePressed ? Colors.red : Colors.transparent,
+                                        color: selectedAppLanguage.isMore ? Colors.red : Colors.transparent,
                                         width: 5.0,
                                       ),
                                     ),

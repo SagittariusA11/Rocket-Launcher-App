@@ -1,4 +1,5 @@
 import 'dart:core';
+import '../config/appTheme.dart';
 
 class ImagePaths{
 
@@ -29,7 +30,11 @@ class ImagePaths{
   static const fleet_of_rockets = "assets/images/FleetOfRocketOnBoardingPage.png";
   static const lg_demo = "assets/images/LGDemo.png";
   static const lg_tasks_bg = "assets/images/lg_tasks_background.png";
-  static const help_bg = "assets/images/help_background.png";
+  static const help_bg_light = "assets/images/help_view/help_light_background.png";
+  static const help_bg_dark = "assets/images/help_view/help_dark_background.png";
+  static const help_bg_red = "assets/images/help_view/help_red_background.png";
+  static const help_bg_green = "assets/images/help_view/help_green_background.png";
+  static const help_bg_blue = "assets/images/help_view/help_blue_background.png";
   static const settings_bg = "assets/images/settings_background.png";
 
 

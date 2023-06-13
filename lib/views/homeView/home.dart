@@ -63,7 +63,11 @@ class _homeViewState extends State<homeView> with SingleTickerProviderStateMixin
           return Scaffold(
             appBar: AppBar(
                 elevation: 0,
-                backgroundColor: Colors.blue.withOpacity(opacityAnimation.value),
+                backgroundColor: selectedAppTheme.isLightMode? Colors.blue.withOpacity(opacityAnimation.value):
+                selectedAppTheme.isDarkMode? Color.fromARGB(255, 15, 28, 75).withOpacity(opacityAnimation.value):
+                selectedAppTheme.isRedMode? Color.fromARGB(255, 128, 47, 47).withOpacity(opacityAnimation.value):
+                selectedAppTheme.isGreenMode? Color.fromARGB(255, 52, 103, 39).withOpacity(opacityAnimation.value):
+                Color.fromARGB(255, 30, 65, 138).withOpacity(opacityAnimation.value),
                 actions: [
                   IconButton(
                     onPressed: _onDrawerTapped,

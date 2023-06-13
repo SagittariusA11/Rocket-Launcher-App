@@ -5,11 +5,15 @@ import 'package:flutter_translate/flutter_translate.dart';
 import 'package:localization/localization.dart';
 import 'package:rocket_launcher_app/utils/routeNames.dart';
 import 'package:rocket_launcher_app/utils/routes.dart';
+import 'package:rocket_launcher_app/utils/utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../config/appTheme.dart';
 
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await selectedAppTheme.init();
+  await selectedAppLanguage.init();
   var delegate = await LocalizationDelegate.create(
       fallbackLocale: 'en',
       supportedLocales: [
