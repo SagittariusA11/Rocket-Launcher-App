@@ -59,4 +59,25 @@ class ImagePaths{
   static const lg_tasks_bg_red = "assets/images/lg_tasks_view/lg_tasks_background_red.png";
   static const lg_tasks_bg_green = "assets/images/lg_tasks_view/lg_tasks_background_green.png";
   static const lg_tasks_bg_blue = "assets/images/lg_tasks_view/lg_tasks_background_blue.png";
+
+  //launch_tab
+  static const launch_bg_light = "assets/images/launch_tab/launch_background_light.png";
+  static const launch_bg_dark = "assets/images/launch_tab/launch_background_dark.png";
+  static const launch_bg_red = "assets/images/launch_tab/launch_background_red.png";
+  static const launch_bg_green = "assets/images/launch_tab/launch_background_green.png";
+  static const launch_bg_blue = "assets/images/launch_tab/launch_background_blue.png";
+
+  //launchMap_tab
+  static const launchMap_bg_light = "assets/images/launchMap_tab/launchMap_background_light.png";
+  static const launchMap_bg_dark = "assets/images/launchMap_tab/launchMap_background_dark.png";
+  static const launchMap_bg_red = "assets/images/launchMap_tab/launchMap_background_red.png";
+  static const launchMap_bg_green = "assets/images/launchMap_tab/launchMap_background_green.png";
+  static const launchMap_bg_blue = "assets/images/launchMap_tab/launchMap_background_blue.png";
+
+  //launchInfo_tab
+  static const launchInfo_bg_light = "assets/images/launchInfo_tab/launchInfo_background_light.png";
+  static const launchInfo_bg_dark = "assets/images/launchInfo_tab/launchInfo_background_dark.png";
+  static const launchInfo_bg_red = "assets/images/launchInfo_tab/launchInfo_background_red.png";
+  static const launchInfo_bg_green = "assets/images/launchInfo_tab/launchInfo_background_green.png";
+  static const launchInfo_bg_blue = "assets/images/launchInfo_tab/launchInfo_background_blue.png";
 }

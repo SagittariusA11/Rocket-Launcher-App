@@ -6,7 +6,7 @@ import '../views/connectionManager.dart';
 import '../views/errorView.dart';
 import '../views/help.dart';
 import '../views/homeView/home.dart';
-import '../views/homeView/launch.dart';
+import '../views/homeView/tab.dart';
 import '../views/homeView/launchInfo.dart';
 import '../views/homeView/launchList.dart';
 import '../views/inventory.dart';
@@ -53,9 +53,9 @@ class Routes {
             (BuildContext context)=>InventoryView()
         );
 
-      case RouteNames.launchView:
+      case RouteNames.tabView:
         return MaterialPageRoute(builder:
-            (BuildContext context)=>LaunchView()
+            (BuildContext context)=>TabView()
         );
 
       case RouteNames.homeView:

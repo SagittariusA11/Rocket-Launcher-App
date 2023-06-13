@@ -9,7 +9,7 @@ class AppTheme{
   Colors.white:selectedAppTheme.isDarkMode?
   Color.fromARGB(255, 211, 211, 211):selectedAppTheme.isRedMode?
   Color.fromARGB(255, 255, 216, 216):selectedAppTheme.isGreenMode?
-  Color.fromARGB(255, 223, 255, 214):Color.fromARGB(255, 211, 227, 255);
+  Color.fromARGB(255, 223, 255, 214):Color.fromARGB(255, 136, 165, 218);
 
   //menu background color
   Color menu_bg_color = selectedAppTheme.isLightMode? Color.fromARGB(204, 106, 161, 244):
@@ -19,7 +19,8 @@ class AppTheme{
   Color.fromARGB(255, 30, 65, 138);
 
   //background color
-  Color bg_color = selectedAppTheme.isLightMode? Color.fromARGB(195, 134, 174, 217):
+  Color bg_color = selectedAppTheme.isLightMode? Color.fromARGB(
+      255, 74, 147, 255):
   selectedAppTheme.isDarkMode? Color.fromARGB(255, 6, 15, 51):
   selectedAppTheme.isRedMode? Color.fromARGB(255, 98, 29, 29):
   selectedAppTheme.isGreenMode? Color.fromARGB(255, 30, 70, 17):

@@ -23,13 +23,13 @@ class Utils {
     if(selectedFontSizeFactor.zero){
       return fontSize;
     } else if(selectedFontSizeFactor.quarter){
-      return fontSize*1.075;
+      return fontSize*1.05;
     } else if(selectedFontSizeFactor.half){
-      return fontSize*1.15;
+      return fontSize*1.10;
     } else if(selectedFontSizeFactor.third){
-      return fontSize*1.225;
+      return fontSize*1.15;
     } else if(selectedFontSizeFactor.full){
-      return fontSize*1.3;
+      return fontSize*1.20;
     } else {
       return fontSize;
     }

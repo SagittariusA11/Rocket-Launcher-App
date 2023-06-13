@@ -80,8 +80,11 @@ flutter:
     - assets/icons/menu_icons/
     - assets/images/help_view/
     - assets/images/lg_tasks_view/
-    - assets/images/
     - assets/images/settings_view/
+    - assets/images/launch_tab/
+    - assets/images/launchInfo_tab/
+    - assets/images/launchMap_tab/
+    - assets/images/
     - assets/i18n/
     - assets/kml/
   #   - images/a_dot_burr.jpeg

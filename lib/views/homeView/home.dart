@@ -18,7 +18,7 @@ import '../inventory.dart';
 import '../lgActions.dart';
 import '../settings.dart';
 import '../takeATour.dart';
-import 'launch.dart';
+import 'tab.dart';
 
 class homeView extends StatefulWidget {
   const homeView({Key? key}) : super(key: key);
@@ -46,7 +46,7 @@ class _homeViewState extends State<homeView> with SingleTickerProviderStateMixin
   @override
   Widget build(BuildContext context) {
     List<Widget> views = [
-      LaunchView(),
+      TabView(),
       AboutUsView(),
       HelpView(),
       LGActionsView(),
@@ -106,7 +106,7 @@ class _homeViewState extends State<homeView> with SingleTickerProviderStateMixin
                         opacity: drawerAnimationController.value,
                         child: child,
                       )
-                  )
+                  ),
                 ]
             ),
           );
