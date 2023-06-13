@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:rocket_launcher_app/config/appTheme.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:ssh2/ssh2.dart';
 import 'dart:io';
@@ -255,7 +256,13 @@ class _LGActionsView extends State<LGActionsView> {
           height: ScreenConfig.height,
           decoration: BoxDecoration(
               image: DecorationImage(
-                  image: AssetImage(ImagePaths.lg_tasks_bg),
+                  image: AssetImage(
+                    selectedAppTheme.isLightMode? ImagePaths.lg_tasks_bg_light:
+                    selectedAppTheme.isDarkMode? ImagePaths.lg_tasks_bg_dark:
+                    selectedAppTheme.isRedMode? ImagePaths.lg_tasks_bg_red:
+                    selectedAppTheme.isGreenMode? ImagePaths.lg_tasks_bg_green:
+                    ImagePaths.lg_tasks_bg_blue,
+                  ),
                   fit: BoxFit.cover
               )
           ),
@@ -324,7 +331,7 @@ class _LGActionsView extends State<LGActionsView> {
                           style: ElevatedButton.styleFrom(
                             elevation: 10,
                             shadowColor: Colors.grey,
-                            primary: Color.fromARGB(255, 62, 130, 232),
+                            primary: AppTheme().menu_bg_color,
                             padding: EdgeInsets.all(15),
                             shape: StadiumBorder(),
                           ),
@@ -366,7 +373,7 @@ class _LGActionsView extends State<LGActionsView> {
                           style: ElevatedButton.styleFrom(
                             elevation: 10,
                             shadowColor: Colors.grey,
-                            primary: Color.fromARGB(255, 62, 130, 232),
+                            primary: AppTheme().menu_bg_color,
                             padding: EdgeInsets.all(15),
                             shape: StadiumBorder(),
                           ),
@@ -405,7 +412,7 @@ class _LGActionsView extends State<LGActionsView> {
                           style: ElevatedButton.styleFrom(
                             elevation: 10,
                             shadowColor: Colors.grey,
-                            primary: Color.fromARGB(255, 62, 130, 232),
+                            primary: AppTheme().menu_bg_color,
                             padding: EdgeInsets.all(15),
                             shape: StadiumBorder(),
                           ),
@@ -436,7 +443,7 @@ class _LGActionsView extends State<LGActionsView> {
                           style: ElevatedButton.styleFrom(
                             elevation: 10,
                             shadowColor: Colors.grey,
-                            primary: Color.fromARGB(255, 62, 130, 232),
+                            primary: AppTheme().menu_bg_color,
                             padding: EdgeInsets.all(15),
                             shape: StadiumBorder(),
                           ),
@@ -475,7 +482,7 @@ class _LGActionsView extends State<LGActionsView> {
                           style: ElevatedButton.styleFrom(
                             elevation: 10,
                             shadowColor: Colors.grey,
-                            primary: Color.fromARGB(255, 62, 130, 232),
+                            primary: AppTheme().menu_bg_color,
                             padding: EdgeInsets.all(15),
                             shape: StadiumBorder(),
                           ),

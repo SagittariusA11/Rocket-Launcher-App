@@ -18,6 +18,20 @@ class AppTheme{
   selectedAppTheme.isGreenMode? Color.fromARGB(255, 52, 103, 39):
   Color.fromARGB(255, 30, 65, 138);
 
+  //background color
+  Color bg_color = selectedAppTheme.isLightMode? Color.fromARGB(195, 134, 174, 217):
+  selectedAppTheme.isDarkMode? Color.fromARGB(255, 6, 15, 51):
+  selectedAppTheme.isRedMode? Color.fromARGB(255, 98, 29, 29):
+  selectedAppTheme.isGreenMode? Color.fromARGB(255, 30, 70, 17):
+  Color.fromARGB(255, 12, 52, 126);
+
+  //connect_button
+  Color connect_color = selectedAppTheme.isLightMode? Colors.white:
+  selectedAppTheme.isDarkMode? Color.fromARGB(255, 20, 52, 168):
+  selectedAppTheme.isRedMode? Color.fromARGB(255, 185, 57, 57):
+  selectedAppTheme.isGreenMode? Color.fromARGB(255, 72, 162, 42):
+  Color.fromARGB(255, 25, 86, 206);
+
   static final darkTheme = ThemeData(
 
   );

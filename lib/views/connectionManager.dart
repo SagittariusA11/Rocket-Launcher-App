@@ -109,7 +109,7 @@ class _ConnectionManagerViewState extends State<ConnectionManagerView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(195, 134, 174, 217),
+      backgroundColor: AppTheme().bg_color,
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -139,7 +139,7 @@ class _ConnectionManagerViewState extends State<ConnectionManagerView> {
                             style: TextStyle(
                                 fontFamily: 'GoogleSans',
                                 fontSize: 25,
-                                color: Colors.black,
+                                color: selectedAppTheme.isLightMode?Colors.black:Colors.white
                             ),
                           ),
                           Text(
@@ -147,7 +147,7 @@ class _ConnectionManagerViewState extends State<ConnectionManagerView> {
                             style: TextStyle(
                               fontFamily: 'GoogleSans',
                               fontSize: 15,
-                              color: Colors.black,
+                              color: selectedAppTheme.isLightMode?Colors.black:Colors.white
                             ),
                           ),
                         ],
@@ -161,7 +161,11 @@ class _ConnectionManagerViewState extends State<ConnectionManagerView> {
                     translate('connection.title'),
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                        fontSize: 40, fontWeight: FontWeight.bold),
+                        fontSize: 40,
+                        fontWeight: FontWeight.bold,
+                      color: selectedAppTheme.isLightMode?
+                      Colors.black:Colors.white
+                    ),
                   ),
                 ),
                 SizedBox(
@@ -188,13 +192,21 @@ class _ConnectionManagerViewState extends State<ConnectionManagerView> {
                           translate('connection.status'),
                           textAlign: TextAlign.start,
                           style: TextStyle(
-                              fontSize: 20, fontWeight: FontWeight.bold),
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                              color: selectedAppTheme.isLightMode?
+                              Colors.black:Colors.white
+                          ),
                         ),
                         Text(
                           connectionStatus
                               ? translate('connection.connected')
                               : translate('connection.disconnected'),
-                          style: TextStyle(fontSize: 20),
+                          style: TextStyle(
+                              fontSize: 20,
+                              color: selectedAppTheme.isLightMode?
+                              Colors.black:Colors.white
+                          ),
                         ),
                         connectionStatus
                             ? Icon(
@@ -219,7 +231,7 @@ class _ConnectionManagerViewState extends State<ConnectionManagerView> {
                       elevation: 8,
                       child: Container(
                         decoration: BoxDecoration(
-                          color: Color.fromARGB(102, 139, 173, 224),
+                          color: AppTheme().bg_color.withAlpha(200),
                           borderRadius: BorderRadius.only(
                             bottomRight: Radius.circular(40),
                           ),
@@ -232,9 +244,14 @@ class _ConnectionManagerViewState extends State<ConnectionManagerView> {
                             fillColor: Colors.transparent,
                             border: InputBorder.none,
                             hintText: 'lg',
+                            hintStyle: TextStyle(
+                              color: selectedAppTheme.isLightMode?Colors.black:Colors.white
+                            ),
                             labelText: translate('connection.mmu'),
                             labelStyle: TextStyle(
-                                color: Color.fromARGB(255, 74, 74, 74)),
+                                color: selectedAppTheme.isLightMode?
+                                Color.fromARGB(255, 74, 74, 74):Color.fromARGB(255, 227, 227, 227)
+                            ),
                           ),
                         ),
                       ),
@@ -249,7 +266,7 @@ class _ConnectionManagerViewState extends State<ConnectionManagerView> {
                       elevation: 8,
                       child: Container(
                         decoration: BoxDecoration(
-                            color: Color.fromARGB(102, 139, 173, 224),
+                            color: AppTheme().bg_color.withAlpha(200),
                             borderRadius: BorderRadius.only(
                                 bottomRight: Radius.circular(40)
                             )
@@ -262,9 +279,14 @@ class _ConnectionManagerViewState extends State<ConnectionManagerView> {
                             fillColor: Colors.transparent,
                             border: InputBorder.none,
                             hintText: '192.168.56.103',
+                            hintStyle: TextStyle(
+                                color: selectedAppTheme.isLightMode?Colors.black:Colors.white
+                            ),
                             labelText: translate('connection.mmip'),
                             labelStyle: TextStyle(
-                                color: Color.fromARGB(255, 74, 74, 74)),
+                                color: selectedAppTheme.isLightMode?
+                                Color.fromARGB(255, 74, 74, 74):Color.fromARGB(255, 227, 227, 227)
+                            ),
                           ),
                         ),
                       ),
@@ -279,7 +301,7 @@ class _ConnectionManagerViewState extends State<ConnectionManagerView> {
                       elevation: 8,
                       child: Container(
                         decoration: BoxDecoration(
-                            color: Color.fromARGB(102, 139, 173, 224),
+                            color: AppTheme().bg_color.withAlpha(200),
                             borderRadius: BorderRadius.only(
                                 bottomRight: Radius.circular(40)
                             )
@@ -292,9 +314,14 @@ class _ConnectionManagerViewState extends State<ConnectionManagerView> {
                             fillColor: Colors.transparent,
                             border: InputBorder.none,
                             hintText: '22',
+                            hintStyle: TextStyle(
+                                color: selectedAppTheme.isLightMode?Colors.black:Colors.white
+                            ),
                             labelText: translate('connection.mmpn'),
                             labelStyle: TextStyle(
-                                color: Color.fromARGB(255, 74, 74, 74)),
+                                color: selectedAppTheme.isLightMode?
+                                Color.fromARGB(255, 74, 74, 74):Color.fromARGB(255, 227, 227, 227)
+                            ),
                           ),
                         ),
                       ),
@@ -307,7 +334,7 @@ class _ConnectionManagerViewState extends State<ConnectionManagerView> {
                     elevation: 8,
                     child: Container(
                       decoration: BoxDecoration(
-                          color: Color.fromARGB(102, 139, 173, 224),
+                          color: AppTheme().bg_color.withAlpha(200),
                           borderRadius: BorderRadius.only(
                               bottomRight: Radius.circular(40)
                           )
@@ -320,9 +347,14 @@ class _ConnectionManagerViewState extends State<ConnectionManagerView> {
                           fillColor: Colors.transparent,
                           border: InputBorder.none,
                           hintText: '****',
+                          hintStyle: TextStyle(
+                              color: selectedAppTheme.isLightMode?Colors.black:Colors.white
+                          ),
                           labelText: translate('connection.mmp'),
                           labelStyle: TextStyle(
-                              color: Color.fromARGB(255, 74, 74, 74)),
+                              color: selectedAppTheme.isLightMode?
+                              Color.fromARGB(255, 74, 74, 74):Color.fromARGB(255, 227, 227, 227)
+                          ),
                           suffixIcon: IconButton(
                             icon: Icon(Icons.remove_red_eye, color: _iconColor),
                             onPressed: () {
@@ -352,7 +384,7 @@ class _ConnectionManagerViewState extends State<ConnectionManagerView> {
                       elevation: 8,
                       child: Container(
                         decoration: BoxDecoration(
-                            color: Color.fromARGB(102, 139, 173, 224),
+                            color: AppTheme().bg_color.withAlpha(200),
                             borderRadius: BorderRadius.only(
                                 bottomRight: Radius.circular(40)
                             )
@@ -365,9 +397,14 @@ class _ConnectionManagerViewState extends State<ConnectionManagerView> {
                             fillColor: Colors.transparent,
                             border: InputBorder.none,
                             hintText: '3',
+                            hintStyle: TextStyle(
+                                color: selectedAppTheme.isLightMode?Colors.black:Colors.white
+                            ),
                             labelText: translate('connection.number'),
                             labelStyle: TextStyle(
-                                color: Color.fromARGB(255, 74, 74, 74)),
+                                color: selectedAppTheme.isLightMode?
+                                Color.fromARGB(255, 74, 74, 74):Color.fromARGB(255, 227, 227, 227)
+                            ),
                           ),
                         ),
                       ),
@@ -437,7 +474,7 @@ class _ConnectionManagerViewState extends State<ConnectionManagerView> {
                       style: ElevatedButton.styleFrom(
                         elevation: 2,
                         shadowColor: Colors.grey.withOpacity(0.5),
-                        primary: Colors.white,
+                        primary: AppTheme().connect_color,
                         padding: EdgeInsets.all(15),
                         shape: StadiumBorder(),
                       ),
@@ -453,7 +490,7 @@ class _ConnectionManagerViewState extends State<ConnectionManagerView> {
                                   translate('connection.connect'),
                                   style: TextStyle(
                                       fontSize: 25,
-                                      color: Colors.black
+                                      color: selectedAppTheme.isLightMode?Colors.black:Colors.white
                                   )),
                             ),
                           ],

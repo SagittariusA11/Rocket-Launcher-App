@@ -110,6 +110,7 @@ class _SettingsViewState extends State<SettingsView> {
                                       selectedAppLanguage.isDe = false;
                                       selectedAppLanguage.isMore = false;
                                     });
+                                    selectedAppLanguage.saveMode('en');
                                     changeLocale(context, "en");
                                   },
                                   style: ElevatedButton.styleFrom(
@@ -141,6 +142,7 @@ class _SettingsViewState extends State<SettingsView> {
                                 ElevatedButton(
                                   onPressed: () {
                                     changeLocale(context, "es");
+                                    selectedAppLanguage.saveMode('es');
                                     setState(() {
                                       selectedAppLanguage.isEn = false;
                                       selectedAppLanguage.isEs = true;
@@ -178,6 +180,7 @@ class _SettingsViewState extends State<SettingsView> {
                                 ElevatedButton(
                                   onPressed: () {
                                     changeLocale(context, "hi");
+                                    selectedAppLanguage.saveMode('hi');
                                     setState(() {
                                       selectedAppLanguage.isEn = false;
                                       selectedAppLanguage.isEs = false;
@@ -214,6 +217,7 @@ class _SettingsViewState extends State<SettingsView> {
                                 ),
                                 ElevatedButton(
                                   onPressed: () {
+                                    selectedAppLanguage.saveMode('de');
                                     setState(() {
                                       selectedAppLanguage.isEn = false;
                                       selectedAppLanguage.isEs = false;
@@ -250,6 +254,7 @@ class _SettingsViewState extends State<SettingsView> {
                                 ),
                                 ElevatedButton(
                                   onPressed: () {
+                                    selectedAppLanguage.saveMode('more');
                                     onActionSheetPress(context, false);
                                     setState(() {
                                       selectedAppLanguage.isEn = false;
