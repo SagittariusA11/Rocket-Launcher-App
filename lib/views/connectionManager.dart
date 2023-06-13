@@ -138,7 +138,7 @@ class _ConnectionManagerViewState extends State<ConnectionManagerView> {
                             translate('connection.label_l1'),
                             style: TextStyle(
                                 fontFamily: 'GoogleSans',
-                                fontSize: 25,
+                                fontSize: Utils().fontSizeMultiplier(25),
                                 color: selectedAppTheme.isLightMode?Colors.black:Colors.white
                             ),
                           ),
@@ -146,7 +146,7 @@ class _ConnectionManagerViewState extends State<ConnectionManagerView> {
                             translate('connection.label_l2'),
                             style: TextStyle(
                               fontFamily: 'GoogleSans',
-                              fontSize: 15,
+                              fontSize: Utils().fontSizeMultiplier(15),
                               color: selectedAppTheme.isLightMode?Colors.black:Colors.white
                             ),
                           ),
@@ -161,7 +161,7 @@ class _ConnectionManagerViewState extends State<ConnectionManagerView> {
                     translate('connection.title'),
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                        fontSize: 40,
+                        fontSize: Utils().fontSizeMultiplier(40),
                         fontWeight: FontWeight.bold,
                       color: selectedAppTheme.isLightMode?
                       Colors.black:Colors.white
@@ -192,7 +192,7 @@ class _ConnectionManagerViewState extends State<ConnectionManagerView> {
                           translate('connection.status'),
                           textAlign: TextAlign.start,
                           style: TextStyle(
-                              fontSize: 20,
+                              fontSize: Utils().fontSizeMultiplier(20),
                               fontWeight: FontWeight.bold,
                               color: selectedAppTheme.isLightMode?
                               Colors.black:Colors.white
@@ -203,7 +203,7 @@ class _ConnectionManagerViewState extends State<ConnectionManagerView> {
                               ? translate('connection.connected')
                               : translate('connection.disconnected'),
                           style: TextStyle(
-                              fontSize: 20,
+                              fontSize: Utils().fontSizeMultiplier(20),
                               color: selectedAppTheme.isLightMode?
                               Colors.black:Colors.white
                           ),
@@ -434,7 +434,7 @@ class _ConnectionManagerViewState extends State<ConnectionManagerView> {
                     //             'CONNECT',
                     //             textAlign: TextAlign.center,
                     //             style: TextStyle(
-                    //                 fontSize: 25,
+                    //                 fontSize: Utils().fontSizeMultiplier(25),
                     //                 color: Colors.black,
                     //             )),
                     //       ),
@@ -459,7 +459,7 @@ class _ConnectionManagerViewState extends State<ConnectionManagerView> {
                     //             'SKIP',
                     //             textAlign: TextAlign.center,
                     //             style: TextStyle(
-                    //               fontSize: 25,
+                    //               fontSize: Utils().fontSizeMultiplier(25),
                     //               color: Colors.black,
                     //             )),
                     //       ),
@@ -489,7 +489,7 @@ class _ConnectionManagerViewState extends State<ConnectionManagerView> {
                               child: Text(
                                   translate('connection.connect'),
                                   style: TextStyle(
-                                      fontSize: 25,
+                                      fontSize: Utils().fontSizeMultiplier(25),
                                       color: selectedAppTheme.isLightMode?Colors.black:Colors.white
                                   )),
                             ),
@@ -531,7 +531,7 @@ class _ConnectionManagerViewState extends State<ConnectionManagerView> {
                   Text(
                     '$title',
                     style: TextStyle(
-                      fontSize: 25,
+                      fontSize: Utils().fontSizeMultiplier(25),
                       color: Color.fromARGB(255, 204, 204, 204),
                     ),
                   ),
@@ -546,7 +546,7 @@ class _ConnectionManagerViewState extends State<ConnectionManagerView> {
                     children: [
                       Text('$msg',
                           style: TextStyle(
-                            fontSize: 18,
+                            fontSize: Utils().fontSizeMultiplier(18),
                             color: Color.fromARGB(
                               255,
                               204,
@@ -578,7 +578,7 @@ class _ConnectionManagerViewState extends State<ConnectionManagerView> {
                                             ? 'continue'
                                             : 'dismiss',
                                         style: TextStyle(
-                                            fontSize: 20,
+                                            fontSize: Utils().fontSizeMultiplier(20),
                                             color: Colors.black)),
                                   ],
                                 ),

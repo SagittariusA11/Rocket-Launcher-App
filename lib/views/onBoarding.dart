@@ -50,7 +50,7 @@ class _OnBoardingState extends State<OnBoarding> {
                           translate('on_board.app'),
                           style: TextStyle(
                               fontFamily: 'GoogleSans',
-                              fontSize: 55,
+                              fontSize: Utils().fontSizeMultiplier(55),
                               color: Colors.white,
                               fontWeight: FontWeight.bold
                           ),
@@ -86,7 +86,7 @@ class _OnBoardingState extends State<OnBoarding> {
                                 translate('on_board.title'),
                                 style: TextStyle(
                                     fontFamily: 'GoogleSans',
-                                    fontSize: 50,
+                                    fontSize: Utils().fontSizeMultiplier(50),
                                     color: Colors.black,
                                     fontWeight: FontWeight.bold
                                 ),
@@ -110,7 +110,7 @@ class _OnBoardingState extends State<OnBoarding> {
                                 translate('on_board.h1'),
                                 style: TextStyle(
                                     fontFamily: 'GoogleSans',
-                                    fontSize: 25,
+                                    fontSize: Utils().fontSizeMultiplier(25),
                                     color: Colors.black,
                                     fontWeight: FontWeight.bold
                                 ),
@@ -144,7 +144,7 @@ class _OnBoardingState extends State<OnBoarding> {
                         translate('on_board.h2'),
                         style: TextStyle(
                             fontFamily: 'GoogleSans',
-                            fontSize: 25,
+                            fontSize: Utils().fontSizeMultiplier(25),
                             color: Colors.black,
                             fontWeight: FontWeight.bold
                         ),

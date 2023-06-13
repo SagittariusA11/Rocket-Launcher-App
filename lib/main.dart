@@ -14,6 +14,7 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await selectedAppTheme.init();
   await selectedAppLanguage.init();
+  await selectedFontSizeFactor.init();
   var delegate = await LocalizationDelegate.create(
       fallbackLocale: 'en',
       supportedLocales: [

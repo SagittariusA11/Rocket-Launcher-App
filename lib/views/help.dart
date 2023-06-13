@@ -64,7 +64,7 @@ class _HelpViewState extends State<HelpView> {
                       translate('help.title'),
                       style: TextStyle(
                           fontFamily: 'GoogleSans',
-                          fontSize: 30,
+                          fontSize: Utils().fontSizeMultiplier(30),
                           color: AppTheme().text,
                           fontWeight: FontWeight.bold
                       ),
@@ -87,7 +87,7 @@ class _HelpViewState extends State<HelpView> {
                           translate('help.h1'),
                           style: TextStyle(
                               fontFamily: 'GoogleSans',
-                              fontSize: 25,
+                              fontSize: Utils().fontSizeMultiplier(25),
                               color: AppTheme().text,
                               fontWeight: FontWeight.bold
                           ),
@@ -101,7 +101,7 @@ class _HelpViewState extends State<HelpView> {
                             translate('help.h1des'),
                             style: TextStyle(
                               fontFamily: 'GoogleSans',
-                              fontSize: 15,
+                              fontSize: Utils().fontSizeMultiplier(15),
                               color: AppTheme().text,
                             ),
                           ),
@@ -126,7 +126,7 @@ class _HelpViewState extends State<HelpView> {
                           translate('help.h2'),
                           style: TextStyle(
                               fontFamily: 'GoogleSans',
-                              fontSize: 25,
+                              fontSize: Utils().fontSizeMultiplier(25),
                               color: AppTheme().text,
                               fontWeight: FontWeight.bold
                           ),
@@ -140,7 +140,7 @@ class _HelpViewState extends State<HelpView> {
                             translate('help.h2des'),
                             style: TextStyle(
                               fontFamily: 'GoogleSans',
-                              fontSize: 15,
+                              fontSize: Utils().fontSizeMultiplier(15),
                               color: AppTheme().text,
                             ),
                           ),
@@ -164,7 +164,7 @@ class _HelpViewState extends State<HelpView> {
                           translate('help.h3'),
                           style: TextStyle(
                               fontFamily: 'GoogleSans',
-                              fontSize: 25,
+                              fontSize: Utils().fontSizeMultiplier(25),
                               color: AppTheme().text,
                               fontWeight: FontWeight.bold
                           ),
@@ -178,7 +178,7 @@ class _HelpViewState extends State<HelpView> {
                             translate('help.h3des'),
                             style: TextStyle(
                               fontFamily: 'GoogleSans',
-                              fontSize: 15,
+                              fontSize: Utils().fontSizeMultiplier(15),
                               color: AppTheme().text,
                             ),
                           ),

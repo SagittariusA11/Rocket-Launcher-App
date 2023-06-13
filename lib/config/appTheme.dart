@@ -7,9 +7,9 @@ class AppTheme{
   //help_screen
   Color text = selectedAppTheme.isLightMode?
   Colors.white:selectedAppTheme.isDarkMode?
-  Color.fromARGB(255, 201, 201, 201):selectedAppTheme.isRedMode?
-  Color.fromARGB(255, 225, 167, 167):selectedAppTheme.isGreenMode?
-  Color.fromARGB(255, 181, 227, 167):Color.fromARGB(255, 136, 165, 218);
+  Color.fromARGB(255, 211, 211, 211):selectedAppTheme.isRedMode?
+  Color.fromARGB(255, 255, 216, 216):selectedAppTheme.isGreenMode?
+  Color.fromARGB(255, 223, 255, 214):Color.fromARGB(255, 211, 227, 255);
 
   //menu background color
   Color menu_bg_color = selectedAppTheme.isLightMode? Color.fromARGB(204, 106, 161, 244):

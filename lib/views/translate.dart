@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 
+import '../utils/utils.dart';
+
 String? value = "en";
 
 void showDemoActionSheet(
@@ -19,7 +21,7 @@ void onActionSheetPress(BuildContext context, bool blackandwhite) {
           title: Text(translate('language.selection.title'),
               style: TextStyle(
                   fontWeight: FontWeight.normal,
-                  fontSize: 20.0,
+                  fontSize: Utils().fontSizeMultiplier(20),
                   color: blackandwhite
                       ? Color.fromARGB(255, 204, 204, 204)
                       : Color.fromARGB(255, 90, 90, 90),
@@ -27,7 +29,7 @@ void onActionSheetPress(BuildContext context, bool blackandwhite) {
           message: Text(translate('language.selection.message'),
               style: TextStyle(
                   fontWeight: FontWeight.normal,
-                  fontSize: 16.0,
+                  fontSize: Utils().fontSizeMultiplier(16),
                   color: blackandwhite
                       ? Color.fromARGB(255, 204, 204, 204)
                       : Color.fromARGB(255, 90, 90, 90),
@@ -38,7 +40,7 @@ void onActionSheetPress(BuildContext context, bool blackandwhite) {
                     style: TextStyle(
                       fontWeight: FontWeight.normal,
                       fontFamily: "GoogleSans",
-                      fontSize: 18.0,
+                      fontSize: Utils().fontSizeMultiplier(18),
                     )),
                 onPressed: () {
                   changeLocale(context, "ar");
@@ -49,7 +51,7 @@ void onActionSheetPress(BuildContext context, bool blackandwhite) {
                     style: TextStyle(
                       fontWeight: FontWeight.normal,
                       fontFamily: "GoogleSans",
-                      fontSize: 18.0,
+                      fontSize: Utils().fontSizeMultiplier(18),
                     )),
                 onPressed: () {
                   changeLocale(context, "ru");
@@ -60,7 +62,7 @@ void onActionSheetPress(BuildContext context, bool blackandwhite) {
                     style: TextStyle(
                       fontWeight: FontWeight.normal,
                       fontFamily: "GoogleSans",
-                      fontSize: 18.0,
+                      fontSize: Utils().fontSizeMultiplier(18),
                     )),
                 onPressed: () {
                   changeLocale(context, "ja");
@@ -71,7 +73,7 @@ void onActionSheetPress(BuildContext context, bool blackandwhite) {
                     style: TextStyle(
                       fontWeight: FontWeight.normal,
                       fontFamily: "GoogleSans",
-                      fontSize: 18.0,
+                      fontSize: Utils().fontSizeMultiplier(18),
                     )),
                 onPressed: () {
                   changeLocale(context, "zh");
@@ -82,7 +84,7 @@ void onActionSheetPress(BuildContext context, bool blackandwhite) {
                     style: TextStyle(
                       fontWeight: FontWeight.normal,
                       fontFamily: "GoogleSans",
-                      fontSize: 18.0,
+                      fontSize: Utils().fontSizeMultiplier(18),
                     )),
                 onPressed: () {
                   changeLocale(context, "pt");
@@ -93,7 +95,7 @@ void onActionSheetPress(BuildContext context, bool blackandwhite) {
                     style: TextStyle(
                       fontWeight: FontWeight.normal,
                       fontFamily: "GoogleSans",
-                      fontSize: 18.0,
+                      fontSize: Utils().fontSizeMultiplier(18),
                     )),
                 onPressed: () {
                   changeLocale(context, "sq");

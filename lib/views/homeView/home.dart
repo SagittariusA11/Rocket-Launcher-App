@@ -121,7 +121,7 @@ class _homeViewState extends State<homeView> with SingleTickerProviderStateMixin
       drawerAnimationController.forward();
     }
     setState(() {
-      AppTheme().menu_bg_color; // Set the desired color value
+      AppTheme().menu_bg_color;
     });
   }
 
@@ -166,7 +166,7 @@ class _homeViewState extends State<homeView> with SingleTickerProviderStateMixin
                           translate('drawer.title'),
                           style: TextStyle(
                               fontFamily: 'GoogleSans',
-                              fontSize: 30,
+                              fontSize: Utils().fontSizeMultiplier(30),
                               color: Colors.white,
                               fontWeight: FontWeight.bold
                           ),
@@ -198,7 +198,7 @@ class _homeViewState extends State<homeView> with SingleTickerProviderStateMixin
                 //         "Home",
                 //         style: TextStyle(
                 //             fontFamily: 'GoogleSans',
-                //             fontSize: 25,
+                //             fontSize: Utils().fontSizeMultiplier(25),
                 //             color: Colors.white,
                 //             fontWeight: FontWeight.bold
                 //         ),
@@ -212,7 +212,7 @@ class _homeViewState extends State<homeView> with SingleTickerProviderStateMixin
                     translate('drawer.home'),
                     style: TextStyle(
                         fontFamily: 'GoogleSans',
-                        fontSize: 25,
+                        fontSize: Utils().fontSizeMultiplier(25),
                         color: Colors.white,
                         fontWeight: FontWeight.bold
                     ),
@@ -229,7 +229,7 @@ class _homeViewState extends State<homeView> with SingleTickerProviderStateMixin
                     translate('drawer.about'),
                     style: TextStyle(
                         fontFamily: 'GoogleSans',
-                        fontSize: 25,
+                        fontSize: Utils().fontSizeMultiplier(25),
                         color: Colors.white,
                         fontWeight: FontWeight.bold
                     ),
@@ -246,7 +246,7 @@ class _homeViewState extends State<homeView> with SingleTickerProviderStateMixin
                     translate('drawer.help'),
                     style: TextStyle(
                         fontFamily: 'GoogleSans',
-                        fontSize: 25,
+                        fontSize: Utils().fontSizeMultiplier(25),
                         color: Colors.white,
                         fontWeight: FontWeight.bold
                     ),
@@ -263,7 +263,7 @@ class _homeViewState extends State<homeView> with SingleTickerProviderStateMixin
                     translate('drawer.task'),
                     style: TextStyle(
                         fontFamily: 'GoogleSans',
-                        fontSize: 25,
+                        fontSize: Utils().fontSizeMultiplier(25),
                         color: Colors.white,
                         fontWeight: FontWeight.bold
                     ),
@@ -280,7 +280,7 @@ class _homeViewState extends State<homeView> with SingleTickerProviderStateMixin
                     translate('drawer.connection'),
                     style: TextStyle(
                         fontFamily: 'GoogleSans',
-                        fontSize: 25,
+                        fontSize: Utils().fontSizeMultiplier(25),
                         color: Colors.white,
                         fontWeight: FontWeight.bold
                     ),
@@ -297,7 +297,7 @@ class _homeViewState extends State<homeView> with SingleTickerProviderStateMixin
                     translate('drawer.settings'),
                     style: TextStyle(
                         fontFamily: 'GoogleSans',
-                        fontSize: 25,
+                        fontSize: Utils().fontSizeMultiplier(25),
                         color: Colors.white,
                         fontWeight: FontWeight.bold
                     ),
@@ -314,7 +314,7 @@ class _homeViewState extends State<homeView> with SingleTickerProviderStateMixin
                     translate('drawer.tour'),
                     style: TextStyle(
                         fontFamily: 'GoogleSans',
-                        fontSize: 25,
+                        fontSize: Utils().fontSizeMultiplier(25),
                         color: Colors.white,
                         fontWeight: FontWeight.bold
                     ),
@@ -331,7 +331,7 @@ class _homeViewState extends State<homeView> with SingleTickerProviderStateMixin
                     translate('drawer.inventory'),
                     style: TextStyle(
                         fontFamily: 'GoogleSans',
-                        fontSize: 25,
+                        fontSize: Utils().fontSizeMultiplier(25),
                         color: Colors.white,
                         fontWeight: FontWeight.bold
                     ),
@@ -377,7 +377,7 @@ class _homeViewState extends State<homeView> with SingleTickerProviderStateMixin
                           translate('drawer.exit'),
                           style: TextStyle(
                               fontFamily: 'GoogleSans',
-                              fontSize: 25,
+                              fontSize: Utils().fontSizeMultiplier(25),
                               color: Colors.white,
                               fontWeight: FontWeight.bold
                           ),

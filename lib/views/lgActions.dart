@@ -45,7 +45,7 @@ class _LGActionsView extends State<LGActionsView> {
                   Text(
                     '$title',
                     style: TextStyle(
-                      fontSize: 25,
+                      fontSize: Utils().fontSizeMultiplier(25),
                       color: Color.fromARGB(255, 204, 204, 204),
                     ),
                   ),
@@ -60,7 +60,7 @@ class _LGActionsView extends State<LGActionsView> {
                     children: [
                       Text('$msg',
                           style: TextStyle(
-                            fontSize: 18,
+                            fontSize: Utils().fontSizeMultiplier(18),
                             color: Color.fromARGB(
                               255,
                               204,
@@ -92,7 +92,10 @@ class _LGActionsView extends State<LGActionsView> {
                                             ? translate('abox.continue')
                                             : translate('abox.dismiss'),
                                         style: TextStyle(
-                                            fontSize: 20, color: Colors.black)),
+                                            fontSize: Utils().fontSizeMultiplier(20),
+                                            color: Colors.black
+                                        )
+                                    ),
                                   ],
                                 ),
                               ))),
@@ -125,7 +128,7 @@ class _LGActionsView extends State<LGActionsView> {
                   Text(
                     '$title',
                     style: TextStyle(
-                      fontSize: 25,
+                      fontSize: Utils().fontSizeMultiplier(25),
                       color: Color.fromARGB(255, 204, 204, 204),
                     ),
                   ),
@@ -140,7 +143,7 @@ class _LGActionsView extends State<LGActionsView> {
                     children: [
                       Text('$msg',
                           style: TextStyle(
-                            fontSize: 18,
+                            fontSize: Utils().fontSizeMultiplier(18),
                             color: Color.fromARGB(
                               255,
                               204,
@@ -206,7 +209,10 @@ class _LGActionsView extends State<LGActionsView> {
                                   children: <Widget>[
                                     Text(translate('tbox.yes'),
                                         style: TextStyle(
-                                            fontSize: 20, color: Colors.black)),
+                                            fontSize: Utils().fontSizeMultiplier(20),
+                                            color: Colors.black
+                                        )
+                                    ),
                                   ],
                                 ),
                               ))),
@@ -234,7 +240,7 @@ class _LGActionsView extends State<LGActionsView> {
                                   children: <Widget>[
                                     Text(translate('tbox.no'),
                                         style: TextStyle(
-                                          fontSize: 20,
+                                          fontSize: Utils().fontSizeMultiplier(20),
                                           color: Color.fromARGB(
                                               255, 125, 164, 243),
                                         )),
@@ -285,7 +291,7 @@ class _LGActionsView extends State<LGActionsView> {
                       translate('tasks.LG_tasks'),
                       style: TextStyle(
                           fontFamily: 'GoogleSans',
-                          fontSize: 30,
+                          fontSize: Utils().fontSizeMultiplier(30),
                           color: Colors.white,
                           fontWeight: FontWeight.bold
                       ),
@@ -342,7 +348,7 @@ class _LGActionsView extends State<LGActionsView> {
                               child: Text(
                                   translate('tasks.Logo'),
                                   style: TextStyle(
-                                      fontSize: 30,
+                                      fontSize: Utils().fontSizeMultiplier(30),
                                       color: Colors.white,
                                       fontWeight: FontWeight.bold
                                   )),
@@ -384,7 +390,7 @@ class _LGActionsView extends State<LGActionsView> {
                               child: Text(
                                   translate('tasks.Clean'),
                                   style: TextStyle(
-                                      fontSize: 30,
+                                      fontSize: Utils().fontSizeMultiplier(30),
                                       color: Colors.white,
                                       fontWeight: FontWeight.bold
                                   )),
@@ -423,7 +429,7 @@ class _LGActionsView extends State<LGActionsView> {
                               child: Text(
                                   translate('tasks.LGReboot'),
                                   style: TextStyle(
-                                      fontSize: 30,
+                                      fontSize: Utils().fontSizeMultiplier(30),
                                       color: Colors.white,
                                       fontWeight: FontWeight.bold
                                   )),
@@ -454,7 +460,7 @@ class _LGActionsView extends State<LGActionsView> {
                               child: Text(
                                   translate('tasks.LGRelaunch'),
                                   style: TextStyle(
-                                      fontSize: 30,
+                                      fontSize: Utils().fontSizeMultiplier(30),
                                       color: Colors.white,
                                       fontWeight: FontWeight.bold
                                   )),
@@ -493,7 +499,7 @@ class _LGActionsView extends State<LGActionsView> {
                               child: Text(
                                   translate('tasks.LGShutdown'),
                                   style: TextStyle(
-                                      fontSize: 30,
+                                      fontSize: Utils().fontSizeMultiplier(30),
                                       color: Colors.white,
                                       fontWeight: FontWeight.bold
                                   )),

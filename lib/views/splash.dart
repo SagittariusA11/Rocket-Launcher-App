@@ -131,9 +131,9 @@ class _SplashState extends State<Splash> {
                       animatedTexts: [
                         TypewriterAnimatedText(
                           translate('title.name'),
-                          textStyle: const TextStyle(
+                          textStyle: TextStyle(
                               fontFamily: 'GoogleSans',
-                              fontSize: 55,
+                              fontSize: Utils().fontSizeMultiplier(55),
                               color: Color.fromARGB(255, 204, 204, 204),
                               fontWeight: FontWeight.bold
                           ),

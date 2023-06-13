@@ -20,7 +20,7 @@ class _SettingsViewState extends State<SettingsView> {
   bool _text_to_speech = false;
   bool _haptic = false;
   bool _voice_command = false;
-  double _currentValue =  25;
+  double _currentValue =  0;
 
   @override
   void didChangeDependencies() {
@@ -72,7 +72,7 @@ class _SettingsViewState extends State<SettingsView> {
                         translate('drawer.settings'),
                         style: TextStyle(
                             fontFamily: 'GoogleSans',
-                            fontSize: 30,
+                            fontSize: Utils().fontSizeMultiplier(30),
                             color: AppTheme().text,
                             fontWeight: FontWeight.bold
                         ),
@@ -96,7 +96,7 @@ class _SettingsViewState extends State<SettingsView> {
                               translate('settings.language.language'),
                               style: TextStyle(
                                   fontFamily: 'GoogleSans',
-                                  fontSize: 30,
+                                  fontSize: Utils().fontSizeMultiplier(30),
                                   color: AppTheme().text,
                                   fontWeight: FontWeight.bold
                               ),
@@ -138,7 +138,7 @@ class _SettingsViewState extends State<SettingsView> {
                                       child: Text(
                                           translate('language.name.en'),
                                           style: TextStyle(
-                                              fontSize: 20,
+                                              fontSize: Utils().fontSizeMultiplier(20),
                                               color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
                                               fontWeight: FontWeight.bold
                                           )),
@@ -176,7 +176,7 @@ class _SettingsViewState extends State<SettingsView> {
                                       child: Text(
                                           translate('language.name.es'),
                                           style: TextStyle(
-                                              fontSize: 20,
+                                              fontSize: Utils().fontSizeMultiplier(20),
                                               color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
                                               fontWeight: FontWeight.bold
                                           )),
@@ -214,7 +214,7 @@ class _SettingsViewState extends State<SettingsView> {
                                       child: Text(
                                           translate('language.name.hi'),
                                           style: TextStyle(
-                                              fontSize: 20,
+                                              fontSize: Utils().fontSizeMultiplier(20),
                                               color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
                                               fontWeight: FontWeight.bold
                                           )),
@@ -251,7 +251,7 @@ class _SettingsViewState extends State<SettingsView> {
                                       child: Text(
                                           translate('language.name.de'),
                                           style: TextStyle(
-                                              fontSize: 20,
+                                              fontSize: Utils().fontSizeMultiplier(20),
                                               color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
                                               fontWeight: FontWeight.bold
                                           )),
@@ -289,7 +289,7 @@ class _SettingsViewState extends State<SettingsView> {
                                       child: Text(
                                           translate('settings.language.more'),
                                           style: TextStyle(
-                                              fontSize: 20,
+                                              fontSize: Utils().fontSizeMultiplier(20),
                                               color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
                                               fontWeight: FontWeight.bold
                                           )),
@@ -311,7 +311,7 @@ class _SettingsViewState extends State<SettingsView> {
                               translate('settings.theme.theme'),
                               style: TextStyle(
                                   fontFamily: 'GoogleSans',
-                                  fontSize: 30,
+                                  fontSize: Utils().fontSizeMultiplier(30),
                                   color: AppTheme().text,
                                   fontWeight: FontWeight.bold
                               ),
@@ -366,7 +366,7 @@ class _SettingsViewState extends State<SettingsView> {
                                           child: Text(
                                               translate('settings.theme.light'),
                                               style: TextStyle(
-                                                  fontSize: 20,
+                                                  fontSize: Utils().fontSizeMultiplier(20),
                                                   color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
                                                   fontWeight: FontWeight.bold
                                               )),
@@ -419,7 +419,7 @@ class _SettingsViewState extends State<SettingsView> {
                                             child: Text(
                                                 translate('settings.theme.dark'),
                                                 style: TextStyle(
-                                                    fontSize: 20,
+                                                    fontSize: Utils().fontSizeMultiplier(20),
                                                     color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
                                                     fontWeight: FontWeight.bold
                                                 )),
@@ -472,7 +472,7 @@ class _SettingsViewState extends State<SettingsView> {
                                             child: Text(
                                                 translate('settings.theme.red'),
                                                 style: TextStyle(
-                                                    fontSize: 20,
+                                                    fontSize: Utils().fontSizeMultiplier(20),
                                                     color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
                                                     fontWeight: FontWeight.bold
                                                 )),
@@ -525,7 +525,7 @@ class _SettingsViewState extends State<SettingsView> {
                                             child: Text(
                                                 translate('settings.theme.green'),
                                                 style: TextStyle(
-                                                    fontSize: 20,
+                                                    fontSize: Utils().fontSizeMultiplier(20),
                                                     color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
                                                     fontWeight: FontWeight.bold
                                                 )),
@@ -578,7 +578,7 @@ class _SettingsViewState extends State<SettingsView> {
                                             child: Text(
                                                 translate('settings.theme.blue'),
                                                 style: TextStyle(
-                                                    fontSize: 20,
+                                                    fontSize: Utils().fontSizeMultiplier(20),
                                                     color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
                                                     fontWeight: FontWeight.bold
                                                 )),
@@ -602,7 +602,7 @@ class _SettingsViewState extends State<SettingsView> {
                               translate('settings.audio.audio'),
                               style: TextStyle(
                                   fontFamily: 'GoogleSans',
-                                  fontSize: 30,
+                                  fontSize: Utils().fontSizeMultiplier(30),
                                   color: AppTheme().text,
                                   fontWeight: FontWeight.bold
                               ),
@@ -625,7 +625,7 @@ class _SettingsViewState extends State<SettingsView> {
                                           translate('settings.audio.aam'),
                                           style: TextStyle(
                                               fontFamily: 'GoogleSans',
-                                              fontSize: 25,
+                                              fontSize: Utils().fontSizeMultiplier(25),
                                               color: AppTheme().text,
                                               fontWeight: FontWeight.bold
                                           ),
@@ -657,7 +657,7 @@ class _SettingsViewState extends State<SettingsView> {
                                           translate('settings.audio.tts'),
                                           style: TextStyle(
                                               fontFamily: 'GoogleSans',
-                                              fontSize: 25,
+                                              fontSize: Utils().fontSizeMultiplier(25),
                                               color: AppTheme().text,
                                               fontWeight: FontWeight.bold
                                           ),
@@ -689,7 +689,7 @@ class _SettingsViewState extends State<SettingsView> {
                                           translate('settings.audio.hp'),
                                           style: TextStyle(
                                               fontFamily: 'GoogleSans',
-                                              fontSize: 25,
+                                              fontSize: Utils().fontSizeMultiplier(25),
                                               color: AppTheme().text,
                                               fontWeight: FontWeight.bold
                                           ),
@@ -728,7 +728,7 @@ class _SettingsViewState extends State<SettingsView> {
                               translate('settings.fs'),
                               style: TextStyle(
                                   fontFamily: 'GoogleSans',
-                                  fontSize: 30,
+                                  fontSize: Utils().fontSizeMultiplier(30),
                                   color: AppTheme().text,
                                   fontWeight: FontWeight.bold
                               ),
@@ -772,8 +772,40 @@ class _SettingsViewState extends State<SettingsView> {
                                           divisions: 4, // Number of discrete values - 4 values with 3 intervals
                                           onChanged: (double value) {
                                             setState(() {
-                                              _currentValue = value; // Update the current selected value
+                                              _currentValue = value;
+                                              selectedFontSizeFactor.saveMode(_currentValue);// Update the current selected value
                                             });
+                                            if(_currentValue == 0.0) {
+                                              selectedFontSizeFactor.zero = true;
+                                              selectedFontSizeFactor.quarter = false;
+                                              selectedFontSizeFactor.half = false;
+                                              selectedFontSizeFactor.third = false;
+                                              selectedFontSizeFactor.full = false;
+                                            } else if(_currentValue == 25.0){
+                                              selectedFontSizeFactor.zero = false;
+                                              selectedFontSizeFactor.quarter = true;
+                                              selectedFontSizeFactor.half = false;
+                                              selectedFontSizeFactor.third = false;
+                                              selectedFontSizeFactor.full = false;
+                                            } else if(_currentValue == 50.0){
+                                              selectedFontSizeFactor.zero = false;
+                                              selectedFontSizeFactor.quarter = false;
+                                              selectedFontSizeFactor.half = true;
+                                              selectedFontSizeFactor.third = false;
+                                              selectedFontSizeFactor.full = false;
+                                            } else if(_currentValue == 75.0){
+                                              selectedFontSizeFactor.zero = false;
+                                              selectedFontSizeFactor.quarter = false;
+                                              selectedFontSizeFactor.half = false;
+                                              selectedFontSizeFactor.third = true;
+                                              selectedFontSizeFactor.full = false;
+                                            } else if(_currentValue == 100.0){
+                                              selectedFontSizeFactor.zero = false;
+                                              selectedFontSizeFactor.quarter = false;
+                                              selectedFontSizeFactor.half = false;
+                                              selectedFontSizeFactor.third = false;
+                                              selectedFontSizeFactor.full = true;
+                                            }
                                           },
                                           activeColor: Colors.white,
                                           inactiveColor: Colors.grey.shade300,
@@ -803,7 +835,7 @@ class _SettingsViewState extends State<SettingsView> {
                           height: 30,
                         ),
                         SizedBox(
-                          width: ScreenConfig.widthPercent*30,
+                          width: ScreenConfig.widthPercent*35,
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -811,7 +843,7 @@ class _SettingsViewState extends State<SettingsView> {
                                 translate('settings.vc'),
                                 style: TextStyle(
                                     fontFamily: 'GoogleSans',
-                                    fontSize: 30,
+                                    fontSize: Utils().fontSizeMultiplier(30),
                                     color: AppTheme().text,
                                     fontWeight: FontWeight.bold
                                 ),
