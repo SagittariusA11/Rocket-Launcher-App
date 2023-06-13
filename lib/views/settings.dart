@@ -42,7 +42,13 @@ class _SettingsViewState extends State<SettingsView> {
           height: ScreenConfig.height,
           decoration: BoxDecoration(
             image: DecorationImage(
-                image: AssetImage(ImagePaths.settings_bg),
+                image: AssetImage(
+                  selectedAppTheme.isLightMode? ImagePaths.settings_bg_light:
+                  selectedAppTheme.isDarkMode? ImagePaths.settings_bg_dark:
+                  selectedAppTheme.isRedMode? ImagePaths.settings_bg_red:
+                  selectedAppTheme.isGreenMode? ImagePaths.settings_bg_green:
+                  ImagePaths.settings_bg_blue,
+                ),
                 fit: BoxFit.cover
             ),
           ),
@@ -64,10 +70,10 @@ class _SettingsViewState extends State<SettingsView> {
                       ),
                        Text(
                         translate('drawer.settings'),
-                        style: const TextStyle(
+                        style: TextStyle(
                             fontFamily: 'GoogleSans',
                             fontSize: 30,
-                            color: Colors.white,
+                            color: AppTheme().text,
                             fontWeight: FontWeight.bold
                         ),
                       ),
@@ -88,10 +94,10 @@ class _SettingsViewState extends State<SettingsView> {
                           children: [
                             Text(
                               translate('settings.language.language'),
-                              style: const TextStyle(
+                              style: TextStyle(
                                   fontFamily: 'GoogleSans',
                                   fontSize: 30,
-                                  color: Colors.white,
+                                  color: AppTheme().text,
                                   fontWeight: FontWeight.bold
                               ),
                             ),
@@ -116,7 +122,7 @@ class _SettingsViewState extends State<SettingsView> {
                                   style: ElevatedButton.styleFrom(
                                     elevation: 10,
                                     shadowColor: Colors.grey,
-                                    primary: Color.fromARGB(255, 217, 217, 217),
+                                    primary: AppTheme().bg_color,
                                     padding: EdgeInsets.all(15),
                                     shape: StadiumBorder(
                                       side: BorderSide(
@@ -131,9 +137,9 @@ class _SettingsViewState extends State<SettingsView> {
                                     child: Center(
                                       child: Text(
                                           translate('language.name.en'),
-                                          style: const TextStyle(
+                                          style: TextStyle(
                                               fontSize: 20,
-                                              color: Colors.black,
+                                              color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
                                               fontWeight: FontWeight.bold
                                           )),
                                     ),
@@ -154,7 +160,7 @@ class _SettingsViewState extends State<SettingsView> {
                                   style: ElevatedButton.styleFrom(
                                     elevation: 10,
                                     shadowColor: Colors.grey,
-                                    primary: Color.fromARGB(255, 217, 217, 217),
+                                    primary: AppTheme().bg_color,
                                     padding: EdgeInsets.all(15),
                                     shape: StadiumBorder(
                                       side: BorderSide(
@@ -169,9 +175,9 @@ class _SettingsViewState extends State<SettingsView> {
                                     child: Center(
                                       child: Text(
                                           translate('language.name.es'),
-                                          style: const TextStyle(
+                                          style: TextStyle(
                                               fontSize: 20,
-                                              color: Colors.black,
+                                              color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
                                               fontWeight: FontWeight.bold
                                           )),
                                     ),
@@ -192,7 +198,7 @@ class _SettingsViewState extends State<SettingsView> {
                                   style: ElevatedButton.styleFrom(
                                     elevation: 10,
                                     shadowColor: Colors.grey,
-                                    primary: const Color.fromARGB(255, 217, 217, 217),
+                                    primary: AppTheme().bg_color,
                                     padding: const EdgeInsets.all(15),
                                     shape: StadiumBorder(
                                       side: BorderSide(
@@ -209,7 +215,7 @@ class _SettingsViewState extends State<SettingsView> {
                                           translate('language.name.hi'),
                                           style: TextStyle(
                                               fontSize: 20,
-                                              color: Colors.black,
+                                              color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
                                               fontWeight: FontWeight.bold
                                           )),
                                     ),
@@ -229,7 +235,7 @@ class _SettingsViewState extends State<SettingsView> {
                                   style: ElevatedButton.styleFrom(
                                     elevation: 10,
                                     shadowColor: Colors.grey,
-                                    primary: const Color.fromARGB(255, 217, 217, 217),
+                                    primary: AppTheme().bg_color,
                                     padding: const EdgeInsets.all(15),
                                     shape: StadiumBorder(
                                       side: BorderSide(
@@ -246,7 +252,7 @@ class _SettingsViewState extends State<SettingsView> {
                                           translate('language.name.de'),
                                           style: TextStyle(
                                               fontSize: 20,
-                                              color: Colors.black,
+                                              color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
                                               fontWeight: FontWeight.bold
                                           )),
                                     ),
@@ -267,7 +273,7 @@ class _SettingsViewState extends State<SettingsView> {
                                   style: ElevatedButton.styleFrom(
                                     elevation: 10,
                                     shadowColor: Colors.grey,
-                                    primary: Color.fromARGB(255, 217, 217, 217),
+                                    primary: AppTheme().bg_color,
                                     padding: EdgeInsets.all(15),
                                     shape: StadiumBorder(
                                       side: BorderSide(
@@ -282,9 +288,9 @@ class _SettingsViewState extends State<SettingsView> {
                                     child: Center(
                                       child: Text(
                                           translate('settings.language.more'),
-                                          style: const TextStyle(
+                                          style: TextStyle(
                                               fontSize: 20,
-                                              color: Colors.black,
+                                              color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
                                               fontWeight: FontWeight.bold
                                           )),
                                     ),
@@ -306,11 +312,11 @@ class _SettingsViewState extends State<SettingsView> {
                               style: TextStyle(
                                   fontFamily: 'GoogleSans',
                                   fontSize: 30,
-                                  color: Colors.white,
+                                  color: AppTheme().text,
                                   fontWeight: FontWeight.bold
                               ),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 20,
                             ),
                             Row(
@@ -330,7 +336,7 @@ class _SettingsViewState extends State<SettingsView> {
                                   style: ElevatedButton.styleFrom(
                                     elevation: 10,
                                     shadowColor: Colors.grey,
-                                    primary: Color.fromARGB(255, 217, 217, 217),
+                                    primary: AppTheme().bg_color,
                                     padding: EdgeInsets.all(15),
                                     shape: StadiumBorder(
                                       side: BorderSide(
@@ -361,7 +367,7 @@ class _SettingsViewState extends State<SettingsView> {
                                               translate('settings.theme.light'),
                                               style: TextStyle(
                                                   fontSize: 20,
-                                                  color: Colors.black,
+                                                  color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
                                                   fontWeight: FontWeight.bold
                                               )),
                                         ),
@@ -383,7 +389,7 @@ class _SettingsViewState extends State<SettingsView> {
                                     style: ElevatedButton.styleFrom(
                                       elevation: 10,
                                       shadowColor: Colors.grey,
-                                      primary: Color.fromARGB(255, 217, 217, 217),
+                                      primary: AppTheme().bg_color,
                                       padding: EdgeInsets.all(15),
                                       shape: StadiumBorder(
                                         side: BorderSide(
@@ -414,7 +420,7 @@ class _SettingsViewState extends State<SettingsView> {
                                                 translate('settings.theme.dark'),
                                                 style: TextStyle(
                                                     fontSize: 20,
-                                                    color: Colors.black,
+                                                    color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
                                                     fontWeight: FontWeight.bold
                                                 )),
                                           ),
@@ -436,7 +442,7 @@ class _SettingsViewState extends State<SettingsView> {
                                     style: ElevatedButton.styleFrom(
                                       elevation: 10,
                                       shadowColor: Colors.grey,
-                                      primary: Color.fromARGB(255, 217, 217, 217),
+                                      primary: AppTheme().bg_color,
                                       padding: EdgeInsets.all(15),
                                       shape: StadiumBorder(
                                         side: BorderSide(
@@ -467,7 +473,7 @@ class _SettingsViewState extends State<SettingsView> {
                                                 translate('settings.theme.red'),
                                                 style: TextStyle(
                                                     fontSize: 20,
-                                                    color: Colors.black,
+                                                    color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
                                                     fontWeight: FontWeight.bold
                                                 )),
                                           ),
@@ -489,7 +495,7 @@ class _SettingsViewState extends State<SettingsView> {
                                     style: ElevatedButton.styleFrom(
                                       elevation: 10,
                                       shadowColor: Colors.grey,
-                                      primary: Color.fromARGB(255, 217, 217, 217),
+                                      primary: AppTheme().bg_color,
                                       padding: EdgeInsets.all(15),
                                       shape: StadiumBorder(
                                         side: BorderSide(
@@ -520,7 +526,7 @@ class _SettingsViewState extends State<SettingsView> {
                                                 translate('settings.theme.green'),
                                                 style: TextStyle(
                                                     fontSize: 20,
-                                                    color: Colors.black,
+                                                    color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
                                                     fontWeight: FontWeight.bold
                                                 )),
                                           ),
@@ -542,7 +548,7 @@ class _SettingsViewState extends State<SettingsView> {
                                     style: ElevatedButton.styleFrom(
                                       elevation: 10,
                                       shadowColor: Colors.grey,
-                                      primary: Color.fromARGB(255, 217, 217, 217),
+                                      primary: AppTheme().bg_color,
                                       padding: EdgeInsets.all(15),
                                       shape: StadiumBorder(
                                         side: BorderSide(
@@ -573,7 +579,7 @@ class _SettingsViewState extends State<SettingsView> {
                                                 translate('settings.theme.blue'),
                                                 style: TextStyle(
                                                     fontSize: 20,
-                                                    color: Colors.black,
+                                                    color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
                                                     fontWeight: FontWeight.bold
                                                 )),
                                           ),
@@ -597,11 +603,11 @@ class _SettingsViewState extends State<SettingsView> {
                               style: TextStyle(
                                   fontFamily: 'GoogleSans',
                                   fontSize: 30,
-                                  color: Colors.white,
+                                  color: AppTheme().text,
                                   fontWeight: FontWeight.bold
                               ),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 20,
                             ),
                             SizedBox(
@@ -620,7 +626,7 @@ class _SettingsViewState extends State<SettingsView> {
                                           style: TextStyle(
                                               fontFamily: 'GoogleSans',
                                               fontSize: 25,
-                                              color: Colors.white,
+                                              color: AppTheme().text,
                                               fontWeight: FontWeight.bold
                                           ),
                                         ),
@@ -652,7 +658,7 @@ class _SettingsViewState extends State<SettingsView> {
                                           style: TextStyle(
                                               fontFamily: 'GoogleSans',
                                               fontSize: 25,
-                                              color: Colors.white,
+                                              color: AppTheme().text,
                                               fontWeight: FontWeight.bold
                                           ),
                                         ),
@@ -684,7 +690,7 @@ class _SettingsViewState extends State<SettingsView> {
                                           style: TextStyle(
                                               fontFamily: 'GoogleSans',
                                               fontSize: 25,
-                                              color: Colors.white,
+                                              color: AppTheme().text,
                                               fontWeight: FontWeight.bold
                                           ),
                                         ),
@@ -723,11 +729,11 @@ class _SettingsViewState extends State<SettingsView> {
                               style: TextStyle(
                                   fontFamily: 'GoogleSans',
                                   fontSize: 30,
-                                  color: Colors.white,
+                                  color: AppTheme().text,
                                   fontWeight: FontWeight.bold
                               ),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 20,
                             ),
                             SizedBox(
@@ -739,7 +745,7 @@ class _SettingsViewState extends State<SettingsView> {
                                 child: Container(
                                   height: ScreenConfig.heightPercent*7,
                                   decoration: BoxDecoration(
-                                    color: Color.fromARGB(255, 83, 149, 248),
+                                    color: AppTheme().bg_color,
                                     borderRadius: BorderRadius.circular(ScreenConfig.heightPercent*7), // Half the width/height value for a circular shape
                                   ),
                                   child: Row(
@@ -806,7 +812,7 @@ class _SettingsViewState extends State<SettingsView> {
                                 style: TextStyle(
                                     fontFamily: 'GoogleSans',
                                     fontSize: 30,
-                                    color: Colors.white,
+                                    color: AppTheme().text,
                                     fontWeight: FontWeight.bold
                                 ),
                               ),

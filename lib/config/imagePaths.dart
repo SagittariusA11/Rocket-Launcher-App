@@ -47,7 +47,11 @@ class ImagePaths{
   static const help_bg_blue = "assets/images/help_view/help_blue_background.png";
 
   //settings_view
-  static const settings_bg = "assets/images/settings_background.png";
+  static const settings_bg_light = "assets/images/settings_view/settings_background_light.png";
+  static const settings_bg_dark = "assets/images/settings_view/settings_background_dark.png";
+  static const settings_bg_red = "assets/images/settings_view/settings_background_red.png";
+  static const settings_bg_green = "assets/images/settings_view/settings_background_green.png";
+  static const settings_bg_blue = "assets/images/settings_view/settings_background_blue.png";
 
   //lg_tasks_view
   static const lg_tasks_bg_light = "assets/images/lg_tasks_view/lg_tasks_background_light.png";
