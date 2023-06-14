@@ -124,5 +124,11 @@
     "title": "Bienvenido a bordo !",
     "h1": "¿Listo para el despegue? Despegue a un todo\n¡Nuevo nivel con nuestra aplicación lanzacohetes!",
     "h2": "Visualiza cualquier evento de lanzamiento de SpaceX en\nespectacular vista panorámica virtualmente real utilizando\nLiquid Galaxy Rigs y Google Maps"
+  },
+  "launch_tab": {
+    "upm": "Próximas\nmisiones",
+    "pm": "Misiones\npasadas",
+    "vlg": "Ver en Liquid Galaxy",
+    "dlg": "Demo"
   }
 }

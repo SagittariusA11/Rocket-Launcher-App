@@ -124,5 +124,11 @@
     "title": "Welcome OnBoard !",
     "h1": "Ready for liftoff? Blast off to a whole\nnew level with our rocket launcher app!",
     "h2": "Visualize any launch event from SpaceX in\nspectacular panoramic virtually real view using\nLiquid Galaxy Rigs and Google Maps"
+  },
+  "launch_tab": {
+    "upm": "Upcoming\nMissions",
+    "pm": "Past\nMissions",
+    "vlg": "Visualize in Liquid Galaxy",
+    "dlg": "Demo"
   }
 }

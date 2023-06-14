@@ -1,5 +1,8 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_translate/flutter_translate.dart';
+import 'package:scroll_snap_list/scroll_snap_list.dart';
 
 import '../../config/imagePaths.dart';
 import '../../config/screenConfig.dart';
@@ -14,6 +17,11 @@ class LaunchView extends StatefulWidget {
 }
 
 class _LaunchViewState extends State<LaunchView> {
+
+  List<int> data = [
+    10,9,8,7,6,5,4,3,2,1
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -78,9 +86,186 @@ class _LaunchViewState extends State<LaunchView> {
                   ),
                 ),
               ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      translate('launch_tab.upm'),
+                      style: TextStyle(
+                          fontFamily: 'GoogleSans',
+                          fontSize: Utils().fontSizeMultiplier(30),
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold
+                      ),
+                    ),
+                    SizedBox(
+                      height: ScreenConfig.heightPercent*30,
+                      width: ScreenConfig.widthPercent*85,
+                      child: _buildUpcomingCard()
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      translate('launch_tab.pm'),
+                      style: TextStyle(
+                          fontFamily: 'GoogleSans',
+                          fontSize: Utils().fontSizeMultiplier(30),
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold
+                      ),
+                    ),
+                    SizedBox(
+                        height: ScreenConfig.heightPercent*25,
+                        width: ScreenConfig.widthPercent*85,
+                        child: _buildPastCard()
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SizedBox(
+                    width: ScreenConfig.widthPercent*5,
+                  ),
+                  ElevatedButton(
+                      onPressed: () { },
+                      style: ElevatedButton.styleFrom(
+                        elevation: 10,
+                        shadowColor: Colors.grey,
+                        primary: AppTheme().bg_color,
+                        padding: EdgeInsets.all(10),
+                        shape: StadiumBorder(),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SizedBox(
+                            width: ScreenConfig.widthPercent*2,
+                          ),
+                          SizedBox(
+                            width: ScreenConfig.widthPercent*27,
+                            height: ScreenConfig.heightPercent*5,
+                            child: Center(
+                              child: Text(
+                                  translate('launch_tab.vlg'),
+                                  style: TextStyle(
+                                      fontSize: Utils().fontSizeMultiplier(23),
+                                      color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
+                                  )),
+                            ),
+                          ),
+                          const Icon(
+                            Icons.location_pin,
+                            color: Colors.black,
+                            size: 35,
+                          ),
+                          SizedBox(
+                            width: ScreenConfig.widthPercent*2,
+                          ),
+                        ],
+                      )
+                  ),
+                  SizedBox(
+                    width: 30,
+                  ),
+                  ElevatedButton(
+                      onPressed: () { },
+                      style: ElevatedButton.styleFrom(
+                        elevation: 10,
+                        shadowColor: Colors.grey,
+                        primary: AppTheme().bg_color,
+                        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                        shape: const StadiumBorder(),
+                      ),
+                      child: SizedBox(
+                        width: ScreenConfig.widthPercent*5,
+                        height: ScreenConfig.heightPercent*5,
+                        child: Center(
+                          child: Text(
+                              translate('launch_tab.dlg'),
+                            style: TextStyle(
+                                fontSize: Utils().fontSizeMultiplier(20),
+                                color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
+                                fontWeight: FontWeight.bold
+                            )
+                          ),
+                        ),
+                      )
+                  ),
+                ],
+              )
             ],
           ),
         )
+    );
+  }
+  Widget _buildUpcomingItemList(BuildContext context, int index){
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Container(
+          height: ScreenConfig.heightPercent*30,
+          width: ScreenConfig.heightPercent*30*0.385,
+          color: Colors.green,
+        ),
+        Container(
+          height: ScreenConfig.heightPercent*25,
+          width: ScreenConfig.heightPercent*30*0.615,
+          color: Colors.blue,
+        )
+      ],
+    );
+  }
+
+  Widget _buildUpcomingCard() {
+    return ScrollSnapList(
+      itemBuilder: _buildUpcomingItemList,
+      itemSize: ScreenConfig.heightPercent*30,
+      dynamicItemSize: true,
+      dynamicItemOpacity: 0.75,
+      itemCount: data.length,
+    );
+  }
+  Widget _buildPastItemList(BuildContext context, int index){
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Container(
+          height: ScreenConfig.heightPercent*25,
+          width: ScreenConfig.heightPercent*25*0.315,
+          color: Colors.green,
+        ),
+        Container(
+          height: ScreenConfig.heightPercent*20,
+          width: ScreenConfig.heightPercent*25*0.642,
+          color: Colors.blue,
+        )
+      ],
+    );
+  }
+
+  Widget _buildPastCard() {
+    return ScrollSnapList(
+      itemBuilder: _buildPastItemList,
+      itemSize: ScreenConfig.heightPercent*25,
+      dynamicItemSize: true,
+      dynamicItemOpacity: 0.75,
+      itemCount: data.length,
     );
   }
 }

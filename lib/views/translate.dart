@@ -1,10 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_translate/flutter_translate.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../utils/utils.dart';
 
-String? value = "en";
+String? value = selectedAppLanguage.getMode();
 
 void showDemoActionSheet(
     {required BuildContext context, required Widget child}) {
@@ -112,4 +113,26 @@ void onActionSheetPress(BuildContext context, bool blackandwhite) {
           ),
         ),
       ));
+}
+
+class TranslatePreferences implements ITranslatePreferences {
+  static const String _selectedLocaleKey = 'selected_locale';
+
+  @override
+  Future<Locale?> getPreferredLocale() async {
+    final preferences = await SharedPreferences.getInstance();
+
+    if (!preferences.containsKey(_selectedLocaleKey)) return null;
+
+    var locale = preferences.getString(_selectedLocaleKey);
+
+    return localeFromString(locale.toString());
+  }
+
+  @override
+  Future savePreferredLocale(Locale locale) async {
+    final preferences = await SharedPreferences.getInstance();
+
+    await preferences.setString(_selectedLocaleKey, localeToString(locale));
+  }
 }

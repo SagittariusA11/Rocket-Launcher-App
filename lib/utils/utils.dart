@@ -21,15 +21,15 @@ class Utils {
 
   double fontSizeMultiplier(double fontSize){
     if(selectedFontSizeFactor.zero){
-      return fontSize;
+      return fontSize*0.90;
     } else if(selectedFontSizeFactor.quarter){
-      return fontSize*1.05;
+      return fontSize;
     } else if(selectedFontSizeFactor.half){
-      return fontSize*1.10;
+      return fontSize*1.08;
     } else if(selectedFontSizeFactor.third){
-      return fontSize*1.15;
+      return fontSize*1.16;
     } else if(selectedFontSizeFactor.full){
-      return fontSize*1.20;
+      return fontSize*1.25;
     } else {
       return fontSize;
     }

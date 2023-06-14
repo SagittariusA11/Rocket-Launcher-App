@@ -16,12 +16,13 @@ Future<void> main() async {
   await selectedAppLanguage.init();
   await selectedFontSizeFactor.init();
   var delegate = await LocalizationDelegate.create(
-      fallbackLocale: 'en',
-      supportedLocales: [
-        'en',
-        'es',
-        'hi',
-      ]);
+    preferences: TranslatePreferences(),
+    fallbackLocale: selectedAppLanguage.getMode()??'en',
+    supportedLocales: [
+      'en',
+      'es',
+      'hi',
+    ]);
   runApp(LocalizedApp(delegate, MyApp()));
   // runApp(const MyApp());
   SystemChrome.setPreferredOrientations([

@@ -20,7 +20,7 @@ class _SettingsViewState extends State<SettingsView> {
   bool _text_to_speech = false;
   bool _haptic = false;
   bool _voice_command = false;
-  double _currentValue =  0;
+  double _currentValue = selectedFontSizeFactor.getMode()??25.0;
 
   @override
   void didChangeDependencies() {
