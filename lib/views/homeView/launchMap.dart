@@ -147,7 +147,7 @@ class _MyMapState extends State<MyMap> with SingleTickerProviderStateMixin {
   MapType _currentMapType = MapType.satellite;
   // bool isOrbiting = false;
   // bool isDemoActive = false;
-  int rigcount = 3;
+  int rigcount = 5;
   double zoomvalue = 591657550.500000 / pow(2, 13.15393352508545);
   double latvalue = 28.65665656297236;
   double longvalue = -17.885454520583153;
@@ -461,43 +461,46 @@ class _MyMapState extends State<MyMap> with SingleTickerProviderStateMixin {
           onCameraMove: _onCameraMove,
           onCameraIdle: _onCameraIdle,
         ),
-        Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Align(
-            alignment: Alignment.topRight,
-            child: Column(
-              children: <Widget>[
-                SizedBox(height: 57.0),
-                FloatingActionButton(
-                  heroTag: "btn1",
-                  onPressed: _onMapTypeButtonPressed,
-                  materialTapTargetSize: MaterialTapTargetSize.padded,
-                  backgroundColor: Color.fromARGB(255, 75, 127, 82),
-                  child: const Icon(
-                    Icons.map,
-                    size: 36.0,
-                    color: Color.fromARGB(255, 204, 204, 204),
+        Positioned(
+          bottom: 0,
+          left: 80,
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Align(
+              alignment: Alignment.topLeft,
+              child: Row(
+                children: <Widget>[
+                  FloatingActionButton(
+                    heroTag: "btn1",
+                    onPressed: _onMapTypeButtonPressed,
+                    materialTapTargetSize: MaterialTapTargetSize.padded,
+                    backgroundColor: Color.fromARGB(255, 75, 127, 82),
+                    child: const Icon(
+                      Icons.map,
+                      size: 36.0,
+                      color: Color.fromARGB(255, 204, 204, 204),
+                    ),
                   ),
-                ),
-                SizedBox(height: 16.0),
-                FloatingActionButton(
-                  heroTag: "btn2",
-                  onPressed: _ongpsfixedButtonPressed,
-                  materialTapTargetSize: MaterialTapTargetSize.padded,
-                  backgroundColor: Color.fromARGB(255, 75, 127, 82),
-                  child: const Icon(
-                    Icons.gps_fixed_rounded,
-                    size: 36.0,
-                    color: Color.fromARGB(255, 204, 204, 204),
+                  const SizedBox(width: 16.0),
+                  FloatingActionButton(
+                    heroTag: "btn2",
+                    onPressed: _ongpsfixedButtonPressed,
+                    materialTapTargetSize: MaterialTapTargetSize.padded,
+                    backgroundColor: Color.fromARGB(255, 75, 127, 82),
+                    child: const Icon(
+                      Icons.gps_fixed_rounded,
+                      size: 36.0,
+                      color: Color.fromARGB(255, 204, 204, 204),
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),
         Positioned(
-          bottom: 80,
-          right: 20,
+          bottom: 30,
+          left: 20,
           child: Card(
             elevation: 0,
             child: Container(

@@ -22,7 +22,7 @@ class LGActionsView extends StatefulWidget {
 
 bool isOpen = false;
 
-class _LGActionsView extends State<LGActionsView> {
+class _LGActionsView extends State<LGActionsView> with SingleTickerProviderStateMixin {
   showAlertDialog(
       String title, String msg, bool isSuccess) {
     showDialog(

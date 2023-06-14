@@ -14,7 +14,7 @@ class SettingsView extends StatefulWidget {
   State<SettingsView> createState() => _SettingsViewState();
 }
 
-class _SettingsViewState extends State<SettingsView> {
+class _SettingsViewState extends State<SettingsView> with SingleTickerProviderStateMixin {
 
   bool _app_audio_and_music = false;
   bool _text_to_speech = false;

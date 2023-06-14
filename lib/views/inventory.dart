@@ -7,7 +7,7 @@ class InventoryView extends StatefulWidget {
   State<InventoryView> createState() => _InventoryViewState();
 }
 
-class _InventoryViewState extends State<InventoryView> {
+class _InventoryViewState extends State<InventoryView> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Center(

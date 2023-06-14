@@ -7,7 +7,7 @@ class TakeATourView extends StatefulWidget {
   State<TakeATourView> createState() => _TakeATourViewState();
 }
 
-class _TakeATourViewState extends State<TakeATourView> {
+class _TakeATourViewState extends State<TakeATourView> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Center(

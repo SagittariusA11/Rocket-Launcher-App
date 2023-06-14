@@ -7,7 +7,7 @@ class AboutUsView extends StatefulWidget {
   State<AboutUsView> createState() => _AboutUsViewState();
 }
 
-class _AboutUsViewState extends State<AboutUsView> {
+class _AboutUsViewState extends State<AboutUsView> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Center(

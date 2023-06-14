@@ -13,7 +13,7 @@ class HelpView extends StatefulWidget {
   State<HelpView> createState() => _HelpViewState();
 }
 
-class _HelpViewState extends State<HelpView> {
+class _HelpViewState extends State<HelpView> with SingleTickerProviderStateMixin {
 
   @override
   void didChangeDependencies() {

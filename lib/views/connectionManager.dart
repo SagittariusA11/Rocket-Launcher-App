@@ -18,7 +18,7 @@ class ConnectionManagerView extends StatefulWidget {
   State<ConnectionManagerView> createState() => _ConnectionManagerViewState();
 }
 
-class _ConnectionManagerViewState extends State<ConnectionManagerView> {
+class _ConnectionManagerViewState extends State<ConnectionManagerView> with SingleTickerProviderStateMixin {
   Color _iconColor = Color.fromARGB(255, 74, 74, 74);
   bool isLoggedIn = false;
   bool obscurePassword = true;

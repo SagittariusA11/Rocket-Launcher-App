@@ -16,11 +16,8 @@ class LaunchView extends StatefulWidget {
   State<LaunchView> createState() => _LaunchViewState();
 }
 
-class _LaunchViewState extends State<LaunchView> {
-
-  List<int> data = [
-    10,9,8,7,6,5,4,3,2,1
-  ];
+class _LaunchViewState extends State<LaunchView> with SingleTickerProviderStateMixin {
+  int length = 10;
 
   @override
   Widget build(BuildContext context) {
@@ -238,7 +235,7 @@ class _LaunchViewState extends State<LaunchView> {
       itemSize: ScreenConfig.heightPercent*30,
       dynamicItemSize: true,
       dynamicItemOpacity: 0.75,
-      itemCount: data.length,
+      itemCount: length,
     );
   }
   Widget _buildPastItemList(BuildContext context, int index){
@@ -247,12 +244,12 @@ class _LaunchViewState extends State<LaunchView> {
       children: [
         Container(
           height: ScreenConfig.heightPercent*25,
-          width: ScreenConfig.heightPercent*25*0.315,
+          width: ScreenConfig.heightPercent*25*0.385,
           color: Colors.green,
         ),
         Container(
           height: ScreenConfig.heightPercent*20,
-          width: ScreenConfig.heightPercent*25*0.642,
+          width: ScreenConfig.heightPercent*25*0.615,
           color: Colors.blue,
         )
       ],
@@ -265,7 +262,7 @@ class _LaunchViewState extends State<LaunchView> {
       itemSize: ScreenConfig.heightPercent*25,
       dynamicItemSize: true,
       dynamicItemOpacity: 0.75,
-      itemCount: data.length,
+      itemCount: length,
     );
   }
 }

@@ -30,6 +30,7 @@ class homeView extends StatefulWidget {
 class _homeViewState extends State<homeView> with SingleTickerProviderStateMixin{
 
   HomeViewAnimation homeViewAnimation = HomeViewAnimation();
+  bool isDrawerOpen = false;
 
   @override
   void didChangeDependencies() {
@@ -122,6 +123,7 @@ class _homeViewState extends State<homeView> with SingleTickerProviderStateMixin
     }
     setState(() {
       AppTheme().menu_bg_color;
+      isDrawerOpen = !isDrawerOpen;
     });
   }
 
@@ -208,8 +210,11 @@ class _homeViewState extends State<homeView> with SingleTickerProviderStateMixin
                 // ),
                 ListTile(
                   onTap: () {
-                    homeViewController.changeSelectedView(0);
-                    },
+                    if(isDrawerOpen) {
+                      homeViewController.changeSelectedView(0);
+                      isDrawerOpen = !isDrawerOpen;
+                    }
+                  },
                   title: Text(
                     translate('drawer.home'),
                     style: TextStyle(
@@ -226,7 +231,12 @@ class _homeViewState extends State<homeView> with SingleTickerProviderStateMixin
                   ),
                 ),
                 ListTile(
-                  onTap: () => homeViewController.changeSelectedView(1),
+                  onTap: () {
+                    if(isDrawerOpen) {
+                      homeViewController.changeSelectedView(1);
+                      isDrawerOpen = !isDrawerOpen;
+                    }
+                  },
                   title: Text(
                     translate('drawer.about'),
                     style: TextStyle(
@@ -243,7 +253,12 @@ class _homeViewState extends State<homeView> with SingleTickerProviderStateMixin
                   ),
                 ),
                 ListTile(
-                  onTap: () => homeViewController.changeSelectedView(2),
+                  onTap: () {
+                    if(isDrawerOpen) {
+                      homeViewController.changeSelectedView(2);
+                      isDrawerOpen = !isDrawerOpen;
+                    }
+                  },
                   title: Text(
                     translate('drawer.help'),
                     style: TextStyle(
@@ -260,7 +275,12 @@ class _homeViewState extends State<homeView> with SingleTickerProviderStateMixin
                   ),
                 ),
                 ListTile(
-                  onTap: () => homeViewController.changeSelectedView(3),
+                  onTap: () {
+                    if(isDrawerOpen) {
+                      homeViewController.changeSelectedView(3);
+                      isDrawerOpen = !isDrawerOpen;
+                    }
+                  },
                   title: Text(
                     translate('drawer.task'),
                     style: TextStyle(
@@ -277,7 +297,12 @@ class _homeViewState extends State<homeView> with SingleTickerProviderStateMixin
                   ),
                 ),
                 ListTile(
-                  onTap: () => homeViewController.changeSelectedView(4),
+                  onTap: () {
+                    if(isDrawerOpen) {
+                      homeViewController.changeSelectedView(4);
+                      isDrawerOpen = !isDrawerOpen;
+                    }
+                  },
                   title: Text(
                     translate('drawer.connection'),
                     style: TextStyle(
@@ -294,7 +319,12 @@ class _homeViewState extends State<homeView> with SingleTickerProviderStateMixin
                   ),
                 ),
                 ListTile(
-                  onTap: () => homeViewController.changeSelectedView(5),
+                  onTap: () {
+                    if(isDrawerOpen) {
+                      homeViewController.changeSelectedView(5);
+                      isDrawerOpen = !isDrawerOpen;
+                    }
+                  },
                   title: Text(
                     translate('drawer.settings'),
                     style: TextStyle(
@@ -311,7 +341,12 @@ class _homeViewState extends State<homeView> with SingleTickerProviderStateMixin
                   ),
                 ),
                 ListTile(
-                  onTap: () => homeViewController.changeSelectedView(6),
+                  onTap: () {
+                    if(isDrawerOpen) {
+                      homeViewController.changeSelectedView(6);
+                      isDrawerOpen = !isDrawerOpen;
+                    }
+                  },
                   title: Text(
                     translate('drawer.tour'),
                     style: TextStyle(
@@ -328,7 +363,12 @@ class _homeViewState extends State<homeView> with SingleTickerProviderStateMixin
                   ),
                 ),
                 ListTile(
-                  onTap: () => homeViewController.changeSelectedView(7),
+                  onTap: () {
+                    if(isDrawerOpen) {
+                      homeViewController.changeSelectedView(7);
+                      isDrawerOpen = !isDrawerOpen;
+                    }
+                  },
                   title: Text(
                     translate('drawer.inventory'),
                     style: TextStyle(
