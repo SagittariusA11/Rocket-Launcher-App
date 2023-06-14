@@ -207,7 +207,9 @@ class _homeViewState extends State<homeView> with SingleTickerProviderStateMixin
                 //   ),
                 // ),
                 ListTile(
-                  onTap: () => homeViewController.changeSelectedView(0),
+                  onTap: () {
+                    homeViewController.changeSelectedView(0);
+                    },
                   title: Text(
                     translate('drawer.home'),
                     style: TextStyle(
