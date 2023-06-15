@@ -135,6 +135,11 @@
     "rn": "Rocket Name",
     "ls": "Launch Site\nName"
   },
+
+  "launchInfo_tab": {
+    "ytv": "Watch Video"
+  },
+
   "inventory": {
     "title": "Inventory",
     "rockets": "Rockets",

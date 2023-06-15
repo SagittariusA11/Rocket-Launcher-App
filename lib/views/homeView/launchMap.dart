@@ -447,7 +447,7 @@ class _MyMapState extends State<MyMap> with SingleTickerProviderStateMixin {
           },
           initialCameraPosition: CameraPosition(
               target: _center,
-              zoom: 13.15393352508545,
+              zoom: 15.65393352508545,
               bearing: bearingvalue,
               tilt: tiltvalue),
           minMaxZoomPreference: MinMaxZoomPreference.unbounded,

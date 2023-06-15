@@ -649,7 +649,7 @@ class _InventoryViewState extends State<InventoryView> with SingleTickerProvider
                 child: Text(
                   translate('inventory.rn'),
                   style: TextStyle(
-                    fontSize: Utils().fontSizeMultiplier(23),
+                    fontSize: 23,
                     color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
                   ),
                   textAlign: TextAlign.center,
@@ -664,7 +664,7 @@ class _InventoryViewState extends State<InventoryView> with SingleTickerProvider
                   Text(
                     translate('inventory.date'),
                     style: TextStyle(
-                      fontSize: Utils().fontSizeMultiplier(20),
+                      fontSize: 20,
                       color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
                     ),
                   ),
@@ -674,7 +674,7 @@ class _InventoryViewState extends State<InventoryView> with SingleTickerProvider
                   Text(
                     translate('inventory.comp'),
                     style: TextStyle(
-                      fontSize: Utils().fontSizeMultiplier(20),
+                      fontSize: 20,
                       color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
                     ),
                   ),
@@ -684,7 +684,7 @@ class _InventoryViewState extends State<InventoryView> with SingleTickerProvider
                   Text(
                     translate('inventory.c'),
                     style: TextStyle(
-                      fontSize: Utils().fontSizeMultiplier(20),
+                      fontSize: 20,
                       color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
                     ),
                   ),
@@ -694,7 +694,7 @@ class _InventoryViewState extends State<InventoryView> with SingleTickerProvider
                   Text(
                     translate('inventory.s'),
                     style: TextStyle(
-                      fontSize: Utils().fontSizeMultiplier(20),
+                      fontSize: 20,
                       color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
                     ),
                   ),
@@ -745,7 +745,7 @@ class _InventoryViewState extends State<InventoryView> with SingleTickerProvider
                 child: Text(
                   translate('inventory.sn'),
                   style: TextStyle(
-                    fontSize: Utils().fontSizeMultiplier(20),
+                    fontSize: 20,
                     color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
                   ),
                   textAlign: TextAlign.center,
@@ -757,7 +757,7 @@ class _InventoryViewState extends State<InventoryView> with SingleTickerProvider
                   Text(
                     translate('inventory.date'),
                     style: TextStyle(
-                      fontSize: Utils().fontSizeMultiplier(17),
+                      fontSize: 17,
                       color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
                     ),
                   ),
@@ -767,7 +767,7 @@ class _InventoryViewState extends State<InventoryView> with SingleTickerProvider
                   Text(
                     translate('inventory.comp'),
                     style: TextStyle(
-                      fontSize: Utils().fontSizeMultiplier(18),
+                      fontSize: 18,
                       color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
                     ),
                   ),
@@ -777,7 +777,7 @@ class _InventoryViewState extends State<InventoryView> with SingleTickerProvider
                   Text(
                     translate('inventory.c'),
                     style: TextStyle(
-                      fontSize: Utils().fontSizeMultiplier(18),
+                      fontSize: 18,
                       color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
                     ),
                   ),
@@ -787,7 +787,7 @@ class _InventoryViewState extends State<InventoryView> with SingleTickerProvider
                   Text(
                     translate('inventory.type'),
                     style: TextStyle(
-                      fontSize: Utils().fontSizeMultiplier(18),
+                      fontSize: 18,
                       color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
                     ),
                   ),

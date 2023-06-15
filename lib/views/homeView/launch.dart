@@ -275,7 +275,7 @@ class _LaunchViewState extends State<LaunchView> with SingleTickerProviderStateM
                         shape: const StadiumBorder(),
                       ),
                       child: SizedBox(
-                        width: ScreenConfig.widthPercent*5,
+                        width: ScreenConfig.widthPercent*6,
                         height: ScreenConfig.heightPercent*5,
                         child: Center(
                           child: Text(
@@ -324,7 +324,7 @@ class _LaunchViewState extends State<LaunchView> with SingleTickerProviderStateM
                 child: Text(
                     translate('launch_tab.mn'),
                     style: TextStyle(
-                        fontSize: Utils().fontSizeMultiplier(20),
+                        fontSize: 20,
                         color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
                     ),
                   textAlign: TextAlign.center,
@@ -339,7 +339,7 @@ class _LaunchViewState extends State<LaunchView> with SingleTickerProviderStateM
                   Text(
                     translate('launch_tab.date'),
                     style: TextStyle(
-                      fontSize: Utils().fontSizeMultiplier(18),
+                      fontSize: 18,
                       color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
                     ),
                   ),
@@ -349,7 +349,7 @@ class _LaunchViewState extends State<LaunchView> with SingleTickerProviderStateM
                   Text(
                     translate('launch_tab.rn'),
                     style: TextStyle(
-                      fontSize: Utils().fontSizeMultiplier(18),
+                      fontSize: 18,
                       color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
                     ),
                   ),
@@ -359,7 +359,7 @@ class _LaunchViewState extends State<LaunchView> with SingleTickerProviderStateM
                   Text(
                     translate('launch_tab.ls'),
                     style: TextStyle(
-                      fontSize: Utils().fontSizeMultiplier(18),
+                      fontSize: 18,
                       color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
                     ),
                   ),
@@ -410,7 +410,7 @@ class _LaunchViewState extends State<LaunchView> with SingleTickerProviderStateM
                 child: Text(
                   translate('launch_tab.mn'),
                   style: TextStyle(
-                    fontSize: Utils().fontSizeMultiplier(17),
+                    fontSize: 17,
                     color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
                   ),
                   textAlign: TextAlign.center,
@@ -425,7 +425,7 @@ class _LaunchViewState extends State<LaunchView> with SingleTickerProviderStateM
                   Text(
                     translate('launch_tab.date'),
                     style: TextStyle(
-                      fontSize: Utils().fontSizeMultiplier(15),
+                      fontSize: 15,
                       color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
                     ),
                   ),
@@ -435,7 +435,7 @@ class _LaunchViewState extends State<LaunchView> with SingleTickerProviderStateM
                   Text(
                     translate('launch_tab.rn'),
                     style: TextStyle(
-                      fontSize: Utils().fontSizeMultiplier(15),
+                      fontSize: 15,
                       color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
                     ),
                   ),
@@ -445,7 +445,7 @@ class _LaunchViewState extends State<LaunchView> with SingleTickerProviderStateM
                   Text(
                     translate('launch_tab.ls'),
                     style: TextStyle(
-                      fontSize: Utils().fontSizeMultiplier(15),
+                      fontSize: 15,
                       color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
                     ),
                   ),

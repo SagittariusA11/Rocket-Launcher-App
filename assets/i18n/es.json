@@ -135,6 +135,11 @@
     "rn": "Nombre del cohete",
     "ls": "Nombre del sitio\nde lanzamiento"
   },
+
+  "launchInfo_tab": {
+    "ytv": "Ver Video"
+  },
+
   "inventory": {
     "title": "Inventario",
     "rockets": "Cohetes",
