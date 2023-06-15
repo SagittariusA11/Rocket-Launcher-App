@@ -69,14 +69,30 @@ class _homeViewState extends State<homeView> with SingleTickerProviderStateMixin
                 selectedAppTheme.isRedMode? Color.fromARGB(255, 128, 47, 47).withOpacity(opacityAnimation.value):
                 selectedAppTheme.isGreenMode? Color.fromARGB(255, 52, 103, 39).withOpacity(opacityAnimation.value):
                 Color.fromARGB(255, 23, 72, 173).withOpacity(opacityAnimation.value),
+                leading: GestureDetector(
+                  onTap: () {
+                    homeViewController.changeSelectedView(0);
+                    },
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 20),
+                    child: const Icon(
+                      Icons.arrow_back,
+                      color: Colors.white,
+                      size: 30,
+                    ),
+                  ),
+                ),
                 actions: [
-                  IconButton(
-                    onPressed: _onDrawerTapped,
-                    icon: AnimatedIcon(
-                      icon: AnimatedIcons.menu_close,
-                      color: Color.fromARGB(255, 255, 255, 255),
-                      size: 33,
-                      progress: drawerAnimationController.view,
+                  Padding(
+                    padding: const EdgeInsets.only(right: 20),
+                    child: IconButton(
+                      onPressed: _onDrawerTapped,
+                      icon: AnimatedIcon(
+                        icon: AnimatedIcons.menu_close,
+                        color: Color.fromARGB(255, 255, 255, 255),
+                        size: 35,
+                        progress: drawerAnimationController.view,
+                      ),
                     ),
                   ),
                 ]
