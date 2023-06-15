@@ -80,4 +80,11 @@ class ImagePaths{
   static const launchInfo_bg_red = "assets/images/launchInfo_tab/launchInfo_background_red.png";
   static const launchInfo_bg_green = "assets/images/launchInfo_tab/launchInfo_background_green.png";
   static const launchInfo_bg_blue = "assets/images/launchInfo_tab/launchInfo_background_blue.png";
+
+  //inventory
+  static const inventory_bg_light = "assets/images/inventory/inventory_background_light.png";
+  static const inventory_bg_dark = "assets/images/inventory/inventory_background_dark.png";
+  static const inventory_bg_red = "assets/images/inventory/inventory_background_red.png";
+  static const inventory_bg_green = "assets/images/inventory/inventory_background_green.png";
+  static const inventory_bg_blue = "assets/images/inventory/inventory_background_blue.png";
 }

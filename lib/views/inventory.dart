@@ -18,6 +18,18 @@ class _InventoryViewState extends State<InventoryView> with SingleTickerProvider
   int length = 10;
   ScrollController rocketScrollController = ScrollController();
   ScrollController satelliteScrollController = ScrollController();
+  TextEditingController _searchController = TextEditingController();
+  bool _isSearching = false;
+  bool isSpaceXRocketsChecked = false;
+  bool isNASARocketsChecked = false;
+  bool isOthersRocketsChecked = false;
+  bool isAllRocketsChecked = true;
+  bool isSpaceXSatellitesChecked = false;
+  bool isNASASatellitesChecked = false;
+  bool isOthersSatellitesChecked = false;
+  bool isStarlinkSatellitesChecked = false;
+  bool isGeostationarySatellitesChecked = false;
+  bool isAllSatellitesChecked = true;
 
   @override
   void initState() {
@@ -79,17 +91,453 @@ class _InventoryViewState extends State<InventoryView> with SingleTickerProvider
                   Container(
                     margin: const EdgeInsets.only(left: 20),
                     width: ScreenConfig.widthPercent*20,
-                    height: ScreenConfig.heightPercent*75,
-                    color: Colors.green,
+                    height: ScreenConfig.heightPercent*77,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(40),
+                      color: AppTheme().bg_color.withOpacity(0.75),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Container(
+                          margin: const EdgeInsets.symmetric(horizontal: 25),
+                          decoration: BoxDecoration(
+                            border: Border(bottom: BorderSide(color: Colors.white, width: 1)),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              SizedBox(
+                                width: ScreenConfig.widthPercent*12,
+                                child: TextFormField(
+                                  controller: _searchController,
+                                  decoration: InputDecoration(
+                                    filled: true,
+                                    fillColor: Colors.transparent,
+                                    hintText: translate('inventory.search'),
+                                    hintStyle: TextStyle(
+                                        color: Colors.white
+                                    ),
+                                    border: InputBorder.none
+                                  ),
+                                  onChanged: (value) {
+                                    setState(() {
+                                      _isSearching = value.isNotEmpty;
+                                    });
+                                  },
+                                ),
+                              ),
+                              IconButton(
+                                icon: Icon(
+                                    Icons.search,
+                                  color: Colors.white,
+                                  size: 30,
+                                ),
+                                onPressed: _isSearching ? () { } : null,
+                              ),
+                            ],
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 25),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                translate('inventory.rockets'),
+                                style: TextStyle(
+                                    fontFamily: 'GoogleSans',
+                                    fontSize: Utils().fontSizeMultiplier(20),
+                                    color: AppTheme().text,
+                                    fontWeight: FontWeight.bold
+                                ),
+                              ),
+                              GestureDetector(
+                                onTap: () {
+                                  setState(() {
+                                    isSpaceXRocketsChecked = !isSpaceXRocketsChecked;
+                                  });
+                                },
+                                child: Row(
+                                  children: [
+                                    Transform.scale(
+                                      scale: 1.1,
+                                      child: Checkbox(
+                                        value: isSpaceXRocketsChecked,
+                                        onChanged: (value) {
+                                          setState(() {
+                                            isSpaceXRocketsChecked = value!;
+                                          });
+                                        },
+                                        // fillColor: MaterialStateProperty.resolveWith<Color>((states) {
+                                        //   return Colors.grey;
+                                        // }),
+                                        activeColor: Colors.green,
+                                      ),
+                                    ),
+                                    Text(
+                                      translate('inventory.spacex'),
+                                      style: TextStyle(
+                                        fontSize: Utils().fontSizeMultiplier(20),
+                                        fontWeight: FontWeight.w400,
+                                        color: AppTheme().text,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              GestureDetector(
+                                onTap: () {
+                                  setState(() {
+                                    isNASARocketsChecked = !isNASARocketsChecked;
+                                  });
+                                },
+                                child: Row(
+                                  children: [
+                                    Transform.scale(
+                                      scale: 1.1,
+                                      child: Checkbox(
+                                        value: isNASARocketsChecked,
+                                        onChanged: (value) {
+                                          setState(() {
+                                            isNASARocketsChecked = value!;
+                                          });
+                                        },
+                                        // fillColor: MaterialStateProperty.resolveWith<Color>((states) {
+                                        //   return Colors.grey;
+                                        // }),
+                                        activeColor: Colors.green,
+                                      ),
+                                    ),
+                                    Text(
+                                      translate('inventory.nasa'),
+                                      style: TextStyle(
+                                        fontSize: Utils().fontSizeMultiplier(20),
+                                        fontWeight: FontWeight.w400,
+                                        color: AppTheme().text,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              GestureDetector(
+                                onTap: () {
+                                  setState(() {
+                                    isOthersRocketsChecked = !isOthersRocketsChecked;
+                                  });
+                                },
+                                child: Row(
+                                  children: [
+                                    Transform.scale(
+                                      scale: 1.1,
+                                      child: Checkbox(
+                                        value: isOthersRocketsChecked,
+                                        onChanged: (value) {
+                                          setState(() {
+                                            isOthersRocketsChecked = value!;
+                                          });
+                                        },
+                                        // fillColor: MaterialStateProperty.resolveWith<Color>((states) {
+                                        //   return Colors.grey;
+                                        // }),
+                                        activeColor: Colors.green,
+                                      ),
+                                    ),
+                                    Text(
+                                      translate('inventory.others'),
+                                      style: TextStyle(
+                                        fontSize: Utils().fontSizeMultiplier(20),
+                                        fontWeight: FontWeight.w400,
+                                        color: AppTheme().text,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              GestureDetector(
+                                onTap: () {
+                                  setState(() {
+                                    isAllRocketsChecked = !isAllRocketsChecked;
+                                  });
+                                },
+                                child: Row(
+                                  children: [
+                                    Transform.scale(
+                                      scale: 1.1,
+                                      child: Checkbox(
+                                        value: isAllRocketsChecked,
+                                        onChanged: (value) {
+                                          setState(() {
+                                            isAllRocketsChecked = value!;
+                                          });
+                                        },
+                                        // fillColor: MaterialStateProperty.resolveWith<Color>((states) {
+                                        //   return Colors.grey;
+                                        // }),
+                                        activeColor: Colors.green,
+                                      ),
+                                    ),
+                                    Text(
+                                      translate('inventory.all'),
+                                      style: TextStyle(
+                                        fontSize: Utils().fontSizeMultiplier(20),
+                                        fontWeight: FontWeight.w400,
+                                        color: AppTheme().text,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 25),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                translate('inventory.satellites'),
+                                style: TextStyle(
+                                    fontFamily: 'GoogleSans',
+                                    fontSize: Utils().fontSizeMultiplier(20),
+                                    color: AppTheme().text,
+                                    fontWeight: FontWeight.bold
+                                ),
+                              ),
+                              GestureDetector(
+                                onTap: () {
+                                  setState(() {
+                                    isSpaceXSatellitesChecked = !isSpaceXSatellitesChecked;
+                                  });
+                                },
+                                child: Row(
+                                  children: [
+                                    Transform.scale(
+                                      scale: 1.1,
+                                      child: Checkbox(
+                                        value: isSpaceXSatellitesChecked,
+                                        onChanged: (value) {
+                                          setState(() {
+                                            isSpaceXSatellitesChecked = value!;
+                                          });
+                                        },
+                                        // fillColor: MaterialStateProperty.resolveWith<Color>((states) {
+                                        //   return Colors.grey;
+                                        // }),
+                                        activeColor: Colors.green,
+                                      ),
+                                    ),
+                                    Text(
+                                      translate('inventory.spacex'),
+                                      style: TextStyle(
+                                        fontSize: Utils().fontSizeMultiplier(20),
+                                        fontWeight: FontWeight.w400,
+                                        color: AppTheme().text,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              GestureDetector(
+                                onTap: () {
+                                  setState(() {
+                                    isNASASatellitesChecked = !isNASASatellitesChecked;
+                                  });
+                                },
+                                child: Row(
+                                  children: [
+                                    Transform.scale(
+                                      scale: 1.1,
+                                      child: Checkbox(
+                                        value: isNASASatellitesChecked,
+                                        onChanged: (value) {
+                                          setState(() {
+                                            isNASASatellitesChecked = value!;
+                                          });
+                                        },
+                                        // fillColor: MaterialStateProperty.resolveWith<Color>((states) {
+                                        //   return Colors.grey;
+                                        // }),
+                                        activeColor: Colors.green,
+                                      ),
+                                    ),
+                                    Text(
+                                      translate('inventory.nasa'),
+                                      style: TextStyle(
+                                        fontSize: Utils().fontSizeMultiplier(20),
+                                        fontWeight: FontWeight.w400,
+                                        color: AppTheme().text,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              GestureDetector(
+                                onTap: () {
+                                  setState(() {
+                                    isStarlinkSatellitesChecked = !isStarlinkSatellitesChecked;
+                                  });
+                                },
+                                child: Row(
+                                  children: [
+                                    Transform.scale(
+                                      scale: 1.1,
+                                      child: Checkbox(
+                                        value: isStarlinkSatellitesChecked,
+                                        onChanged: (value) {
+                                          setState(() {
+                                            isStarlinkSatellitesChecked = value!;
+                                          });
+                                        },
+                                        // fillColor: MaterialStateProperty.resolveWith<Color>((states) {
+                                        //   return Colors.grey;
+                                        // }),
+                                        activeColor: Colors.green,
+                                      ),
+                                    ),
+                                    Text(
+                                      translate('inventory.starlink'),
+                                      style: TextStyle(
+                                        fontSize: Utils().fontSizeMultiplier(20),
+                                        fontWeight: FontWeight.w400,
+                                        color: AppTheme().text,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              GestureDetector(
+                                onTap: () {
+                                  setState(() {
+                                    isGeostationarySatellitesChecked = !isGeostationarySatellitesChecked;
+                                  });
+                                },
+                                child: Row(
+                                  children: [
+                                    Transform.scale(
+                                      scale: 1.1,
+                                      child: Checkbox(
+                                        value: isGeostationarySatellitesChecked,
+                                        onChanged: (value) {
+                                          setState(() {
+                                            isGeostationarySatellitesChecked = value!;
+                                          });
+                                        },
+                                        // fillColor: MaterialStateProperty.resolveWith<Color>((states) {
+                                        //   return Colors.grey;
+                                        // }),
+                                        activeColor: Colors.green,
+                                      ),
+                                    ),
+                                    Text(
+                                      translate('inventory.geo'),
+                                      style: TextStyle(
+                                        fontSize: Utils().fontSizeMultiplier(20),
+                                        fontWeight: FontWeight.w400,
+                                        color: AppTheme().text,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              GestureDetector(
+                                onTap: () {
+                                  setState(() {
+                                    isOthersSatellitesChecked = !isOthersSatellitesChecked;
+                                  });
+                                },
+                                child: Row(
+                                  children: [
+                                    Transform.scale(
+                                      scale: 1.1,
+                                      child: Checkbox(
+                                        value: isOthersSatellitesChecked,
+                                        onChanged: (value) {
+                                          setState(() {
+                                            isOthersSatellitesChecked = value!;
+                                          });
+                                        },
+                                        // fillColor: MaterialStateProperty.resolveWith<Color>((states) {
+                                        //   return Colors.grey;
+                                        // }),
+                                        activeColor: Colors.green,
+                                      ),
+                                    ),
+                                    Text(
+                                      translate('inventory.others'),
+                                      style: TextStyle(
+                                        fontSize: Utils().fontSizeMultiplier(20),
+                                        fontWeight: FontWeight.w400,
+                                        color: AppTheme().text,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              GestureDetector(
+                                onTap: () {
+                                  setState(() {
+                                    isAllSatellitesChecked = !isAllSatellitesChecked;
+                                  });
+                                },
+                                child: Row(
+                                  children: [
+                                    Transform.scale(
+                                      scale: 1.1,
+                                      child: Checkbox(
+                                        value: isAllSatellitesChecked,
+                                        onChanged: (value) {
+                                          setState(() {
+                                            isAllSatellitesChecked = value!;
+                                          });
+                                        },
+                                        // fillColor: MaterialStateProperty.resolveWith<Color>((states) {
+                                        //   return Colors.grey;
+                                        // }),
+                                        activeColor: Colors.green,
+                                      ),
+                                    ),
+                                    Text(
+                                      translate('inventory.all'),
+                                      style: TextStyle(
+                                        fontSize: Utils().fontSizeMultiplier(20),
+                                        fontWeight: FontWeight.w400,
+                                        color: AppTheme().text,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                   Column(
                     children: [
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 19),
-                        child: SizedBox(
-                            height: ScreenConfig.heightPercent*35,
-                            width: ScreenConfig.widthPercent*75,
-                            child: _buildRocketsCard()
+                        child: Stack(
+                          children: [
+                            SizedBox(
+                                height: ScreenConfig.heightPercent*35,
+                                width: ScreenConfig.widthPercent*75,
+                                child: _buildRocketsCard()
+                            ),
+                            Text(
+                              translate('inventory.rockets'),
+                              style: TextStyle(
+                                  fontFamily: 'GoogleSans',
+                                  fontSize: Utils().fontSizeMultiplier(30),
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                       const SizedBox(
@@ -97,10 +545,23 @@ class _InventoryViewState extends State<InventoryView> with SingleTickerProvider
                       ),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 19),
-                        child: SizedBox(
-                            height: ScreenConfig.heightPercent*28,
-                            width: ScreenConfig.widthPercent*75,
-                            child: _buildSatellitesCard()
+                        child: Stack(
+                          children: [
+                            SizedBox(
+                                height: ScreenConfig.heightPercent*28,
+                                width: ScreenConfig.widthPercent*75,
+                                child: _buildSatellitesCard()
+                            ),
+                            Text(
+                              translate('inventory.satellites'),
+                              style: TextStyle(
+                                  fontFamily: 'GoogleSans',
+                                  fontSize: Utils().fontSizeMultiplier(30),
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                       const SizedBox(

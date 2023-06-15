@@ -86,6 +86,7 @@ flutter:
     - assets/images/launch_tab/
     - assets/images/launchInfo_tab/
     - assets/images/launchMap_tab/
+    - assets/images/inventory/
     - assets/images/
     - assets/i18n/
     - assets/kml/

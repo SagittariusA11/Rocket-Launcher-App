@@ -132,6 +132,15 @@
     "dlg": "प्रदर्शन"
   },
   "inventory": {
-    "title": "भंडार"
+    "title": "भंडार",
+    "rockets": "रॉकेट्स",
+    "satellites": "उपग्रहों",
+    "search": "खोज",
+    "spacex": "SpaceX",
+    "nasa": "NASA",
+    "others": "अन्य",
+    "all": "सभी",
+    "starlink": "Starlink",
+    "geo": "भू-स्थिर"
   }
 }

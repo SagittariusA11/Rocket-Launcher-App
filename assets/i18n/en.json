@@ -132,6 +132,15 @@
     "dlg": "Demo"
   },
   "inventory": {
-    "title": "Inventory"
+    "title": "Inventory",
+    "rockets": "Rockets",
+    "satellites": "Satellites",
+    "search": "Search",
+    "spacex": "SpaceX",
+    "nasa": "NASA",
+    "others": "Others",
+    "all": "All",
+    "starlink": "Starlink",
+    "geo": "GeoStationary"
   }
 }
