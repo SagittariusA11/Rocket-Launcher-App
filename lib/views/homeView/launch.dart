@@ -18,6 +18,17 @@ class LaunchView extends StatefulWidget {
 
 class _LaunchViewState extends State<LaunchView> with SingleTickerProviderStateMixin {
   int length = 10;
+  ScrollController upcomingScrollController = ScrollController();
+  ScrollController pastScrollController = ScrollController();
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      upcomingScrollController.jumpTo(ScreenConfig.heightPercent*60);
+      pastScrollController.jumpTo(ScreenConfig.heightPercent*50);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -231,6 +242,7 @@ class _LaunchViewState extends State<LaunchView> with SingleTickerProviderStateM
 
   Widget _buildUpcomingCard() {
     return ScrollSnapList(
+      listController: upcomingScrollController,
       itemBuilder: _buildUpcomingItemList,
       itemSize: ScreenConfig.heightPercent*30,
       dynamicItemSize: true,
@@ -258,6 +270,7 @@ class _LaunchViewState extends State<LaunchView> with SingleTickerProviderStateM
 
   Widget _buildPastCard() {
     return ScrollSnapList(
+      listController: pastScrollController,
       itemBuilder: _buildPastItemList,
       itemSize: ScreenConfig.heightPercent*25,
       dynamicItemSize: true,

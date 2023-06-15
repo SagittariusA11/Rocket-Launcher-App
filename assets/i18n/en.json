@@ -130,5 +130,8 @@
     "pm": "Past\nMissions",
     "vlg": "Visualize in Liquid Galaxy",
     "dlg": "Demo"
+  },
+  "inventory": {
+    "title": "Inventory"
   }
 }
