@@ -20,6 +20,8 @@ class _LaunchViewState extends State<LaunchView> with SingleTickerProviderStateM
   int length = 10;
   ScrollController upcomingScrollController = ScrollController();
   ScrollController pastScrollController = ScrollController();
+  TextEditingController _searchController = TextEditingController();
+  bool _isSearching = false;
 
   @override
   void initState() {
@@ -54,39 +56,111 @@ class _LaunchViewState extends State<LaunchView> with SingleTickerProviderStateM
               Padding(
                 padding: const EdgeInsets.only(top: 10),
                 child: SizedBox(
-                  width: ScreenConfig.widthPercent*35,
+                  width: ScreenConfig.width,
                   child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      SizedBox(
-                        width: ScreenConfig.widthPercent*1.75,
-                      ),
-                      Utils.images(
-                          ScreenConfig.heightPercent*10,
-                          ScreenConfig.heightPercent*10,
-                          ImagePaths.rla_icon
-                      ),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                      Row(
                         children: [
-                          Text(
-                            translate('connection.label_l1'),
-                            style: TextStyle(
-                                fontFamily: 'GoogleSans',
-                                fontSize: Utils().fontSizeMultiplier(30),
-                                color: Colors.white,
-                              fontWeight: FontWeight.bold
+                          SizedBox(
+                            width: ScreenConfig.widthPercent*1.75,
+                          ),
+                          Utils.images(
+                              ScreenConfig.heightPercent*10,
+                              ScreenConfig.heightPercent*10,
+                              ImagePaths.rla_icon
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                translate('connection.label_l1'),
+                                style: TextStyle(
+                                    fontFamily: 'GoogleSans',
+                                    fontSize: Utils().fontSizeMultiplier(30),
+                                    color: Colors.white,
+                                  fontWeight: FontWeight.bold
+                                ),
+                              ),
+                              Text(
+                                translate('connection.label_l2'),
+                                style: TextStyle(
+                                    fontFamily: 'GoogleSans',
+                                    fontSize: Utils().fontSizeMultiplier(20),
+                                    color: Colors.white
+                                ),
+                              ),
+                            ],
+                          )
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Container(
+                            margin: const EdgeInsets.symmetric(horizontal: 15),
+                            decoration: const BoxDecoration(
+                              border: Border(bottom: BorderSide(color: Colors.white, width: 1)),
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                SizedBox(
+                                  width: ScreenConfig.widthPercent*12,
+                                  child: TextFormField(
+                                    controller: _searchController,
+                                    decoration: InputDecoration(
+                                        filled: true,
+                                        fillColor: Colors.transparent,
+                                        hintText: translate('inventory.search'),
+                                        hintStyle: TextStyle(
+                                            color: Colors.white
+                                        ),
+                                        border: InputBorder.none
+                                    ),
+                                    onChanged: (value) {
+                                      setState(() {
+                                        _isSearching = value.isNotEmpty;
+                                      });
+                                    },
+                                  ),
+                                ),
+                                IconButton(
+                                  icon: Icon(
+                                    Icons.search,
+                                    color: Colors.white,
+                                    size: 30,
+                                  ),
+                                  onPressed: _isSearching ? () { } : null,
+                                ),
+                              ],
                             ),
                           ),
-                          Text(
-                            translate('connection.label_l2'),
-                            style: TextStyle(
-                                fontFamily: 'GoogleSans',
-                                fontSize: Utils().fontSizeMultiplier(20),
-                                color: Colors.white
+                          GestureDetector(
+                            onTap: () { },
+                            child: const Icon(
+                              Icons.filter_list,
+                              color: Colors.white,
+                              size: 40,
                             ),
+                          ),
+                          const SizedBox(
+                            width: 20,
+                          ),
+                          GestureDetector(
+                            onTap: () { },
+                            child: const Icon(
+                              Icons.calendar_month_rounded,
+                              color: Colors.white,
+                              size: 40,
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 20,
                           ),
                         ],
                       )
@@ -229,12 +303,70 @@ class _LaunchViewState extends State<LaunchView> with SingleTickerProviderStateM
         Container(
           height: ScreenConfig.heightPercent*30,
           width: ScreenConfig.heightPercent*30*0.385,
-          color: Colors.green,
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage(ImagePaths.rocket),
+              fit: BoxFit.fill
+            )
+          ),
         ),
         Container(
           height: ScreenConfig.heightPercent*25,
           width: ScreenConfig.heightPercent*30*0.615,
-          color: Colors.blue,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20),
+            color: AppTheme().bg_color.withOpacity(0.5),
+          ),
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Text(
+                    translate('launch_tab.mn'),
+                    style: TextStyle(
+                        fontSize: Utils().fontSizeMultiplier(20),
+                        color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
+                    ),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    translate('launch_tab.date'),
+                    style: TextStyle(
+                      fontSize: Utils().fontSizeMultiplier(18),
+                      color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  Text(
+                    translate('launch_tab.rn'),
+                    style: TextStyle(
+                      fontSize: Utils().fontSizeMultiplier(18),
+                      color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  Text(
+                    translate('launch_tab.ls'),
+                    style: TextStyle(
+                      fontSize: Utils().fontSizeMultiplier(18),
+                      color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
+                    ),
+                  ),
+                ],
+              )
+            ],
+          ),
         )
       ],
     );
@@ -257,12 +389,70 @@ class _LaunchViewState extends State<LaunchView> with SingleTickerProviderStateM
         Container(
           height: ScreenConfig.heightPercent*25,
           width: ScreenConfig.heightPercent*25*0.385,
-          color: Colors.green,
+          decoration: const BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage(ImagePaths.rocket),
+                  fit: BoxFit.fill
+              ),
+          ),
         ),
         Container(
           height: ScreenConfig.heightPercent*20,
           width: ScreenConfig.heightPercent*25*0.615,
-          color: Colors.blue,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(18),
+            color: AppTheme().bg_color.withOpacity(0.5),
+          ),
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Text(
+                  translate('launch_tab.mn'),
+                  style: TextStyle(
+                    fontSize: Utils().fontSizeMultiplier(17),
+                    color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+              const SizedBox(
+                height: 5,
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    translate('launch_tab.date'),
+                    style: TextStyle(
+                      fontSize: Utils().fontSizeMultiplier(15),
+                      color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 3,
+                  ),
+                  Text(
+                    translate('launch_tab.rn'),
+                    style: TextStyle(
+                      fontSize: Utils().fontSizeMultiplier(15),
+                      color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 3,
+                  ),
+                  Text(
+                    translate('launch_tab.ls'),
+                    style: TextStyle(
+                      fontSize: Utils().fontSizeMultiplier(15),
+                      color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
+                    ),
+                  ),
+                ],
+              )
+            ],
+          ),
         )
       ],
     );

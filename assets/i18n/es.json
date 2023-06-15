@@ -129,7 +129,11 @@
     "upm": "Próximas\nmisiones",
     "pm": "Misiones\npasadas",
     "vlg": "Ver en Liquid Galaxy",
-    "dlg": "Demo"
+    "dlg": "Demo",
+    "mn": "Nombre de\nla misión",
+    "date": "15-06-2023",
+    "rn": "Nombre del cohete",
+    "ls": "Nombre del sitio\nde lanzamiento"
   },
   "inventory": {
     "title": "Inventario",

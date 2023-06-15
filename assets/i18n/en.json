@@ -129,7 +129,11 @@
     "upm": "Upcoming\nMissions",
     "pm": "Past\nMissions",
     "vlg": "Visualize in Liquid Galaxy",
-    "dlg": "Demo"
+    "dlg": "Demo",
+    "mn": "Mission\nName",
+    "date": "15-06-2023",
+    "rn": "Rocket Name",
+    "ls": "Launch Site\nName"
   },
   "inventory": {
     "title": "Inventory",
@@ -141,6 +145,13 @@
     "others": "Others",
     "all": "All",
     "starlink": "Starlink",
-    "geo": "GeoStationary"
+    "geo": "GeoStationary",
+    "date": "15-06-2023",
+    "rn": "Rocket\nName",
+    "comp": "Company",
+    "c": "Country",
+    "s": "Stages",
+    "sn": "Satellite\nName",
+    "type": "Type"
   }
 }

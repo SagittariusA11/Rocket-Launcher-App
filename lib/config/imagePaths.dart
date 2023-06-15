@@ -87,4 +87,10 @@ class ImagePaths{
   static const inventory_bg_red = "assets/images/inventory/inventory_background_red.png";
   static const inventory_bg_green = "assets/images/inventory/inventory_background_green.png";
   static const inventory_bg_blue = "assets/images/inventory/inventory_background_blue.png";
+
+  //rockets
+  static const rocket = "assets/rockets/rocket.png";
+
+  //satellites
+  static const satellites = "assets/satellites/satellite.png";
 }

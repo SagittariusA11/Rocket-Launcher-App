@@ -102,7 +102,7 @@ class _InventoryViewState extends State<InventoryView> with SingleTickerProvider
                       children: [
                         Container(
                           margin: const EdgeInsets.symmetric(horizontal: 25),
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                             border: Border(bottom: BorderSide(color: Colors.white, width: 1)),
                           ),
                           child: Row(
@@ -628,12 +628,80 @@ class _InventoryViewState extends State<InventoryView> with SingleTickerProvider
         Container(
           height: ScreenConfig.heightPercent*35,
           width: ScreenConfig.heightPercent*35*0.385,
-          color: Colors.green,
+          decoration: const BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage(ImagePaths.rocket),
+                  fit: BoxFit.fill
+              )
+          ),
         ),
         Container(
           height: ScreenConfig.heightPercent*29,
           width: ScreenConfig.heightPercent*35*0.615,
-          color: Colors.blue,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(25),
+            color: AppTheme().bg_color.withOpacity(0.5),
+          ),
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Text(
+                  translate('inventory.rn'),
+                  style: TextStyle(
+                    fontSize: Utils().fontSizeMultiplier(23),
+                    color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    translate('inventory.date'),
+                    style: TextStyle(
+                      fontSize: Utils().fontSizeMultiplier(20),
+                      color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  Text(
+                    translate('inventory.comp'),
+                    style: TextStyle(
+                      fontSize: Utils().fontSizeMultiplier(20),
+                      color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  Text(
+                    translate('inventory.c'),
+                    style: TextStyle(
+                      fontSize: Utils().fontSizeMultiplier(20),
+                      color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  Text(
+                    translate('inventory.s'),
+                    style: TextStyle(
+                      fontSize: Utils().fontSizeMultiplier(20),
+                      color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
+                    ),
+                  ),
+                ],
+              )
+            ],
+          ),
         )
       ],
     );
@@ -656,12 +724,77 @@ class _InventoryViewState extends State<InventoryView> with SingleTickerProvider
         Container(
           height: ScreenConfig.heightPercent*28,
           width: ScreenConfig.heightPercent*28*0.385,
-          color: Colors.green,
+          decoration: const BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage(ImagePaths.satellites),
+                  fit: BoxFit.fill
+              )
+          ),
         ),
         Container(
-          height: ScreenConfig.heightPercent*26,
+          height: ScreenConfig.heightPercent*23,
           width: ScreenConfig.heightPercent*28*0.615,
-          color: Colors.blue,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(18),
+            color: AppTheme().bg_color.withOpacity(0.5),
+          ),
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Text(
+                  translate('inventory.sn'),
+                  style: TextStyle(
+                    fontSize: Utils().fontSizeMultiplier(20),
+                    color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    translate('inventory.date'),
+                    style: TextStyle(
+                      fontSize: Utils().fontSizeMultiplier(17),
+                      color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  Text(
+                    translate('inventory.comp'),
+                    style: TextStyle(
+                      fontSize: Utils().fontSizeMultiplier(18),
+                      color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  Text(
+                    translate('inventory.c'),
+                    style: TextStyle(
+                      fontSize: Utils().fontSizeMultiplier(18),
+                      color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  Text(
+                    translate('inventory.type'),
+                    style: TextStyle(
+                      fontSize: Utils().fontSizeMultiplier(18),
+                      color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
+                    ),
+                  ),
+                ],
+              )
+            ],
+          ),
         )
       ],
     );

@@ -88,6 +88,8 @@ flutter:
     - assets/images/launchMap_tab/
     - assets/images/inventory/
     - assets/images/
+    - assets/rockets/
+    - assets/satellites/
     - assets/i18n/
     - assets/kml/
   #   - images/a_dot_burr.jpeg
