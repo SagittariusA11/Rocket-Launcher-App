@@ -137,7 +137,32 @@
   },
 
   "launchInfo_tab": {
-    "ytv": "Ver Video"
+    "ytv": "Ver Video",
+    "mn": "Telstar 19V",
+    "date": "Fecha",
+    "rn": "Nombre del cohete",
+    "rn_01": "Halcón 9",
+    "ls": "Sitio de lanzamiento",
+    "ls_01": "CCAFS SLC 40",
+    "time": "Tiempo",
+    "fn": "Número de vuelo",
+    "py": "Carga útil",
+    "py_01": "Telstar 19V",
+    "n": "Nacionalidad",
+    "n_01": "Canadá",
+    "ct": "Cliente",
+    "ct_01": "Telesat",
+    "orb": "Orbita",
+    "orb_01": "Geoestacionario",
+    "art": "Artículo",
+    "wiki": "Wikipedia",
+    "img": "Fotos",
+    "md": "Descripción de la misión",
+    "md_01": "Satélite de comunicaciones fabricado por SSL destinado a ser colocado en 63° Oeste sobre las Américas. Con 7.075 kg, se convirtió en el satélite comercial de comunicaciones más pesado jamás lanzado.",
+    "lsd": "Descripción del sitio de lanzamiento",
+    "lsfn": "Complejo de lanzamiento espacial de la estación de la Fuerza Aérea de Cabo Cañaveral 40",
+    "lsd_01": "El Complejo de Lanzamiento Espacial 40 (SLC-40) de la Estación de la Fuerza Aérea de Cabo Cañaveral es una instalación vital operada por SpaceX en Florida. Se dedica al lanzamiento de cohetes Falcon 9 para una variedad de misiones, incluidos los despliegues de satélites y el reabastecimiento de la Estación Espacial Internacional. SLC-40 ha sido objeto de actualizaciones para admitir aterrizajes de refuerzo, desempeñando un papel importante en los avances tecnológicos de cohetes reutilizables de SpaceX. Este complejo sirve como un centro crítico para el acceso rentable y eficiente al espacio.",
+    "mi": "Más información"
   },
 
   "inventory": {

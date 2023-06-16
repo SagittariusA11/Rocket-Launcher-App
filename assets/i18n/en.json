@@ -137,7 +137,32 @@
   },
 
   "launchInfo_tab": {
-    "ytv": "Watch Video"
+    "ytv": "Watch Video",
+    "mn": "Telstar 19V",
+    "date": "Date",
+    "rn": "Rocket Name",
+    "rn_01": "Falcon 9",
+    "ls": "Launch Site",
+    "ls_01": "CCAFS SLC 40",
+    "time": "Time",
+    "fn": "Flight Number",
+    "py": "Payload",
+    "py_01": "Telstar 19V",
+    "n": "Nationality",
+    "n_01": "Canada",
+    "ct": "Customer",
+    "ct_01": "Telesat",
+    "orb": "Orbit",
+    "orb_01": "Geostationary",
+    "art": "Article",
+    "wiki": "Wikipedia",
+    "img": "Images",
+    "md": "Mission Description",
+    "md_01": "SSL-manufactured communications satellite intended to be placed at 63° West over the Americas. At 7,075 kg, it became the heaviest commercial communications satellite ever launched.",
+    "lsd": "Launch Site Description",
+    "lsfn": "Cape Canaveral Air Force Station Space Launch Complex 40",
+    "lsd_01": "Cape Canaveral Air Force Station Space Launch Complex 40 (SLC-40) is a vital SpaceX-operated facility in Florida. It is dedicated to launching Falcon 9 rockets for a variety of missions, including satellite deployments and International Space Station resupply. SLC-40 has undergone upgrades to support booster landings, playing a significant role in SpaceX's reusable rocket technology advancements. This complex serves as a critical hub for cost-effective and efficient access to space",
+    "mi": "More Info"
   },
 
   "inventory": {

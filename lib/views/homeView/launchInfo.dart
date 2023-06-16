@@ -162,6 +162,289 @@ class _LaunchInfoState extends State<LaunchInfo> {
                   borderRadius: BorderRadius.circular(50),
                   color: AppTheme().bg_color.withOpacity(0.5),
                 ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    SizedBox(
+                      height: ScreenConfig.heightPercent*56,
+                      width: ScreenConfig.widthPercent*18,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Text(
+                            translate('launchInfo_tab.mn'),
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontFamily: 'GoogleSans',
+                                fontSize: Utils().fontSizeMultiplier(30),
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold
+                            ),
+                          ),
+                          Container(
+                            height: ScreenConfig.heightPercent*41,
+                            width: ScreenConfig.heightPercent*41*0.385,
+                            decoration: const BoxDecoration(
+                              image: DecorationImage(
+                                  image: AssetImage(ImagePaths.rocket),
+                                  fit: BoxFit.fill
+                              ),
+                            ),
+                          ),
+                          ElevatedButton(
+                              onPressed: () { },
+                              style: ElevatedButton.styleFrom(
+                                elevation: 10,
+                                shadowColor: Colors.grey,
+                                primary: AppTheme().bg_color,
+                                shape: const StadiumBorder(),
+                              ),
+                              child: SizedBox(
+                                width: ScreenConfig.widthPercent*9,
+                                height: ScreenConfig.heightPercent*3,
+                                child: Center(
+                                  child: Text(
+                                      translate('launchInfo_tab.mi'),
+                                      style: TextStyle(
+                                          fontSize: Utils().fontSizeMultiplier(20),
+                                          color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
+                                      )
+                                  ),
+                                ),
+                              )
+                          ),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      height: ScreenConfig.heightPercent*56,
+                      width: ScreenConfig.widthPercent*30,
+                      decoration: const BoxDecoration(
+                        border: Border(
+                          left: BorderSide(width: 5.0, color: Colors.white),
+                          right: BorderSide(width: 5.0, color: Colors.white),
+                        ),
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Text(
+                            "${translate('launchInfo_tab.rn')}:   ${translate('launchInfo_tab.rn_01')}",
+                            style: const TextStyle(
+                              fontSize: 22,
+                              color: Colors.white,
+                            ),
+                          ),
+                          Text(
+                            "${translate('launchInfo_tab.date')}:   2018-07-22",
+                            style: const TextStyle(
+                              fontSize: 22,
+                              color: Colors.white,
+                            ),
+                          ),
+                          Text(
+                            "${translate('launchInfo_tab.time')}:   05:50:00 UTC",
+                            style: const TextStyle(
+                              fontSize: 22,
+                              color: Colors.white,
+                            ),
+                          ),
+                          Text(
+                            "${translate('launchInfo_tab.ls')}:   ${translate('launchInfo_tab.ls_01')}",
+                            style: const TextStyle(
+                              fontSize: 22,
+                              color: Colors.white,
+                            ),
+                          ),
+                          Text(
+                            "${translate('launchInfo_tab.fn')}:   65",
+                            style: const TextStyle(
+                              fontSize: 22,
+                              color: Colors.white,
+                            ),
+                          ),
+                          Text(
+                            "${translate('launchInfo_tab.py')}:   ${translate('launchInfo_tab.py_01')}",
+                            style: const TextStyle(
+                              fontSize: 22,
+                              color: Colors.white,
+                            ),
+                          ),
+                          Text(
+                            "${translate('launchInfo_tab.n')}:    ${translate('launchInfo_tab.n_01')}",
+                            style: const TextStyle(
+                              fontSize: 22,
+                              color: Colors.white,
+                            ),
+                          ),
+                          Text(
+                            "${translate('launchInfo_tab.ct')}:    ${translate('launchInfo_tab.ct_01')}",
+                            style: const TextStyle(
+                              fontSize: 22,
+                              color: Colors.white,
+                            ),
+                          ),
+                          Text(
+                            "${translate('launchInfo_tab.orb')}:    ${translate('launchInfo_tab.orb_01')}",
+                            style: const TextStyle(
+                              fontSize: 22,
+                              color: Colors.white,
+                            ),
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              ElevatedButton(
+                                  onPressed: () { },
+                                  style: ElevatedButton.styleFrom(
+                                    elevation: 10,
+                                    shadowColor: Colors.grey,
+                                    primary: AppTheme().bg_color,
+                                    shape: const StadiumBorder(),
+                                  ),
+                                  child: SizedBox(
+                                    width: ScreenConfig.widthPercent*5,
+                                    height: ScreenConfig.heightPercent*3,
+                                    child: Center(
+                                      child: Text(
+                                          translate('launchInfo_tab.art'),
+                                          style: TextStyle(
+                                              fontSize: 18,
+                                              color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
+                                          )
+                                      ),
+                                    ),
+                                  )
+                              ),
+                              ElevatedButton(
+                                  onPressed: () { },
+                                  style: ElevatedButton.styleFrom(
+                                    elevation: 10,
+                                    shadowColor: Colors.grey,
+                                    primary: AppTheme().bg_color,
+                                    shape: const StadiumBorder(),
+                                  ),
+                                  child: SizedBox(
+                                    width: ScreenConfig.widthPercent*7,
+                                    height: ScreenConfig.heightPercent*3,
+                                    child: Center(
+                                      child: Text(
+                                          translate('launchInfo_tab.wiki'),
+                                          style: TextStyle(
+                                            fontSize: 18,
+                                            color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
+                                          )
+                                      ),
+                                    ),
+                                  )
+                              ),
+                              ElevatedButton(
+                                  onPressed: () { },
+                                  style: ElevatedButton.styleFrom(
+                                    elevation: 10,
+                                    shadowColor: Colors.grey,
+                                    primary: AppTheme().bg_color,
+                                    shape: const StadiumBorder(),
+                                  ),
+                                  child: SizedBox(
+                                    width: ScreenConfig.widthPercent*5,
+                                    height: ScreenConfig.heightPercent*3,
+                                    child: Center(
+                                      child: Text(
+                                          translate('launchInfo_tab.img'),
+                                          style: TextStyle(
+                                            fontSize: 18,
+                                            color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
+                                          )
+                                      ),
+                                    ),
+                                  )
+                              ),
+                            ],
+                          )
+                        ],
+                      )
+                    ),
+                    SizedBox(
+                      height: ScreenConfig.heightPercent*56,
+                      width: ScreenConfig.widthPercent*44,
+                      child: Column(
+                        children: [
+                          Container(
+                            height: ScreenConfig.heightPercent*20,
+                            width: ScreenConfig.widthPercent*44,
+                            decoration: const BoxDecoration(
+                              border: Border(
+                                bottom: BorderSide(width: 5.0, color: Colors.white),
+                              ),
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "${translate('launchInfo_tab.md')}:",
+                                  style: const TextStyle(
+                                    fontSize: 25,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: 8,
+                                ),
+                                Text(
+                                  translate('launchInfo_tab.md_01'),
+                                  style: const TextStyle(
+                                    fontSize: 22,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Container(
+                            padding: const EdgeInsets.only(top: 10),
+                            height: ScreenConfig.heightPercent*36,
+                            width: ScreenConfig.widthPercent*44,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "${translate('launchInfo_tab.lsd')}:",
+                                  style: const TextStyle(
+                                    fontSize: 25,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                Text(
+                                  translate('launchInfo_tab.lsfn'),
+                                  style: const TextStyle(
+                                    fontSize: 20,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                Text(
+                                  translate('launchInfo_tab.lsd_01'),
+                                  style: const TextStyle(
+                                    fontSize: 19,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -204,8 +487,8 @@ class _LaunchInfoState extends State<LaunchInfo> {
                         ],
                       )
                   ),
-                  SizedBox(
-                    width: 30,
+                  const SizedBox(
+                    width: 20,
                   ),
                   ElevatedButton(
                       onPressed: () { },
@@ -245,8 +528,8 @@ class _LaunchInfoState extends State<LaunchInfo> {
                         ],
                       )
                   ),
-                  SizedBox(
-                    width: 30,
+                  const SizedBox(
+                    width: 20,
                   ),
                   ElevatedButton(
                       onPressed: () { },
