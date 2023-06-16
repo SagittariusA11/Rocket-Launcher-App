@@ -305,13 +305,13 @@ class _LaunchInfoState extends State<LaunchInfo> {
                                     shape: const StadiumBorder(),
                                   ),
                                   child: SizedBox(
-                                    width: ScreenConfig.widthPercent*5,
+                                    width: ScreenConfig.widthPercent*3.75,
                                     height: ScreenConfig.heightPercent*3,
                                     child: Center(
                                       child: Text(
                                           translate('launchInfo_tab.art'),
                                           style: TextStyle(
-                                              fontSize: 18,
+                                              fontSize: 15,
                                               color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
                                           )
                                       ),
@@ -327,13 +327,35 @@ class _LaunchInfoState extends State<LaunchInfo> {
                                     shape: const StadiumBorder(),
                                   ),
                                   child: SizedBox(
-                                    width: ScreenConfig.widthPercent*7,
+                                    width: ScreenConfig.widthPercent*2.5,
                                     height: ScreenConfig.heightPercent*3,
                                     child: Center(
                                       child: Text(
                                           translate('launchInfo_tab.wiki'),
                                           style: TextStyle(
-                                            fontSize: 18,
+                                            fontSize: 16,
+                                            color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
+                                          )
+                                      ),
+                                    ),
+                                  )
+                              ),
+                              ElevatedButton(
+                                  onPressed: () { },
+                                  style: ElevatedButton.styleFrom(
+                                    elevation: 10,
+                                    shadowColor: Colors.grey,
+                                    primary: AppTheme().bg_color,
+                                    shape: const StadiumBorder(),
+                                  ),
+                                  child: SizedBox(
+                                    width: ScreenConfig.widthPercent*4.25,
+                                    height: ScreenConfig.heightPercent*3,
+                                    child: Center(
+                                      child: Text(
+                                          translate('launchInfo_tab.img'),
+                                          style: TextStyle(
+                                            fontSize: 16,
                                             color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
                                           )
                                       ),
@@ -353,9 +375,9 @@ class _LaunchInfoState extends State<LaunchInfo> {
                                     height: ScreenConfig.heightPercent*3,
                                     child: Center(
                                       child: Text(
-                                          translate('launchInfo_tab.img'),
+                                          translate('launchInfo_tab.tl'),
                                           style: TextStyle(
-                                            fontSize: 18,
+                                            fontSize: 16,
                                             color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
                                           )
                                       ),
@@ -373,11 +395,12 @@ class _LaunchInfoState extends State<LaunchInfo> {
                       child: Column(
                         children: [
                           Container(
+                            padding: const EdgeInsets.only(top: 5),
                             height: ScreenConfig.heightPercent*20,
                             width: ScreenConfig.widthPercent*44,
                             decoration: const BoxDecoration(
                               border: Border(
-                                bottom: BorderSide(width: 5.0, color: Colors.white),
+                                bottom: BorderSide(width: 3.0, color: Colors.white),
                               ),
                             ),
                             child: Column(
@@ -396,7 +419,7 @@ class _LaunchInfoState extends State<LaunchInfo> {
                                 Text(
                                   translate('launchInfo_tab.md_01'),
                                   style: const TextStyle(
-                                    fontSize: 22,
+                                    fontSize: 20,
                                     color: Colors.white,
                                   ),
                                 ),
