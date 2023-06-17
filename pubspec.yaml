@@ -50,6 +50,7 @@ dependencies:
   localization: ^2.1.0
   scroll_snap_list: ^0.5.1
   google_maps_flutter: ^2.3.0
+  font_awesome_flutter: ^10.4.0
 
 dev_dependencies:
   flutter_test:

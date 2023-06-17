@@ -166,6 +166,26 @@
     "mi": "More Info"
   },
 
+  "rocket_info": {
+    "rn": "Rocket Name",
+    "des": "Falcon 9 is a two-stage rocket designed and manufactured by SpaceX for the reliable and safe transport of satellites and the Dragon spacecraft into orbit.",
+    "ff": "First Flight",
+    "h": "Height",
+    "w": "Weight",
+    "d": "Diameter",
+    "ll": "Landing Legs",
+    "fs": "First Stage",
+    "ss": "Second Stage",
+    "r": "Reusable",
+    "e": "Engines",
+    "t": "Thrust",
+    "f": "Fuel",
+    "bt": "Burn Time",
+    "p_1": "Propellant 1",
+    "p_2": "Propellant 2",
+    "tw": "Thrust to Weight"
+  },
+
   "inventory": {
     "title": "Inventory",
     "rockets": "Rockets",

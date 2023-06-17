@@ -166,6 +166,26 @@
     "mi": "Más información"
   },
 
+  "rocket_info": {
+    "rn": "Nombre del cohete",
+    "des": "Falcon 9 es un cohete de dos etapas diseñado y fabricado por SpaceX para el transporte confiable y seguro de satélites y la nave espacial Dragon a la órbita.",
+    "ff": "Primer vuelo",
+    "h": "Altura",
+    "w": "Peso",
+    "d": "Diámetro",
+    "ll": "Piernas de aterrizaje",
+    "fs": "Primera etapa",
+    "ss": "Segunda etapa",
+    "r": "Reutilizable",
+    "e": "Motores",
+    "t": "Empuje",
+    "f": "Combustible",
+    "bt": "Tiempo de grabación",
+    "p_1": "Propulsor 1",
+    "p_2": "Propulsor 2",
+    "tw": "Empuje al peso"
+  },
+
   "inventory": {
     "title": "Inventario",
     "rockets": "Cohetes",

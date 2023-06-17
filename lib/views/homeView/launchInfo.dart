@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_translate/flutter_translate.dart';
+import 'package:rocket_launcher_app/views/rocketsInfo.dart';
 
 import '../../config/imagePaths.dart';
 import '../../config/screenConfig.dart';
@@ -195,7 +196,7 @@ class _LaunchInfoState extends State<LaunchInfo> {
                               onPressed: (){
                                 showDialog(
                                     context: context,
-                                    builder: (context) => Utils.rocketInfo()
+                                    builder: (context) => RocketsInfo.rocketInfo(context)
                                 );
                               },
                               style: ElevatedButton.styleFrom(
