@@ -197,5 +197,28 @@
     "all": "Todo",
     "starlink": "Starlink",
     "geo": "Geoestacionario"
+  },
+
+  "satellite_info": {
+    "sn": "Nombre del satélite",
+    "ls": "Sitio de lanzamiento",
+    "rn": "Nombre del cohete",
+    "d": "Fecha",
+    "m": "Masa",
+    "o": "Orbita",
+    "n": "Nacionalidad",
+    "c": "Cliente"
+  },
+
+  "starlink_info": {
+    "sn": "Nombre de enlace estelar",
+    "ls": "Sitio de lanzamiento",
+    "rn": "Nombre del cohete",
+    "d": "Fecha",
+    "n": "Nacionalidad",
+    "long": "Longitud",
+    "lat": "Latitud",
+    "h": "Altura",
+    "v": "Velocidad"
   }
 }

@@ -204,5 +204,28 @@
     "s": "Stages",
     "sn": "Satellite\nName",
     "type": "Type"
+  },
+
+  "satellite_info": {
+    "sn": "Satellite Name",
+    "ls": "Launch Site",
+    "rn": "Rocket Name",
+    "d": "Date",
+    "m": "Mass",
+    "o": "Orbit",
+    "n": "Nationality",
+    "c": "Customer"
+  },
+
+  "starlink_info": {
+    "sn": "Starlink Name",
+    "ls": "Launch Site",
+    "rn": "Rocket Name",
+    "d": "Date",
+    "n": "Nationality",
+    "long": "Longitude",
+    "lat": "Latitude",
+    "h": "Height",
+    "v": "Velocity"
   }
 }

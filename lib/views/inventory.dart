@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_translate/flutter_translate.dart';
+import 'package:rocket_launcher_app/views/moreInfoView/rocketsInfo.dart';
+import 'package:rocket_launcher_app/views/moreInfoView/payloadInfo.dart';
 import 'package:scroll_snap_list/scroll_snap_list.dart';
 
 import '../config/screenConfig.dart';
@@ -626,7 +628,7 @@ class _InventoryViewState extends State<InventoryView> with SingleTickerProvider
     );
   }
 
-  Widget _buildRocketsItemList(BuildContext context, int index){
+  static Widget RocketsItemList(){
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
@@ -715,14 +717,24 @@ class _InventoryViewState extends State<InventoryView> with SingleTickerProvider
   Widget _buildRocketsCard() {
     return ScrollSnapList(
       listController: rocketScrollController,
-      itemBuilder: _buildRocketsItemList,
+      itemBuilder: (context, index) {
+        return GestureDetector(
+          onTap: (){
+            showDialog(
+                context: context,
+                builder: (context) => RocketsInfo.rocketInfo(context)
+            );
+          },
+          child: RocketsItemList(),
+        );
+      },
       itemSize: ScreenConfig.heightPercent*36.925,
       dynamicItemSize: true,
       dynamicItemOpacity: 0.75,
       itemCount: length,
     );
   }
-  Widget _buildSatellitesItemList(BuildContext context, int index){
+  static Widget SatellitesItemList(){
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
@@ -808,7 +820,17 @@ class _InventoryViewState extends State<InventoryView> with SingleTickerProvider
   Widget _buildSatellitesCard() {
     return ScrollSnapList(
       listController: satelliteScrollController,
-      itemBuilder: _buildSatellitesItemList,
+      itemBuilder: (context, index) {
+        return GestureDetector(
+          onTap: (){
+            showDialog(
+                context: context,
+                builder: (context) => PayloadInfo.starlinkInfo(context)
+            );
+          },
+          child: SatellitesItemList(),
+        );
+      },
       itemSize: ScreenConfig.heightPercent*29.925,
       dynamicItemSize: true,
       dynamicItemOpacity: 0.75,

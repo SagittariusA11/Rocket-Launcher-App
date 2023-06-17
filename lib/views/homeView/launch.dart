@@ -262,7 +262,7 @@ class _LaunchViewState extends State<LaunchView> with SingleTickerProviderStateM
                         ],
                       )
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 30,
                   ),
                   ElevatedButton(

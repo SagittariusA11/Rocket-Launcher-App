@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import '../config/appTheme.dart';
-import '../config/imagePaths.dart';
-import '../config/screenConfig.dart';
-import '../utils/utils.dart';
+import '../../config/appTheme.dart';
+import '../../config/imagePaths.dart';
+import '../../config/screenConfig.dart';
+import '../../utils/utils.dart';
 
 class RocketsInfo{
   static Widget rocketAPIInfoTable(

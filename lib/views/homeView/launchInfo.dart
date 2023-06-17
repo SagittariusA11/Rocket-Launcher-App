@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_translate/flutter_translate.dart';
-import 'package:rocket_launcher_app/views/rocketsInfo.dart';
+import 'package:rocket_launcher_app/views/moreInfoView/rocketsInfo.dart';
 
 import '../../config/imagePaths.dart';
 import '../../config/screenConfig.dart';
