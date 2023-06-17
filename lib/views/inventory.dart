@@ -35,8 +35,8 @@ class _InventoryViewState extends State<InventoryView> with SingleTickerProvider
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      rocketScrollController.jumpTo(ScreenConfig.heightPercent*35);
-      satelliteScrollController.jumpTo(ScreenConfig.heightPercent*56);
+      rocketScrollController.jumpTo(ScreenConfig.heightPercent*37);
+      satelliteScrollController.jumpTo(ScreenConfig.heightPercent*58);
     });
   }
 
@@ -64,22 +64,67 @@ class _InventoryViewState extends State<InventoryView> with SingleTickerProvider
               Padding(
                 padding: const EdgeInsets.only(top: 10, left: 20),
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Utils.images(
-                        ScreenConfig.heightPercent*10,
-                        ScreenConfig.heightPercent*10,
-                        ImagePaths.rla_icon
+                    Row(
+                      children: [
+                        Utils.images(
+                            ScreenConfig.heightPercent*10,
+                            ScreenConfig.heightPercent*10,
+                            ImagePaths.rla_icon
+                        ),
+                        SizedBox(
+                          width: ScreenConfig.widthPercent*2,
+                        ),
+                        Text(
+                          translate('inventory.title'),
+                          style: TextStyle(
+                              fontFamily: 'GoogleSans',
+                              fontSize: Utils().fontSizeMultiplier(30),
+                              color: AppTheme().text,
+                              fontWeight: FontWeight.bold
+                          ),
+                        ),
+                      ],
                     ),
-                    SizedBox(
-                      width: ScreenConfig.widthPercent*2,
-                    ),
-                    Text(
-                      translate('inventory.title'),
-                      style: TextStyle(
-                          fontFamily: 'GoogleSans',
-                          fontSize: Utils().fontSizeMultiplier(30),
-                          color: AppTheme().text,
-                          fontWeight: FontWeight.bold
+                    Container(
+                      margin: const EdgeInsets.symmetric(horizontal: 15),
+                      decoration: const BoxDecoration(
+                        border: Border(bottom: BorderSide(color: Colors.white, width: 1)),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          SizedBox(
+                            width: ScreenConfig.widthPercent*12,
+                            child: TextFormField(
+                              controller: _searchController,
+                              decoration: InputDecoration(
+                                  filled: true,
+                                  fillColor: Colors.transparent,
+                                  hintText: translate('inventory.search'),
+                                  hintStyle: TextStyle(
+                                      color: Colors.white
+                                  ),
+                                  border: InputBorder.none
+                              ),
+                              onChanged: (value) {
+                                setState(() {
+                                  _isSearching = value.isNotEmpty;
+                                });
+                              },
+                            ),
+                          ),
+                          IconButton(
+                            icon: Icon(
+                              Icons.search,
+                              color: Colors.white,
+                              size: 30,
+                            ),
+                            onPressed: _isSearching ? () { } : null,
+                          ),
+                        ],
                       ),
                     ),
                   ],
@@ -100,46 +145,6 @@ class _InventoryViewState extends State<InventoryView> with SingleTickerProvider
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        Container(
-                          margin: const EdgeInsets.symmetric(horizontal: 25),
-                          decoration: const BoxDecoration(
-                            border: Border(bottom: BorderSide(color: Colors.white, width: 1)),
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              SizedBox(
-                                width: ScreenConfig.widthPercent*12,
-                                child: TextFormField(
-                                  controller: _searchController,
-                                  decoration: InputDecoration(
-                                    filled: true,
-                                    fillColor: Colors.transparent,
-                                    hintText: translate('inventory.search'),
-                                    hintStyle: TextStyle(
-                                        color: Colors.white
-                                    ),
-                                    border: InputBorder.none
-                                  ),
-                                  onChanged: (value) {
-                                    setState(() {
-                                      _isSearching = value.isNotEmpty;
-                                    });
-                                  },
-                                ),
-                              ),
-                              IconButton(
-                                icon: Icon(
-                                    Icons.search,
-                                  color: Colors.white,
-                                  size: 30,
-                                ),
-                                onPressed: _isSearching ? () { } : null,
-                              ),
-                            ],
-                          ),
-                        ),
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 25),
                           child: Column(
@@ -524,7 +529,7 @@ class _InventoryViewState extends State<InventoryView> with SingleTickerProvider
                         child: Stack(
                           children: [
                             SizedBox(
-                                height: ScreenConfig.heightPercent*35,
+                                height: ScreenConfig.heightPercent*37,
                                 width: ScreenConfig.widthPercent*75,
                                 child: _buildRocketsCard()
                             ),
@@ -548,7 +553,7 @@ class _InventoryViewState extends State<InventoryView> with SingleTickerProvider
                         child: Stack(
                           children: [
                             SizedBox(
-                                height: ScreenConfig.heightPercent*28,
+                                height: ScreenConfig.heightPercent*30,
                                 width: ScreenConfig.widthPercent*75,
                                 child: _buildSatellitesCard()
                             ),
@@ -567,50 +572,50 @@ class _InventoryViewState extends State<InventoryView> with SingleTickerProvider
                       const SizedBox(
                         height: 20,
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          ElevatedButton(
-                              onPressed: () { },
-                              style: ElevatedButton.styleFrom(
-                                elevation: 10,
-                                shadowColor: Colors.grey,
-                                primary: AppTheme().bg_color,
-                                padding: EdgeInsets.all(10),
-                                shape: StadiumBorder(),
-                              ),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  SizedBox(
-                                    width: ScreenConfig.widthPercent*2,
-                                  ),
-                                  SizedBox(
-                                    width: ScreenConfig.widthPercent*27,
-                                    height: ScreenConfig.heightPercent*5,
-                                    child: Center(
-                                      child: Text(
-                                          translate('launch_tab.vlg'),
-                                          style: TextStyle(
-                                            fontSize: Utils().fontSizeMultiplier(23),
-                                            color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
-                                          )),
-                                    ),
-                                  ),
-                                  const Icon(
-                                    Icons.location_pin,
-                                    color: Colors.black,
-                                    size: 35,
-                                  ),
-                                  SizedBox(
-                                    width: ScreenConfig.widthPercent*2,
-                                  ),
-                                ],
-                              )
-                          ),
-                          SizedBox(width: ScreenConfig.widthPercent*5,)
-                        ],
-                      )
+                      // Row(
+                      //   mainAxisAlignment: MainAxisAlignment.center,
+                      //   children: [
+                      //     ElevatedButton(
+                      //         onPressed: () { },
+                      //         style: ElevatedButton.styleFrom(
+                      //           elevation: 10,
+                      //           shadowColor: Colors.grey,
+                      //           primary: AppTheme().bg_color,
+                      //           padding: EdgeInsets.all(10),
+                      //           shape: StadiumBorder(),
+                      //         ),
+                      //         child: Row(
+                      //           mainAxisAlignment: MainAxisAlignment.center,
+                      //           children: [
+                      //             SizedBox(
+                      //               width: ScreenConfig.widthPercent*2,
+                      //             ),
+                      //             SizedBox(
+                      //               width: ScreenConfig.widthPercent*27,
+                      //               height: ScreenConfig.heightPercent*5,
+                      //               child: Center(
+                      //                 child: Text(
+                      //                     translate('launch_tab.vlg'),
+                      //                     style: TextStyle(
+                      //                       fontSize: Utils().fontSizeMultiplier(23),
+                      //                       color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
+                      //                     )),
+                      //               ),
+                      //             ),
+                      //             const Icon(
+                      //               Icons.location_pin,
+                      //               color: Colors.black,
+                      //               size: 35,
+                      //             ),
+                      //             SizedBox(
+                      //               width: ScreenConfig.widthPercent*2,
+                      //             ),
+                      //           ],
+                      //         )
+                      //     ),
+                      //     SizedBox(width: ScreenConfig.widthPercent*5,)
+                      //   ],
+                      // )
                     ],
                   ),
                 ],
@@ -626,8 +631,8 @@ class _InventoryViewState extends State<InventoryView> with SingleTickerProvider
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Container(
-          height: ScreenConfig.heightPercent*35,
-          width: ScreenConfig.heightPercent*35*0.385,
+          height: ScreenConfig.heightPercent*40,
+          width: ScreenConfig.heightPercent*37*0.385,
           decoration: const BoxDecoration(
               image: DecorationImage(
                   image: AssetImage(ImagePaths.rocket),
@@ -711,7 +716,7 @@ class _InventoryViewState extends State<InventoryView> with SingleTickerProvider
     return ScrollSnapList(
       listController: rocketScrollController,
       itemBuilder: _buildRocketsItemList,
-      itemSize: ScreenConfig.heightPercent*35,
+      itemSize: ScreenConfig.heightPercent*36.925,
       dynamicItemSize: true,
       dynamicItemOpacity: 0.75,
       itemCount: length,
@@ -722,7 +727,7 @@ class _InventoryViewState extends State<InventoryView> with SingleTickerProvider
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Container(
-          height: ScreenConfig.heightPercent*28,
+          height: ScreenConfig.heightPercent*33,
           width: ScreenConfig.heightPercent*28*0.385,
           decoration: const BoxDecoration(
               image: DecorationImage(
@@ -804,7 +809,7 @@ class _InventoryViewState extends State<InventoryView> with SingleTickerProvider
     return ScrollSnapList(
       listController: satelliteScrollController,
       itemBuilder: _buildSatellitesItemList,
-      itemSize: ScreenConfig.heightPercent*28,
+      itemSize: ScreenConfig.heightPercent*29.925,
       dynamicItemSize: true,
       dynamicItemOpacity: 0.75,
       itemCount: length,

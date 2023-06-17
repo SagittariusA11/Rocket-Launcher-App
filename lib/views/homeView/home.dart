@@ -69,9 +69,12 @@ class _homeViewState extends State<homeView> with SingleTickerProviderStateMixin
                 selectedAppTheme.isRedMode? Color.fromARGB(255, 128, 47, 47).withOpacity(opacityAnimation.value):
                 selectedAppTheme.isGreenMode? Color.fromARGB(255, 52, 103, 39).withOpacity(opacityAnimation.value):
                 Color.fromARGB(255, 23, 72, 173).withOpacity(opacityAnimation.value),
-                leading: GestureDetector(
+                leading: homeViewController.selectedView == 0?Container():GestureDetector(
                   onTap: () {
                     homeViewController.changeSelectedView(0);
+                    setState(() {
+                      homeViewController.selectedView;
+                    });
                     },
                   child: Padding(
                     padding: const EdgeInsets.only(left: 20),

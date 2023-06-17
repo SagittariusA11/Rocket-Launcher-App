@@ -1,0 +1,46 @@
+{
+  "dragon": {
+    "capsule": "5e9e2c5cf359185d753b266f",
+    "mass_returned_kg": 1814.4,
+    "mass_returned_lbs": 4000,
+    "flight_time_sec": 2508480,
+    "manifest": "https://www.nasa.gov/sites/default/files/atoms/files/spacex_crs-20_mission_overview.pdf",
+    "water_landing": true,
+    "land_landing": false
+  },
+  "name": "CRS-20",
+  "type": "Dragon 1.1",
+  "reused": true,
+  "launch": "5eb87d42ffd86e000604b384",
+  "customers": [
+    "NASA (CRS)"
+  ],
+  "norad_ids": [
+    45341
+  ],
+  "nationalities": [
+    "United States"
+  ],
+  "manufacturers": [
+    "SpaceX"
+  ],
+  "mass_kg": 1977,
+  "mass_lbs": 4358.539,
+  "orbit": "ISS",
+  "reference_system": "geocentric",
+  "regime": "low-earth",
+  "longitude": null,
+  "semi_major_axis_km": 6793.753,
+  "eccentricity": 0.0010224,
+  "periapsis_km": 408.672,
+  "apoapsis_km": 422.564,
+  "inclination_deg": 51.6432,
+  "period_min": 92.88,
+  "lifespan_years": null,
+  "epoch": "2020-04-07T15:36:40.000Z",
+  "mean_motion": 15.50379704,
+  "raan": 337.5161,
+  "arg_of_pericenter": 31.3734,
+  "mean_anomaly": 354.3442,
+  "id": "5eb0e4d0b6c3bb0006eeb253"
+}

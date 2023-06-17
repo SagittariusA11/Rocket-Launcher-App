@@ -192,7 +192,12 @@ class _LaunchInfoState extends State<LaunchInfo> {
                             ),
                           ),
                           ElevatedButton(
-                              onPressed: () { },
+                              onPressed: (){
+                                showDialog(
+                                    context: context,
+                                    builder: (context) => Utils.rocketInfo()
+                                );
+                              },
                               style: ElevatedButton.styleFrom(
                                 elevation: 10,
                                 shadowColor: Colors.grey,

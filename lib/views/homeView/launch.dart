@@ -27,8 +27,8 @@ class _LaunchViewState extends State<LaunchView> with SingleTickerProviderStateM
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      upcomingScrollController.jumpTo(ScreenConfig.heightPercent*60);
-      pastScrollController.jumpTo(ScreenConfig.heightPercent*50);
+      upcomingScrollController.jumpTo(ScreenConfig.heightPercent*64);
+      pastScrollController.jumpTo(ScreenConfig.heightPercent*55);
     });
   }
 
@@ -183,7 +183,7 @@ class _LaunchViewState extends State<LaunchView> with SingleTickerProviderStateM
                       ),
                     ),
                     SizedBox(
-                      height: ScreenConfig.heightPercent*30,
+                      height: ScreenConfig.heightPercent*35,
                       width: ScreenConfig.widthPercent*85,
                       child: _buildUpcomingCard()
                     ),
@@ -208,7 +208,7 @@ class _LaunchViewState extends State<LaunchView> with SingleTickerProviderStateM
                       ),
                     ),
                     SizedBox(
-                        height: ScreenConfig.heightPercent*25,
+                        height: ScreenConfig.heightPercent*30,
                         width: ScreenConfig.widthPercent*85,
                         child: _buildPastCard()
                     ),
@@ -218,79 +218,79 @@ class _LaunchViewState extends State<LaunchView> with SingleTickerProviderStateM
               const SizedBox(
                 height: 20,
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SizedBox(
-                    width: ScreenConfig.widthPercent*5,
-                  ),
-                  ElevatedButton(
-                      onPressed: () { },
-                      style: ElevatedButton.styleFrom(
-                        elevation: 10,
-                        shadowColor: Colors.grey,
-                        primary: AppTheme().bg_color,
-                        padding: EdgeInsets.all(10),
-                        shape: StadiumBorder(),
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          SizedBox(
-                            width: ScreenConfig.widthPercent*2,
-                          ),
-                          SizedBox(
-                            width: ScreenConfig.widthPercent*27,
-                            height: ScreenConfig.heightPercent*5,
-                            child: Center(
-                              child: Text(
-                                  translate('launch_tab.vlg'),
-                                  style: TextStyle(
-                                      fontSize: Utils().fontSizeMultiplier(23),
-                                      color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
-                                  )),
-                            ),
-                          ),
-                          const Icon(
-                            Icons.location_pin,
-                            color: Colors.black,
-                            size: 35,
-                          ),
-                          SizedBox(
-                            width: ScreenConfig.widthPercent*2,
-                          ),
-                        ],
-                      )
-                  ),
-                  SizedBox(
-                    width: 30,
-                  ),
-                  ElevatedButton(
-                      onPressed: () { },
-                      style: ElevatedButton.styleFrom(
-                        elevation: 10,
-                        shadowColor: Colors.grey,
-                        primary: AppTheme().bg_color,
-                        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                        shape: const StadiumBorder(),
-                      ),
-                      child: SizedBox(
-                        width: ScreenConfig.widthPercent*6,
-                        height: ScreenConfig.heightPercent*5,
-                        child: Center(
-                          child: Text(
-                              translate('launch_tab.dlg'),
-                            style: TextStyle(
-                                fontSize: Utils().fontSizeMultiplier(20),
-                                color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
-                                fontWeight: FontWeight.bold
-                            )
-                          ),
-                        ),
-                      )
-                  ),
-                ],
-              )
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.center,
+              //   children: [
+              //     SizedBox(
+              //       width: ScreenConfig.widthPercent*5,
+              //     ),
+              //     ElevatedButton(
+              //         onPressed: () { },
+              //         style: ElevatedButton.styleFrom(
+              //           elevation: 10,
+              //           shadowColor: Colors.grey,
+              //           primary: AppTheme().bg_color,
+              //           padding: EdgeInsets.all(10),
+              //           shape: StadiumBorder(),
+              //         ),
+              //         child: Row(
+              //           mainAxisAlignment: MainAxisAlignment.center,
+              //           children: [
+              //             SizedBox(
+              //               width: ScreenConfig.widthPercent*2,
+              //             ),
+              //             SizedBox(
+              //               width: ScreenConfig.widthPercent*27,
+              //               height: ScreenConfig.heightPercent*5,
+              //               child: Center(
+              //                 child: Text(
+              //                     translate('launch_tab.vlg'),
+              //                     style: TextStyle(
+              //                         fontSize: Utils().fontSizeMultiplier(23),
+              //                         color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
+              //                     )),
+              //               ),
+              //             ),
+              //             const Icon(
+              //               Icons.location_pin,
+              //               color: Colors.black,
+              //               size: 35,
+              //             ),
+              //             SizedBox(
+              //               width: ScreenConfig.widthPercent*2,
+              //             ),
+              //           ],
+              //         )
+              //     ),
+              //     SizedBox(
+              //       width: 30,
+              //     ),
+              //     ElevatedButton(
+              //         onPressed: () { },
+              //         style: ElevatedButton.styleFrom(
+              //           elevation: 10,
+              //           shadowColor: Colors.grey,
+              //           primary: AppTheme().bg_color,
+              //           padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+              //           shape: const StadiumBorder(),
+              //         ),
+              //         child: SizedBox(
+              //           width: ScreenConfig.widthPercent*6,
+              //           height: ScreenConfig.heightPercent*5,
+              //           child: Center(
+              //             child: Text(
+              //                 translate('launch_tab.dlg'),
+              //               style: TextStyle(
+              //                   fontSize: Utils().fontSizeMultiplier(20),
+              //                   color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
+              //                   fontWeight: FontWeight.bold
+              //               )
+              //             ),
+              //           ),
+              //         )
+              //     ),
+              //   ],
+              // )
             ],
           ),
         )
@@ -301,8 +301,8 @@ class _LaunchViewState extends State<LaunchView> with SingleTickerProviderStateM
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Container(
-          height: ScreenConfig.heightPercent*30,
-          width: ScreenConfig.heightPercent*30*0.385,
+          height: ScreenConfig.heightPercent*35,
+          width: ScreenConfig.heightPercent*35*0.385,
           decoration: const BoxDecoration(
             image: DecorationImage(
               image: AssetImage(ImagePaths.rocket),
@@ -376,7 +376,7 @@ class _LaunchViewState extends State<LaunchView> with SingleTickerProviderStateM
     return ScrollSnapList(
       listController: upcomingScrollController,
       itemBuilder: _buildUpcomingItemList,
-      itemSize: ScreenConfig.heightPercent*30,
+      itemSize: ScreenConfig.heightPercent*31.925,
       dynamicItemSize: true,
       dynamicItemOpacity: 0.75,
       itemCount: length,
@@ -387,8 +387,8 @@ class _LaunchViewState extends State<LaunchView> with SingleTickerProviderStateM
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Container(
-          height: ScreenConfig.heightPercent*25,
-          width: ScreenConfig.heightPercent*25*0.385,
+          height: ScreenConfig.heightPercent*30,
+          width: ScreenConfig.heightPercent*30*0.385,
           decoration: const BoxDecoration(
               image: DecorationImage(
                   image: AssetImage(ImagePaths.rocket),
@@ -462,7 +462,7 @@ class _LaunchViewState extends State<LaunchView> with SingleTickerProviderStateM
     return ScrollSnapList(
       listController: pastScrollController,
       itemBuilder: _buildPastItemList,
-      itemSize: ScreenConfig.heightPercent*25,
+      itemSize: ScreenConfig.heightPercent*26.925,
       dynamicItemSize: true,
       dynamicItemOpacity: 0.75,
       itemCount: length,

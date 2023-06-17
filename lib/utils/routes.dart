@@ -13,7 +13,6 @@ import '../views/inventory.dart';
 import '../views/homeView/launchMap.dart';
 import '../views/lgActions.dart';
 import '../views/onBoarding.dart';
-import '../views/rocketInfo.dart';
 import '../views/settings.dart';
 import '../views/splash.dart';
 import '../views/ytLive.dart';
@@ -71,11 +70,6 @@ class Routes {
       case RouteNames.onBoarding:
         return MaterialPageRoute(builder:
             (BuildContext context)=>OnBoarding()
-        );
-
-      case RouteNames.rocketInfo:
-        return MaterialPageRoute(builder:
-            (BuildContext context)=>RocketInfo()
         );
 
       case RouteNames.settings:
