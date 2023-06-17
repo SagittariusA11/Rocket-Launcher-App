@@ -11,6 +11,5 @@ class RouteNames{
   static const onBoarding = "/onBoarding";
   static const rocketInfo = "/rocketInfo";
   static const settings = "/settings";
-  static const ytLive = "/ytLive";
   static const homeView = "/homeView";
 }

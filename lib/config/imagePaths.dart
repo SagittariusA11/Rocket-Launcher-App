@@ -93,4 +93,7 @@ class ImagePaths{
 
   //satellites
   static const satellites = "assets/satellites/satellite.png";
+
+  //YT_Screenshot
+  static const yt = "assets/images/YT_Screenshot.png";
 }

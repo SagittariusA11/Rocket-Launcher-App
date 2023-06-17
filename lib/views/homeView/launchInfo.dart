@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:rocket_launcher_app/views/moreInfoView/rocketsInfo.dart';
+import 'package:rocket_launcher_app/views/ytLive.dart';
 
 import '../../config/imagePaths.dart';
 import '../../config/screenConfig.dart';
@@ -479,7 +480,12 @@ class _LaunchInfoState extends State<LaunchInfo> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   ElevatedButton(
-                      onPressed: () { },
+                      onPressed: () {
+                        showDialog(
+                            context: context,
+                            builder: (context) => YTLive.ytLive(context)
+                        );
+                      },
                       style: ElevatedButton.styleFrom(
                         elevation: 10,
                         shadowColor: Colors.grey,

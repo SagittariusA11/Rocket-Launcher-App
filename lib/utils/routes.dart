@@ -77,10 +77,6 @@ class Routes {
             (BuildContext context)=>SettingsView()
         );
 
-      case RouteNames.ytLive:
-        return MaterialPageRoute(builder:
-            (BuildContext context)=>YTLive()
-        );
 
     //Invalid Route Exception
       default:

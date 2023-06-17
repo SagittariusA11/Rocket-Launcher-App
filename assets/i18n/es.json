@@ -220,5 +220,22 @@
     "lat": "Latitud",
     "h": "Altura",
     "v": "Velocidad"
+  },
+
+  "yt_live": {
+    "title": "Visualizador de lanzamiento de YouTube Live",
+    "mn": "Nombre de la misión",
+    "date": "Fecha",
+    "rn": "Nombre del cohete",
+    "ls": "Sitio de lanzamiento",
+    "time": "Tiempo",
+    "link": "Código incrustado",
+    "code": "Pegar código aquí",
+    "inst": "Instrucciones",
+    "inst_01": "1.    Vaya a YouTube (https://www.youtube.com/) y busque <mission_name> lanzar video en vivo.",
+    "inst_02": "2.    Abra el video y luego haga clic derecho en el video. En la lista de opciones, toque 'copiar código de inserción' como se muestra. La opción está rodeada en azul en la imagen adjunta.",
+    "inst_03": "3.    Ahora pegue el enlace en el campo de entrada en esta página a la izquierda.",
+    "inst_04": "4.    Y luego haga clic en el botón Visualizar en Liquid Galaxy para ver el video en Liquid galaxy Rig.",
+    "inst_05": "5.    Si aún tiene dudas, haga clic en este enlace para ver la explicación en video."
   }
 }
