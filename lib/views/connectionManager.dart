@@ -85,7 +85,6 @@ class _ConnectionManagerViewState extends State<ConnectionManagerView> with Sing
       setState(() {
         connectionStatus = true;
       });
-      await LGConnection().openDemoLogos();
       await client.disconnect();
     } catch (e) {
       ErrorView();
@@ -245,7 +244,8 @@ class _ConnectionManagerViewState extends State<ConnectionManagerView> with Sing
                             border: InputBorder.none,
                             hintText: 'lg',
                             hintStyle: TextStyle(
-                              color: selectedAppTheme.isLightMode?Colors.black:Colors.white
+                              color: selectedAppTheme.isLightMode?
+                              Color.fromARGB(255, 74, 74, 74):Color.fromARGB(255, 227, 227, 227)
                             ),
                             labelText: translate('connection.mmu'),
                             labelStyle: TextStyle(
@@ -280,7 +280,8 @@ class _ConnectionManagerViewState extends State<ConnectionManagerView> with Sing
                             border: InputBorder.none,
                             hintText: '192.168.56.103',
                             hintStyle: TextStyle(
-                                color: selectedAppTheme.isLightMode?Colors.black:Colors.white
+                                color: selectedAppTheme.isLightMode?
+                                Color.fromARGB(255, 74, 74, 74):Color.fromARGB(255, 227, 227, 227)
                             ),
                             labelText: translate('connection.mmip'),
                             labelStyle: TextStyle(
@@ -315,7 +316,8 @@ class _ConnectionManagerViewState extends State<ConnectionManagerView> with Sing
                             border: InputBorder.none,
                             hintText: '22',
                             hintStyle: TextStyle(
-                                color: selectedAppTheme.isLightMode?Colors.black:Colors.white
+                                color: selectedAppTheme.isLightMode?
+                                Color.fromARGB(255, 74, 74, 74):Color.fromARGB(255, 227, 227, 227)
                             ),
                             labelText: translate('connection.mmpn'),
                             labelStyle: TextStyle(
@@ -348,7 +350,8 @@ class _ConnectionManagerViewState extends State<ConnectionManagerView> with Sing
                           border: InputBorder.none,
                           hintText: '****',
                           hintStyle: TextStyle(
-                              color: selectedAppTheme.isLightMode?Colors.black:Colors.white
+                              color: selectedAppTheme.isLightMode?
+                              Color.fromARGB(255, 74, 74, 74):Color.fromARGB(255, 227, 227, 227)
                           ),
                           labelText: translate('connection.mmp'),
                           labelStyle: TextStyle(
@@ -398,7 +401,8 @@ class _ConnectionManagerViewState extends State<ConnectionManagerView> with Sing
                             border: InputBorder.none,
                             hintText: '3',
                             hintStyle: TextStyle(
-                                color: selectedAppTheme.isLightMode?Colors.black:Colors.white
+                                color: selectedAppTheme.isLightMode?
+                                Color.fromARGB(255, 74, 74, 74):Color.fromARGB(255, 227, 227, 227)
                             ),
                             labelText: translate('connection.number'),
                             labelStyle: TextStyle(
@@ -523,8 +527,8 @@ class _ConnectionManagerViewState extends State<ConnectionManagerView> with Sing
                       padding: EdgeInsets.only(left: 10),
                       child: Image.asset(
                         isSuccess
-                            ? "assets/happy.png"
-                            : "assets/sad.png",
+                            ? "assets/images/happy.png"
+                            : "assets/images/sad.png",
                         width: 250,
                         height: 250,
                       )),
@@ -621,8 +625,40 @@ class LGConnection {
     );
     int rigs = 4;
     rigs = (int.parse(credencials['numberofrigs']) / 2).floor() + 2;
+    String openLogoKML = '''
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
+<Document>
+	<name>VolTrac</name>
+	<open>1</open>
+	<description>The logo it located in the bottom left hand corner</description>
+	<Folder>
+		<name>tags</name>
+		<Style>
+			<ListStyle>
+				<listItemType>checkHideChildren</listItemType>
+				<bgColor>00ffffff</bgColor>
+				<maxSnippetLines>2</maxSnippetLines>
+			</ListStyle>
+		</Style>
+		<ScreenOverlay id="abc">
+			<name>VolTrac</name>
+			<Icon>
+				<href>https://raw.githubusercontent.com/SagittariusA11/kml-images_RLA_LiquidGalaxy_GSoC-23/main/all_logos.png</href>
+			</Icon>
+			<overlayXY x="0" y="1" xunits="fraction" yunits="fraction"/>
+			<screenXY x="0" y="0.98" xunits="fraction" yunits="fraction"/>
+			<rotationXY x="0" y="0" xunits="fraction" yunits="fraction"/>
+			<size x="0" y="0" xunits="pixels" yunits="fraction"/>
+		</ScreenOverlay>
+	</Folder>
+</Document>
+</kml>
+  ''';
     try {
       await client.connect();
+      await client
+          .execute("echo '$openLogoKML' > /var/www/html/kml/slave_$rigs.kml");
     } catch (e) {
       return Future.error(e);
     }
