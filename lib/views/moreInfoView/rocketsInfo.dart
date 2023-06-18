@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:rocket_launcher_app/utils/routes.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../config/appTheme.dart';
 import '../../config/imagePaths.dart';
@@ -12,6 +13,7 @@ import '../../utils/routeNames.dart';
 import '../../utils/utils.dart';
 
 class RocketsInfo{
+
   static Widget rocketAPIInfoTable(
       String text,
       double fontSize,
@@ -150,7 +152,10 @@ class RocketsInfo{
                                           width: 10,
                                         ),
                                         IconButton(
-                                            onPressed: () { },
+                                            onPressed: () {
+                                              launchUrl(Uri.parse('https://en.wikipedia.org/wiki/Falcon_9'));
+                                              // print("Hello");
+                                            },
                                             icon: const FaIcon(
                                               FontAwesomeIcons.globe,
                                               color: Colors.white,
@@ -427,7 +432,7 @@ class _ImageGridState extends State<ImageGrid> {
               fit: BoxFit.cover,
             ),
           ),
-          child: Image.network("https://farm1.staticflickr.com/929/28787338307_3453a11a77_b.jpg", fit: BoxFit.contain)
+          // child: Image.network("https://farm1.staticflickr.com/929/28787338307_3453a11a77_b.jpg", fit: BoxFit.contain)
         );
       },
     );

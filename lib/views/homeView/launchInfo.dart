@@ -1,7 +1,10 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:rocket_launcher_app/views/moreInfoView/rocketsInfo.dart';
 import 'package:rocket_launcher_app/views/ytLive.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:scroll_snap_list/scroll_snap_list.dart';
 
 import '../../config/imagePaths.dart';
 import '../../config/screenConfig.dart';
@@ -19,9 +22,52 @@ class _LaunchInfoState extends State<LaunchInfo> {
 
   TextEditingController _searchController = TextEditingController();
   bool _isSearching = false;
+  DateTime? selectedDate;
+  DateTimeRange? selectedDateRange;
+  int length = 10;
+
+  Future<void> _selectDate() async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2021),
+      lastDate: DateTime(2025),
+    );
+
+    if (picked != null) {
+      setState(() {
+        selectedDate = picked;
+      });
+    }
+  }
+
+  Future<void> _selectDateRange() async {
+    final DateTimeRange? picked = await showDateRangePicker(
+      context: context,
+      firstDate: DateTime(2021),
+      lastDate: DateTime(2025),
+    );
+
+    if (picked != null) {
+      setState(() {
+        selectedDateRange = picked;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
+
+    final List<Widget> RocketInfoCardList = [
+      RocketInfoItemList(),
+      RocketInfoItemList(),
+      RocketInfoItemList(),
+      RocketInfoItemList(),
+      RocketInfoItemList(),
+      RocketInfoItemList(),
+      RocketInfoItemList(),
+    ];
+
     return Scaffold(
         body: Container(
           width: ScreenConfig.width,
@@ -105,7 +151,7 @@ class _LaunchInfoState extends State<LaunchInfo> {
                                         filled: true,
                                         fillColor: Colors.transparent,
                                         hintText: translate('inventory.search'),
-                                        hintStyle: TextStyle(
+                                        hintStyle: const TextStyle(
                                             color: Colors.white
                                         ),
                                         border: InputBorder.none
@@ -118,30 +164,38 @@ class _LaunchInfoState extends State<LaunchInfo> {
                                   ),
                                 ),
                                 IconButton(
-                                  icon: Icon(
-                                    Icons.search,
-                                    color: Colors.white,
-                                    size: 30,
-                                  ),
-                                  onPressed: _isSearching ? () { } : null,
+                                    icon: const Icon(
+                                      Icons.search,
+                                      color: Colors.white,
+                                      size: 30,
+                                    ),
+                                    onPressed: () {
+                                      print("Search");
+                                    }
                                 ),
                               ],
                             ),
                           ),
-                          GestureDetector(
-                            onTap: () { },
-                            child: const Icon(
-                              Icons.filter_list,
+                          IconButton(
+                            onPressed: () { print("Filter"); },
+                            icon: const FaIcon(
+                              FontAwesomeIcons.filter,
                               color: Colors.white,
-                              size: 40,
+                              size: 30,
                             ),
                           ),
-                          const SizedBox(
-                            width: 20,
-                          ),
-                          GestureDetector(
-                            onTap: () { },
-                            child: const Icon(
+                          // const SizedBox(
+                          //   width: 10,
+                          // ),
+                          IconButton(
+                            onPressed: () {
+                              showDialog(
+                                  context: context,
+                                  builder: (context) => dateRangePickerButton(context)
+                              );
+                              print("Calander");
+                            },
+                            icon: const Icon(
                               Icons.calendar_month_rounded,
                               color: Colors.white,
                               size: 40,
@@ -157,325 +211,17 @@ class _LaunchInfoState extends State<LaunchInfo> {
                 ),
               ),
               Container(
-                margin: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
-                height: ScreenConfig.heightPercent*58,
-                width: ScreenConfig.width,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(50),
-                  color: AppTheme().bg_color.withOpacity(0.5),
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    SizedBox(
-                      height: ScreenConfig.heightPercent*56,
-                      width: ScreenConfig.widthPercent*18,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Text(
-                            translate('launchInfo_tab.mn'),
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                                fontFamily: 'GoogleSans',
-                                fontSize: Utils().fontSizeMultiplier(30),
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold
-                            ),
-                          ),
-                          Container(
-                            height: ScreenConfig.heightPercent*41,
-                            width: ScreenConfig.heightPercent*41*0.385,
-                            decoration: const BoxDecoration(
-                              image: DecorationImage(
-                                  image: AssetImage(ImagePaths.rocket),
-                                  fit: BoxFit.fill
-                              ),
-                            ),
-                          ),
-                          ElevatedButton(
-                              onPressed: (){
-                                showDialog(
-                                    context: context,
-                                    builder: (context) => RocketsInfo.rocketInfo(context)
-                                );
-                              },
-                              style: ElevatedButton.styleFrom(
-                                elevation: 10,
-                                shadowColor: Colors.grey,
-                                primary: AppTheme().bg_color,
-                                shape: const StadiumBorder(),
-                              ),
-                              child: SizedBox(
-                                width: ScreenConfig.widthPercent*9,
-                                height: ScreenConfig.heightPercent*3,
-                                child: Center(
-                                  child: Text(
-                                      translate('launchInfo_tab.mi'),
-                                      style: TextStyle(
-                                          fontSize: Utils().fontSizeMultiplier(20),
-                                          color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
-                                      )
-                                  ),
-                                ),
-                              )
-                          ),
-                        ],
-                      ),
+                  child: CarouselSlider(
+                    options: CarouselOptions(
+                      enlargeCenterPage: true,
+                      height: ScreenConfig.heightPercent*62,
+                      initialPage: 0,
+                      scrollDirection: Axis.vertical,
+                      autoPlayInterval: const Duration(milliseconds: 5000),
+                      autoPlay: false,
                     ),
-                    Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 10),
-                      height: ScreenConfig.heightPercent*56,
-                      width: ScreenConfig.widthPercent*30,
-                      decoration: const BoxDecoration(
-                        border: Border(
-                          left: BorderSide(width: 5.0, color: Colors.white),
-                          right: BorderSide(width: 5.0, color: Colors.white),
-                        ),
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Text(
-                            "${translate('launchInfo_tab.rn')}:   ${translate('launchInfo_tab.rn_01')}",
-                            style: const TextStyle(
-                              fontSize: 22,
-                              color: Colors.white,
-                            ),
-                          ),
-                          Text(
-                            "${translate('launchInfo_tab.date')}:   2018-07-22",
-                            style: const TextStyle(
-                              fontSize: 22,
-                              color: Colors.white,
-                            ),
-                          ),
-                          Text(
-                            "${translate('launchInfo_tab.time')}:   05:50:00 UTC",
-                            style: const TextStyle(
-                              fontSize: 22,
-                              color: Colors.white,
-                            ),
-                          ),
-                          Text(
-                            "${translate('launchInfo_tab.ls')}:   ${translate('launchInfo_tab.ls_01')}",
-                            style: const TextStyle(
-                              fontSize: 22,
-                              color: Colors.white,
-                            ),
-                          ),
-                          Text(
-                            "${translate('launchInfo_tab.fn')}:   65",
-                            style: const TextStyle(
-                              fontSize: 22,
-                              color: Colors.white,
-                            ),
-                          ),
-                          Text(
-                            "${translate('launchInfo_tab.py')}:   ${translate('launchInfo_tab.py_01')}",
-                            style: const TextStyle(
-                              fontSize: 22,
-                              color: Colors.white,
-                            ),
-                          ),
-                          Text(
-                            "${translate('launchInfo_tab.n')}:    ${translate('launchInfo_tab.n_01')}",
-                            style: const TextStyle(
-                              fontSize: 22,
-                              color: Colors.white,
-                            ),
-                          ),
-                          Text(
-                            "${translate('launchInfo_tab.ct')}:    ${translate('launchInfo_tab.ct_01')}",
-                            style: const TextStyle(
-                              fontSize: 22,
-                              color: Colors.white,
-                            ),
-                          ),
-                          Text(
-                            "${translate('launchInfo_tab.orb')}:    ${translate('launchInfo_tab.orb_01')}",
-                            style: const TextStyle(
-                              fontSize: 22,
-                              color: Colors.white,
-                            ),
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              ElevatedButton(
-                                  onPressed: () { },
-                                  style: ElevatedButton.styleFrom(
-                                    elevation: 10,
-                                    shadowColor: Colors.grey,
-                                    primary: AppTheme().bg_color,
-                                    shape: const StadiumBorder(),
-                                  ),
-                                  child: SizedBox(
-                                    width: ScreenConfig.widthPercent*3.75,
-                                    height: ScreenConfig.heightPercent*3,
-                                    child: Center(
-                                      child: Text(
-                                          translate('launchInfo_tab.art'),
-                                          style: TextStyle(
-                                              fontSize: 15,
-                                              color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
-                                          )
-                                      ),
-                                    ),
-                                  )
-                              ),
-                              ElevatedButton(
-                                  onPressed: () { },
-                                  style: ElevatedButton.styleFrom(
-                                    elevation: 10,
-                                    shadowColor: Colors.grey,
-                                    primary: AppTheme().bg_color,
-                                    shape: const StadiumBorder(),
-                                  ),
-                                  child: SizedBox(
-                                    width: ScreenConfig.widthPercent*2.5,
-                                    height: ScreenConfig.heightPercent*3,
-                                    child: Center(
-                                      child: Text(
-                                          translate('launchInfo_tab.wiki'),
-                                          style: TextStyle(
-                                            fontSize: 16,
-                                            color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
-                                          )
-                                      ),
-                                    ),
-                                  )
-                              ),
-                              ElevatedButton(
-                                  onPressed: () { },
-                                  style: ElevatedButton.styleFrom(
-                                    elevation: 10,
-                                    shadowColor: Colors.grey,
-                                    primary: AppTheme().bg_color,
-                                    shape: const StadiumBorder(),
-                                  ),
-                                  child: SizedBox(
-                                    width: ScreenConfig.widthPercent*4.25,
-                                    height: ScreenConfig.heightPercent*3,
-                                    child: Center(
-                                      child: Text(
-                                          translate('launchInfo_tab.img'),
-                                          style: TextStyle(
-                                            fontSize: 16,
-                                            color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
-                                          )
-                                      ),
-                                    ),
-                                  )
-                              ),
-                              ElevatedButton(
-                                  onPressed: () { },
-                                  style: ElevatedButton.styleFrom(
-                                    elevation: 10,
-                                    shadowColor: Colors.grey,
-                                    primary: AppTheme().bg_color,
-                                    shape: const StadiumBorder(),
-                                  ),
-                                  child: SizedBox(
-                                    width: ScreenConfig.widthPercent*5,
-                                    height: ScreenConfig.heightPercent*3,
-                                    child: Center(
-                                      child: Text(
-                                          translate('launchInfo_tab.tl'),
-                                          style: TextStyle(
-                                            fontSize: 16,
-                                            color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
-                                          )
-                                      ),
-                                    ),
-                                  )
-                              ),
-                            ],
-                          )
-                        ],
-                      )
-                    ),
-                    SizedBox(
-                      height: ScreenConfig.heightPercent*56,
-                      width: ScreenConfig.widthPercent*44,
-                      child: Column(
-                        children: [
-                          Container(
-                            padding: const EdgeInsets.only(top: 5),
-                            height: ScreenConfig.heightPercent*20,
-                            width: ScreenConfig.widthPercent*44,
-                            decoration: const BoxDecoration(
-                              border: Border(
-                                bottom: BorderSide(width: 3.0, color: Colors.white),
-                              ),
-                            ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  "${translate('launchInfo_tab.md')}:",
-                                  style: const TextStyle(
-                                    fontSize: 25,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                                const SizedBox(
-                                  height: 8,
-                                ),
-                                Text(
-                                  translate('launchInfo_tab.md_01'),
-                                  style: const TextStyle(
-                                    fontSize: 20,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Container(
-                            padding: const EdgeInsets.only(top: 10),
-                            height: ScreenConfig.heightPercent*36,
-                            width: ScreenConfig.widthPercent*44,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  "${translate('launchInfo_tab.lsd')}:",
-                                  style: const TextStyle(
-                                    fontSize: 25,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                                const SizedBox(
-                                  height: 10,
-                                ),
-                                Text(
-                                  translate('launchInfo_tab.lsfn'),
-                                  style: const TextStyle(
-                                    fontSize: 20,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                                const SizedBox(
-                                  height: 10,
-                                ),
-                                Text(
-                                  translate('launchInfo_tab.lsd_01'),
-                                  style: const TextStyle(
-                                    fontSize: 19,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+                    items: RocketInfoCardList,
+                  )),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -595,6 +341,356 @@ class _LaunchInfoState extends State<LaunchInfo> {
             ],
           ),
         )
+    );
+  }
+
+  Widget RocketInfoItemList(){
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+      height: ScreenConfig.heightPercent*68,
+      width: ScreenConfig.width,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(50),
+        color: AppTheme().bg_color.withOpacity(0.5),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          SizedBox(
+            width: ScreenConfig.widthPercent*18,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Text(
+                  translate('launchInfo_tab.mn'),
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      fontFamily: 'GoogleSans',
+                      fontSize: Utils().fontSizeMultiplier(30),
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold
+                  ),
+                ),
+                Container(
+                  height: ScreenConfig.heightPercent*35,
+                  width: ScreenConfig.heightPercent*35*0.385,
+                  decoration: const BoxDecoration(
+                    image: DecorationImage(
+                        image: AssetImage(ImagePaths.rocket),
+                        fit: BoxFit.fill
+                    ),
+                  ),
+                ),
+                ElevatedButton(
+                    onPressed: (){
+                      showDialog(
+                          context: context,
+                          builder: (context) => RocketsInfo.rocketInfo(context)
+                      );
+                    },
+                    style: ElevatedButton.styleFrom(
+                      elevation: 10,
+                      shadowColor: Colors.grey,
+                      primary: AppTheme().bg_color,
+                      shape: const StadiumBorder(),
+                    ),
+                    child: SizedBox(
+                      width: ScreenConfig.widthPercent*9,
+                      height: ScreenConfig.heightPercent*3,
+                      child: Center(
+                        child: Text(
+                            translate('launchInfo_tab.mi'),
+                            style: TextStyle(
+                              fontSize: Utils().fontSizeMultiplier(20),
+                              color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
+                            )
+                        ),
+                      ),
+                    )
+                ),
+              ],
+            ),
+          ),
+          Container(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              height: ScreenConfig.heightPercent*56,
+              width: ScreenConfig.widthPercent*30,
+              decoration: const BoxDecoration(
+                border: Border(
+                  left: BorderSide(width: 5.0, color: Colors.white),
+                  right: BorderSide(width: 5.0, color: Colors.white),
+                ),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Text(
+                    "${translate('launchInfo_tab.rn')}:   ${translate('launchInfo_tab.rn_01')}",
+                    style: const TextStyle(
+                      fontSize: 22,
+                      color: Colors.white,
+                    ),
+                  ),
+                  Text(
+                    "${translate('launchInfo_tab.date')}:   2018-07-22",
+                    style: const TextStyle(
+                      fontSize: 22,
+                      color: Colors.white,
+                    ),
+                  ),
+                  Text(
+                    "${translate('launchInfo_tab.time')}:   05:50:00 UTC",
+                    style: const TextStyle(
+                      fontSize: 22,
+                      color: Colors.white,
+                    ),
+                  ),
+                  Text(
+                    "${translate('launchInfo_tab.ls')}:   ${translate('launchInfo_tab.ls_01')}",
+                    style: const TextStyle(
+                      fontSize: 22,
+                      color: Colors.white,
+                    ),
+                  ),
+                  Text(
+                    "${translate('launchInfo_tab.fn')}:   65",
+                    style: const TextStyle(
+                      fontSize: 22,
+                      color: Colors.white,
+                    ),
+                  ),
+                  Text(
+                    "${translate('launchInfo_tab.py')}:   ${translate('launchInfo_tab.py_01')}",
+                    style: const TextStyle(
+                      fontSize: 22,
+                      color: Colors.white,
+                    ),
+                  ),
+                  Text(
+                    "${translate('launchInfo_tab.n')}:    ${translate('launchInfo_tab.n_01')}",
+                    style: const TextStyle(
+                      fontSize: 22,
+                      color: Colors.white,
+                    ),
+                  ),
+                  Text(
+                    "${translate('launchInfo_tab.ct')}:    ${translate('launchInfo_tab.ct_01')}",
+                    style: const TextStyle(
+                      fontSize: 22,
+                      color: Colors.white,
+                    ),
+                  ),
+                  Text(
+                    "${translate('launchInfo_tab.orb')}:    ${translate('launchInfo_tab.orb_01')}",
+                    style: const TextStyle(
+                      fontSize: 22,
+                      color: Colors.white,
+                    ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      ElevatedButton(
+                          onPressed: () { },
+                          style: ElevatedButton.styleFrom(
+                            elevation: 10,
+                            shadowColor: Colors.grey,
+                            primary: AppTheme().bg_color,
+                            shape: const StadiumBorder(),
+                          ),
+                          child: SizedBox(
+                            width: ScreenConfig.widthPercent*3.75,
+                            height: ScreenConfig.heightPercent*3,
+                            child: Center(
+                              child: Text(
+                                  translate('launchInfo_tab.art'),
+                                  style: TextStyle(
+                                    fontSize: 15,
+                                    color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
+                                  )
+                              ),
+                            ),
+                          )
+                      ),
+                      ElevatedButton(
+                          onPressed: () { },
+                          style: ElevatedButton.styleFrom(
+                            elevation: 10,
+                            shadowColor: Colors.grey,
+                            primary: AppTheme().bg_color,
+                            shape: const StadiumBorder(),
+                          ),
+                          child: SizedBox(
+                            width: ScreenConfig.widthPercent*2.5,
+                            height: ScreenConfig.heightPercent*3,
+                            child: Center(
+                              child: Text(
+                                  translate('launchInfo_tab.wiki'),
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
+                                  )
+                              ),
+                            ),
+                          )
+                      ),
+                      ElevatedButton(
+                          onPressed: () { },
+                          style: ElevatedButton.styleFrom(
+                            elevation: 10,
+                            shadowColor: Colors.grey,
+                            primary: AppTheme().bg_color,
+                            shape: const StadiumBorder(),
+                          ),
+                          child: SizedBox(
+                            width: ScreenConfig.widthPercent*4.25,
+                            height: ScreenConfig.heightPercent*3,
+                            child: Center(
+                              child: Text(
+                                  translate('launchInfo_tab.img'),
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
+                                  )
+                              ),
+                            ),
+                          )
+                      ),
+                      ElevatedButton(
+                          onPressed: () { },
+                          style: ElevatedButton.styleFrom(
+                            elevation: 10,
+                            shadowColor: Colors.grey,
+                            primary: AppTheme().bg_color,
+                            shape: const StadiumBorder(),
+                          ),
+                          child: SizedBox(
+                            width: ScreenConfig.widthPercent*5,
+                            height: ScreenConfig.heightPercent*3,
+                            child: Center(
+                              child: Text(
+                                  translate('launchInfo_tab.tl'),
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
+                                  )
+                              ),
+                            ),
+                          )
+                      ),
+                    ],
+                  )
+                ],
+              )
+          ),
+          SizedBox(
+            width: ScreenConfig.widthPercent*44,
+            child: Column(
+              children: [
+                Container(
+                  padding: const EdgeInsets.only(top: 5),
+                  height: ScreenConfig.heightPercent*16,
+                  width: ScreenConfig.widthPercent*44,
+                  decoration: const BoxDecoration(
+                    border: Border(
+                      bottom: BorderSide(width: 3.0, color: Colors.white),
+                    ),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "${translate('launchInfo_tab.md')}:",
+                        style: const TextStyle(
+                          fontSize: 25,
+                          color: Colors.white,
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 8,
+                      ),
+                      Text(
+                        translate('launchInfo_tab.md_01'),
+                        style: const TextStyle(
+                          fontSize: 15,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Container(
+                  padding: const EdgeInsets.only(top: 10),
+                  height: ScreenConfig.heightPercent*30,
+                  width: ScreenConfig.widthPercent*44,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "${translate('launchInfo_tab.lsd')}:",
+                        style: const TextStyle(
+                          fontSize: 25,
+                          color: Colors.white,
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Text(
+                        translate('launchInfo_tab.lsfn'),
+                        style: const TextStyle(
+                          fontSize: 20,
+                          color: Colors.white,
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Text(
+                        translate('launchInfo_tab.lsd_01'),
+                        style: const TextStyle(
+                          fontSize: 15,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ],
+                  ),
+                )
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget dateRangePickerButton(
+      BuildContext context,
+      ) {
+    return AlertDialog(
+      title: Text(translate('launch_tab.so')),
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          ListTile(
+            leading: const Icon(Icons.calendar_today),
+            title: Text(translate('launch_tab.sd')),
+            onTap: () {
+              Navigator.of(context).pop();
+              _selectDate();
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.calendar_view_day),
+            title: Text(translate('launch_tab.sdr')),
+            onTap: () {
+              Navigator.of(context).pop();
+              _selectDateRange();
+            },
+          ),
+        ],
+      ),
     );
   }
 }

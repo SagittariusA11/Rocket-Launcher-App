@@ -52,6 +52,8 @@ dependencies:
   google_maps_flutter: ^2.3.0
   font_awesome_flutter: ^10.4.0
   date_range_picker: ^1.0.7
+  url_launcher: ^6.1.11
+  carousel_slider: ^4.2.1
 
 dev_dependencies:
   flutter_test:
