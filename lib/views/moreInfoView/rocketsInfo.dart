@@ -3,10 +3,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:rocket_launcher_app/utils/routes.dart';
 
 import '../../config/appTheme.dart';
 import '../../config/imagePaths.dart';
 import '../../config/screenConfig.dart';
+import '../../utils/routeNames.dart';
 import '../../utils/utils.dart';
 
 class RocketsInfo{
@@ -135,7 +137,9 @@ class RocketsInfo{
                                     Row(
                                       children: [
                                         IconButton(
-                                            onPressed: () { },
+                                            onPressed: () {
+                                              Navigator.of(context).pushNamed(RouteNames.imageView);
+                                            },
                                             icon: const FaIcon(
                                               FontAwesomeIcons.images,
                                               color: Colors.white,
@@ -394,6 +398,38 @@ class RocketsInfo{
           ),
         ),
       ),
+    );
+  }
+}
+
+class ImageGrid extends StatefulWidget {
+  @override
+  _ImageGridState createState() => _ImageGridState();
+}
+
+class _ImageGridState extends State<ImageGrid> {
+
+  @override
+  Widget build(BuildContext context) {
+    return GridView.builder(
+      itemCount: 10,
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+        crossAxisSpacing: 10,
+        mainAxisSpacing: 10,
+      ),
+      itemBuilder: (context, index) {
+        return Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(8),
+            image: const DecorationImage(
+              image: NetworkImage("https://farm1.staticflickr.com/929/28787338307_3453a11a77_b.jpg"),
+              fit: BoxFit.cover,
+            ),
+          ),
+          child: Image.network("https://farm1.staticflickr.com/929/28787338307_3453a11a77_b.jpg", fit: BoxFit.contain)
+        );
+      },
     );
   }
 }

@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_translate/flutter_translate.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:scroll_snap_list/scroll_snap_list.dart';
 
 import '../../config/imagePaths.dart';
@@ -22,6 +23,38 @@ class _LaunchViewState extends State<LaunchView> with SingleTickerProviderStateM
   ScrollController pastScrollController = ScrollController();
   TextEditingController _searchController = TextEditingController();
   bool _isSearching = false;
+  DateTime? selectedDate;
+  DateTimeRange? selectedDateRange;
+
+  Future<void> _selectDate() async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2021),
+      lastDate: DateTime(2025),
+    );
+
+    if (picked != null) {
+      setState(() {
+        selectedDate = picked;
+      });
+    }
+  }
+
+  Future<void> _selectDateRange() async {
+    final DateTimeRange? picked = await showDateRangePicker(
+      context: context,
+      firstDate: DateTime(2021),
+      lastDate: DateTime(2025),
+    );
+
+    if (picked != null) {
+      setState(() {
+        selectedDateRange = picked;
+      });
+    }
+  }
+
 
   @override
   void initState() {
@@ -117,7 +150,7 @@ class _LaunchViewState extends State<LaunchView> with SingleTickerProviderStateM
                                         filled: true,
                                         fillColor: Colors.transparent,
                                         hintText: translate('inventory.search'),
-                                        hintStyle: TextStyle(
+                                        hintStyle: const TextStyle(
                                             color: Colors.white
                                         ),
                                         border: InputBorder.none
@@ -130,30 +163,38 @@ class _LaunchViewState extends State<LaunchView> with SingleTickerProviderStateM
                                   ),
                                 ),
                                 IconButton(
-                                  icon: Icon(
+                                  icon: const Icon(
                                     Icons.search,
                                     color: Colors.white,
                                     size: 30,
                                   ),
-                                  onPressed: _isSearching ? () { } : null,
+                                  onPressed: () {
+                                    print("Search");
+                                  }
                                 ),
                               ],
                             ),
                           ),
-                          GestureDetector(
-                            onTap: () { },
-                            child: const Icon(
-                              Icons.filter_list,
+                          IconButton(
+                            onPressed: () { print("Filter"); },
+                            icon: const FaIcon(
+                              FontAwesomeIcons.filter,
                               color: Colors.white,
-                              size: 40,
+                              size: 30,
                             ),
                           ),
-                          const SizedBox(
-                            width: 20,
-                          ),
-                          GestureDetector(
-                            onTap: () { },
-                            child: const Icon(
+                          // const SizedBox(
+                          //   width: 10,
+                          // ),
+                          IconButton(
+                            onPressed: () {
+                              showDialog(
+                                  context: context,
+                                  builder: (context) => dateRangePickerButton(context)
+                              );
+                              print("Calander");
+                              },
+                            icon: const Icon(
                               Icons.calendar_month_rounded,
                               color: Colors.white,
                               size: 40,
@@ -468,4 +509,34 @@ class _LaunchViewState extends State<LaunchView> with SingleTickerProviderStateM
       itemCount: length,
     );
   }
+
+  Widget dateRangePickerButton(
+      BuildContext context,
+      ) {
+    return AlertDialog(
+      title: Text(translate('launch_tab.so')),
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          ListTile(
+            leading: const Icon(Icons.calendar_today),
+            title: Text(translate('launch_tab.sd')),
+            onTap: () {
+              Navigator.of(context).pop();
+              _selectDate();
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.calendar_view_day),
+            title: Text(translate('launch_tab.sdr')),
+            onTap: () {
+              Navigator.of(context).pop();
+              _selectDateRange();
+            },
+          ),
+        ],
+      ),
+    );
+  }
+
 }

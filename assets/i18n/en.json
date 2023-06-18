@@ -133,7 +133,10 @@
     "mn": "Mission\nName",
     "date": "15-06-2023",
     "rn": "Rocket Name",
-    "ls": "Launch Site\nName"
+    "ls": "Launch Site\nName",
+    "so": "Select Option",
+    "sd": "Select Date",
+    "sdr": "Select Date Range"
   },
 
   "launchInfo_tab": {

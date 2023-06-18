@@ -12,6 +12,7 @@ import '../views/homeView/launchList.dart';
 import '../views/inventory.dart';
 import '../views/homeView/launchMap.dart';
 import '../views/lgActions.dart';
+import '../views/moreInfoView/rocketsInfo.dart';
 import '../views/onBoarding.dart';
 import '../views/settings.dart';
 import '../views/splash.dart';
@@ -75,6 +76,11 @@ class Routes {
       case RouteNames.settings:
         return MaterialPageRoute(builder:
             (BuildContext context)=>SettingsView()
+        );
+
+      case RouteNames.imageView:
+        return MaterialPageRoute(builder:
+            (BuildContext context)=>ImageGrid()
         );
 
 

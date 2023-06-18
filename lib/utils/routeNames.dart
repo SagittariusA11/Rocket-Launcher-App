@@ -12,4 +12,5 @@ class RouteNames{
   static const rocketInfo = "/rocketInfo";
   static const settings = "/settings";
   static const homeView = "/homeView";
+  static const imageView = "/imageView";
 }

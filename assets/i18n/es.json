@@ -133,7 +133,10 @@
     "mn": "Nombre de\nla misión",
     "date": "15-06-2023",
     "rn": "Nombre del cohete",
-    "ls": "Nombre del sitio\nde lanzamiento"
+    "ls": "Nombre del sitio\nde lanzamiento",
+    "so": "Seleccionar opción",
+    "sd": "Seleccione fecha",
+    "sdr": "Seleccionar rango de fechas"
   },
 
   "launchInfo_tab": {
