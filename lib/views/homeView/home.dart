@@ -11,7 +11,7 @@ import '../../config/appTheme.dart';
 import '../../config/imagePaths.dart';
 import '../../config/screenConfig.dart';
 import '../../utils/utils.dart';
-import '../../view models/home_view_model.dart';
+import '../../view models/homeViewModels/home_view_model.dart';
 import '../aboutUs.dart';
 import '../help.dart';
 import '../inventory.dart';

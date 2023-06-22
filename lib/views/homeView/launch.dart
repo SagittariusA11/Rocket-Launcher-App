@@ -7,8 +7,10 @@ import 'package:scroll_snap_list/scroll_snap_list.dart';
 
 import '../../config/imagePaths.dart';
 import '../../config/screenConfig.dart';
+import '../../data/launches_response.dart';
 import '../../utils/utils.dart';
 import '../../config/appTheme.dart';
+import '../../view models/homeViewModels/launchViewModel.dart';
 
 class LaunchView extends StatefulWidget {
   const LaunchView({Key? key}) : super(key: key);
@@ -25,6 +27,10 @@ class _LaunchViewState extends State<LaunchView> with SingleTickerProviderStateM
   bool _isSearching = false;
   DateTime? selectedDate;
   DateTimeRange? selectedDateRange;
+
+  Future<List<UpcomingLaunch>>? _upcomingLaunchesFuture;
+
+  late final UpcomingLaunch upcomingLaunches;
 
   Future<void> _selectDate() async {
     final DateTime? picked = await showDatePicker(
@@ -59,6 +65,7 @@ class _LaunchViewState extends State<LaunchView> with SingleTickerProviderStateM
   @override
   void initState() {
     super.initState();
+    _upcomingLaunchesFuture = LaunchService.fetchUpcomingLaunches();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       upcomingScrollController.jumpTo(ScreenConfig.heightPercent*60);
       pastScrollController.jumpTo(ScreenConfig.heightPercent*50);
@@ -337,92 +344,38 @@ class _LaunchViewState extends State<LaunchView> with SingleTickerProviderStateM
         )
     );
   }
-  Widget _buildUpcomingItemList(BuildContext context, int index){
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Container(
-          height: ScreenConfig.heightPercent*30,
-          width: ScreenConfig.heightPercent*30*0.385,
-          decoration: const BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage(ImagePaths.rocket),
-              fit: BoxFit.fill
-            )
-          ),
-        ),
-        Container(
-          height: ScreenConfig.heightPercent*25,
-          width: ScreenConfig.heightPercent*30*0.615,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20),
-            color: AppTheme().bg_color.withOpacity(0.5),
-          ),
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Text(
-                    translate('launch_tab.mn'),
-                    style: TextStyle(
-                        fontSize: 20,
-                        color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
-                    ),
-                  textAlign: TextAlign.center,
-                ),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    translate('launch_tab.date'),
-                    style: TextStyle(
-                      fontSize: 18,
-                      color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 5,
-                  ),
-                  Text(
-                    translate('launch_tab.rn'),
-                    style: TextStyle(
-                      fontSize: 18,
-                      color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 5,
-                  ),
-                  Text(
-                    translate('launch_tab.ls'),
-                    style: TextStyle(
-                      fontSize: 18,
-                      color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
-                    ),
-                  ),
-                ],
-              )
-            ],
-          ),
-        )
-      ],
+
+
+  Widget _buildUpcomingCard(){
+    return FutureBuilder<List<UpcomingLaunch>>(
+      future: _upcomingLaunchesFuture,
+      builder: (BuildContext context, AsyncSnapshot<List<UpcomingLaunch>> snapshot) {
+        if (snapshot.hasData) {
+          final _upcomingLaunches = snapshot.data!;
+          return ScrollSnapList(
+            listController: upcomingScrollController,
+            itemBuilder: (BuildContext context, int index) {
+              final upcominglaunch = _upcomingLaunches[index];
+              return BuildUpcomingLaunchList(upcomingLaunches: upcominglaunch);
+            },
+            itemSize: ScreenConfig.heightPercent*30,
+            dynamicItemSize: true,
+            dynamicItemOpacity: 0.75,
+            itemCount: _upcomingLaunches.length,
+          );
+        } else if (snapshot.hasError) {
+          return Center(
+            child: Text('Error: ${snapshot.error}'),
+          );
+        } else {
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+        }
+      },
     );
   }
 
-  Widget _buildUpcomingCard() {
-    return ScrollSnapList(
-      listController: upcomingScrollController,
-      itemBuilder: _buildUpcomingItemList,
-      itemSize: ScreenConfig.heightPercent*30,
-      dynamicItemSize: true,
-      dynamicItemOpacity: 0.75,
-      itemCount: length,
-    );
-  }
   Widget _buildPastItemList(BuildContext context, int index){
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -539,4 +492,91 @@ class _LaunchViewState extends State<LaunchView> with SingleTickerProviderStateM
     );
   }
 
+}
+
+class BuildUpcomingLaunchList extends StatelessWidget {
+  const BuildUpcomingLaunchList({Key? key, required this.upcomingLaunches}) : super(key: key);
+
+  final UpcomingLaunch upcomingLaunches;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Container(
+          height: ScreenConfig.heightPercent*30,
+          width: ScreenConfig.heightPercent*30*0.385,
+          decoration: const BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage(ImagePaths.rocket),
+                  fit: BoxFit.fill
+              )
+          ),
+        ),
+        Container(
+          height: ScreenConfig.heightPercent*25,
+          width: ScreenConfig.heightPercent*30*0.615,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20),
+            color: AppTheme().bg_color.withOpacity(0.5),
+          ),
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Text(
+                  upcomingLaunches.missionName,
+                  // translate('launch_tab.mn'),
+                  style: TextStyle(
+                    fontSize: 20,
+                    color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    upcomingLaunches.launchDate,
+                    // translate('launch_tab.date'),
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  Text(
+                    upcomingLaunches.rocketName,
+                    // translate('launch_tab.rn'),
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  Text(
+                    upcomingLaunches.launchPad,
+                    // translate('launch_tab.ls'),
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
+                    ),
+                  ),
+                ],
+              )
+            ],
+          ),
+        )
+      ],
+    );
+  }
 }

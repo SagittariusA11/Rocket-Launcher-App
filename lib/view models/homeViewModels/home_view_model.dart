@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 
-import '../animation/home_view_animation.dart';
+import '../../animation/home_view_animation.dart';
 
 HomeViewModel homeViewModel = HomeViewModel();
 final homeViewController = Get.put(homeViewModel);
