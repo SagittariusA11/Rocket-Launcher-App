@@ -447,99 +447,84 @@ class BuildUpcomingLaunchList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: ExtractR$LPName().extractRocketAndLaunchPadNames(
-          upcomingLaunches.rocketName,
-          upcomingLaunches.launchPad
-      ),
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return CircularProgressIndicator();
-        } else if (snapshot.hasData) {
-          final data = snapshot.data!;
-          return Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Container(
+          height: ScreenConfig.heightPercent*30,
+          width: ScreenConfig.heightPercent*30*0.385,
+          decoration: const BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage(ImagePaths.rocket),
+                  fit: BoxFit.fill
+              )
+          ),
+        ),
+        Container(
+          height: ScreenConfig.heightPercent*25,
+          width: ScreenConfig.heightPercent*30*0.615,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20),
+            color: AppTheme().bg_color.withOpacity(0.5),
+          ),
+          child: Column(
             children: [
-              Container(
-                height: ScreenConfig.heightPercent*30,
-                width: ScreenConfig.heightPercent*30*0.385,
-                decoration: const BoxDecoration(
-                    image: DecorationImage(
-                        image: AssetImage(ImagePaths.rocket),
-                        fit: BoxFit.fill
-                    )
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Text(
+                  upcomingLaunches.missionName,
+                  // translate('launch_tab.mn'),
+                  style: TextStyle(
+                    fontSize: 20,
+                    color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
+                  ),
+                  textAlign: TextAlign.center,
                 ),
               ),
-              Container(
-                height: ScreenConfig.heightPercent*25,
-                width: ScreenConfig.heightPercent*30*0.615,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  color: AppTheme().bg_color.withOpacity(0.5),
-                ),
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: Text(
-                        upcomingLaunches.missionName,
-                        // translate('launch_tab.mn'),
-                        style: TextStyle(
-                          fontSize: 20,
-                          color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
+              const SizedBox(
+                height: 10,
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    upcomingLaunches.launchDate,
+                    // translate('launch_tab.date'),
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
                     ),
-                    const SizedBox(
-                      height: 10,
+                  ),
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  Text(
+                    // data[0],
+                    upcomingLaunches.rocketName,
+                    // translate('launch_tab.rn'),
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
                     ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          upcomingLaunches.launchDate,
-                          // translate('launch_tab.date'),
-                          style: TextStyle(
-                            fontSize: 18,
-                            color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 5,
-                        ),
-                        Text(
-                          data[0],
-                          // translate('launch_tab.rn'),
-                          style: TextStyle(
-                            fontSize: 18,
-                            color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 5,
-                        ),
-                        Text(
-                          data[1],
-                          // translate('launch_tab.ls'),
-                          style: TextStyle(
-                            fontSize: 18,
-                            color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
-                          ),
-                        ),
-                      ],
-                    )
-                  ],
-                ),
+                  ),
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  Text(
+                    // data[1],
+                    upcomingLaunches.launchPad,
+                    // translate('launch_tab.ls'),
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
+                    ),
+                  ),
+                ],
               )
             ],
-          );
-        } else if (snapshot.hasError) {
-          return Text('Error: ${snapshot.error}');
-        } else {
-          return Text('No data available');
-        }
-      },
+          ),
+        )
+      ],
     );
   }
 }
@@ -551,99 +536,82 @@ class BuildPastLaunchList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: ExtractR$LPName().extractRocketAndLaunchPadNames(
-          pastLaunches.rocketName,
-          pastLaunches.launchPad
-      ),
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return CircularProgressIndicator();
-        } else if (snapshot.hasData) {
-          final data = snapshot.data!;
-          return Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Container(
+          height: ScreenConfig.heightPercent*25,
+          width: ScreenConfig.heightPercent*25*0.385,
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage(ImagePaths.rocket),
+                fit: BoxFit.fill
+            ),
+          ),
+        ),
+        Container(
+          height: ScreenConfig.heightPercent*20,
+          width: ScreenConfig.heightPercent*25*0.615,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(18),
+            color: AppTheme().bg_color.withOpacity(0.5),
+          ),
+          child: Column(
             children: [
-              Container(
-                height: ScreenConfig.heightPercent*25,
-                width: ScreenConfig.heightPercent*25*0.385,
-                decoration: const BoxDecoration(
-                  image: DecorationImage(
-                      image: AssetImage(ImagePaths.rocket),
-                      fit: BoxFit.fill
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Text(
+                  pastLaunches.missionName,
+                  // translate('launch_tab.mn'),
+                  style: TextStyle(
+                    fontSize: 17,
+                    color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
                   ),
+                  textAlign: TextAlign.center,
                 ),
               ),
-              Container(
-                height: ScreenConfig.heightPercent*20,
-                width: ScreenConfig.heightPercent*25*0.615,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(18),
-                  color: AppTheme().bg_color.withOpacity(0.5),
-                ),
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: Text(
-                        pastLaunches.missionName,
-                        // translate('launch_tab.mn'),
-                        style: TextStyle(
-                          fontSize: 17,
-                          color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
+              const SizedBox(
+                height: 5,
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    pastLaunches.launchDate,
+                    // translate('launch_tab.date'),
+                    style: TextStyle(
+                      fontSize: 15,
+                      color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
                     ),
-                    const SizedBox(
-                      height: 5,
+                  ),
+                  const SizedBox(
+                    height: 3,
+                  ),
+                  Text(
+                    pastLaunches.rocketName,
+                    // translate('launch_tab.rn'),
+                    style: TextStyle(
+                      fontSize: 15,
+                      color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
                     ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          pastLaunches.launchDate,
-                          // translate('launch_tab.date'),
-                          style: TextStyle(
-                            fontSize: 15,
-                            color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 3,
-                        ),
-                        Text(
-                          data[0],
-                          // translate('launch_tab.rn'),
-                          style: TextStyle(
-                            fontSize: 15,
-                            color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 3,
-                        ),
-                        Text(
-                          data[1],
-                          // translate('launch_tab.ls'),
-                          style: TextStyle(
-                            fontSize: 15,
-                            color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
-                          ),
-                        ),
-                      ],
-                    )
-                  ],
-                ),
+                  ),
+                  const SizedBox(
+                    height: 3,
+                  ),
+                  Text(
+                    pastLaunches.launchPad,
+                    // translate('launch_tab.ls'),
+                    style: TextStyle(
+                      fontSize: 15,
+                      color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
+                    ),
+                  ),
+                ],
               )
             ],
-          );
-        } else if (snapshot.hasError) {
-          return Text('Error: ${snapshot.error}');
-        } else {
-          return Text('No data available');
-        }
-      },
+          ),
+        )
+      ],
     );
   }
 }

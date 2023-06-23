@@ -25,7 +25,7 @@ class UpcomingLaunch {
   }
 }
 
-class ExtractR$LPName {
+class ExtractRnLPName {
   Future<List<String>> extractRocketAndLaunchPadNames(String rocketID, String launchPadID) async {
     try {
       final rocketResponse = await http.get(Uri.parse("https://api.spacexdata.com/v4/rockets/$rocketID"));

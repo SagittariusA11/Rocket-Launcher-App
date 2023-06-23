@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:localization/localization.dart';
+import 'package:rocket_launcher_app/data/launches_response.dart';
 import 'package:rocket_launcher_app/utils/routeNames.dart';
 import 'package:rocket_launcher_app/utils/routes.dart';
 import 'package:rocket_launcher_app/utils/utils.dart';
@@ -13,6 +14,8 @@ import '../config/appTheme.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  // await LaunchService.fetchUpcomingLaunches();
+  // await LaunchService.fetchPastLaunches();
   await selectedAppTheme.init();
   await selectedAppLanguage.init();
   await selectedFontSizeFactor.init();
