@@ -19,10 +19,14 @@ class LaunchService {
     }
   }
 
-  static Future<List<dynamic>> fetchPastLaunches() async {
+  static Future<List<PastLaunch>> fetchPastLaunches() async {
     final response = await http.get(Uri.parse('https://api.spacexdata.com/v4/launches/past'));
     if (response.statusCode == 200) {
-      final launches = json.decode(response.body);
+      final launchesJson = json.decode(response.body) as List<dynamic>;
+      final launches = launchesJson.map((json) => PastLaunch.fromJson(json)).toList();
+      // print("hello");
+      // print(launchesJson);
+      // print(launches);
       return launches;
     } else {
       throw Exception('Failed to fetch past launches.');

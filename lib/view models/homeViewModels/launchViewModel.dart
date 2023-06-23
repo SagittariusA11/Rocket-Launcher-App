@@ -23,39 +23,48 @@ class UpcomingLaunch {
       launchPad: json['launchpad'] ?? 'N/A',
     );
   }
+}
 
-  Future<String?> extractRocketName(String rocketID) async {
+class ExtractR$LPName {
+  Future<List<String>> extractRocketAndLaunchPadNames(String rocketID, String launchPadID) async {
     try {
-      final response = await http.get(Uri.parse("https://api.spacexdata.com/v4/rockets/$rocketID"));
-      final jsonData = json.decode(response.body);
-      final rocketName = jsonData['name'];
-      return rocketName;
+      final rocketResponse = await http.get(Uri.parse("https://api.spacexdata.com/v4/rockets/$rocketID"));
+      final rocketJsonData = json.decode(rocketResponse.body);
+      final rocketName = rocketJsonData['name'];
+
+      final launchPadResponse = await http.get(Uri.parse("https://api.spacexdata.com/v4/launchpads/$launchPadID"));
+      final launchPadJsonData = json.decode(launchPadResponse.body);
+      final launchPadName = launchPadJsonData['name'];
+
+      return [rocketName, launchPadName];
     } catch (e) {
-      print('Failed to extract mission name from API response: $e');
-      return null;
+      print('Failed to extract rocket and launch pad names from API response: $e');
+      return ['null', 'null'];
     }
   }
 }
 
+
+
 class PastLaunch {
-  final int flightNumber;
   final String missionName;
   final String launchDate;
-  final String details;
+  final String rocketName;
+  final String launchPad;
 
   PastLaunch({
-    required this.flightNumber,
+    required this.rocketName,
     required this.missionName,
     required this.launchDate,
-    required this.details,
+    required this.launchPad,
   });
 
   factory PastLaunch.fromJson(Map<String, dynamic> json) {
     return PastLaunch(
-      flightNumber: json['flight_number'],
-      missionName: json['mission_name'],
-      launchDate: json['launch_date_local'],
-      details: json['details'] ?? 'N/A',
+      rocketName: json['rocket'],
+      missionName: json['name'].toString().length>14?json['name'].toString().substring(0,14):json['name'],
+      launchDate: json['date_utc'].toString().substring(0,10),
+      launchPad: json['launchpad'] ?? 'N/A',
     );
   }
 }
