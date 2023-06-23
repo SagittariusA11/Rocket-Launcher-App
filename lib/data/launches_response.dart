@@ -14,7 +14,7 @@ class LaunchService {
       for (final launchJson in launchesJson) {
         final rocketId = launchJson['rocket'];
         final launchPadId = launchJson['launchpad'];
-        final future = ExtractRnLPName().extractRocketAndLaunchPadNames(rocketId, launchPadId)
+        final future = ExtractNamesAndDetails().extractRocketAndLaunchPadNames(rocketId, launchPadId)
             .then((rnlpName) {
           launchJson['rocket'] = rnlpName[0];
           launchJson['launchpad'] = rnlpName[1];
@@ -40,7 +40,7 @@ class LaunchService {
       for (final launchJson in launchesJson) {
         final rocketId = launchJson['rocket'];
         final launchPadId = launchJson['launchpad'];
-        final future = ExtractRnLPName().extractRocketAndLaunchPadNames(rocketId, launchPadId)
+        final future = ExtractNamesAndDetails().extractRocketAndLaunchPadNames(rocketId, launchPadId)
             .then((rnlpName) {
           launchJson['rocket'] = rnlpName[0];
           launchJson['launchpad'] = rnlpName[1];
@@ -51,6 +51,52 @@ class LaunchService {
       await Future.wait(futures);
 
       final launches = launchesJson.map((json) => PastLaunch.fromJson(json)).toList();
+      return launches;
+    } else {
+      throw Exception('Failed to fetch past launches.');
+    }
+  }
+
+  static Future<List<AllLaunch>> fetchAllLaunches() async {
+    final response = await http.get(Uri.parse('https://api.spacexdata.com/v4/launches'));
+    if (response.statusCode == 200) {
+      final launchesJson = json.decode(response.body) as List<dynamic>;
+      final futures = <Future>[];
+
+      for (final launchJson in launchesJson) {
+        final rocketId = launchJson['rocket'];
+        final launchPadId = launchJson['launchpad'];
+        final future = ExtractNamesAndDetails().extractRocketAndLaunchPadNames(rocketId, launchPadId)
+            .then((rnlpName) {
+          launchJson['rocket'] = rnlpName[0];
+          launchJson['launchpad'] = rnlpName[1];
+        });
+        futures.add(future);
+      }
+      for (final launchJson in launchesJson) {
+        final payloadId = launchJson['payloads'][0];
+        final launchPadId = launchJson['launchpad'];
+        final future = ExtractNamesAndDetails().extractNamesAndDetails(
+            launchPadId,
+            payloadId
+        ).then((namesAndDetails) {
+          launchJson['launchPadDetails'] = [
+            namesAndDetails[0][0],
+            namesAndDetails[0][1]
+          ];
+          launchJson['payloads'] = [
+            namesAndDetails[1][0],
+            namesAndDetails[1][1],
+            namesAndDetails[1][2],
+            namesAndDetails[1][3]
+          ];
+        });
+        futures.add(future);
+      }
+
+      await Future.wait(futures);
+
+      final launches = launchesJson.map((json) => AllLaunch.fromJson(json)).toList();
       return launches;
     } else {
       throw Exception('Failed to fetch past launches.');

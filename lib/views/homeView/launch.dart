@@ -20,7 +20,7 @@ class LaunchView extends StatefulWidget {
 }
 
 class _LaunchViewState extends State<LaunchView> with SingleTickerProviderStateMixin {
-  int length = 10;
+
   ScrollController upcomingScrollController = ScrollController();
   ScrollController pastScrollController = ScrollController();
   TextEditingController _searchController = TextEditingController();
@@ -28,11 +28,15 @@ class _LaunchViewState extends State<LaunchView> with SingleTickerProviderStateM
   DateTime? selectedDate;
   DateTimeRange? selectedDateRange;
 
+  // Future<List<UpcomingLaunch>>? _upcomingLaunchesFuture = LaunchService.fetchUpcomingLaunches();
+  // Future<List<PastLaunch>>? _pastLaunchesFuture = LaunchService.fetchPastLaunches();
+
   Future<List<UpcomingLaunch>>? _upcomingLaunchesFuture;
   Future<List<PastLaunch>>? _pastLaunchesFuture;
 
   late final UpcomingLaunch upcomingLaunches;
   late final PastLaunch pastLaunches;
+  bool _isDataLoaded = false;
 
   Future<void> _selectDate() async {
     final DateTime? picked = await showDatePicker(
@@ -67,8 +71,11 @@ class _LaunchViewState extends State<LaunchView> with SingleTickerProviderStateM
   @override
   void initState() {
     super.initState();
-    _upcomingLaunchesFuture = LaunchService.fetchUpcomingLaunches();
-    _pastLaunchesFuture = LaunchService.fetchPastLaunches();
+    if (!_isDataLoaded) {
+      _upcomingLaunchesFuture = LaunchService.fetchUpcomingLaunches();
+      _pastLaunchesFuture = LaunchService.fetchPastLaunches();
+      _isDataLoaded = true;
+    }
     WidgetsBinding.instance.addPostFrameCallback((_) {
       upcomingScrollController.jumpTo(ScreenConfig.heightPercent*60);
       pastScrollController.jumpTo(ScreenConfig.heightPercent*50);

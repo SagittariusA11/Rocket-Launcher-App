@@ -600,47 +600,47 @@ class _SettingsViewState extends State<SettingsView> with SingleTickerProviderSt
                         const SizedBox(
                           height: 30,
                         ),
-                        Row(
-                          children: [
-                            Text(
-                              translate('settings.tz'),
-                              style: TextStyle(
-                                  fontFamily: 'GoogleSans',
-                                  fontSize: Utils().fontSizeMultiplier(30),
-                                  color: AppTheme().text,
-                                  fontWeight: FontWeight.bold
-                              ),
-                            ),
-                            SizedBox(
-                              width: ScreenConfig.widthPercent*40,
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                children: [
-                                  GestureDetector(
-                                    onTap: () {
-                                      showTimeZonePicker(context);
-                                    },
-                                    child: Text(
-                                      selectedTimeZone,
-                                      style: TextStyle(
-                                        fontSize: Utils().fontSizeMultiplier(20),
-                                        color: Colors.white
-                                      ),
-                                    ),
-                                  ),
-                                  const SizedBox(width: 10.0),
-                                  const FaIcon(
-                                    FontAwesomeIcons.locationDot,
-                                    color: Colors.white,
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(
-                          height: 30,
-                        ),
+                        // Row(
+                        //   children: [
+                        //     Text(
+                        //       translate('settings.tz'),
+                        //       style: TextStyle(
+                        //           fontFamily: 'GoogleSans',
+                        //           fontSize: Utils().fontSizeMultiplier(30),
+                        //           color: AppTheme().text,
+                        //           fontWeight: FontWeight.bold
+                        //       ),
+                        //     ),
+                        //     SizedBox(
+                        //       width: ScreenConfig.widthPercent*40,
+                        //       child: Row(
+                        //         mainAxisAlignment: MainAxisAlignment.end,
+                        //         children: [
+                        //           GestureDetector(
+                        //             onTap: () {
+                        //               showTimeZonePicker(context);
+                        //             },
+                        //             child: Text(
+                        //               selectedTimeZone,
+                        //               style: TextStyle(
+                        //                 fontSize: Utils().fontSizeMultiplier(20),
+                        //                 color: Colors.white
+                        //               ),
+                        //             ),
+                        //           ),
+                        //           const SizedBox(width: 10.0),
+                        //           const FaIcon(
+                        //             FontAwesomeIcons.locationDot,
+                        //             color: Colors.white,
+                        //           ),
+                        //         ],
+                        //       ),
+                        //     ),
+                        //   ],
+                        // ),
+                        // const SizedBox(
+                        //   height: 30,
+                        // ),
                         Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.start,

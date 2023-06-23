@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_translate/flutter_translate.dart';
@@ -5,11 +7,13 @@ import 'package:rocket_launcher_app/views/moreInfoView/rocketsInfo.dart';
 import 'package:rocket_launcher_app/views/ytLive.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:scroll_snap_list/scroll_snap_list.dart';
-
+import 'package:http/http.dart' as http;
 import '../../config/imagePaths.dart';
 import '../../config/screenConfig.dart';
+import '../../data/launches_response.dart';
 import '../../utils/utils.dart';
 import '../../config/appTheme.dart';
+import '../../view models/homeViewModels/launchViewModel.dart';
 
 class LaunchInfo extends StatefulWidget {
   const LaunchInfo({Key? key}) : super(key: key);
@@ -24,7 +28,10 @@ class _LaunchInfoState extends State<LaunchInfo> {
   bool _isSearching = false;
   DateTime? selectedDate;
   DateTimeRange? selectedDateRange;
-  int length = 10;
+
+  Future<List<AllLaunch>>? _allLaunchesFuture;
+  late final AllLaunch allLaunches;
+  bool _isDataLoaded = false;
 
   Future<void> _selectDate() async {
     final DateTime? picked = await showDatePicker(
@@ -55,19 +62,33 @@ class _LaunchInfoState extends State<LaunchInfo> {
     }
   }
 
+  List<Widget> RocketInfoCardList = [];
+
+  Future<void> buildRocketInfoList() async {
+    final response = await http.get(Uri.parse('https://api.spacexdata.com/v4/launches'));
+    if (response.statusCode == 200) {
+      final launchesJson = json.decode(response.body) as List<dynamic>;
+      int iteamcount = launchesJson.length;
+      for(int i = 0; i < iteamcount; i++){
+        final alllaunch = launchesJson[i];
+        final Widget RocketInfoCard = BuildRocketInfoItemList(allLaunches: alllaunch);
+        RocketInfoCardList.add(RocketInfoCard);
+      }
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    buildRocketInfoList();
+    if (!_isDataLoaded) {
+      _allLaunchesFuture = LaunchService.fetchAllLaunches();
+      _isDataLoaded = true;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-
-    final List<Widget> RocketInfoCardList = [
-      RocketInfoItemList(),
-      RocketInfoItemList(),
-      RocketInfoItemList(),
-      RocketInfoItemList(),
-      RocketInfoItemList(),
-      RocketInfoItemList(),
-      RocketInfoItemList(),
-    ];
-
     return Scaffold(
         body: Container(
           width: ScreenConfig.width,
@@ -210,18 +231,17 @@ class _LaunchInfoState extends State<LaunchInfo> {
                   ),
                 ),
               ),
-              Container(
-                  child: CarouselSlider(
-                    options: CarouselOptions(
-                      enlargeCenterPage: true,
-                      height: ScreenConfig.heightPercent*62,
-                      initialPage: 0,
-                      scrollDirection: Axis.vertical,
-                      autoPlayInterval: const Duration(milliseconds: 5000),
-                      autoPlay: false,
-                    ),
-                    items: RocketInfoCardList,
-                  )),
+              CarouselSlider(
+                options: CarouselOptions(
+                  enlargeCenterPage: true,
+                  height: ScreenConfig.heightPercent*62,
+                  initialPage: 0,
+                  scrollDirection: Axis.vertical,
+                  autoPlayInterval: const Duration(milliseconds: 5000),
+                  autoPlay: false,
+                ),
+                items: RocketInfoCardList,
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -344,7 +364,43 @@ class _LaunchInfoState extends State<LaunchInfo> {
     );
   }
 
-  Widget RocketInfoItemList(){
+  Widget dateRangePickerButton(
+      BuildContext context,
+      ) {
+    return AlertDialog(
+      title: Text(translate('launch_tab.so')),
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          ListTile(
+            leading: const Icon(Icons.calendar_today),
+            title: Text(translate('launch_tab.sd')),
+            onTap: () {
+              Navigator.of(context).pop();
+              _selectDate();
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.calendar_view_day),
+            title: Text(translate('launch_tab.sdr')),
+            onTap: () {
+              Navigator.of(context).pop();
+              _selectDateRange();
+            },
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class BuildRocketInfoItemList extends StatelessWidget {
+  const BuildRocketInfoItemList({Key? key, required this.allLaunches}) : super(key: key);
+
+  final AllLaunch allLaunches;
+
+  @override
+  Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
       height: ScreenConfig.heightPercent*68,
@@ -362,7 +418,8 @@ class _LaunchInfoState extends State<LaunchInfo> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Text(
-                  translate('launchInfo_tab.mn'),
+                allLaunches.missionName,
+                  // translate('launchInfo_tab.mn'),
                   textAlign: TextAlign.center,
                   style: TextStyle(
                       fontFamily: 'GoogleSans',
@@ -426,63 +483,63 @@ class _LaunchInfoState extends State<LaunchInfo> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Text(
-                    "${translate('launchInfo_tab.rn')}:   ${translate('launchInfo_tab.rn_01')}",
+                    "${translate('launchInfo_tab.rn')}:   ${allLaunches.rocketName}",
                     style: const TextStyle(
                       fontSize: 22,
                       color: Colors.white,
                     ),
                   ),
                   Text(
-                    "${translate('launchInfo_tab.date')}:   2018-07-22",
+                    "${translate('launchInfo_tab.date')}:   ${allLaunches.launchDate}",
                     style: const TextStyle(
                       fontSize: 22,
                       color: Colors.white,
                     ),
                   ),
                   Text(
-                    "${translate('launchInfo_tab.time')}:   05:50:00 UTC",
+                    "${translate('launchInfo_tab.time')}:   ${allLaunches.launchTime}    UTC",
                     style: const TextStyle(
                       fontSize: 22,
                       color: Colors.white,
                     ),
                   ),
                   Text(
-                    "${translate('launchInfo_tab.ls')}:   ${translate('launchInfo_tab.ls_01')}",
+                    "${translate('launchInfo_tab.ls')}:   ${allLaunches.launchPad}",
                     style: const TextStyle(
                       fontSize: 22,
                       color: Colors.white,
                     ),
                   ),
                   Text(
-                    "${translate('launchInfo_tab.fn')}:   65",
+                    "${translate('launchInfo_tab.fn')}:   ${allLaunches.flightNumber}",
                     style: const TextStyle(
                       fontSize: 22,
                       color: Colors.white,
                     ),
                   ),
                   Text(
-                    "${translate('launchInfo_tab.py')}:   ${translate('launchInfo_tab.py_01')}",
+                    "${translate('launchInfo_tab.py')}:   ${allLaunches.payload}",
                     style: const TextStyle(
                       fontSize: 22,
                       color: Colors.white,
                     ),
                   ),
                   Text(
-                    "${translate('launchInfo_tab.n')}:    ${translate('launchInfo_tab.n_01')}",
+                    "${translate('launchInfo_tab.n')}:    ${allLaunches.nationality}",
                     style: const TextStyle(
                       fontSize: 22,
                       color: Colors.white,
                     ),
                   ),
                   Text(
-                    "${translate('launchInfo_tab.ct')}:    ${translate('launchInfo_tab.ct_01')}",
+                    "${translate('launchInfo_tab.ct')}:    ${allLaunches.customer}",
                     style: const TextStyle(
                       fontSize: 22,
                       color: Colors.white,
                     ),
                   ),
                   Text(
-                    "${translate('launchInfo_tab.orb')}:    ${translate('launchInfo_tab.orb_01')}",
+                    "${translate('launchInfo_tab.orb')}:    ${allLaunches.orbit}",
                     style: const TextStyle(
                       fontSize: 22,
                       color: Colors.white,
@@ -611,7 +668,8 @@ class _LaunchInfoState extends State<LaunchInfo> {
                         height: 8,
                       ),
                       Text(
-                        translate('launchInfo_tab.md_01'),
+                        allLaunches.missionDes,
+                        // translate('launchInfo_tab.md_01'),
                         style: const TextStyle(
                           fontSize: 15,
                           color: Colors.white,
@@ -638,7 +696,8 @@ class _LaunchInfoState extends State<LaunchInfo> {
                         height: 10,
                       ),
                       Text(
-                        translate('launchInfo_tab.lsfn'),
+                        allLaunches.launchPadFullName,
+                        // translate('launchInfo_tab.lsfn'),
                         style: const TextStyle(
                           fontSize: 20,
                           color: Colors.white,
@@ -648,7 +707,8 @@ class _LaunchInfoState extends State<LaunchInfo> {
                         height: 10,
                       ),
                       Text(
-                        translate('launchInfo_tab.lsd_01'),
+                        allLaunches.launchPadDes,
+                        // translate('launchInfo_tab.lsd_01'),
                         style: const TextStyle(
                           fontSize: 15,
                           color: Colors.white,
@@ -664,33 +724,5 @@ class _LaunchInfoState extends State<LaunchInfo> {
       ),
     );
   }
-
-  Widget dateRangePickerButton(
-      BuildContext context,
-      ) {
-    return AlertDialog(
-      title: Text(translate('launch_tab.so')),
-      content: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          ListTile(
-            leading: const Icon(Icons.calendar_today),
-            title: Text(translate('launch_tab.sd')),
-            onTap: () {
-              Navigator.of(context).pop();
-              _selectDate();
-            },
-          ),
-          ListTile(
-            leading: const Icon(Icons.calendar_view_day),
-            title: Text(translate('launch_tab.sdr')),
-            onTap: () {
-              Navigator.of(context).pop();
-              _selectDateRange();
-            },
-          ),
-        ],
-      ),
-    );
-  }
 }
+
