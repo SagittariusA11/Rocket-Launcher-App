@@ -75,6 +75,7 @@
       "green": "Verde",
       "blue": "Azul"
     },
+    "tz": "Zona horaria",
     "audio": {
       "audio": "Audio",
       "aam": "Aplicación de audio y música.",

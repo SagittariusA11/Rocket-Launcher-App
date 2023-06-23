@@ -75,6 +75,7 @@
       "green": "Green",
       "blue": "Blue"
     },
+    "tz": "Time Zone",
     "audio": {
       "audio": "Audio",
       "aam": "App audio and music",

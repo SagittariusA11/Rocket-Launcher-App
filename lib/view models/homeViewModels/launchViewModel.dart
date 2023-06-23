@@ -5,6 +5,7 @@ import 'package:http/http.dart' as http;
 class UpcomingLaunch {
   final String missionName;
   final String launchDate;
+  final String launchTime;
   final String rocketName;
   final String launchPad;
 
@@ -12,6 +13,7 @@ class UpcomingLaunch {
     required this.rocketName,
     required this.missionName,
     required this.launchDate,
+    required this.launchTime,
     required this.launchPad,
   });
 
@@ -20,6 +22,7 @@ class UpcomingLaunch {
       rocketName: json['rocket'],
       missionName: json['name'].toString().length>14?json['name'].toString().substring(0,14):json['name'],
       launchDate: json['date_utc'].toString().substring(0,10),
+      launchTime: json['date_utc'].toString().substring(12,19),
       launchPad: json['launchpad'] ?? 'N/A',
     );
   }
@@ -49,6 +52,7 @@ class ExtractRnLPName {
 class PastLaunch {
   final String missionName;
   final String launchDate;
+  final String launchTime;
   final String rocketName;
   final String launchPad;
 
@@ -56,6 +60,7 @@ class PastLaunch {
     required this.rocketName,
     required this.missionName,
     required this.launchDate,
+    required this.launchTime,
     required this.launchPad,
   });
 
@@ -64,6 +69,7 @@ class PastLaunch {
       rocketName: json['rocket'],
       missionName: json['name'].toString().length>14?json['name'].toString().substring(0,14):json['name'],
       launchDate: json['date_utc'].toString().substring(0,10),
+      launchTime: json['date_utc'].toString().substring(12,19),
       launchPad: json['launchpad'] ?? 'N/A',
     );
   }

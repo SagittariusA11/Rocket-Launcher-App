@@ -10,10 +10,12 @@ import 'package:rocket_launcher_app/utils/utils.dart';
 import 'package:rocket_launcher_app/views/homeView/launch.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../config/appTheme.dart';
+import 'package:timezone/data/latest.dart' as tz;
 
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  tz.initializeTimeZones();
   // await LaunchService.fetchUpcomingLaunches();
   // await LaunchService.fetchPastLaunches();
   await selectedAppTheme.init();

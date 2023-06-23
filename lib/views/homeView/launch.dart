@@ -499,6 +499,17 @@ class BuildUpcomingLaunchList extends StatelessWidget {
                     height: 5,
                   ),
                   Text(
+                    "${upcomingLaunches.launchTime}    UTC",
+                    // translate('launch_tab.date'),
+                    style: TextStyle(
+                      fontSize: 15,
+                      color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 3,
+                  ),
+                  Text(
                     // data[0],
                     upcomingLaunches.rocketName,
                     // translate('launch_tab.rn'),
@@ -578,6 +589,17 @@ class BuildPastLaunchList extends StatelessWidget {
                 children: [
                   Text(
                     pastLaunches.launchDate,
+                    // translate('launch_tab.date'),
+                    style: TextStyle(
+                      fontSize: 15,
+                      color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 3,
+                  ),
+                  Text(
+                    "${pastLaunches.launchTime}    UTC",
                     // translate('launch_tab.date'),
                     style: TextStyle(
                       fontSize: 15,

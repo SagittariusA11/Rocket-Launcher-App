@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_translate/flutter_translate.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:rocket_launcher_app/views/translate.dart';
 
 import '../config/imagePaths.dart';
 import '../config/screenConfig.dart';
 import '../utils/utils.dart';
 import '../config/appTheme.dart';
+import 'package:intl/intl.dart';
+import 'package:timezone/timezone.dart' as tz;
 
 class SettingsView extends StatefulWidget {
   const SettingsView({Key? key}) : super(key: key);
@@ -21,6 +24,9 @@ class _SettingsViewState extends State<SettingsView> with SingleTickerProviderSt
   bool _haptic = false;
   bool _voice_command = false;
   double _currentValue = selectedFontSizeFactor.getMode()??25.0;
+
+  String selectedTimeZone = 'UTC';
+  List<String> timeZones = tz.timeZoneDatabase.locations.keys.toList();
 
   @override
   void didChangeDependencies() {
@@ -594,6 +600,47 @@ class _SettingsViewState extends State<SettingsView> with SingleTickerProviderSt
                         const SizedBox(
                           height: 30,
                         ),
+                        Row(
+                          children: [
+                            Text(
+                              translate('settings.tz'),
+                              style: TextStyle(
+                                  fontFamily: 'GoogleSans',
+                                  fontSize: Utils().fontSizeMultiplier(30),
+                                  color: AppTheme().text,
+                                  fontWeight: FontWeight.bold
+                              ),
+                            ),
+                            SizedBox(
+                              width: ScreenConfig.widthPercent*40,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  GestureDetector(
+                                    onTap: () {
+                                      showTimeZonePicker(context);
+                                    },
+                                    child: Text(
+                                      selectedTimeZone,
+                                      style: TextStyle(
+                                        fontSize: Utils().fontSizeMultiplier(20),
+                                        color: Colors.white
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(width: 10.0),
+                                  const FaIcon(
+                                    FontAwesomeIcons.locationDot,
+                                    color: Colors.white,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 30,
+                        ),
                         Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -879,4 +926,64 @@ class _SettingsViewState extends State<SettingsView> with SingleTickerProviderSt
         )
     );
   }
+
+  void showTimeZonePicker(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      builder: (BuildContext context) {
+        return Container(
+          height: 300.0,
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text(
+                      'Select Time Zone',
+                      style: TextStyle(fontSize: 18.0),
+                    ),
+                    IconButton(
+                      icon: Icon(Icons.close),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                    ),
+                  ],
+                ),
+              ),
+              Expanded(
+                child: ListView.builder(
+                  itemCount: timeZones.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    String timeZone = timeZones[index];
+                    return ListTile(
+                      title: Text(timeZone),
+                      onTap: () {
+                        setState(() {
+                          selectedTimeZone = timeZone;
+                        });
+                        Navigator.of(context).pop();
+                      },
+                    );
+                  },
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  String convertUnixDateTimeToLocal(DateTime dateTime, String timeZone) {
+    final location = tz.getLocation(timeZone);
+    final localDateTime = tz.TZDateTime.from(dateTime, location);
+
+    final formatter = DateFormat.yMd().add_jm();
+    return formatter.format(localDateTime);
+  }
 }
+
+
