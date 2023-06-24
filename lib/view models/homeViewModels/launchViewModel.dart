@@ -30,7 +30,9 @@ class UpcomingLaunch {
 }
 
 class ExtractNamesAndDetails {
-  Future<List<String>> extractRocketAndLaunchPadNames(String rocketID, String launchPadID) async {
+  Future<List<String>> extractRocketAndLaunchPadNames(
+      String rocketID, String launchPadID
+      ) async {
     try {
       final rocketResponse = await http.get(Uri.parse("https://api.spacexdata.com/v4/rockets/$rocketID"));
       final rocketJsonData = json.decode(rocketResponse.body);
@@ -48,8 +50,7 @@ class ExtractNamesAndDetails {
   }
 
   Future<List<dynamic>> extractNamesAndDetails(
-      String? launchPadID,
-      String? payloadID,
+      String? launchPadID, String? payloadID,
       ) async {
     try {
       final launchPadResponse = await http.get(Uri.parse("https://api.spacexdata.com/v4/launchpads/$launchPadID"));
@@ -112,7 +113,6 @@ class ExtractNamesAndDetails {
   }
 
 }
-
 
 
 class PastLaunch {
@@ -219,14 +219,14 @@ class AllLaunch {
   });
 
   factory AllLaunch.fromJson(Map<String, dynamic> json) {
-    if(json['payloads'].length != 0){
+    if (json['payloads'].length != 0 && json['launchPadDetails'].length != 0) {
       return AllLaunch(
         rocketName: json['rocket'],
-        missionName: json['name'].toString().length>14?json['name'].toString().substring(0,14):json['name'],
-        launchDate: json['date_utc'].toString().substring(0,10),
-        launchTime: json['date_utc'].toString().substring(12,19),
+        missionName: json['name'].toString().length > 14 ? json['name'].toString().substring(0, 14) : json['name'],
+        launchDate: json['date_utc'].toString().substring(0, 10),
+        launchTime: json['date_utc'].toString().substring(12, 19),
         launchPad: json['launchpad'] ?? 'N/A',
-        flightNumber: json['flight_number'],
+        flightNumber: json['flight_number'].toString(),
         payload: json['payloads'][0],
         nationality: json['payloads'][2],
         customer: json['payloads'][1],
@@ -238,19 +238,20 @@ class AllLaunch {
     } else {
       return AllLaunch(
         rocketName: json['rocket'],
-        missionName: json['name'].toString().length>14?json['name'].toString().substring(0,14):json['name'],
-        launchDate: json['date_utc'].toString().substring(0,10),
-        launchTime: json['date_utc'].toString().substring(12,19),
+        missionName: json['name'].toString().length > 14 ? json['name'].toString().substring(0, 14) : json['name'],
+        launchDate: json['date_utc'].toString().substring(0, 10),
+        launchTime: json['date_utc'].toString().substring(12, 19),
         launchPad: json['launchpad'] ?? 'N/A',
-        flightNumber: json['flight_number'],
+        flightNumber: json['flight_number'].toString(),
         payload: "N/A",
         nationality: "N/A",
         customer: "N/A",
         orbit: "N/A",
         missionDes: json['details'],
-        launchPadFullName: json['launchPadDetails'][0],
-        launchPadDes: json['launchPadDetails'][1],
+        launchPadFullName: "N/A",
+        launchPadDes: "N/A",
       );
     }
   }
+
 }

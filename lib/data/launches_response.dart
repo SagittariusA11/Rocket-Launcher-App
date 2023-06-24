@@ -76,34 +76,34 @@ class LaunchService {
       for (final launchJson in launchesJson) {
         final payloadId = launchJson['payloads'][0];
         final launchPadId = launchJson['launchpad'];
-        final future = ExtractNamesAndDetails().extractNamesAndDetails(
-            launchPadId,
-            payloadId
+        final futuredetails = ExtractNamesAndDetails().extractNamesAndDetails(
+          launchPadId,
+          payloadId,
         ).then((namesAndDetails) {
           launchJson['launchPadDetails'] = [
             namesAndDetails[0][0],
             namesAndDetails[0][1]
           ];
-          if(namesAndDetails[1].length != 0){
+          if (namesAndDetails[1].length != 0) {
             launchJson['payloads'] = [
               namesAndDetails[1][0],
               namesAndDetails[1][1],
               namesAndDetails[1][2],
               namesAndDetails[1][3]
             ];
-          } else{
+          } else {
             launchJson['payloads'] = [];
           }
         });
-        futures.add(future);
+        futures.add(futuredetails);
       }
 
       await Future.wait(futures);
-
       final launches = launchesJson.map((json) => AllLaunch.fromJson(json)).toList();
       return launches;
     } else {
-      throw Exception('Failed to fetch all launches.');
+      print('Failed to fetch all launches: ${response.statusCode}');
+      return [];
     }
   }
 

@@ -449,6 +449,7 @@ class _LaunchInfoState extends State<LaunchInfo> {
             scrollDirection: Axis.vertical,
           );
         } else if (snapshot.hasError) {
+          print('Error: ${snapshot.error}');
           return Center(
             child: Text('Error: ${snapshot.error}'),
           );
