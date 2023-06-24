@@ -48,43 +48,61 @@ class ExtractNamesAndDetails {
   }
 
   Future<List<dynamic>> extractNamesAndDetails(
-      String launchPadID,
-      String payloadID
+      String? launchPadID,
+      String? payloadID,
       ) async {
     try {
-
       final launchPadResponse = await http.get(Uri.parse("https://api.spacexdata.com/v4/launchpads/$launchPadID"));
       final launchPadJsonData = json.decode(launchPadResponse.body);
-      final launchPadName = launchPadJsonData['name'];
+      String launchPadName = launchPadJsonData['name'];
+      final launchPadFullName = launchPadJsonData['full_name'];
       String launchPadDes = "";
-      if(launchPadName == "VAFB SLC 3W"){
+      if (launchPadName == "VAFB SLC 3W") {
         launchPadDes = translate('launchInfo_tab/lsd_01');
-      }else if(launchPadName == "CCSFS SLC 40"){
+      } else if (launchPadName == "CCSFS SLC 40") {
         launchPadDes = translate('launchInfo_tab/lsd_02');
-      }else if(launchPadName == "STLS"){
+      } else if (launchPadName == "STLS") {
         launchPadDes = translate('launchInfo_tab/lsd_03');
-      }else if(launchPadName == "Kwajalein Atoll"){
+      } else if (launchPadName == "Kwajalein Atoll") {
         launchPadDes = translate('launchInfo_tab/lsd_04');
-      }else if(launchPadName == "VAFB SLC 4E"){
+      } else if (launchPadName == "VAFB SLC 4E") {
         launchPadDes = translate('launchInfo_tab/lsd_05');
-      }else if(launchPadName == "KSC LC 39A"){
+      } else if (launchPadName == "KSC LC 39A") {
         launchPadDes = translate('launchInfo_tab/lsd_06');
-      }else{
+      } else {
         launchPadDes = translate('launchInfo_tab/lsd_07');
       }
+
       final launchPadDetails = [
-        launchPadJsonData['full_name'],
-        launchPadDes
+        launchPadFullName,
+        launchPadDes,
       ];
 
-      final payloadResponse = await http.get(Uri.parse("https://api.spacexdata.com/v4/payloads/$payloadID"));
-      final payloadJsonData = json.decode(payloadResponse.body);
-      final payloadDetails = [
-        payloadJsonData['name'],
-        payloadJsonData['customers'][0],
-        payloadJsonData['nationalities'][0],
-        payloadJsonData['reference_system']
-      ];
+      List payloadDetails = [];
+
+      if (payloadID != null) {
+        final payloadResponse = await http.get(Uri.parse("https://api.spacexdata.com/v4/payloads/$payloadID"));
+        final payloadJsonData = json.decode(payloadResponse.body);
+
+        if (payloadJsonData.containsKey('name') &&
+            payloadJsonData.containsKey('customers') &&
+            payloadJsonData.containsKey('nationalities') &&
+            payloadJsonData.containsKey('reference_system') &&
+            payloadJsonData['customers'].length != 0 &&
+            payloadJsonData['nationalities'].length != 0
+        ) {
+          payloadDetails = [
+            payloadJsonData['name'],
+            payloadJsonData['customers'][0],
+            payloadJsonData['nationalities'][0],
+            payloadJsonData['reference_system'],
+          ];
+        } else {
+          payloadDetails = [];
+        }
+      } else {
+        payloadDetails = [];
+      }
 
       return [launchPadDetails, payloadDetails];
     } catch (e) {
@@ -92,6 +110,7 @@ class ExtractNamesAndDetails {
       return ['null', 'null'];
     }
   }
+
 }
 
 
@@ -200,20 +219,38 @@ class AllLaunch {
   });
 
   factory AllLaunch.fromJson(Map<String, dynamic> json) {
-    return AllLaunch(
-      rocketName: json['rocket'],
-      missionName: json['name'].toString().length>14?json['name'].toString().substring(0,14):json['name'],
-      launchDate: json['date_utc'].toString().substring(0,10),
-      launchTime: json['date_utc'].toString().substring(12,19),
-      launchPad: json['launchpad'] ?? 'N/A',
-      flightNumber: json['flight_number'],
-      payload: json['payloads_01'],
-      nationality: json['nationality'],
-      customer: json['customer'],
-      orbit: json['orbit'],
-      missionDes: json['details'],
-      launchPadFullName: json['launchPadFullName'],
-      launchPadDes: json['launchPadDes'],
-    );
+    if(json['payloads'].length != 0){
+      return AllLaunch(
+        rocketName: json['rocket'],
+        missionName: json['name'].toString().length>14?json['name'].toString().substring(0,14):json['name'],
+        launchDate: json['date_utc'].toString().substring(0,10),
+        launchTime: json['date_utc'].toString().substring(12,19),
+        launchPad: json['launchpad'] ?? 'N/A',
+        flightNumber: json['flight_number'],
+        payload: json['payloads'][0],
+        nationality: json['payloads'][2],
+        customer: json['payloads'][1],
+        orbit: json['payloads'][3],
+        missionDes: json['details'],
+        launchPadFullName: json['launchPadDetails'][0],
+        launchPadDes: json['launchPadDetails'][1],
+      );
+    } else {
+      return AllLaunch(
+        rocketName: json['rocket'],
+        missionName: json['name'].toString().length>14?json['name'].toString().substring(0,14):json['name'],
+        launchDate: json['date_utc'].toString().substring(0,10),
+        launchTime: json['date_utc'].toString().substring(12,19),
+        launchPad: json['launchpad'] ?? 'N/A',
+        flightNumber: json['flight_number'],
+        payload: "N/A",
+        nationality: "N/A",
+        customer: "N/A",
+        orbit: "N/A",
+        missionDes: json['details'],
+        launchPadFullName: json['launchPadDetails'][0],
+        launchPadDes: json['launchPadDetails'][1],
+      );
+    }
   }
 }

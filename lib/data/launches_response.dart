@@ -68,8 +68,8 @@ class LaunchService {
         final launchPadId = launchJson['launchpad'];
         final future = ExtractNamesAndDetails().extractRocketAndLaunchPadNames(rocketId, launchPadId)
             .then((rnlpName) {
-          launchJson['rocket'] = rnlpName[0];
-          launchJson['launchpad'] = rnlpName[1];
+          launchJson['rocket_01'] = rnlpName[0];
+          launchJson['launchpad_01'] = rnlpName[1];
         });
         futures.add(future);
       }
@@ -84,12 +84,16 @@ class LaunchService {
             namesAndDetails[0][0],
             namesAndDetails[0][1]
           ];
-          launchJson['payloads'] = [
-            namesAndDetails[1][0],
-            namesAndDetails[1][1],
-            namesAndDetails[1][2],
-            namesAndDetails[1][3]
-          ];
+          if(namesAndDetails[1].length != 0){
+            launchJson['payloads'] = [
+              namesAndDetails[1][0],
+              namesAndDetails[1][1],
+              namesAndDetails[1][2],
+              namesAndDetails[1][3]
+            ];
+          } else{
+            launchJson['payloads'] = [];
+          }
         });
         futures.add(future);
       }
@@ -99,7 +103,7 @@ class LaunchService {
       final launches = launchesJson.map((json) => AllLaunch.fromJson(json)).toList();
       return launches;
     } else {
-      throw Exception('Failed to fetch past launches.');
+      throw Exception('Failed to fetch all launches.');
     }
   }
 

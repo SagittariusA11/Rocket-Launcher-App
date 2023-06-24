@@ -32,6 +32,7 @@ class _LaunchInfoState extends State<LaunchInfo> {
   Future<List<AllLaunch>>? _allLaunchesFuture;
   late final AllLaunch allLaunches;
   bool _isDataLoaded = false;
+  ScrollController allScrollController = ScrollController();
 
   Future<void> _selectDate() async {
     final DateTime? picked = await showDatePicker(
@@ -62,25 +63,56 @@ class _LaunchInfoState extends State<LaunchInfo> {
     }
   }
 
-  List<Widget> RocketInfoCardList = [];
+  // List<Widget> RocketInfoCardList = [];
+  //
+  // Future<void> buildRocketInfoList() async {
+  //   final response = await http.get(Uri.parse('https://api.spacexdata.com/v4/launches'));
+  //   if (response.statusCode == 200) {
+  //     final launchesJson = json.decode(response.body) as List<dynamic>;
+  //     int iteamcount = launchesJson.length;
+  //     for(int i = 0; i < iteamcount; i++){
+  //       final alllaunch = launchesJson[i];
+  //       final Widget RocketInfoCard = BuildRocketInfoItemList(allLaunches: alllaunch);
+  //       RocketInfoCardList.add(RocketInfoCard);
+  //       print(RocketInfoCardList);
+  //       print(iteamcount);
+  //     }
+  //   }
+  // }
+  //
+  // Widget _buildAllCard(){
+  //   return FutureBuilder<List<AllLaunch>>(
+  //     future: _allLaunchesFuture,
+  //     builder: (BuildContext context, AsyncSnapshot<List<AllLaunch>> snapshot) {
+  //       if (snapshot.hasData) {
+  //         final _allLaunches = snapshot.data!;
+  //         int itemCount = _allLaunches.length;
+  //         for(int i = 0; i < itemCount; i++){
+  //           final allLaunch = _allLaunches[i];
+  //           final Widget rocketInfoCard = BuildRocketInfoItemList(allLaunches: allLaunch);
+  //           RocketInfoCardList.add(rocketInfoCard);
+  //           print(RocketInfoCardList);
+  //           print(itemCount);
+  //           return BuildRocketInfoItemList(allLaunches: allLaunch);
+  //         }
+  //       } else if (snapshot.hasError) {
+  //         return Center(
+  //           child: Text('Error: ${snapshot.error}'),
+  //         );
+  //       }
+  //       return Center(
+  //         child: CircularProgressIndicator(),
+  //       );
+  //     },
+  //   );
+  // }
 
-  Future<void> buildRocketInfoList() async {
-    final response = await http.get(Uri.parse('https://api.spacexdata.com/v4/launches'));
-    if (response.statusCode == 200) {
-      final launchesJson = json.decode(response.body) as List<dynamic>;
-      int iteamcount = launchesJson.length;
-      for(int i = 0; i < iteamcount; i++){
-        final alllaunch = launchesJson[i];
-        final Widget RocketInfoCard = BuildRocketInfoItemList(allLaunches: alllaunch);
-        RocketInfoCardList.add(RocketInfoCard);
-      }
-    }
-  }
 
   @override
   void initState() {
     super.initState();
-    buildRocketInfoList();
+    // buildRocketInfoList();
+    // _buildAllCard();
     if (!_isDataLoaded) {
       _allLaunchesFuture = LaunchService.fetchAllLaunches();
       _isDataLoaded = true;
@@ -231,16 +263,21 @@ class _LaunchInfoState extends State<LaunchInfo> {
                   ),
                 ),
               ),
-              CarouselSlider(
-                options: CarouselOptions(
-                  enlargeCenterPage: true,
+              // CarouselSlider(
+              //   options: CarouselOptions(
+              //     enlargeCenterPage: true,
+              //     height: ScreenConfig.heightPercent*62,
+              //     initialPage: 0,
+              //     scrollDirection: Axis.vertical,
+              //     autoPlayInterval: const Duration(milliseconds: 5000),
+              //     autoPlay: false,
+              //   ),
+              //   items: RocketInfoCardList,
+              // ),
+              SizedBox(
                   height: ScreenConfig.heightPercent*62,
-                  initialPage: 0,
-                  scrollDirection: Axis.vertical,
-                  autoPlayInterval: const Duration(milliseconds: 5000),
-                  autoPlay: false,
-                ),
-                items: RocketInfoCardList,
+                  // width: ScreenConfig.widthPercent*85,
+                  child: _buildAllCard()
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -390,6 +427,37 @@ class _LaunchInfoState extends State<LaunchInfo> {
           ),
         ],
       ),
+    );
+  }
+
+  Widget _buildAllCard(){
+    return FutureBuilder<List<AllLaunch>>(
+      future: _allLaunchesFuture,
+      builder: (BuildContext context, AsyncSnapshot<List<AllLaunch>> snapshot) {
+        if (snapshot.hasData) {
+          final _allLaunches = snapshot.data!;
+          return ScrollSnapList(
+            listController: allScrollController,
+            itemBuilder: (BuildContext context, int index) {
+              final alllaunch = _allLaunches[index];
+              return BuildRocketInfoItemList(allLaunches: alllaunch);
+            },
+            itemSize: ScreenConfig.heightPercent*70,
+            dynamicItemSize: true,
+            dynamicItemOpacity: 0.75,
+            itemCount: _allLaunches.length,
+            scrollDirection: Axis.vertical,
+          );
+        } else if (snapshot.hasError) {
+          return Center(
+            child: Text('Error: ${snapshot.error}'),
+          );
+        } else {
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+        }
+      },
     );
   }
 }
