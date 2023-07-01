@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_translate/flutter_translate.dart';
+import 'package:provider/provider.dart';
 import 'package:rocket_launcher_app/views/moreInfoView/rocketsInfo.dart';
 import 'package:rocket_launcher_app/views/ytLive.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -24,12 +25,15 @@ class LaunchInfo extends StatefulWidget {
 
 class _LaunchInfoState extends State<LaunchInfo> {
 
+  GlobalKey __LaunchInfoStateKey = GlobalKey();
+
   TextEditingController _searchController = TextEditingController();
   bool _isSearching = false;
   DateTime? selectedDate;
   DateTimeRange? selectedDateRange;
 
   Future<List<AllLaunch>>? _allLaunchesFuture;
+  // List<AllLaunch> _allLaunchesFuture = [];
   late final AllLaunch allLaunches;
   bool _isDataLoaded = false;
   ScrollController allScrollController = ScrollController();
@@ -74,12 +78,12 @@ class _LaunchInfoState extends State<LaunchInfo> {
   //       final alllaunch = launchesJson[i];
   //       final Widget RocketInfoCard = BuildRocketInfoItemList(allLaunches: alllaunch);
   //       RocketInfoCardList.add(RocketInfoCard);
-  //       print(RocketInfoCardList);
+  //       print("\n\n5: ${RocketInfoCardList.length}\n\n");
   //       print(iteamcount);
   //     }
   //   }
   // }
-  //
+
   // Widget _buildAllCard(){
   //   return FutureBuilder<List<AllLaunch>>(
   //     future: _allLaunchesFuture,
@@ -91,7 +95,7 @@ class _LaunchInfoState extends State<LaunchInfo> {
   //           final allLaunch = _allLaunches[i];
   //           final Widget rocketInfoCard = BuildRocketInfoItemList(allLaunches: allLaunch);
   //           RocketInfoCardList.add(rocketInfoCard);
-  //           print(RocketInfoCardList);
+  //           print("\n\n5: ${RocketInfoCardList.length}\n\n");
   //           print(itemCount);
   //           return BuildRocketInfoItemList(allLaunches: allLaunch);
   //         }
@@ -113,11 +117,19 @@ class _LaunchInfoState extends State<LaunchInfo> {
     super.initState();
     // buildRocketInfoList();
     // _buildAllCard();
-    if (!_isDataLoaded) {
-      _allLaunchesFuture = LaunchService.fetchAllLaunches();
-      _isDataLoaded = true;
-    }
+    // if (!_isDataLoaded) {
+    //   _allLaunchesFuture = LaunchService.fetchAllLaunches();
+    //   _isDataLoaded = true;
+    // }
+    _allLaunchesFuture = LaunchService.fetchAllLaunches();
+    // test();
   }
+  // void test()async{
+  //   _allLaunchesFuture = await LaunchService.fetchAllLaunches();
+  //   setState(() {
+  //     print("4: $_allLaunchesFuture");
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -274,10 +286,13 @@ class _LaunchInfoState extends State<LaunchInfo> {
               //   ),
               //   items: RocketInfoCardList,
               // ),
-              SizedBox(
-                  height: ScreenConfig.heightPercent*62,
-                  // width: ScreenConfig.widthPercent*85,
-                  child: _buildAllCard()
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: SizedBox(
+                    height: ScreenConfig.heightPercent*62,
+                    // width: ScreenConfig.widthPercent*85,
+                    child: _buildAllCard()
+                ),
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -436,19 +451,30 @@ class _LaunchInfoState extends State<LaunchInfo> {
       builder: (BuildContext context, AsyncSnapshot<List<AllLaunch>> snapshot) {
         if (snapshot.hasData) {
           final _allLaunches = snapshot.data!;
-          return ScrollSnapList(
-            listController: allScrollController,
+          print(_allLaunches.length);
+          // return ScrollSnapList(
+          //   listController: allScrollController,
+          //   itemBuilder: (BuildContext context, int index) {
+          //     final alllaunch = _allLaunches[index];
+          //     return BuildRocketInfoItemList(allLaunches: alllaunch);
+          //   },
+          //   itemSize: ScreenConfig.heightPercent*70,
+          //   dynamicItemSize: true,
+          //   dynamicItemOpacity: 0.75,
+          //   itemCount: _allLaunches.length,
+          //   scrollDirection: Axis.vertical,
+          // );
+          return ListView.builder(
+            controller: allScrollController,
             itemBuilder: (BuildContext context, int index) {
               final alllaunch = _allLaunches[index];
               return BuildRocketInfoItemList(allLaunches: alllaunch);
             },
-            itemSize: ScreenConfig.heightPercent*70,
-            dynamicItemSize: true,
-            dynamicItemOpacity: 0.75,
             itemCount: _allLaunches.length,
             scrollDirection: Axis.vertical,
           );
         } else if (snapshot.hasError) {
+          print("snapshot.data: ${snapshot.data?.length}");
           print('Error: ${snapshot.error}');
           return Center(
             child: Text('Error: ${snapshot.error}'),
@@ -461,6 +487,17 @@ class _LaunchInfoState extends State<LaunchInfo> {
       },
     );
   }
+
+  // Widget _buildAllCard(){
+  //   if(_allLaunchesFuture != null){
+  //     print("\n\n***$_allLaunchesFuture ***\n\n");
+  //     return Container(
+  //       child: Text("Working"),
+  //     );
+  //   } else {
+  //     return Text("Here");
+  //   }
+  // }
 }
 
 class BuildRocketInfoItemList extends StatelessWidget {
@@ -594,26 +631,26 @@ class BuildRocketInfoItemList extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    "${translate('launchInfo_tab.n')}:    ${allLaunches.nationality}",
+                    "${translate('launchInfo_tab.n')}:    ${allLaunches.country}",
                     style: const TextStyle(
                       fontSize: 22,
                       color: Colors.white,
                     ),
                   ),
                   Text(
-                    "${translate('launchInfo_tab.ct')}:    ${allLaunches.customer}",
+                    "${translate('launchInfo_tab.ct')}:    ${allLaunches.company}",
                     style: const TextStyle(
                       fontSize: 22,
                       color: Colors.white,
                     ),
                   ),
-                  Text(
-                    "${translate('launchInfo_tab.orb')}:    ${allLaunches.orbit}",
-                    style: const TextStyle(
-                      fontSize: 22,
-                      color: Colors.white,
-                    ),
-                  ),
+                  // Text(
+                  //   "${translate('launchInfo_tab.orb')}:    ${allLaunches.orbit}",
+                  //   style: const TextStyle(
+                  //     fontSize: 22,
+                  //     color: Colors.white,
+                  //   ),
+                  // ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [

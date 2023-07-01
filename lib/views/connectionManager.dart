@@ -168,7 +168,7 @@ class _ConnectionManagerViewState extends State<ConnectionManagerView> with Sing
                   ),
                 ),
                 SizedBox(
-                  width: ScreenConfig.widthPercent*28.75,
+                  width: ScreenConfig.widthPercent*27,
                 )
               ],
             ),

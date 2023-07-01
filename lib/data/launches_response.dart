@@ -9,20 +9,20 @@ class LaunchService {
     final response = await http.get(Uri.parse('https://api.spacexdata.com/v4/launches/upcoming'));
     if (response.statusCode == 200) {
       final launchesJson = json.decode(response.body) as List<dynamic>;
-      final futures = <Future>[];
+      final futuresUpcoming = <Future>[];
 
       for (final launchJson in launchesJson) {
         final rocketId = launchJson['rocket'];
         final launchPadId = launchJson['launchpad'];
-        final future = ExtractNamesAndDetails().extractRocketAndLaunchPadNames(rocketId, launchPadId)
+        final futureUpcoming = ExtractNamesAndDetails().extractRocketAndLaunchPadNames(rocketId, launchPadId)
             .then((rnlpName) {
           launchJson['rocket'] = rnlpName[0];
           launchJson['launchpad'] = rnlpName[1];
         });
-        futures.add(future);
+        futuresUpcoming.add(futureUpcoming);
       }
 
-      await Future.wait(futures);
+      await Future.wait(futuresUpcoming);
 
       final launches = launchesJson.map((json) => UpcomingLaunch.fromJson(json)).toList();
       return launches;
@@ -35,20 +35,20 @@ class LaunchService {
     final response = await http.get(Uri.parse('https://api.spacexdata.com/v4/launches/past'));
     if (response.statusCode == 200) {
       final launchesJson = json.decode(response.body) as List<dynamic>;
-      final futures = <Future>[];
+      final futuresPast = <Future>[];
 
       for (final launchJson in launchesJson) {
         final rocketId = launchJson['rocket'];
         final launchPadId = launchJson['launchpad'];
-        final future = ExtractNamesAndDetails().extractRocketAndLaunchPadNames(rocketId, launchPadId)
+        final futurePast = ExtractNamesAndDetails().extractRocketAndLaunchPadNames(rocketId, launchPadId)
             .then((rnlpName) {
           launchJson['rocket'] = rnlpName[0];
           launchJson['launchpad'] = rnlpName[1];
         });
-        futures.add(future);
+        futuresPast.add(futurePast);
       }
 
-      await Future.wait(futures);
+      await Future.wait(futuresPast);
 
       final launches = launchesJson.map((json) => PastLaunch.fromJson(json)).toList();
       return launches;
@@ -61,45 +61,28 @@ class LaunchService {
     final response = await http.get(Uri.parse('https://api.spacexdata.com/v4/launches'));
     if (response.statusCode == 200) {
       final launchesJson = json.decode(response.body) as List<dynamic>;
-      final futures = <Future>[];
+      print("1:$launchesJson");
+      final futuresAll = <Future>[];
 
       for (final launchJson in launchesJson) {
         final rocketId = launchJson['rocket'];
         final launchPadId = launchJson['launchpad'];
-        final future = ExtractNamesAndDetails().extractRocketAndLaunchPadNames(rocketId, launchPadId)
-            .then((rnlpName) {
-          launchJson['rocket_01'] = rnlpName[0];
-          launchJson['launchpad_01'] = rnlpName[1];
+        final futureAll = ExtractNamesAndDetails().extractNamesAndDetails(rocketId, launchPadId)
+            .then((NnDes) {
+          launchJson['rocket'] = NnDes[0];
+          launchJson['country'] = NnDes[1];
+          launchJson['company'] = NnDes[2];
+          launchJson['launchpad'] = NnDes[3];
+          launchJson['launchpadFM'] = NnDes[4];
+          launchJson['launchpadDes'] = NnDes[5];
+          print("\n\n2: $NnDes\n\n");
         });
-        futures.add(future);
-      }
-      for (final launchJson in launchesJson) {
-        final payloadId = launchJson['payloads'][0];
-        final launchPadId = launchJson['launchpad'];
-        final futuredetails = ExtractNamesAndDetails().extractNamesAndDetails(
-          launchPadId,
-          payloadId,
-        ).then((namesAndDetails) {
-          launchJson['launchPadDetails'] = [
-            namesAndDetails[0][0],
-            namesAndDetails[0][1]
-          ];
-          if (namesAndDetails[1].length != 0) {
-            launchJson['payloads'] = [
-              namesAndDetails[1][0],
-              namesAndDetails[1][1],
-              namesAndDetails[1][2],
-              namesAndDetails[1][3]
-            ];
-          } else {
-            launchJson['payloads'] = [];
-          }
-        });
-        futures.add(futuredetails);
+        futuresAll.add(futureAll);
       }
 
-      await Future.wait(futures);
+      await Future.wait(futuresAll);
       final launches = launchesJson.map((json) => AllLaunch.fromJson(json)).toList();
+      print("6: $launches");
       return launches;
     } else {
       print('Failed to fetch all launches: ${response.statusCode}');

@@ -49,13 +49,19 @@ class ExtractNamesAndDetails {
     }
   }
 
-  Future<List<dynamic>> extractNamesAndDetails(
-      String? launchPadID, String? payloadID,
+  Future<List<String>> extractNamesAndDetails(
+      String rocketID, String launchPadID
       ) async {
     try {
+      final rocketResponse = await http.get(Uri.parse("https://api.spacexdata.com/v4/rockets/$rocketID"));
+      final rocketJsonData = json.decode(rocketResponse.body);
+      final rocketName = rocketJsonData['name'];
+      final company = rocketJsonData['company'];
+      final country = rocketJsonData['country'];
+
       final launchPadResponse = await http.get(Uri.parse("https://api.spacexdata.com/v4/launchpads/$launchPadID"));
       final launchPadJsonData = json.decode(launchPadResponse.body);
-      String launchPadName = launchPadJsonData['name'];
+      final launchPadName = launchPadJsonData['name'];
       final launchPadFullName = launchPadJsonData['full_name'];
       String launchPadDes = "";
       if (launchPadName == "VAFB SLC 3W") {
@@ -74,40 +80,9 @@ class ExtractNamesAndDetails {
         launchPadDes = translate('launchInfo_tab/lsd_07');
       }
 
-      final launchPadDetails = [
-        launchPadFullName,
-        launchPadDes,
-      ];
-
-      List payloadDetails = [];
-
-      if (payloadID != null) {
-        final payloadResponse = await http.get(Uri.parse("https://api.spacexdata.com/v4/payloads/$payloadID"));
-        final payloadJsonData = json.decode(payloadResponse.body);
-
-        if (payloadJsonData.containsKey('name') &&
-            payloadJsonData.containsKey('customers') &&
-            payloadJsonData.containsKey('nationalities') &&
-            payloadJsonData.containsKey('reference_system') &&
-            payloadJsonData['customers'].length != 0 &&
-            payloadJsonData['nationalities'].length != 0
-        ) {
-          payloadDetails = [
-            payloadJsonData['name'],
-            payloadJsonData['customers'][0],
-            payloadJsonData['nationalities'][0],
-            payloadJsonData['reference_system'],
-          ];
-        } else {
-          payloadDetails = [];
-        }
-      } else {
-        payloadDetails = [];
-      }
-
-      return [launchPadDetails, payloadDetails];
+      return [rocketName, country, company, launchPadName, launchPadFullName, launchPadDes];
     } catch (e) {
-      print('Failed to extract names and details from API response: $e');
+      print('Failed to extract rocket and launch pad names from API response: $e');
       return ['null', 'null'];
     }
   }
@@ -195,9 +170,8 @@ class AllLaunch {
   final String launchPad;
   final String flightNumber;
   final String payload;
-  final String nationality;
-  final String customer;
-  final String orbit;
+  final String country;
+  final String company;
   final String missionDes;
   final String launchPadFullName;
   final String launchPadDes;
@@ -205,9 +179,8 @@ class AllLaunch {
   AllLaunch({
     required this.flightNumber,
     required this.payload,
-    required this.nationality,
-    required this.customer,
-    required this.orbit,
+    required this.country,
+    required this.company,
     required this.missionDes,
     required this.launchPadFullName,
     required this.launchPadDes,
@@ -219,7 +192,7 @@ class AllLaunch {
   });
 
   factory AllLaunch.fromJson(Map<String, dynamic> json) {
-    if (json['payloads'].length != 0 && json['launchPadDetails'].length != 0) {
+    if (json['payloads'].length != 0) {
       return AllLaunch(
         rocketName: json['rocket'],
         missionName: json['name'].toString().length > 14 ? json['name'].toString().substring(0, 14) : json['name'],
@@ -227,13 +200,12 @@ class AllLaunch {
         launchTime: json['date_utc'].toString().substring(12, 19),
         launchPad: json['launchpad'] ?? 'N/A',
         flightNumber: json['flight_number'].toString(),
-        payload: json['payloads'][0],
-        nationality: json['payloads'][2],
-        customer: json['payloads'][1],
-        orbit: json['payloads'][3],
+        payload: 'YES',
+        country: json['country'],
+        company: json['company'],
         missionDes: json['details'],
-        launchPadFullName: json['launchPadDetails'][0],
-        launchPadDes: json['launchPadDetails'][1],
+        launchPadFullName: json['launchpadFM'],
+        launchPadDes: json['launchpadDes'],
       );
     } else {
       return AllLaunch(
@@ -243,13 +215,12 @@ class AllLaunch {
         launchTime: json['date_utc'].toString().substring(12, 19),
         launchPad: json['launchpad'] ?? 'N/A',
         flightNumber: json['flight_number'].toString(),
-        payload: "N/A",
-        nationality: "N/A",
-        customer: "N/A",
-        orbit: "N/A",
+        payload: 'NO',
+        country: json['country'],
+        company: json['company'],
         missionDes: json['details'],
-        launchPadFullName: "N/A",
-        launchPadDes: "N/A",
+        launchPadFullName: json['launchpadFM'],
+        launchPadDes: json['launchpadDes'],
       );
     }
   }
