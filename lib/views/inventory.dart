@@ -6,8 +6,10 @@ import 'package:scroll_snap_list/scroll_snap_list.dart';
 
 import '../config/screenConfig.dart';
 import '../config/imagePaths.dart';
+import '../data/inventory_response.dart';
 import '../utils/utils.dart';
 import '../config/appTheme.dart';
+import '../view models/inventoryViewModel.dart';
 
 class InventoryView extends StatefulWidget {
   const InventoryView({Key? key}) : super(key: key);
@@ -17,6 +19,7 @@ class InventoryView extends StatefulWidget {
 }
 
 class _InventoryViewState extends State<InventoryView> with SingleTickerProviderStateMixin {
+
   int length = 10;
   ScrollController rocketScrollController = ScrollController();
   ScrollController satelliteScrollController = ScrollController();
@@ -33,9 +36,16 @@ class _InventoryViewState extends State<InventoryView> with SingleTickerProvider
   bool isGeostationarySatellitesChecked = false;
   bool isAllSatellitesChecked = true;
 
+  Future<List<RocketListInventory>>? _allRocketsFuture;
+  Future<List<StarlinkListInventory>>? _allStarlinkFuture;
+  ScrollController allRocketsScrollController = ScrollController();
+  ScrollController allStarlinkScrollController = ScrollController();
+
   @override
   void initState() {
     super.initState();
+    _allRocketsFuture = InventoryService.fetchallRockets();
+    _allStarlinkFuture = InventoryService.fetchallStarlink();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       rocketScrollController.jumpTo(ScreenConfig.heightPercent*37);
       satelliteScrollController.jumpTo(ScreenConfig.heightPercent*58);
@@ -98,6 +108,14 @@ class _InventoryViewState extends State<InventoryView> with SingleTickerProvider
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
+                          IconButton(
+                            icon: Icon(
+                              Icons.search,
+                              color: Colors.white,
+                              size: 30,
+                            ),
+                            onPressed: _isSearching ? () { } : null,
+                          ),
                           SizedBox(
                             width: ScreenConfig.widthPercent*12,
                             child: TextFormField(
@@ -117,14 +135,6 @@ class _InventoryViewState extends State<InventoryView> with SingleTickerProvider
                                 });
                               },
                             ),
-                          ),
-                          IconButton(
-                            icon: Icon(
-                              Icons.search,
-                              color: Colors.white,
-                              size: 30,
-                            ),
-                            onPressed: _isSearching ? () { } : null,
                           ),
                         ],
                       ),
@@ -628,7 +638,243 @@ class _InventoryViewState extends State<InventoryView> with SingleTickerProvider
     );
   }
 
-  static Widget RocketsItemList(){
+  // static Widget RocketsItemList(){
+  //   return Row(
+  //     crossAxisAlignment: CrossAxisAlignment.center,
+  //     children: [
+  //       Container(
+  //         height: ScreenConfig.heightPercent*40,
+  //         width: ScreenConfig.heightPercent*37*0.385,
+  //         decoration: const BoxDecoration(
+  //             image: DecorationImage(
+  //                 image: AssetImage(ImagePaths.rocket),
+  //                 fit: BoxFit.fill
+  //             )
+  //         ),
+  //       ),
+  //       Container(
+  //         height: ScreenConfig.heightPercent*29,
+  //         width: ScreenConfig.heightPercent*35*0.615,
+  //         decoration: BoxDecoration(
+  //           borderRadius: BorderRadius.circular(25),
+  //           color: AppTheme().bg_color.withOpacity(0.5),
+  //         ),
+  //         child: Column(
+  //           children: [
+  //             Padding(
+  //               padding: const EdgeInsets.all(10.0),
+  //               child: Text(
+  //                 translate('inventory.rn'),
+  //                 style: TextStyle(
+  //                   fontSize: 23,
+  //                   color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
+  //                 ),
+  //                 textAlign: TextAlign.center,
+  //               ),
+  //             ),
+  //             const SizedBox(
+  //               height: 10,
+  //             ),
+  //             Column(
+  //               crossAxisAlignment: CrossAxisAlignment.start,
+  //               children: [
+  //                 Text(
+  //                   translate('inventory.date'),
+  //                   style: TextStyle(
+  //                     fontSize: 20,
+  //                     color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
+  //                   ),
+  //                 ),
+  //                 const SizedBox(
+  //                   height: 5,
+  //                 ),
+  //                 Text(
+  //                   translate('inventory.comp'),
+  //                   style: TextStyle(
+  //                     fontSize: 20,
+  //                     color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
+  //                   ),
+  //                 ),
+  //                 const SizedBox(
+  //                   height: 5,
+  //                 ),
+  //                 Text(
+  //                   translate('inventory.c'),
+  //                   style: TextStyle(
+  //                     fontSize: 20,
+  //                     color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
+  //                   ),
+  //                 ),
+  //                 const SizedBox(
+  //                   height: 5,
+  //                 ),
+  //                 Text(
+  //                   translate('inventory.s'),
+  //                   style: TextStyle(
+  //                     fontSize: 20,
+  //                     color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
+  //                   ),
+  //                 ),
+  //               ],
+  //             )
+  //           ],
+  //         ),
+  //       )
+  //     ],
+  //   );
+  // }
+
+  Widget _buildRocketsCard() {
+    return FutureBuilder<List<RocketListInventory>>(
+      future: _allRocketsFuture,
+      builder: (BuildContext context, AsyncSnapshot<List<RocketListInventory>> snapshot) {
+        if (snapshot.hasData) {
+          final _allRockets = snapshot.data!;
+          return ScrollSnapList(
+            listController: allRocketsScrollController,
+            itemBuilder: (BuildContext context, int index) {
+              final allRocket = _allRockets[index];
+              return BuildRocketsItemList(allRockets: allRocket);
+            },
+            itemSize: ScreenConfig.heightPercent*36.925,
+            dynamicItemSize: true,
+            dynamicItemOpacity: 0.75,
+            itemCount: _allRockets.length,
+          );
+        } else if (snapshot.hasError) {
+          return Center(
+            child: Text('Error: ${snapshot.error}'),
+          );
+        } else {
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+        }
+      },
+    );
+  }
+
+  // static Widget SatellitesItemList(){
+  //   return Row(
+  //     crossAxisAlignment: CrossAxisAlignment.center,
+  //     children: [
+  //       Container(
+  //         height: ScreenConfig.heightPercent*33,
+  //         width: ScreenConfig.heightPercent*28*0.385,
+  //         decoration: const BoxDecoration(
+  //             image: DecorationImage(
+  //                 image: AssetImage(ImagePaths.satellites),
+  //                 fit: BoxFit.fill
+  //             )
+  //         ),
+  //       ),
+  //       Container(
+  //         height: ScreenConfig.heightPercent*23,
+  //         width: ScreenConfig.heightPercent*28*0.615,
+  //         decoration: BoxDecoration(
+  //           borderRadius: BorderRadius.circular(18),
+  //           color: AppTheme().bg_color.withOpacity(0.5),
+  //         ),
+  //         child: Column(
+  //           children: [
+  //             Padding(
+  //               padding: const EdgeInsets.all(10.0),
+  //               child: Text(
+  //                 translate('inventory.sn'),
+  //                 style: TextStyle(
+  //                   fontSize: 20,
+  //                   color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
+  //                 ),
+  //                 textAlign: TextAlign.center,
+  //               ),
+  //             ),
+  //             Column(
+  //               crossAxisAlignment: CrossAxisAlignment.start,
+  //               children: [
+  //                 Text(
+  //                   translate('inventory.date'),
+  //                   style: TextStyle(
+  //                     fontSize: 17,
+  //                     color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
+  //                   ),
+  //                 ),
+  //                 const SizedBox(
+  //                   height: 5,
+  //                 ),
+  //                 Text(
+  //                   translate('inventory.comp'),
+  //                   style: TextStyle(
+  //                     fontSize: 18,
+  //                     color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
+  //                   ),
+  //                 ),
+  //                 const SizedBox(
+  //                   height: 5,
+  //                 ),
+  //                 Text(
+  //                   translate('inventory.c'),
+  //                   style: TextStyle(
+  //                     fontSize: 18,
+  //                     color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
+  //                   ),
+  //                 ),
+  //                 const SizedBox(
+  //                   height: 5,
+  //                 ),
+  //                 Text(
+  //                   translate('inventory.type'),
+  //                   style: TextStyle(
+  //                     fontSize: 18,
+  //                     color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
+  //                   ),
+  //                 ),
+  //               ],
+  //             )
+  //           ],
+  //         ),
+  //       )
+  //     ],
+  //   );
+  // }
+
+  Widget _buildSatellitesCard() {
+    return FutureBuilder<List<StarlinkListInventory>>(
+      future: _allStarlinkFuture,
+      builder: (BuildContext context, AsyncSnapshot<List<StarlinkListInventory>> snapshot) {
+        if (snapshot.hasData) {
+          final _allStarlinks = snapshot.data!;
+          return ScrollSnapList(
+            listController: allStarlinkScrollController,
+            itemBuilder: (BuildContext context, int index) {
+              final allStarlink = _allStarlinks[index];
+              return BuildStarlinksItemList(allStarlink: allStarlink);
+            },
+            itemSize: ScreenConfig.heightPercent*29.925,
+            dynamicItemSize: true,
+            dynamicItemOpacity: 0.75,
+            itemCount: _allStarlinks.length,
+          );
+        } else if (snapshot.hasError) {
+          return Center(
+            child: Text('Error: ${snapshot.error}'),
+          );
+        } else {
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+        }
+      },
+    );
+  }
+}
+
+class BuildRocketsItemList extends StatelessWidget {
+  const BuildRocketsItemList({Key? key, required this.allRockets}) : super(key: key);
+
+  final RocketListInventory allRockets;
+
+  @override
+  Widget build(BuildContext context) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
@@ -654,7 +900,8 @@ class _InventoryViewState extends State<InventoryView> with SingleTickerProvider
               Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: Text(
-                  translate('inventory.rn'),
+                  allRockets.rocketName,
+                  // translate('inventory.rn'),
                   style: TextStyle(
                     fontSize: 23,
                     color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
@@ -669,7 +916,8 @@ class _InventoryViewState extends State<InventoryView> with SingleTickerProvider
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    translate('inventory.date'),
+                    allRockets.firstFlight,
+                    // translate('inventory.date'),
                     style: TextStyle(
                       fontSize: 20,
                       color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
@@ -679,7 +927,8 @@ class _InventoryViewState extends State<InventoryView> with SingleTickerProvider
                     height: 5,
                   ),
                   Text(
-                    translate('inventory.comp'),
+                    // translate('inventory.comp'),
+                    allRockets.company,
                     style: TextStyle(
                       fontSize: 20,
                       color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
@@ -689,7 +938,8 @@ class _InventoryViewState extends State<InventoryView> with SingleTickerProvider
                     height: 5,
                   ),
                   Text(
-                    translate('inventory.c'),
+                    // translate('inventory.c'),
+                    allRockets.country,
                     style: TextStyle(
                       fontSize: 20,
                       color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
@@ -699,7 +949,7 @@ class _InventoryViewState extends State<InventoryView> with SingleTickerProvider
                     height: 5,
                   ),
                   Text(
-                    translate('inventory.s'),
+                    "${translate('inventory.s')}: ${allRockets.stages}",
                     style: TextStyle(
                       fontSize: 20,
                       color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
@@ -713,28 +963,15 @@ class _InventoryViewState extends State<InventoryView> with SingleTickerProvider
       ],
     );
   }
+}
 
-  Widget _buildRocketsCard() {
-    return ScrollSnapList(
-      listController: rocketScrollController,
-      itemBuilder: (context, index) {
-        return GestureDetector(
-          onTap: (){
-            showDialog(
-                context: context,
-                builder: (context) => RocketsInfo.rocketInfo(context)
-            );
-          },
-          child: RocketsItemList(),
-        );
-      },
-      itemSize: ScreenConfig.heightPercent*36.925,
-      dynamicItemSize: true,
-      dynamicItemOpacity: 0.75,
-      itemCount: length,
-    );
-  }
-  static Widget SatellitesItemList(){
+class BuildStarlinksItemList extends StatelessWidget {
+  const BuildStarlinksItemList({Key? key, required this.allStarlink}) : super(key: key);
+
+  final StarlinkListInventory allStarlink;
+
+  @override
+  Widget build(BuildContext context) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
@@ -760,7 +997,8 @@ class _InventoryViewState extends State<InventoryView> with SingleTickerProvider
               Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: Text(
-                  translate('inventory.sn'),
+                  allStarlink.satName,
+                  // translate('inventory.sn'),
                   style: TextStyle(
                     fontSize: 20,
                     color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
@@ -772,7 +1010,8 @@ class _InventoryViewState extends State<InventoryView> with SingleTickerProvider
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    translate('inventory.date'),
+                    allStarlink.launchDate,
+                    // translate('inventory.date'),
                     style: TextStyle(
                       fontSize: 17,
                       color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
@@ -782,9 +1021,9 @@ class _InventoryViewState extends State<InventoryView> with SingleTickerProvider
                     height: 5,
                   ),
                   Text(
-                    translate('inventory.comp'),
+                    "${translate('inventory.height')}: ${allStarlink.height}  Km",
                     style: TextStyle(
-                      fontSize: 18,
+                      fontSize: 16,
                       color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
                     ),
                   ),
@@ -792,9 +1031,9 @@ class _InventoryViewState extends State<InventoryView> with SingleTickerProvider
                     height: 5,
                   ),
                   Text(
-                    translate('inventory.c'),
+                    "${translate('inventory.velocity')}: ${allStarlink.velocity}  Kms",
                     style: TextStyle(
-                      fontSize: 18,
+                      fontSize: 15,
                       color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
                     ),
                   ),
@@ -802,7 +1041,7 @@ class _InventoryViewState extends State<InventoryView> with SingleTickerProvider
                     height: 5,
                   ),
                   Text(
-                    translate('inventory.type'),
+                    "${translate('inventory.site')}: ${allStarlink.site}",
                     style: TextStyle(
                       fontSize: 18,
                       color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
@@ -816,26 +1055,7 @@ class _InventoryViewState extends State<InventoryView> with SingleTickerProvider
       ],
     );
   }
-
-  Widget _buildSatellitesCard() {
-    return ScrollSnapList(
-      listController: satelliteScrollController,
-      itemBuilder: (context, index) {
-        return GestureDetector(
-          onTap: (){
-            showDialog(
-                context: context,
-                builder: (context) => PayloadInfo.starlinkInfo(context)
-            );
-          },
-          child: SatellitesItemList(),
-        );
-      },
-      itemSize: ScreenConfig.heightPercent*29.925,
-      dynamicItemSize: true,
-      dynamicItemOpacity: 0.75,
-      itemCount: length,
-    );
-  }
 }
+
+
 

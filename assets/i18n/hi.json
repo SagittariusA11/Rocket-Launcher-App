@@ -207,7 +207,10 @@
     "others": "अन्य",
     "all": "सभी",
     "starlink": "Starlink",
-    "geo": "भू-स्थिर"
+    "geo": "भू-स्थिर",
+    "height": "ऊंचाई",
+    "velocity": "रफ़्तार",
+    "site": "जगह"
   },
 
   "satellite_info": {

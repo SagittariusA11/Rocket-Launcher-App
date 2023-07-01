@@ -199,48 +199,6 @@ class _LaunchInfoState extends State<LaunchInfo> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Container(
-                            margin: const EdgeInsets.symmetric(horizontal: 15),
-                            decoration: const BoxDecoration(
-                              border: Border(bottom: BorderSide(color: Colors.white, width: 1)),
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                SizedBox(
-                                  width: ScreenConfig.widthPercent*12,
-                                  child: TextFormField(
-                                    controller: _searchController,
-                                    decoration: InputDecoration(
-                                        filled: true,
-                                        fillColor: Colors.transparent,
-                                        hintText: translate('inventory.search'),
-                                        hintStyle: const TextStyle(
-                                            color: Colors.white
-                                        ),
-                                        border: InputBorder.none
-                                    ),
-                                    onChanged: (value) {
-                                      setState(() {
-                                        _isSearching = value.isNotEmpty;
-                                      });
-                                    },
-                                  ),
-                                ),
-                                IconButton(
-                                    icon: const Icon(
-                                      Icons.search,
-                                      color: Colors.white,
-                                      size: 30,
-                                    ),
-                                    onPressed: () {
-                                      print("Search");
-                                    }
-                                ),
-                              ],
-                            ),
-                          ),
                           IconButton(
                             onPressed: () { print("Filter"); },
                             icon: const FaIcon(
@@ -264,6 +222,48 @@ class _LaunchInfoState extends State<LaunchInfo> {
                               Icons.calendar_month_rounded,
                               color: Colors.white,
                               size: 40,
+                            ),
+                          ),
+                          Container(
+                            margin: const EdgeInsets.symmetric(horizontal: 15),
+                            decoration: const BoxDecoration(
+                              border: Border(bottom: BorderSide(color: Colors.white, width: 1)),
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                IconButton(
+                                    icon: const Icon(
+                                      Icons.search,
+                                      color: Colors.white,
+                                      size: 30,
+                                    ),
+                                    onPressed: () {
+                                      print("Search");
+                                    }
+                                ),
+                                SizedBox(
+                                  width: ScreenConfig.widthPercent*12,
+                                  child: TextFormField(
+                                    controller: _searchController,
+                                    decoration: InputDecoration(
+                                        filled: true,
+                                        fillColor: Colors.transparent,
+                                        hintText: translate('inventory.search'),
+                                        hintStyle: const TextStyle(
+                                            color: Colors.white
+                                        ),
+                                        border: InputBorder.none
+                                    ),
+                                    onChanged: (value) {
+                                      setState(() {
+                                        _isSearching = value.isNotEmpty;
+                                      });
+                                    },
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                           const SizedBox(
@@ -509,7 +509,7 @@ class BuildRocketInfoItemList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
-      height: ScreenConfig.heightPercent*68,
+      height: ScreenConfig.heightPercent*60,
       width: ScreenConfig.width,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(50),
@@ -747,83 +747,86 @@ class BuildRocketInfoItemList extends StatelessWidget {
                 ],
               )
           ),
-          SizedBox(
-            width: ScreenConfig.widthPercent*44,
-            child: Column(
-              children: [
-                Container(
-                  padding: const EdgeInsets.only(top: 5),
-                  height: ScreenConfig.heightPercent*16,
-                  width: ScreenConfig.widthPercent*44,
-                  decoration: const BoxDecoration(
-                    border: Border(
-                      bottom: BorderSide(width: 3.0, color: Colors.white),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 20),
+            child: SizedBox(
+              width: ScreenConfig.widthPercent*44,
+              child: Column(
+                children: [
+                  Container(
+                    padding: const EdgeInsets.only(top: 5),
+                    height: ScreenConfig.heightPercent*16,
+                    width: ScreenConfig.widthPercent*40,
+                    decoration: const BoxDecoration(
+                      border: Border(
+                        bottom: BorderSide(width: 3.0, color: Colors.white),
+                      ),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "${translate('launchInfo_tab.md')}:",
+                          style: const TextStyle(
+                            fontSize: 25,
+                            color: Colors.white,
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 8,
+                        ),
+                        Text(
+                          allLaunches.missionDes,
+                          // translate('launchInfo_tab.md_01'),
+                          style: const TextStyle(
+                            fontSize: 15,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "${translate('launchInfo_tab.md')}:",
-                        style: const TextStyle(
-                          fontSize: 25,
-                          color: Colors.white,
+                  Container(
+                    padding: const EdgeInsets.only(top: 10),
+                    height: ScreenConfig.heightPercent*30,
+                    width: ScreenConfig.widthPercent*40,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "${translate('launchInfo_tab.lsd')}:",
+                          style: const TextStyle(
+                            fontSize: 25,
+                            color: Colors.white,
+                          ),
                         ),
-                      ),
-                      const SizedBox(
-                        height: 8,
-                      ),
-                      Text(
-                        allLaunches.missionDes,
-                        // translate('launchInfo_tab.md_01'),
-                        style: const TextStyle(
-                          fontSize: 15,
-                          color: Colors.white,
+                        const SizedBox(
+                          height: 10,
                         ),
-                      ),
-                    ],
-                  ),
-                ),
-                Container(
-                  padding: const EdgeInsets.only(top: 10),
-                  height: ScreenConfig.heightPercent*30,
-                  width: ScreenConfig.widthPercent*44,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "${translate('launchInfo_tab.lsd')}:",
-                        style: const TextStyle(
-                          fontSize: 25,
-                          color: Colors.white,
+                        Text(
+                          allLaunches.launchPadFullName,
+                          // translate('launchInfo_tab.lsfn'),
+                          style: const TextStyle(
+                            fontSize: 20,
+                            color: Colors.white,
+                          ),
                         ),
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      Text(
-                        allLaunches.launchPadFullName,
-                        // translate('launchInfo_tab.lsfn'),
-                        style: const TextStyle(
-                          fontSize: 20,
-                          color: Colors.white,
+                        const SizedBox(
+                          height: 10,
                         ),
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      Text(
-                        allLaunches.launchPadDes,
-                        // translate('launchInfo_tab.lsd_01'),
-                        style: const TextStyle(
-                          fontSize: 15,
-                          color: Colors.white,
+                        Text(
+                          // translate(allLaunches.launchPadDes),
+                          translate('launchInfo_tab.lsd_0${allLaunches.launchPadDes}'),
+                          style: const TextStyle(
+                            fontSize: 15,
+                            color: Colors.white,
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
-                )
-              ],
+                      ],
+                    ),
+                  )
+                ],
+              ),
             ),
           ),
         ],

@@ -213,7 +213,10 @@
     "c": "Country",
     "s": "Stages",
     "sn": "Satellite\nName",
-    "type": "Type"
+    "type": "Type",
+    "height": "Height",
+    "velocity": "Velocity",
+    "site": "Site"
   },
 
   "satellite_info": {

@@ -206,7 +206,10 @@
     "others": "Otros",
     "all": "Todo",
     "starlink": "Starlink",
-    "geo": "Geoestacionario"
+    "geo": "Geoestacionario",
+    "height": "Altura",
+    "velocity": "Velocidad",
+    "site": "Sitio"
   },
 
   "satellite_info": {

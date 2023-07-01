@@ -65,19 +65,19 @@ class ExtractNamesAndDetails {
       final launchPadFullName = launchPadJsonData['full_name'];
       String launchPadDes = "";
       if (launchPadName == "VAFB SLC 3W") {
-        launchPadDes = translate('launchInfo_tab/lsd_01');
+        launchPadDes = '1';
       } else if (launchPadName == "CCSFS SLC 40") {
-        launchPadDes = translate('launchInfo_tab/lsd_02');
+        launchPadDes = '2';
       } else if (launchPadName == "STLS") {
-        launchPadDes = translate('launchInfo_tab/lsd_03');
+        launchPadDes = '3';
       } else if (launchPadName == "Kwajalein Atoll") {
-        launchPadDes = translate('launchInfo_tab/lsd_04');
+        launchPadDes = '4';
       } else if (launchPadName == "VAFB SLC 4E") {
-        launchPadDes = translate('launchInfo_tab/lsd_05');
+        launchPadDes = '5';
       } else if (launchPadName == "KSC LC 39A") {
-        launchPadDes = translate('launchInfo_tab/lsd_06');
+        launchPadDes = '6';
       } else {
-        launchPadDes = translate('launchInfo_tab/lsd_07');
+        launchPadDes = '7';
       }
 
       return [rocketName, country, company, launchPadName, launchPadFullName, launchPadDes];

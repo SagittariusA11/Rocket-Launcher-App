@@ -150,48 +150,6 @@ class _LaunchViewState extends State<LaunchView> with SingleTickerProviderStateM
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Container(
-                            margin: const EdgeInsets.symmetric(horizontal: 15),
-                            decoration: const BoxDecoration(
-                              border: Border(bottom: BorderSide(color: Colors.white, width: 1)),
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                SizedBox(
-                                  width: ScreenConfig.widthPercent*12,
-                                  child: TextFormField(
-                                    controller: _searchController,
-                                    decoration: InputDecoration(
-                                        filled: true,
-                                        fillColor: Colors.transparent,
-                                        hintText: translate('inventory.search'),
-                                        hintStyle: const TextStyle(
-                                            color: Colors.white
-                                        ),
-                                        border: InputBorder.none
-                                    ),
-                                    onChanged: (value) {
-                                      setState(() {
-                                        _isSearching = value.isNotEmpty;
-                                      });
-                                    },
-                                  ),
-                                ),
-                                IconButton(
-                                  icon: const Icon(
-                                    Icons.search,
-                                    color: Colors.white,
-                                    size: 30,
-                                  ),
-                                  onPressed: () {
-                                    print("Search");
-                                  }
-                                ),
-                              ],
-                            ),
-                          ),
                           IconButton(
                             onPressed: () { print("Filter"); },
                             icon: const FaIcon(
@@ -215,6 +173,48 @@ class _LaunchViewState extends State<LaunchView> with SingleTickerProviderStateM
                               Icons.calendar_month_rounded,
                               color: Colors.white,
                               size: 40,
+                            ),
+                          ),
+                          Container(
+                            margin: const EdgeInsets.symmetric(horizontal: 15),
+                            decoration: const BoxDecoration(
+                              border: Border(bottom: BorderSide(color: Colors.white, width: 1)),
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                IconButton(
+                                    icon: const Icon(
+                                      Icons.search,
+                                      color: Colors.white,
+                                      size: 30,
+                                    ),
+                                    onPressed: () {
+                                      print("Search");
+                                    }
+                                ),
+                                SizedBox(
+                                  width: ScreenConfig.widthPercent*12,
+                                  child: TextFormField(
+                                    controller: _searchController,
+                                    decoration: InputDecoration(
+                                        filled: true,
+                                        fillColor: Colors.transparent,
+                                        hintText: translate('inventory.search'),
+                                        hintStyle: const TextStyle(
+                                            color: Colors.white
+                                        ),
+                                        border: InputBorder.none
+                                    ),
+                                    onChanged: (value) {
+                                      setState(() {
+                                        _isSearching = value.isNotEmpty;
+                                      });
+                                    },
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                           const SizedBox(
