@@ -69,7 +69,7 @@ class LaunchService {
         final launchPadId = launchJson['launchpad'];
         final futureAll = ExtractNamesAndDetails().extractNamesAndDetails(rocketId, launchPadId)
             .then((NnDes) {
-          launchJson['rocket'] = NnDes[0];
+          launchJson['rocket_01'] = NnDes[0];
           launchJson['country'] = NnDes[1];
           launchJson['company'] = NnDes[2];
           launchJson['launchpad'] = NnDes[3];

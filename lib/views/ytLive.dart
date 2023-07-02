@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../config/appTheme.dart';
 import '../config/imagePaths.dart';
@@ -10,6 +11,7 @@ import '../utils/utils.dart';
 class YTLive{
   static Widget ytLive(
       BuildContext context,
+      Map<String, String> YTLiveContent,
       ){
     return Material(
       child: Center(
@@ -66,19 +68,37 @@ class YTLive{
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(
-                                translate('yt_live.mn'),
-                                style: const TextStyle(
-                                    fontSize: 30,
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold
-                                ),
+                              Row(
+                                children: [
+                                  Text(
+                                    YTLiveContent['yt_live_mn']!,
+                                    // translate('yt_live.mn'),
+                                    style: const TextStyle(
+                                        fontSize: 30,
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    width: 30,
+                                  ),
+                                  IconButton(
+                                      onPressed: () {
+                                        launchUrl(Uri.parse(YTLiveContent['yt_live_link']!));
+                                      },
+                                      icon: const Icon(
+                                        FontAwesomeIcons.youtube,
+                                        color: Colors.white,
+                                        size: 30,
+                                      )
+                                  )
+                                ],
                               ),
                               const SizedBox(
                                 height: 40,
                               ),
                               Text(
-                                "${translate('yt_live.rn')}:    Rocket Name",
+                                "${translate('yt_live.rn')}:    ${YTLiveContent['yt_live_rn']}",
                                 style: TextStyle(
                                     fontSize: Utils().fontSizeMultiplier(20),
                                     color: Colors.white,
@@ -88,7 +108,7 @@ class YTLive{
                                 height: 15,
                               ),
                               Text(
-                                "${translate('yt_live.date')}:    20-12-2022",
+                                "${translate('yt_live.date')}:    ${YTLiveContent['yt_live_date']}",
                                 style: TextStyle(
                                   fontSize: Utils().fontSizeMultiplier(20),
                                   color: Colors.white,
@@ -98,7 +118,7 @@ class YTLive{
                                 height: 15,
                               ),
                               Text(
-                                "${translate('yt_live.time')}:    16:15:35 UTC",
+                                "${translate('yt_live.time')}:    ${YTLiveContent['yt_live_time']} UTC",
                                 style: TextStyle(
                                   fontSize: Utils().fontSizeMultiplier(20),
                                   color: Colors.white,
@@ -108,7 +128,7 @@ class YTLive{
                                 height: 15,
                               ),
                               Text(
-                                "${translate('yt_live.ls')}:    Cape Canaveral Space Launch",
+                                "${translate('yt_live.ls')}:    ${YTLiveContent['yt_live_ls']}",
                                 style: TextStyle(
                                   fontSize: Utils().fontSizeMultiplier(20),
                                   color: Colors.white,

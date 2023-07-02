@@ -175,6 +175,11 @@ class AllLaunch {
   final String missionDes;
   final String launchPadFullName;
   final String launchPadDes;
+  final String article;
+  final String wiki;
+  final List imgs;
+  final String yt;
+  final String rocketID;
 
   AllLaunch({
     required this.flightNumber,
@@ -189,40 +194,33 @@ class AllLaunch {
     required this.launchDate,
     required this.launchTime,
     required this.launchPad,
+    required this.article,
+    required this.wiki,
+    required this.imgs,
+    required this.yt,
+    required this.rocketID
   });
 
   factory AllLaunch.fromJson(Map<String, dynamic> json) {
-    if (json['payloads'].length != 0) {
-      return AllLaunch(
-        rocketName: json['rocket'],
-        missionName: json['name'].toString().length > 14 ? json['name'].toString().substring(0, 14) : json['name'],
-        launchDate: json['date_utc'].toString().substring(0, 10),
-        launchTime: json['date_utc'].toString().substring(12, 19),
-        launchPad: json['launchpad'] ?? 'N/A',
-        flightNumber: json['flight_number'].toString(),
-        payload: 'YES',
-        country: json['country'],
-        company: json['company'],
-        missionDes: json['details'],
-        launchPadFullName: json['launchpadFM'],
-        launchPadDes: json['launchpadDes'],
-      );
-    } else {
-      return AllLaunch(
-        rocketName: json['rocket'],
-        missionName: json['name'].toString().length > 14 ? json['name'].toString().substring(0, 14) : json['name'],
-        launchDate: json['date_utc'].toString().substring(0, 10),
-        launchTime: json['date_utc'].toString().substring(12, 19),
-        launchPad: json['launchpad'] ?? 'N/A',
-        flightNumber: json['flight_number'].toString(),
-        payload: 'NO',
-        country: json['country'],
-        company: json['company'],
-        missionDes: json['details'],
-        launchPadFullName: json['launchpadFM'],
-        launchPadDes: json['launchpadDes'],
-      );
-    }
+    return AllLaunch(
+      rocketName: json['rocket_01'],
+      missionName: json['name'].toString().length > 14 ? json['name'].toString().substring(0, 14) : json['name'],
+      launchDate: json['date_utc'].toString().substring(0, 10),
+      launchTime: json['date_utc'].toString().substring(12, 19),
+      launchPad: json['launchpad'] ?? 'N/A',
+      flightNumber: json['flight_number'].toString(),
+      payload: 'YES',
+      country: json['country'],
+      company: json['company'],
+      missionDes: json['details'],
+      launchPadFullName: json['launchpadFM'],
+      launchPadDes: json['launchpadDes'],
+      article: json['links']['article'],
+      wiki: json['links']['wikipedia'],
+      imgs: json['links']['flickr']['original'] ?? [],
+      yt: json['links']['webcast'],
+      rocketID: json['rocket'],
+    );
   }
 
 }

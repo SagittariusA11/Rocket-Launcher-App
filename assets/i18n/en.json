@@ -251,8 +251,8 @@
     "link": "Embedded Code",
     "code": "Paste Code Here",
     "inst": "Instructions",
-    "inst_01": "1.    Go on YouTube (https://www.youtube.com/) and search for <mission_name> launch live video.",
-    "inst_02": "2.    Open the video and then right click on the video. From the options list tap on “copy embed code” as shown. The option is encircled in blue in the attached image.",
+    "inst_01": "1.    Go on YouTube by clicking on youtube icon beside <mission name>.",
+    "inst_02": "2.    Right click on the video. From the options list tap on 'copy embed code' as shown. The option is encircled in blue in the attached image.",
     "inst_03": "3.    Now paste the link in the input field on this page at the left.",
     "inst_04": "4.    And then click on Visualize on Liquid Galaxy button to view the video on Liquid galaxy Rig.",
     "inst_05": "5.    If still has doubt then click on this link to see video explanation."

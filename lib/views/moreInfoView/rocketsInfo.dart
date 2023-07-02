@@ -234,7 +234,7 @@ class RocketInfoCard extends StatelessWidget {
                                 ),
                               ),
                               const SizedBox(
-                                height: 5,
+                                height: 10,
                               ),
                               Text(
                                 "${translate('rocket_info.ff')}:   ${rocket.firstFlight}",
@@ -456,35 +456,6 @@ class RocketInfoCard extends StatelessWidget {
           ),
         ],
       ),
-    );
-  }
-}
-
-class ImageGrid extends StatelessWidget {
-  const ImageGrid({Key? key, required this.imgs}) : super(key: key);
-  final List imgs;
-
-  @override
-  Widget build(BuildContext context) {
-    return GridView.builder(
-      itemCount: imgs.length,
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
-        crossAxisSpacing: 10,
-        mainAxisSpacing: 10,
-      ),
-      itemBuilder: (context, index) {
-        return Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(8),
-            image: DecorationImage(
-              image: NetworkImage(imgs[index]),
-              fit: BoxFit.cover,
-            ),
-          ),
-          // child: Image.network("https://farm1.staticflickr.com/929/28787338307_3453a11a77_b.jpg", fit: BoxFit.contain)
-        );
-      },
     );
   }
 }

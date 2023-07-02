@@ -9,6 +9,7 @@ import 'package:rocket_launcher_app/views/ytLive.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:scroll_snap_list/scroll_snap_list.dart';
 import 'package:http/http.dart' as http;
+import 'package:url_launcher/url_launcher.dart';
 import '../../config/imagePaths.dart';
 import '../../config/screenConfig.dart';
 import '../../data/launches_response.dart';
@@ -31,6 +32,8 @@ class _LaunchInfoState extends State<LaunchInfo> {
   bool _isSearching = false;
   DateTime? selectedDate;
   DateTimeRange? selectedDateRange;
+  var currentLaunch;
+  bool isTapped = false;
 
   Future<List<AllLaunch>>? _allLaunchesFuture;
   // List<AllLaunch> _allLaunchesFuture = [];
@@ -299,10 +302,22 @@ class _LaunchInfoState extends State<LaunchInfo> {
                 children: [
                   ElevatedButton(
                       onPressed: () {
-                        showDialog(
-                            context: context,
-                            builder: (context) => YTLive.ytLive(context)
-                        );
+                        if(isTapped){
+                          showDialog(
+                              context: context,
+                              builder: (context) => YTLive.ytLive(
+                                  context,
+                                  {
+                                    'yt_live_mn': currentLaunch.missionName,
+                                    'yt_live_rn': currentLaunch.rocketName,
+                                    'yt_live_date': currentLaunch.launchDate,
+                                    'yt_live_time': currentLaunch.launchTime,
+                                    'yt_live_ls': currentLaunch.launchPad,
+                                    'yt_live_link': currentLaunch.yt
+                                  }
+                              )
+                          );
+                        }
                       },
                       style: ElevatedButton.styleFrom(
                         elevation: 10,
@@ -468,7 +483,14 @@ class _LaunchInfoState extends State<LaunchInfo> {
             controller: allScrollController,
             itemBuilder: (BuildContext context, int index) {
               final alllaunch = _allLaunches[index];
-              return BuildRocketInfoItemList(allLaunches: alllaunch);
+              return GestureDetector(
+                onTap: () {
+                  currentLaunch = alllaunch;
+                  isTapped = true;
+                  // print("Here");
+                },
+                child: BuildRocketInfoItemList(allLaunches: alllaunch)
+              );
             },
             itemCount: _allLaunches.length,
             scrollDirection: Axis.vertical,
@@ -546,10 +568,10 @@ class BuildRocketInfoItemList extends StatelessWidget {
                 ),
                 ElevatedButton(
                     onPressed: (){
-                      // showDialog(
-                      //     context: context,
-                      //     builder: (context) => RocketsInfo()
-                      // );
+                      showDialog(
+                          context: context,
+                          builder: (context) => RocketsInfo(RocketID: allLaunches.rocketID)
+                      );
                     },
                     style: ElevatedButton.styleFrom(
                       elevation: 10,
@@ -655,7 +677,9 @@ class BuildRocketInfoItemList extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       ElevatedButton(
-                          onPressed: () { },
+                          onPressed: () {
+                            launchUrl(Uri.parse(allLaunches.article));
+                          },
                           style: ElevatedButton.styleFrom(
                             elevation: 10,
                             shadowColor: Colors.grey,
@@ -663,8 +687,8 @@ class BuildRocketInfoItemList extends StatelessWidget {
                             shape: const StadiumBorder(),
                           ),
                           child: SizedBox(
-                            width: ScreenConfig.widthPercent*3.75,
-                            height: ScreenConfig.heightPercent*3,
+                            width: ScreenConfig.widthPercent*6,
+                            height: ScreenConfig.heightPercent*5,
                             child: Center(
                               child: Text(
                                   translate('launchInfo_tab.art'),
@@ -677,7 +701,9 @@ class BuildRocketInfoItemList extends StatelessWidget {
                           )
                       ),
                       ElevatedButton(
-                          onPressed: () { },
+                          onPressed: () {
+                            launchUrl(Uri.parse(allLaunches.wiki));
+                          },
                           style: ElevatedButton.styleFrom(
                             elevation: 10,
                             shadowColor: Colors.grey,
@@ -685,8 +711,8 @@ class BuildRocketInfoItemList extends StatelessWidget {
                             shape: const StadiumBorder(),
                           ),
                           child: SizedBox(
-                            width: ScreenConfig.widthPercent*2.5,
-                            height: ScreenConfig.heightPercent*3,
+                            width: ScreenConfig.widthPercent*6,
+                            height: ScreenConfig.heightPercent*5,
                             child: Center(
                               child: Text(
                                   translate('launchInfo_tab.wiki'),
@@ -699,7 +725,13 @@ class BuildRocketInfoItemList extends StatelessWidget {
                           )
                       ),
                       ElevatedButton(
-                          onPressed: () { },
+                          onPressed: () {
+                            print(allLaunches.imgs);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => ImageGrid(imgs: allLaunches.imgs)),
+                            );
+                          },
                           style: ElevatedButton.styleFrom(
                             elevation: 10,
                             shadowColor: Colors.grey,
@@ -707,8 +739,8 @@ class BuildRocketInfoItemList extends StatelessWidget {
                             shape: const StadiumBorder(),
                           ),
                           child: SizedBox(
-                            width: ScreenConfig.widthPercent*4.25,
-                            height: ScreenConfig.heightPercent*3,
+                            width: ScreenConfig.widthPercent*6,
+                            height: ScreenConfig.heightPercent*5,
                             child: Center(
                               child: Text(
                                   translate('launchInfo_tab.img'),
@@ -720,28 +752,28 @@ class BuildRocketInfoItemList extends StatelessWidget {
                             ),
                           )
                       ),
-                      ElevatedButton(
-                          onPressed: () { },
-                          style: ElevatedButton.styleFrom(
-                            elevation: 10,
-                            shadowColor: Colors.grey,
-                            primary: AppTheme().bg_color,
-                            shape: const StadiumBorder(),
-                          ),
-                          child: SizedBox(
-                            width: ScreenConfig.widthPercent*5,
-                            height: ScreenConfig.heightPercent*3,
-                            child: Center(
-                              child: Text(
-                                  translate('launchInfo_tab.tl'),
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
-                                  )
-                              ),
-                            ),
-                          )
-                      ),
+                      // ElevatedButton(
+                      //     onPressed: () { },
+                      //     style: ElevatedButton.styleFrom(
+                      //       elevation: 10,
+                      //       shadowColor: Colors.grey,
+                      //       primary: AppTheme().bg_color,
+                      //       shape: const StadiumBorder(),
+                      //     ),
+                      //     child: SizedBox(
+                      //       width: ScreenConfig.widthPercent*5,
+                      //       height: ScreenConfig.heightPercent*3,
+                      //       child: Center(
+                      //         child: Text(
+                      //             translate('launchInfo_tab.tl'),
+                      //             style: TextStyle(
+                      //               fontSize: 16,
+                      //               color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
+                      //             )
+                      //         ),
+                      //       ),
+                      //     )
+                      // ),
                     ],
                   )
                 ],
