@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:rocket_launcher_app/views/moreInfoView/rocketsInfo.dart';
 import 'package:rocket_launcher_app/views/moreInfoView/payloadInfo.dart';
+import 'package:rocket_launcher_app/views/searchScreen.dart';
 import 'package:scroll_snap_list/scroll_snap_list.dart';
 
 import '../config/screenConfig.dart';
@@ -99,44 +100,43 @@ class _InventoryViewState extends State<InventoryView> with SingleTickerProvider
                         ),
                       ],
                     ),
-                    Container(
-                      margin: const EdgeInsets.symmetric(horizontal: 15),
-                      decoration: const BoxDecoration(
-                        border: Border(bottom: BorderSide(color: Colors.white, width: 1)),
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          IconButton(
-                            icon: Icon(
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => SearchScreen(),
+                          ),
+                        );
+
+                      },
+                      child: Container(
+                        width: ScreenConfig.widthPercent*12,
+                        margin: const EdgeInsets.symmetric(horizontal: 30),
+                        padding: const EdgeInsets.only(bottom: 5),
+                        decoration: const BoxDecoration(
+                          border: Border(bottom: BorderSide(color: Colors.white, width: 1)),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            const Icon(
                               Icons.search,
                               color: Colors.white,
                               size: 30,
                             ),
-                            onPressed: _isSearching ? () { } : null,
-                          ),
-                          SizedBox(
-                            width: ScreenConfig.widthPercent*12,
-                            child: TextFormField(
-                              controller: _searchController,
-                              decoration: InputDecoration(
-                                  filled: true,
-                                  fillColor: Colors.transparent,
-                                  hintText: translate('inventory.search'),
-                                  hintStyle: TextStyle(
-                                      color: Colors.white
-                                  ),
-                                  border: InputBorder.none
-                              ),
-                              onChanged: (value) {
-                                setState(() {
-                                  _isSearching = value.isNotEmpty;
-                                });
-                              },
+                            SizedBox(
+                              width: 10,
                             ),
-                          ),
-                        ],
+                            Text(
+                              translate('inventory.search'),
+                              style: const TextStyle(
+                                  color: Colors.white
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ],

@@ -11,6 +11,7 @@ import '../../data/launches_response.dart';
 import '../../utils/utils.dart';
 import '../../config/appTheme.dart';
 import '../../view models/homeViewModels/launchViewModel.dart';
+import '../searchScreen.dart';
 
 class LaunchView extends StatefulWidget {
   const LaunchView({Key? key}) : super(key: key);
@@ -175,46 +176,43 @@ class _LaunchViewState extends State<LaunchView> with SingleTickerProviderStateM
                               size: 40,
                             ),
                           ),
-                          Container(
-                            margin: const EdgeInsets.symmetric(horizontal: 15),
-                            decoration: const BoxDecoration(
-                              border: Border(bottom: BorderSide(color: Colors.white, width: 1)),
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                IconButton(
-                                    icon: const Icon(
-                                      Icons.search,
-                                      color: Colors.white,
-                                      size: 30,
-                                    ),
-                                    onPressed: () {
-                                      print("Search");
-                                    }
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => SearchScreen(),
                                 ),
-                                SizedBox(
-                                  width: ScreenConfig.widthPercent*12,
-                                  child: TextFormField(
-                                    controller: _searchController,
-                                    decoration: InputDecoration(
-                                        filled: true,
-                                        fillColor: Colors.transparent,
-                                        hintText: translate('inventory.search'),
-                                        hintStyle: const TextStyle(
-                                            color: Colors.white
-                                        ),
-                                        border: InputBorder.none
-                                    ),
-                                    onChanged: (value) {
-                                      setState(() {
-                                        _isSearching = value.isNotEmpty;
-                                      });
-                                    },
+                              );
+
+                            },
+                            child: Container(
+                              width: ScreenConfig.widthPercent*12,
+                              margin: const EdgeInsets.symmetric(horizontal: 15),
+                              padding: const EdgeInsets.only(bottom: 5),
+                              decoration: const BoxDecoration(
+                                border: Border(bottom: BorderSide(color: Colors.white, width: 1)),
+                              ),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  const Icon(
+                                    Icons.search,
+                                    color: Colors.white,
+                                    size: 30,
                                   ),
-                                ),
-                              ],
+                                  SizedBox(
+                                    width: 10,
+                                  ),
+                                  Text(
+                                    translate('inventory.search'),
+                                    style: const TextStyle(
+                                        color: Colors.white
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                           const SizedBox(
