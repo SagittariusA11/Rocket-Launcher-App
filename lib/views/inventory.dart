@@ -734,7 +734,17 @@ class _InventoryViewState extends State<InventoryView> with SingleTickerProvider
             listController: allRocketsScrollController,
             itemBuilder: (BuildContext context, int index) {
               final allRocket = _allRockets[index];
-              return BuildRocketsItemList(allRockets: allRocket);
+              return GestureDetector(
+                  onTap: (){
+                    showDialog(
+                        context: context,
+                        builder: (context) => RocketsInfo(
+                          RocketID: allRocket.rocketID
+                        )
+                    );
+                  },
+                  child: BuildRocketsItemList(allRockets: allRocket)
+              );
             },
             itemSize: ScreenConfig.heightPercent*36.925,
             dynamicItemSize: true,
@@ -849,7 +859,7 @@ class _InventoryViewState extends State<InventoryView> with SingleTickerProvider
               final allStarlink = _allStarlinks[index];
               return BuildStarlinksItemList(allStarlink: allStarlink);
             },
-            itemSize: ScreenConfig.heightPercent*29.925,
+            itemSize: ScreenConfig.heightPercent*28,
             dynamicItemSize: true,
             dynamicItemOpacity: 0.75,
             itemCount: _allStarlinks.length,
@@ -1023,7 +1033,7 @@ class BuildStarlinksItemList extends StatelessWidget {
                   Text(
                     "${translate('inventory.height')}: ${allStarlink.height}  Km",
                     style: TextStyle(
-                      fontSize: 16,
+                      fontSize: 15,
                       color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
                     ),
                   ),

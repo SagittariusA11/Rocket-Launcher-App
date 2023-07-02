@@ -26,4 +26,19 @@ class InventoryService {
     }
   }
 
+  static Future<RocketInfo> fetchRocketInfo(
+      String rocketID
+      ) async {
+    final response = await http.get(Uri.parse("https://api.spacexdata.com/v4/rockets/$rocketID"));
+
+    if (response.statusCode == 200) {
+      final jsonResponse = json.decode(response.body);
+      final rocketInfo = RocketInfo.fromJson(jsonResponse);
+      print("fetchRocketInfo success");
+      return rocketInfo;
+    } else {
+      throw Exception('Failed to load rocket info');
+    }
+  }
+
 }

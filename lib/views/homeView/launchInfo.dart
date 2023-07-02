@@ -546,10 +546,10 @@ class BuildRocketInfoItemList extends StatelessWidget {
                 ),
                 ElevatedButton(
                     onPressed: (){
-                      showDialog(
-                          context: context,
-                          builder: (context) => RocketsInfo.rocketInfo(context)
-                      );
+                      // showDialog(
+                      //     context: context,
+                      //     builder: (context) => RocketsInfo()
+                      // );
                     },
                     style: ElevatedButton.styleFrom(
                       elevation: 10,

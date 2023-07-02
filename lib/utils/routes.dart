@@ -78,10 +78,10 @@ class Routes {
             (BuildContext context)=>SettingsView()
         );
 
-      case RouteNames.imageView:
-        return MaterialPageRoute(builder:
-            (BuildContext context)=>ImageGrid()
-        );
+      // case RouteNames.imageView:
+      //   return MaterialPageRoute(builder:
+      //       (BuildContext context)=>ImageGrid()
+      //   );
 
 
     //Invalid Route Exception
