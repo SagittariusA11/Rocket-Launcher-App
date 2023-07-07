@@ -1,10 +1,11 @@
+import 'package:dartssh2/dartssh2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:provider/provider.dart';
 import 'package:rocket_launcher_app/config/screenConfig.dart';
 import 'package:rocket_launcher_app/utils/routeNames.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:ssh2/ssh2.dart';
+// import 'package:ssh2/ssh2.dart';
 import 'dart:ui' as ui;
 import '../config/appTheme.dart';
 import '../config/imagePaths.dart';
@@ -44,12 +45,19 @@ class _ConnectionManagerViewState extends State<ConnectionManagerView> with Sing
 
     try {
       SSHClient client = SSHClient(
-        host: ipAddress.text,
-        port: int.tryParse(portNumber.text)!.toInt(),
+        await SSHSocket.connect(ipAddress.text, int.tryParse(portNumber.text)!.toInt()),
+        // host: '${credencials['ip']}',
+        // port: int.parse('${credencials['port']}'),
         username: username.text,
-        passwordOrKey: password.text,
+        onPasswordRequest: () => password.text,
       );
-      await client.connect();
+      // SSHClient client = SSHClient(
+      //   host: ipAddress.text,
+      //   port: int.tryParse(portNumber.text)!.toInt(),
+      //   username: username.text,
+      //   passwordOrKey: password.text,
+      // );
+      await client;
       showAlertDialog(translate("connection.alert"),
           '${ipAddress.text} ' + translate("connection.alert2"), true);
       setState(() {
@@ -57,7 +65,7 @@ class _ConnectionManagerViewState extends State<ConnectionManagerView> with Sing
       });
       // open logos
       await LGConnection().openDemoLogos();
-      await client.disconnect();
+      await client;
     } catch (e) {
       showAlertDialog(translate("connection.alert3"),
           '${ipAddress.text} ' + translate("connection.alert4"), false);
@@ -76,16 +84,23 @@ class _ConnectionManagerViewState extends State<ConnectionManagerView> with Sing
 
     try {
       SSHClient client = SSHClient(
-        host: ipAddress.text,
-        port: int.tryParse(portNumber.text)!.toInt(),
+        await SSHSocket.connect(ipAddress.text, int.tryParse(portNumber.text)!.toInt()),
+        //   host: ipAddress.text,
+        //   port: int.tryParse(portNumber.text)!.toInt(),
         username: username.text,
-        passwordOrKey: password.text,
+        onPasswordRequest: () => password.text,
       );
-      await client.connect();
+      // SSHClient client = SSHClient(
+      //   host: ipAddress.text,
+      //   port: int.tryParse(portNumber.text)!.toInt(),
+      //   username: username.text,
+      //   passwordOrKey: password.text,
+      // );
+      await client;
       setState(() {
         connectionStatus = true;
       });
-      await client.disconnect();
+      await client;
     } catch (e) {
       ErrorView();
       setState(() {
@@ -278,7 +293,7 @@ class _ConnectionManagerViewState extends State<ConnectionManagerView> with Sing
                             filled: true,
                             fillColor: Colors.transparent,
                             border: InputBorder.none,
-                            hintText: '192.168.56.103',
+                            hintText: '192.168.56.113',
                             hintStyle: TextStyle(
                                 color: selectedAppTheme.isLightMode?
                                 Color.fromARGB(255, 74, 74, 74):Color.fromARGB(255, 227, 227, 227)
@@ -618,10 +633,11 @@ class LGConnection {
     dynamic credencials = await _getCredentials();
 
     SSHClient client = SSHClient(
-      host: '${credencials['ip']}',
-      port: int.parse('${credencials['port']}'),
+      await SSHSocket.connect('${credencials['ip']}', int.parse('${credencials['port']}')),
+      // host: '${credencials['ip']}',
+      // port: int.parse('${credencials['port']}'),
       username: '${credencials['username']}',
-      passwordOrKey: '${credencials['pass']}',
+      onPasswordRequest: () => '${credencials['pass']}',
     );
     int rigs = 4;
     rigs = (int.parse(credencials['numberofrigs']) / 2).floor() + 2;
@@ -656,7 +672,7 @@ class LGConnection {
 </kml>
   ''';
     try {
-      await client.connect();
+      await client;
       await client
           .execute("echo '$openLogoKML' > /var/www/html/kml/slave_$rigs.kml");
     } catch (e) {

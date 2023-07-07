@@ -1,13 +1,14 @@
 import 'dart:math';
 import 'dart:ui';
 
+import 'package:dartssh2/dartssh2.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:ssh2/ssh2.dart';
+// import 'package:ssh2/ssh2.dart';
 import 'package:flutter/gestures.dart';
 import '../../config/imagePaths.dart';
 import '../../config/screenConfig.dart';
@@ -368,10 +369,11 @@ class _MyMapState extends State<MyMap> with SingleTickerProviderStateMixin {
     dynamic credencials = await _getCredentials();
 
     SSHClient client = SSHClient(
-      host: '${credencials['ip']}',
-      port: int.parse('${credencials['port']}'),
+      await SSHSocket.connect('${credencials['ip']}', int.parse('${credencials['port']}')),
+      // host: '${credencials['ip']}',
+      // port: int.parse('${credencials['port']}'),
       username: '${credencials['username']}',
-      passwordOrKey: '${credencials['pass']}',
+      onPasswordRequest: () => '${credencials['pass']}',
     );
 
     // LookAt flyto = LookAt(
@@ -396,10 +398,11 @@ class _MyMapState extends State<MyMap> with SingleTickerProviderStateMixin {
     dynamic credencials = await _getCredentials();
 
     SSHClient client = SSHClient(
-      host: '${credencials['ip']}',
-      port: int.parse('${credencials['port']}'),
+      await SSHSocket.connect('${credencials['ip']}', int.parse('${credencials['port']}')),
+      // host: '${credencials['ip']}',
+      // port: int.parse('${credencials['port']}'),
       username: '${credencials['username']}',
-      passwordOrKey: '${credencials['pass']}',
+      onPasswordRequest: () => '${credencials['pass']}',
     );
 
     // LookAt flyto = LookAt(rightleftflag, updownflag, zoomflag.toString(),

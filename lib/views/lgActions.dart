@@ -1,11 +1,12 @@
 
+import 'package:dartssh2/dartssh2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:rocket_launcher_app/config/appTheme.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:ssh2/ssh2.dart';
+// import 'package:ssh2/ssh2.dart';
 import 'dart:io';
 import 'dart:ui' as ui;
 
@@ -525,14 +526,15 @@ class LGConnection {
     dynamic credencials = await _getCredentials();
 
     SSHClient client = SSHClient(
-      host: '${credencials['ip']}',
-      port: int.parse('${credencials['port']}'),
+      await SSHSocket.connect('${credencials['ip']}', int.parse('${credencials['port']}')),
+      // host: '${credencials['ip']}',
+      // port: int.parse('${credencials['port']}'),
       username: '${credencials['username']}',
-      passwordOrKey: '${credencials['pass']}',
+      onPasswordRequest: () => '${credencials['pass']}',
     );
 
     try {
-      await client.connect();
+      await client;
       stopOrbit();
       return await client.execute('> /var/www/html/kmls.txt');
     } catch (e) {
@@ -545,10 +547,11 @@ class LGConnection {
     dynamic credencials = await _getCredentials();
 
     SSHClient client = SSHClient(
-      host: '${credencials['ip']}',
-      port: int.parse('${credencials['port']}'),
+      await SSHSocket.connect('${credencials['ip']}', int.parse('${credencials['port']}')),
+      // host: '${credencials['ip']}',
+      // port: int.parse('${credencials['port']}'),
       username: '${credencials['username']}',
-      passwordOrKey: '${credencials['pass']}',
+      onPasswordRequest: () => '${credencials['pass']}',
     );
     int rigs = 4;
     String blank = '''
@@ -559,7 +562,7 @@ class LGConnection {
 </kml>''';
     rigs = (int.parse(credencials['numberofrigs']) / 2).floor() + 2;
     try {
-      await client.connect();
+      await client;
       return await client
           .execute("echo '$blank' > /var/www/html/kml/slave_$rigs.kml");
     } catch (e) {
@@ -571,15 +574,16 @@ class LGConnection {
     dynamic credencials = await _getCredentials();
 
     SSHClient client = SSHClient(
-      host: '${credencials['ip']}',
-      port: int.parse('${credencials['port']}'),
+      await SSHSocket.connect('${credencials['ip']}', int.parse('${credencials['port']}')),
+      // host: '${credencials['ip']}',
+      // port: int.parse('${credencials['port']}'),
       username: '${credencials['username']}',
-      passwordOrKey: '${credencials['pass']}',
+      onPasswordRequest: () => '${credencials['pass']}',
     );
 
     try {
       for (var i = int.parse(credencials['numberofrigs']); i >= 1; i--) {
-        await client.connect();
+        await client;
         final relaunchCommand = """RELAUNCH_CMD="\\
 if [ -f /etc/init/lxdm.conf ]; then
   export SERVICE=lxdm
@@ -608,15 +612,16 @@ fi
     dynamic credencials = await _getCredentials();
 
     SSHClient client = SSHClient(
-      host: '${credencials['ip']}',
-      port: int.parse('${credencials['port']}'),
+      await SSHSocket.connect('${credencials['ip']}', int.parse('${credencials['port']}')),
+      // host: '${credencials['ip']}',
+      // port: int.parse('${credencials['port']}'),
       username: '${credencials['username']}',
-      passwordOrKey: '${credencials['pass']}',
+      onPasswordRequest: () => '${credencials['pass']}',
     );
 
     try {
       for (var i = int.parse(credencials['numberofrigs']); i >= 1; i--) {
-        await client.connect();
+        await client;
         await client.execute(
             'sshpass -p ${credencials['pass']} ssh -t lg$i "echo ${credencials['pass']} | sudo -S poweroff"');
       }
@@ -630,15 +635,16 @@ fi
     dynamic credencials = await _getCredentials();
 
     SSHClient client = SSHClient(
-      host: '${credencials['ip']}',
-      port: int.parse('${credencials['port']}'),
+      await SSHSocket.connect('${credencials['ip']}', int.parse('${credencials['port']}')),
+      // host: '${credencials['ip']}',
+      // port: int.parse('${credencials['port']}'),
       username: '${credencials['username']}',
-      passwordOrKey: '${credencials['pass']}',
+      onPasswordRequest: () => '${credencials['pass']}',
     );
 
     try {
       for (var i = int.parse(credencials['numberofrigs']); i >= 1; i--) {
-        await client.connect();
+        await client;
         await client.execute(
             'sshpass -p ${credencials['pass']} ssh -t lg$i "echo ${credencials['pass']} | sudo -S reboot"'
           // "'/home/${credencials['username']}/bin/lg-reboot' > /home/${credencials['username']}/log.txt"
@@ -671,14 +677,15 @@ fi
     dynamic credencials = await _getCredentials();
 
     SSHClient client = SSHClient(
-      host: '${credencials['ip']}',
-      port: int.parse('${credencials['port']}'),
+      await SSHSocket.connect('${credencials['ip']}', int.parse('${credencials['port']}')),
+      // host: '${credencials['ip']}',
+      // port: int.parse('${credencials['port']}'),
       username: '${credencials['username']}',
-      passwordOrKey: '${credencials['pass']}',
+      onPasswordRequest: () => '${credencials['pass']}',
     );
 
     try {
-      await client.connect();
+      await client;
       return await client.execute('echo "exittour=true" > /tmp/query.txt');
     } catch (e) {
       print('Could not connect to host LG');
@@ -690,10 +697,11 @@ fi
     dynamic credencials = await _getCredentials();
 
     SSHClient client = SSHClient(
-      host: '${credencials['ip']}',
-      port: int.parse('${credencials['port']}'),
+      await SSHSocket.connect('${credencials['ip']}', int.parse('${credencials['port']}')),
+      // host: '${credencials['ip']}',
+      // port: int.parse('${credencials['port']}'),
       username: '${credencials['username']}',
-      passwordOrKey: '${credencials['pass']}',
+      onPasswordRequest: () => '${credencials['pass']}',
     );
     int rigs = 3;
     String blank = '''
@@ -704,7 +712,7 @@ fi
 </kml>''';
     rigs = (int.parse(credencials['numberofrigs']) / 2).floor() + 1;
     try {
-      await client.connect();
+      await client;
       return await client
           .execute("echo '$blank' > /var/www/html/kml/slave_$rigs.kml");
     } catch (e) {
