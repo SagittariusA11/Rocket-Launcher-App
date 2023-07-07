@@ -71,6 +71,9 @@ class _LaunchViewState extends State<LaunchView> with SingleTickerProviderStateM
 
   @override
   void initState() {
+    setState(() {
+      AppTheme().tab_color;
+    });
     super.initState();
     if (!_isDataLoaded) {
       _upcomingLaunchesFuture = LaunchService.fetchUpcomingLaunches();
@@ -89,18 +92,19 @@ class _LaunchViewState extends State<LaunchView> with SingleTickerProviderStateM
         body: Container(
           width: ScreenConfig.width,
           height: ScreenConfig.height,
-          decoration: BoxDecoration(
-              image: DecorationImage(
-                  image: AssetImage(
-                    selectedAppTheme.isLightMode? ImagePaths.launch_bg_light:
-                    selectedAppTheme.isDarkMode? ImagePaths.launch_bg_dark:
-                    selectedAppTheme.isRedMode? ImagePaths.launch_bg_red:
-                    selectedAppTheme.isGreenMode? ImagePaths.launch_bg_green:
-                    ImagePaths.launch_bg_blue,
-                  ),
-                  fit: BoxFit.cover
-              )
-          ),
+          color: AppTheme().bg_color,
+          // decoration: BoxDecoration(
+          //     image: DecorationImage(
+          //         image: AssetImage(
+          //           selectedAppTheme.isLightMode? ImagePaths.launch_bg_light:
+          //           selectedAppTheme.isDarkMode? ImagePaths.launch_bg_dark:
+          //           selectedAppTheme.isRedMode? ImagePaths.launch_bg_red:
+          //           selectedAppTheme.isGreenMode? ImagePaths.launch_bg_green:
+          //           ImagePaths.launch_bg_blue,
+          //         ),
+          //         fit: BoxFit.cover
+          //     )
+          // ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -132,7 +136,7 @@ class _LaunchViewState extends State<LaunchView> with SingleTickerProviderStateM
                                 style: TextStyle(
                                     fontFamily: 'GoogleSans',
                                     fontSize: Utils().fontSizeMultiplier(30),
-                                    color: Colors.white,
+                                    color: AppTheme().ht_color,
                                   fontWeight: FontWeight.bold
                                 ),
                               ),
@@ -141,7 +145,7 @@ class _LaunchViewState extends State<LaunchView> with SingleTickerProviderStateM
                                 style: TextStyle(
                                     fontFamily: 'GoogleSans',
                                     fontSize: Utils().fontSizeMultiplier(20),
-                                    color: Colors.white
+                                    color: AppTheme().ht_color,
                                 ),
                               ),
                             ],
@@ -153,9 +157,9 @@ class _LaunchViewState extends State<LaunchView> with SingleTickerProviderStateM
                         children: [
                           IconButton(
                             onPressed: () { print("Filter"); },
-                            icon: const FaIcon(
+                            icon: FaIcon(
                               FontAwesomeIcons.filter,
-                              color: Colors.white,
+                              color: AppTheme().ht_color.withOpacity(0.85),
                               size: 30,
                             ),
                           ),
@@ -170,9 +174,9 @@ class _LaunchViewState extends State<LaunchView> with SingleTickerProviderStateM
                               );
                               print("Calander");
                               },
-                            icon: const Icon(
+                            icon: Icon(
                               Icons.calendar_month_rounded,
-                              color: Colors.white,
+                              color: AppTheme().ht_color.withOpacity(0.85),
                               size: 40,
                             ),
                           ),
@@ -190,16 +194,18 @@ class _LaunchViewState extends State<LaunchView> with SingleTickerProviderStateM
                               width: ScreenConfig.widthPercent*12,
                               margin: const EdgeInsets.symmetric(horizontal: 15),
                               padding: const EdgeInsets.only(bottom: 5),
-                              decoration: const BoxDecoration(
-                                border: Border(bottom: BorderSide(color: Colors.white, width: 1)),
+                              decoration: BoxDecoration(
+                                border: Border(
+                                    bottom: BorderSide(color: AppTheme().ht_color, width: 1)
+                                ),
                               ),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-                                  const Icon(
+                                  Icon(
                                     Icons.search,
-                                    color: Colors.white,
+                                    color: AppTheme().ht_color,
                                     size: 30,
                                   ),
                                   SizedBox(
@@ -207,8 +213,8 @@ class _LaunchViewState extends State<LaunchView> with SingleTickerProviderStateM
                                   ),
                                   Text(
                                     translate('inventory.search'),
-                                    style: const TextStyle(
-                                        color: Colors.white
+                                    style: TextStyle(
+                                        color: AppTheme().ht_color,
                                     ),
                                   ),
                                 ],
@@ -234,7 +240,7 @@ class _LaunchViewState extends State<LaunchView> with SingleTickerProviderStateM
                       style: TextStyle(
                           fontFamily: 'GoogleSans',
                           fontSize: Utils().fontSizeMultiplier(30),
-                          color: Colors.white,
+                          color: AppTheme().ht_color,
                           fontWeight: FontWeight.bold
                       ),
                     ),
@@ -259,7 +265,7 @@ class _LaunchViewState extends State<LaunchView> with SingleTickerProviderStateM
                       style: TextStyle(
                           fontFamily: 'GoogleSans',
                           fontSize: Utils().fontSizeMultiplier(30),
-                          color: Colors.white,
+                          color: AppTheme().ht_color,
                           fontWeight: FontWeight.bold
                       ),
                     ),
@@ -285,7 +291,7 @@ class _LaunchViewState extends State<LaunchView> with SingleTickerProviderStateM
                       style: ElevatedButton.styleFrom(
                         elevation: 10,
                         shadowColor: Colors.grey,
-                        primary: AppTheme().bg_color,
+                        backgroundColor: AppTheme().ebtn_color,
                         padding: EdgeInsets.all(10),
                         shape: StadiumBorder(),
                       ),
@@ -303,13 +309,14 @@ class _LaunchViewState extends State<LaunchView> with SingleTickerProviderStateM
                                   translate('launch_tab.vlg'),
                                   style: TextStyle(
                                       fontSize: Utils().fontSizeMultiplier(23),
-                                      color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
+                                      color: AppTheme().ht_color,
+                                    fontWeight: FontWeight.bold
                                   )),
                             ),
                           ),
-                          const Icon(
+                          Icon(
                             Icons.location_pin,
-                            color: Colors.black,
+                            color: AppTheme().ht_color,
                             size: 35,
                           ),
                           SizedBox(
@@ -326,7 +333,7 @@ class _LaunchViewState extends State<LaunchView> with SingleTickerProviderStateM
                       style: ElevatedButton.styleFrom(
                         elevation: 10,
                         shadowColor: Colors.grey,
-                        primary: AppTheme().bg_color,
+                        backgroundColor: AppTheme().ebtn_color,
                         padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                         shape: const StadiumBorder(),
                       ),
@@ -338,7 +345,7 @@ class _LaunchViewState extends State<LaunchView> with SingleTickerProviderStateM
                               translate('launch_tab.dlg'),
                             style: TextStyle(
                                 fontSize: Utils().fontSizeMultiplier(20),
-                                color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
+                                color: AppTheme().ht_color,
                                 fontWeight: FontWeight.bold
                             )
                           ),
@@ -470,7 +477,7 @@ class BuildUpcomingLaunchList extends StatelessWidget {
           width: ScreenConfig.heightPercent*30*0.615,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
-            color: AppTheme().bg_color.withOpacity(0.5),
+            color: AppTheme().cards_color
           ),
           child: Column(
             children: [
@@ -570,7 +577,7 @@ class BuildPastLaunchList extends StatelessWidget {
           width: ScreenConfig.heightPercent*25*0.615,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(18),
-            color: AppTheme().bg_color.withOpacity(0.5),
+            color: AppTheme().cards_color
           ),
           child: Column(
             children: [

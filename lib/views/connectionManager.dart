@@ -153,7 +153,7 @@ class _ConnectionManagerViewState extends State<ConnectionManagerView> with Sing
                             style: TextStyle(
                                 fontFamily: 'GoogleSans',
                                 fontSize: Utils().fontSizeMultiplier(25),
-                                color: selectedAppTheme.isLightMode?Colors.black:Colors.white
+                                color: AppTheme().ht_color
                             ),
                           ),
                           Text(
@@ -161,7 +161,7 @@ class _ConnectionManagerViewState extends State<ConnectionManagerView> with Sing
                             style: TextStyle(
                               fontFamily: 'GoogleSans',
                               fontSize: Utils().fontSizeMultiplier(15),
-                              color: selectedAppTheme.isLightMode?Colors.black:Colors.white
+                              color: AppTheme().ht_color
                             ),
                           ),
                         ],
@@ -177,8 +177,7 @@ class _ConnectionManagerViewState extends State<ConnectionManagerView> with Sing
                     style: TextStyle(
                         fontSize: Utils().fontSizeMultiplier(40),
                         fontWeight: FontWeight.bold,
-                      color: selectedAppTheme.isLightMode?
-                      Colors.black:Colors.white
+                      color: AppTheme().ht_color
                     ),
                   ),
                 ),
@@ -208,8 +207,7 @@ class _ConnectionManagerViewState extends State<ConnectionManagerView> with Sing
                           style: TextStyle(
                               fontSize: Utils().fontSizeMultiplier(20),
                               fontWeight: FontWeight.bold,
-                              color: selectedAppTheme.isLightMode?
-                              Colors.black:Colors.white
+                              color: AppTheme().ht_color
                           ),
                         ),
                         Text(
@@ -218,8 +216,7 @@ class _ConnectionManagerViewState extends State<ConnectionManagerView> with Sing
                               : translate('connection.disconnected'),
                           style: TextStyle(
                               fontSize: Utils().fontSizeMultiplier(20),
-                              color: selectedAppTheme.isLightMode?
-                              Colors.black:Colors.white
+                              color: AppTheme().ht_color
                           ),
                         ),
                         connectionStatus
@@ -236,8 +233,28 @@ class _ConnectionManagerViewState extends State<ConnectionManagerView> with Sing
                       ],
                     ),
                   ),
+                  placeholder(
+                    username,
+                    TextInputType.text,
+                    'lg',
+                    translate('connection.mmu'),
+                  ),
+                  placeholder(
+                    ipAddress,
+                    TextInputType.number,
+                    '192.168.56.113',
+                    translate('connection.mmip'),
+                  ),
+                  placeholder(
+                    portNumber,
+                    TextInputType.number,
+                    '22',
+                    translate('connection.mmpn'),
+                  ),
                   Padding(
-                    padding: EdgeInsets.only(bottom: 0.0),
+                    padding: const EdgeInsets.only(
+                      bottom: 20
+                    ),
                     child: Material(
                       borderRadius: BorderRadius.only(
                         bottomRight: Radius.circular(40),
@@ -245,247 +262,65 @@ class _ConnectionManagerViewState extends State<ConnectionManagerView> with Sing
                       elevation: 8,
                       child: Container(
                         decoration: BoxDecoration(
-                          color: AppTheme().bg_color.withAlpha(200),
-                          borderRadius: BorderRadius.only(
-                            bottomRight: Radius.circular(40),
-                          ),
+                            color: AppTheme().bg_color.withAlpha(200),
+                            borderRadius: BorderRadius.only(
+                                bottomRight: Radius.circular(40)
+                            )
                         ),
                         child: TextFormField(
-                          controller: username,
-                          keyboardType: TextInputType.text,
+                          controller: password,
+                          obscureText: obscurePassword,
+                          style: TextStyle(
+                            color: selectedAppTheme.isLightMode? AppTheme().ht_color:
+                            selectedAppTheme.isDarkMode? AppTheme().ht_color:
+                            selectedAppTheme.isRedMode? Color.fromARGB(
+                                255, 121, 0, 0):
+                            selectedAppTheme.isGreenMode? Color.fromARGB(
+                                255, 3, 52, 10):
+                            Color.fromARGB(255, 0, 26, 66),
+                          ),
                           decoration: InputDecoration(
                             filled: true,
                             fillColor: Colors.transparent,
                             border: InputBorder.none,
-                            hintText: 'lg',
+                            hintText: '****',
                             hintStyle: TextStyle(
-                              color: selectedAppTheme.isLightMode?
-                              Color.fromARGB(255, 74, 74, 74):Color.fromARGB(255, 227, 227, 227)
+                                color: AppTheme().ht_color
                             ),
-                            labelText: translate('connection.mmu'),
+                            labelText: translate('connection.mmp'),
                             labelStyle: TextStyle(
-                                color: selectedAppTheme.isLightMode?
-                                Color.fromARGB(255, 74, 74, 74):Color.fromARGB(255, 227, 227, 227)
+                                color: AppTheme().ht_color
+                            ),
+                            suffixIcon: IconButton(
+                              icon: Icon(Icons.remove_red_eye, color: _iconColor),
+                              onPressed: () {
+                                setState(
+                                      () {
+                                    obscurePassword = !obscurePassword;
+                                    if (_iconColor ==
+                                        Color.fromARGB(255, 74, 74, 74)) {
+                                      _iconColor = Color(0xFF3E87F5);
+                                    } else {
+                                      _iconColor = Color.fromARGB(255, 74, 74, 74);
+                                    }
+                                  },
+                                );
+                              },
                             ),
                           ),
                         ),
                       ),
                     ),
+                  ),
+                  placeholder(
+                    numberofrigs,
+                    TextInputType.number,
+                    '3',
+                    translate('connection.number'),
                   ),
                   Padding(
                     padding: EdgeInsets.symmetric(vertical: 20.0),
-                    child: Material(
-                      borderRadius: BorderRadius.only(
-                        bottomRight: Radius.circular(40),
-                      ),
-                      elevation: 8,
-                      child: Container(
-                        decoration: BoxDecoration(
-                            color: AppTheme().bg_color.withAlpha(200),
-                            borderRadius: BorderRadius.only(
-                                bottomRight: Radius.circular(40)
-                            )
-                        ),
-                        child: TextFormField(
-                          controller: ipAddress,
-                          keyboardType: TextInputType.number,
-                          decoration: InputDecoration(
-                            filled: true,
-                            fillColor: Colors.transparent,
-                            border: InputBorder.none,
-                            hintText: '192.168.56.113',
-                            hintStyle: TextStyle(
-                                color: selectedAppTheme.isLightMode?
-                                Color.fromARGB(255, 74, 74, 74):Color.fromARGB(255, 227, 227, 227)
-                            ),
-                            labelText: translate('connection.mmip'),
-                            labelStyle: TextStyle(
-                                color: selectedAppTheme.isLightMode?
-                                Color.fromARGB(255, 74, 74, 74):Color.fromARGB(255, 227, 227, 227)
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(bottom: 20.0),
-                    child: Material(
-                      borderRadius: BorderRadius.only(
-                        bottomRight: Radius.circular(40),
-                      ),
-                      elevation: 8,
-                      child: Container(
-                        decoration: BoxDecoration(
-                            color: AppTheme().bg_color.withAlpha(200),
-                            borderRadius: BorderRadius.only(
-                                bottomRight: Radius.circular(40)
-                            )
-                        ),
-                        child: TextFormField(
-                          controller: portNumber,
-                          keyboardType: TextInputType.number,
-                          decoration: InputDecoration(
-                            filled: true,
-                            fillColor: Colors.transparent,
-                            border: InputBorder.none,
-                            hintText: '22',
-                            hintStyle: TextStyle(
-                                color: selectedAppTheme.isLightMode?
-                                Color.fromARGB(255, 74, 74, 74):Color.fromARGB(255, 227, 227, 227)
-                            ),
-                            labelText: translate('connection.mmpn'),
-                            labelStyle: TextStyle(
-                                color: selectedAppTheme.isLightMode?
-                                Color.fromARGB(255, 74, 74, 74):Color.fromARGB(255, 227, 227, 227)
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  Material(
-                    borderRadius: BorderRadius.only(
-                      bottomRight: Radius.circular(40),
-                    ),
-                    elevation: 8,
-                    child: Container(
-                      decoration: BoxDecoration(
-                          color: AppTheme().bg_color.withAlpha(200),
-                          borderRadius: BorderRadius.only(
-                              bottomRight: Radius.circular(40)
-                          )
-                      ),
-                      child: TextFormField(
-                        controller: password,
-                        obscureText: obscurePassword,
-                        decoration: InputDecoration(
-                          filled: true,
-                          fillColor: Colors.transparent,
-                          border: InputBorder.none,
-                          hintText: '****',
-                          hintStyle: TextStyle(
-                              color: selectedAppTheme.isLightMode?
-                              Color.fromARGB(255, 74, 74, 74):Color.fromARGB(255, 227, 227, 227)
-                          ),
-                          labelText: translate('connection.mmp'),
-                          labelStyle: TextStyle(
-                              color: selectedAppTheme.isLightMode?
-                              Color.fromARGB(255, 74, 74, 74):Color.fromARGB(255, 227, 227, 227)
-                          ),
-                          suffixIcon: IconButton(
-                            icon: Icon(Icons.remove_red_eye, color: _iconColor),
-                            onPressed: () {
-                              setState(
-                                    () {
-                                  obscurePassword = !obscurePassword;
-                                  if (_iconColor ==
-                                      Color.fromARGB(255, 74, 74, 74)) {
-                                    _iconColor = Color(0xFF3E87F5);
-                                  } else {
-                                    _iconColor = Color.fromARGB(255, 74, 74, 74);
-                                  }
-                                },
-                              );
-                            },
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(top: 20.0),
-                    child: Material(
-                      borderRadius: BorderRadius.only(
-                        bottomRight: Radius.circular(40),
-                      ),
-                      elevation: 8,
-                      child: Container(
-                        decoration: BoxDecoration(
-                            color: AppTheme().bg_color.withAlpha(200),
-                            borderRadius: BorderRadius.only(
-                                bottomRight: Radius.circular(40)
-                            )
-                        ),
-                        child: TextFormField(
-                          controller: numberofrigs,
-                          keyboardType: TextInputType.number,
-                          decoration: InputDecoration(
-                            filled: true,
-                            fillColor: Colors.transparent,
-                            border: InputBorder.none,
-                            hintText: '3',
-                            hintStyle: TextStyle(
-                                color: selectedAppTheme.isLightMode?
-                                Color.fromARGB(255, 74, 74, 74):Color.fromARGB(255, 227, 227, 227)
-                            ),
-                            labelText: translate('connection.number'),
-                            labelStyle: TextStyle(
-                                color: selectedAppTheme.isLightMode?
-                                Color.fromARGB(255, 74, 74, 74):Color.fromARGB(255, 227, 227, 227)
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.symmetric(vertical: 20.0),
-                    child:
-                    // onBoarding? Row(
-                    //   mainAxisAlignment: MainAxisAlignment.center,
-                    //   children: [
-                    //     ElevatedButton(
-                    //       onPressed: () {
-                    //         connect();
-                    //         FocusManager.instance.primaryFocus?.unfocus();
-                    //       },
-                    //       style: ElevatedButton.styleFrom(
-                    //         elevation: 2,
-                    //         shadowColor: Colors.grey.withOpacity(0.5),
-                    //         primary: Colors.white,
-                    //         padding: EdgeInsets.all(15),
-                    //         shape: StadiumBorder(),
-                    //       ),
-                    //       child: SizedBox(
-                    //         width: ScreenConfig.widthPercent*30,
-                    //         child: Text(
-                    //             'CONNECT',
-                    //             textAlign: TextAlign.center,
-                    //             style: TextStyle(
-                    //                 fontSize: Utils().fontSizeMultiplier(25),
-                    //                 color: Colors.black,
-                    //             )),
-                    //       ),
-                    //     ),
-                    //     SizedBox(
-                    //       width: ScreenConfig.widthPercent*10,
-                    //     ),
-                    //     ElevatedButton(
-                    //       onPressed: () {
-                    //         Navigator.of(context).pushNamed(RouteNames.homeView);
-                    //       },
-                    //       style: ElevatedButton.styleFrom(
-                    //         elevation: 2,
-                    //         shadowColor: Colors.grey.withOpacity(0.5),
-                    //         primary: Colors.white,
-                    //         padding: EdgeInsets.all(15),
-                    //         shape: StadiumBorder(),
-                    //       ),
-                    //       child: SizedBox(
-                    //         width: ScreenConfig.widthPercent*30,
-                    //         child: Text(
-                    //             'SKIP',
-                    //             textAlign: TextAlign.center,
-                    //             style: TextStyle(
-                    //               fontSize: Utils().fontSizeMultiplier(25),
-                    //               color: Colors.black,
-                    //             )),
-                    //       ),
-                    //     ),
-                    //   ],
-                    // )
-                    ElevatedButton(
+                    child: ElevatedButton(
                       onPressed: () {
                         connect();
                         FocusManager.instance.primaryFocus?.unfocus();
@@ -493,7 +328,7 @@ class _ConnectionManagerViewState extends State<ConnectionManagerView> with Sing
                       style: ElevatedButton.styleFrom(
                         elevation: 2,
                         shadowColor: Colors.grey.withOpacity(0.5),
-                        primary: AppTheme().connect_color,
+                        primary: AppTheme().ebtn_color,
                         padding: EdgeInsets.all(15),
                         shape: StadiumBorder(),
                       ),
@@ -509,7 +344,8 @@ class _ConnectionManagerViewState extends State<ConnectionManagerView> with Sing
                                   translate('connection.connect'),
                                   style: TextStyle(
                                       fontSize: Utils().fontSizeMultiplier(25),
-                                      color: selectedAppTheme.isLightMode?Colors.black:Colors.white
+                                      color: AppTheme().ht_color,
+                                    fontWeight: FontWeight.bold
                                   )),
                             ),
                           ],
@@ -521,6 +357,57 @@ class _ConnectionManagerViewState extends State<ConnectionManagerView> with Sing
               ),
             ),
           ],
+        ),
+      ),
+    );
+  }
+
+  placeholder (
+      TextEditingController controller,
+      TextInputType keyboardType,
+      String hintText,
+      String labelText,
+      ) {
+    return Padding(
+      padding: EdgeInsets.only(bottom: 20.0),
+      child: Material(
+        borderRadius: BorderRadius.only(
+          bottomRight: Radius.circular(40),
+        ),
+        elevation: 8,
+        child: Container(
+          decoration: BoxDecoration(
+            color: AppTheme().bg_color.withAlpha(200),
+            borderRadius: BorderRadius.only(
+              bottomRight: Radius.circular(40),
+            ),
+          ),
+          child: TextFormField(
+            controller: controller,
+            keyboardType: keyboardType,
+            style: TextStyle(
+              color: selectedAppTheme.isLightMode? AppTheme().ht_color:
+              selectedAppTheme.isDarkMode? AppTheme().ht_color:
+              selectedAppTheme.isRedMode? Color.fromARGB(
+                  255, 121, 0, 0):
+              selectedAppTheme.isGreenMode? Color.fromARGB(
+                  255, 3, 52, 10):
+              Color.fromARGB(255, 0, 26, 66),
+            ),
+            decoration: InputDecoration(
+              filled: true,
+              fillColor: Colors.transparent,
+              border: InputBorder.none,
+              hintText: hintText,
+              hintStyle: TextStyle(
+                  color: AppTheme().ht_color
+              ),
+              labelText: labelText,
+              labelStyle: TextStyle(
+                  color: AppTheme().ht_color
+              ),
+            ),
+          ),
         ),
       ),
     );

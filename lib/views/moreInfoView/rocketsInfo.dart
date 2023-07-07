@@ -112,7 +112,7 @@ class RocketInfoCard extends StatelessWidget {
                     onPressed: () => Navigator.of(context).pop(),
                     icon: Icon(
                       Icons.cancel_outlined,
-                      color: AppTheme().bg_color,
+                      color: AppTheme().primary_color,
                       size: 50,
                     )
                 ),

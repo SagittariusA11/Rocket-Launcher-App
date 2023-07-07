@@ -128,7 +128,7 @@ class _SettingsViewState extends State<SettingsView> with SingleTickerProviderSt
                                   style: ElevatedButton.styleFrom(
                                     elevation: 10,
                                     shadowColor: Colors.grey,
-                                    primary: AppTheme().bg_color,
+                                    primary: AppTheme().primary_color,
                                     padding: EdgeInsets.all(15),
                                     shape: StadiumBorder(
                                       side: BorderSide(
@@ -166,7 +166,7 @@ class _SettingsViewState extends State<SettingsView> with SingleTickerProviderSt
                                   style: ElevatedButton.styleFrom(
                                     elevation: 10,
                                     shadowColor: Colors.grey,
-                                    primary: AppTheme().bg_color,
+                                    primary: AppTheme().primary_color,
                                     padding: EdgeInsets.all(15),
                                     shape: StadiumBorder(
                                       side: BorderSide(
@@ -204,7 +204,7 @@ class _SettingsViewState extends State<SettingsView> with SingleTickerProviderSt
                                   style: ElevatedButton.styleFrom(
                                     elevation: 10,
                                     shadowColor: Colors.grey,
-                                    primary: AppTheme().bg_color,
+                                    primary: AppTheme().primary_color,
                                     padding: const EdgeInsets.all(15),
                                     shape: StadiumBorder(
                                       side: BorderSide(
@@ -241,7 +241,7 @@ class _SettingsViewState extends State<SettingsView> with SingleTickerProviderSt
                                   style: ElevatedButton.styleFrom(
                                     elevation: 10,
                                     shadowColor: Colors.grey,
-                                    primary: AppTheme().bg_color,
+                                    primary: AppTheme().primary_color,
                                     padding: const EdgeInsets.all(15),
                                     shape: StadiumBorder(
                                       side: BorderSide(
@@ -279,7 +279,7 @@ class _SettingsViewState extends State<SettingsView> with SingleTickerProviderSt
                                   style: ElevatedButton.styleFrom(
                                     elevation: 10,
                                     shadowColor: Colors.grey,
-                                    primary: AppTheme().bg_color,
+                                    primary: AppTheme().primary_color,
                                     padding: EdgeInsets.all(15),
                                     shape: StadiumBorder(
                                       side: BorderSide(
@@ -342,7 +342,7 @@ class _SettingsViewState extends State<SettingsView> with SingleTickerProviderSt
                                   style: ElevatedButton.styleFrom(
                                     elevation: 10,
                                     shadowColor: Colors.grey,
-                                    primary: AppTheme().bg_color,
+                                    primary: AppTheme().primary_color,
                                     padding: EdgeInsets.all(15),
                                     shape: StadiumBorder(
                                       side: BorderSide(
@@ -395,7 +395,7 @@ class _SettingsViewState extends State<SettingsView> with SingleTickerProviderSt
                                     style: ElevatedButton.styleFrom(
                                       elevation: 10,
                                       shadowColor: Colors.grey,
-                                      primary: AppTheme().bg_color,
+                                      primary: AppTheme().primary_color,
                                       padding: EdgeInsets.all(15),
                                       shape: StadiumBorder(
                                         side: BorderSide(
@@ -448,7 +448,7 @@ class _SettingsViewState extends State<SettingsView> with SingleTickerProviderSt
                                     style: ElevatedButton.styleFrom(
                                       elevation: 10,
                                       shadowColor: Colors.grey,
-                                      primary: AppTheme().bg_color,
+                                      primary: AppTheme().primary_color,
                                       padding: EdgeInsets.all(15),
                                       shape: StadiumBorder(
                                         side: BorderSide(
@@ -501,7 +501,7 @@ class _SettingsViewState extends State<SettingsView> with SingleTickerProviderSt
                                     style: ElevatedButton.styleFrom(
                                       elevation: 10,
                                       shadowColor: Colors.grey,
-                                      primary: AppTheme().bg_color,
+                                      primary: AppTheme().primary_color,
                                       padding: EdgeInsets.all(15),
                                       shape: StadiumBorder(
                                         side: BorderSide(
@@ -554,7 +554,7 @@ class _SettingsViewState extends State<SettingsView> with SingleTickerProviderSt
                                     style: ElevatedButton.styleFrom(
                                       elevation: 10,
                                       shadowColor: Colors.grey,
-                                      primary: AppTheme().bg_color,
+                                      primary: AppTheme().primary_color,
                                       padding: EdgeInsets.all(15),
                                       shape: StadiumBorder(
                                         side: BorderSide(
@@ -792,7 +792,7 @@ class _SettingsViewState extends State<SettingsView> with SingleTickerProviderSt
                                 child: Container(
                                   height: ScreenConfig.heightPercent*7,
                                   decoration: BoxDecoration(
-                                    color: AppTheme().bg_color,
+                                    color: AppTheme().primary_color,
                                     borderRadius: BorderRadius.circular(ScreenConfig.heightPercent*7), // Half the width/height value for a circular shape
                                   ),
                                   child: Row(

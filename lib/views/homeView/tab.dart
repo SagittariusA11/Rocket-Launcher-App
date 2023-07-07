@@ -26,6 +26,9 @@ class _TabViewState extends State<TabView> with SingleTickerProviderStateMixin {
   void initState() {
     super.initState();
     _tabController = TabController(length: 3, vsync: this);
+    setState(() {
+      AppTheme().tab_color;
+    });
   }
 
   @override
@@ -62,8 +65,7 @@ class _TabViewState extends State<TabView> with SingleTickerProviderStateMixin {
             _tabController.index = index;
           });
         },
-        backgroundColor: AppTheme().bg_color,
-        selectedIconTheme: IconThemeData(color: Colors.white),
+        backgroundColor: AppTheme().tab_color,
         selectedLabelStyle: TextStyle(
           fontWeight: FontWeight.bold,
         ),

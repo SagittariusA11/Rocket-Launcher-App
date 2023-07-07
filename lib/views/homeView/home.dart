@@ -20,14 +20,14 @@ import '../settings.dart';
 import '../takeATour.dart';
 import 'tab.dart';
 
-class homeView extends StatefulWidget {
-  const homeView({Key? key}) : super(key: key);
+class HomeView extends StatefulWidget {
+  const HomeView({Key? key}) : super(key: key);
 
   @override
-  State<homeView> createState() => _homeViewState();
+  State<HomeView> createState() => _HomeViewState();
 }
 
-class _homeViewState extends State<homeView> with SingleTickerProviderStateMixin{
+class _HomeViewState extends State<HomeView> with SingleTickerProviderStateMixin{
 
   HomeViewAnimation homeViewAnimation = HomeViewAnimation();
   bool isDrawerOpen = false;
@@ -66,7 +66,7 @@ class _homeViewState extends State<homeView> with SingleTickerProviderStateMixin
                 elevation: 0,
                 backgroundColor: selectedAppTheme.isLightMode? Colors.blue.withOpacity(opacityAnimation.value):
                 selectedAppTheme.isDarkMode? Color.fromARGB(255, 7, 20, 66).withOpacity(opacityAnimation.value):
-                selectedAppTheme.isRedMode? Color.fromARGB(255, 128, 47, 47).withOpacity(opacityAnimation.value):
+                selectedAppTheme.isRedMode? Color.fromARGB(255, 189, 37, 37).withOpacity(opacityAnimation.value):
                 selectedAppTheme.isGreenMode? Color.fromARGB(255, 52, 103, 39).withOpacity(opacityAnimation.value):
                 Color.fromARGB(255, 23, 72, 173).withOpacity(opacityAnimation.value),
                 leading: homeViewController.selectedView == 0?Container():GestureDetector(

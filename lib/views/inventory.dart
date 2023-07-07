@@ -151,7 +151,7 @@ class _InventoryViewState extends State<InventoryView> with SingleTickerProvider
                     height: ScreenConfig.heightPercent*77,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(40),
-                      color: AppTheme().bg_color.withOpacity(0.75),
+                      color: AppTheme().primary_color.withOpacity(0.75),
                     ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -592,7 +592,7 @@ class _InventoryViewState extends State<InventoryView> with SingleTickerProvider
                       //         style: ElevatedButton.styleFrom(
                       //           elevation: 10,
                       //           shadowColor: Colors.grey,
-                      //           primary: AppTheme().bg_color,
+                      //           primary: AppTheme().primary_color,
                       //           padding: EdgeInsets.all(10),
                       //           shape: StadiumBorder(),
                       //         ),
@@ -657,7 +657,7 @@ class _InventoryViewState extends State<InventoryView> with SingleTickerProvider
   //         width: ScreenConfig.heightPercent*35*0.615,
   //         decoration: BoxDecoration(
   //           borderRadius: BorderRadius.circular(25),
-  //           color: AppTheme().bg_color.withOpacity(0.5),
+  //           color: AppTheme().primary_color.withOpacity(0.5),
   //         ),
   //         child: Column(
   //           children: [
@@ -783,7 +783,7 @@ class _InventoryViewState extends State<InventoryView> with SingleTickerProvider
   //         width: ScreenConfig.heightPercent*28*0.615,
   //         decoration: BoxDecoration(
   //           borderRadius: BorderRadius.circular(18),
-  //           color: AppTheme().bg_color.withOpacity(0.5),
+  //           color: AppTheme().primary_color.withOpacity(0.5),
   //         ),
   //         child: Column(
   //           children: [
@@ -903,7 +903,7 @@ class BuildRocketsItemList extends StatelessWidget {
           width: ScreenConfig.heightPercent*35*0.615,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(25),
-            color: AppTheme().bg_color.withOpacity(0.5),
+            color: AppTheme().primary_color.withOpacity(0.5),
           ),
           child: Column(
             children: [
@@ -1000,7 +1000,7 @@ class BuildStarlinksItemList extends StatelessWidget {
           width: ScreenConfig.heightPercent*28*0.615,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(18),
-            color: AppTheme().bg_color.withOpacity(0.5),
+            color: AppTheme().primary_color.withOpacity(0.5),
           ),
           child: Column(
             children: [

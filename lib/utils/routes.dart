@@ -60,7 +60,7 @@ class Routes {
 
       case RouteNames.homeView:
         return MaterialPageRoute(builder:
-            (BuildContext context)=>homeView()
+            (BuildContext context)=>HomeView()
         );
 
       case RouteNames.lgActions:

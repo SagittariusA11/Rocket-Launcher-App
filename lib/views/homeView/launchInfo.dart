@@ -320,7 +320,7 @@ class _LaunchInfoState extends State<LaunchInfo> {
                       style: ElevatedButton.styleFrom(
                         elevation: 10,
                         shadowColor: Colors.grey,
-                        primary: AppTheme().bg_color,
+                        primary: AppTheme().primary_color,
                         padding: EdgeInsets.all(10),
                         shape: StadiumBorder(),
                       ),
@@ -361,7 +361,7 @@ class _LaunchInfoState extends State<LaunchInfo> {
                       style: ElevatedButton.styleFrom(
                         elevation: 10,
                         shadowColor: Colors.grey,
-                        primary: AppTheme().bg_color,
+                        primary: AppTheme().primary_color,
                         padding: EdgeInsets.all(10),
                         shape: StadiumBorder(),
                       ),
@@ -402,7 +402,7 @@ class _LaunchInfoState extends State<LaunchInfo> {
                       style: ElevatedButton.styleFrom(
                         elevation: 10,
                         shadowColor: Colors.grey,
-                        primary: AppTheme().bg_color,
+                        primary: AppTheme().primary_color,
                         padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                         shape: const StadiumBorder(),
                       ),
@@ -533,7 +533,7 @@ class BuildRocketInfoItemList extends StatelessWidget {
       width: ScreenConfig.width,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(50),
-        color: AppTheme().bg_color.withOpacity(0.5),
+        color: AppTheme().primary_color.withOpacity(0.5),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -574,7 +574,7 @@ class BuildRocketInfoItemList extends StatelessWidget {
                     style: ElevatedButton.styleFrom(
                       elevation: 10,
                       shadowColor: Colors.grey,
-                      primary: AppTheme().bg_color,
+                      primary: AppTheme().primary_color,
                       shape: const StadiumBorder(),
                     ),
                     child: SizedBox(
@@ -681,7 +681,7 @@ class BuildRocketInfoItemList extends StatelessWidget {
                           style: ElevatedButton.styleFrom(
                             elevation: 10,
                             shadowColor: Colors.grey,
-                            primary: AppTheme().bg_color,
+                            primary: AppTheme().primary_color,
                             shape: const StadiumBorder(),
                           ),
                           child: SizedBox(
@@ -705,7 +705,7 @@ class BuildRocketInfoItemList extends StatelessWidget {
                           style: ElevatedButton.styleFrom(
                             elevation: 10,
                             shadowColor: Colors.grey,
-                            primary: AppTheme().bg_color,
+                            primary: AppTheme().primary_color,
                             shape: const StadiumBorder(),
                           ),
                           child: SizedBox(
@@ -733,7 +733,7 @@ class BuildRocketInfoItemList extends StatelessWidget {
                           style: ElevatedButton.styleFrom(
                             elevation: 10,
                             shadowColor: Colors.grey,
-                            primary: AppTheme().bg_color,
+                            primary: AppTheme().primary_color,
                             shape: const StadiumBorder(),
                           ),
                           child: SizedBox(
@@ -755,7 +755,7 @@ class BuildRocketInfoItemList extends StatelessWidget {
                       //     style: ElevatedButton.styleFrom(
                       //       elevation: 10,
                       //       shadowColor: Colors.grey,
-                      //       primary: AppTheme().bg_color,
+                      //       primary: AppTheme().primary_color,
                       //       shape: const StadiumBorder(),
                       //     ),
                       //     child: SizedBox(

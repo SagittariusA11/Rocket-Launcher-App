@@ -31,7 +31,7 @@ class YTLive{
                         onPressed: () => Navigator.of(context).pop(),
                         icon: Icon(
                           Icons.cancel_outlined,
-                          color: AppTheme().bg_color,
+                          color: AppTheme().primary_color,
                           size: 50,
                         )
                     ),
@@ -172,7 +172,7 @@ class YTLive{
                                   style: ElevatedButton.styleFrom(
                                     elevation: 10,
                                     shadowColor: Colors.grey,
-                                    primary: AppTheme().bg_color,
+                                    primary: AppTheme().primary_color,
                                     padding: EdgeInsets.all(10),
                                     shape: StadiumBorder(),
                                   ),
