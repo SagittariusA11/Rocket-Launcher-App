@@ -141,18 +141,19 @@ class _LaunchInfoState extends State<LaunchInfo> {
         body: Container(
           width: ScreenConfig.width,
           height: ScreenConfig.height,
-          decoration: BoxDecoration(
-              image: DecorationImage(
-                  image: AssetImage(
-                    selectedAppTheme.isLightMode? ImagePaths.launchInfo_bg_light:
-                    selectedAppTheme.isDarkMode? ImagePaths.launchInfo_bg_dark:
-                    selectedAppTheme.isRedMode? ImagePaths.launchInfo_bg_red:
-                    selectedAppTheme.isGreenMode? ImagePaths.launchInfo_bg_green:
-                    ImagePaths.launchInfo_bg_blue,
-                  ),
-                  fit: BoxFit.cover
-              )
-          ),
+          color: AppTheme().bg_color,
+          // decoration: BoxDecoration(
+          //     image: DecorationImage(
+          //         image: AssetImage(
+          //           selectedAppTheme.isLightMode? ImagePaths.launchInfo_bg_light:
+          //           selectedAppTheme.isDarkMode? ImagePaths.launchInfo_bg_dark:
+          //           selectedAppTheme.isRedMode? ImagePaths.launchInfo_bg_red:
+          //           selectedAppTheme.isGreenMode? ImagePaths.launchInfo_bg_green:
+          //           ImagePaths.launchInfo_bg_blue,
+          //         ),
+          //         fit: BoxFit.cover
+          //     )
+          // ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -184,7 +185,7 @@ class _LaunchInfoState extends State<LaunchInfo> {
                                 style: TextStyle(
                                     fontFamily: 'GoogleSans',
                                     fontSize: Utils().fontSizeMultiplier(30),
-                                    color: Colors.white,
+                                    color: AppTheme().ht_color,
                                     fontWeight: FontWeight.bold
                                 ),
                               ),
@@ -193,7 +194,7 @@ class _LaunchInfoState extends State<LaunchInfo> {
                                 style: TextStyle(
                                     fontFamily: 'GoogleSans',
                                     fontSize: Utils().fontSizeMultiplier(20),
-                                    color: Colors.white
+                                    color: AppTheme().ht_color,
                                 ),
                               ),
                             ],
@@ -205,9 +206,9 @@ class _LaunchInfoState extends State<LaunchInfo> {
                         children: [
                           IconButton(
                             onPressed: () { print("Filter"); },
-                            icon: const FaIcon(
+                            icon: FaIcon(
                               FontAwesomeIcons.filter,
-                              color: Colors.white,
+                              color: AppTheme().ht_color,
                               size: 30,
                             ),
                           ),
@@ -222,9 +223,9 @@ class _LaunchInfoState extends State<LaunchInfo> {
                               );
                               print("Calander");
                             },
-                            icon: const Icon(
+                            icon: Icon(
                               Icons.calendar_month_rounded,
-                              color: Colors.white,
+                              color: AppTheme().ht_color,
                               size: 40,
                             ),
                           ),
@@ -242,16 +243,16 @@ class _LaunchInfoState extends State<LaunchInfo> {
                               width: ScreenConfig.widthPercent*12,
                               margin: const EdgeInsets.symmetric(horizontal: 15),
                               padding: const EdgeInsets.only(bottom: 5),
-                              decoration: const BoxDecoration(
-                                border: Border(bottom: BorderSide(color: Colors.white, width: 1)),
+                              decoration: BoxDecoration(
+                                border: Border(bottom: BorderSide(color: AppTheme().ht_color, width: 1)),
                               ),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-                                  const Icon(
+                                  Icon(
                                     Icons.search,
-                                    color: Colors.white,
+                                    color: AppTheme().ht_color,
                                     size: 30,
                                   ),
                                   SizedBox(
@@ -259,8 +260,8 @@ class _LaunchInfoState extends State<LaunchInfo> {
                                   ),
                                   Text(
                                     translate('inventory.search'),
-                                    style: const TextStyle(
-                                        color: Colors.white
+                                    style: TextStyle(
+                                        color: AppTheme().ht_color,
                                     ),
                                   ),
                                 ],
@@ -320,7 +321,7 @@ class _LaunchInfoState extends State<LaunchInfo> {
                       style: ElevatedButton.styleFrom(
                         elevation: 10,
                         shadowColor: Colors.grey,
-                        primary: AppTheme().primary_color,
+                        backgroundColor: AppTheme().ebtn_color,
                         padding: EdgeInsets.all(10),
                         shape: StadiumBorder(),
                       ),
@@ -338,13 +339,13 @@ class _LaunchInfoState extends State<LaunchInfo> {
                                   translate('launchInfo_tab.ytv'),
                                   style: TextStyle(
                                     fontSize: Utils().fontSizeMultiplier(23),
-                                    color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
+                                    color: AppTheme().ht_color
                                   )),
                             ),
                           ),
-                          const Icon(
+                          Icon(
                             Icons.play_arrow,
-                            color: Colors.black,
+                            color: AppTheme().ht_color,
                             size: 35,
                           ),
                           SizedBox(
@@ -361,7 +362,7 @@ class _LaunchInfoState extends State<LaunchInfo> {
                       style: ElevatedButton.styleFrom(
                         elevation: 10,
                         shadowColor: Colors.grey,
-                        primary: AppTheme().primary_color,
+                        backgroundColor: AppTheme().ebtn_color,
                         padding: EdgeInsets.all(10),
                         shape: StadiumBorder(),
                       ),
@@ -379,13 +380,13 @@ class _LaunchInfoState extends State<LaunchInfo> {
                                   translate('launch_tab.vlg'),
                                   style: TextStyle(
                                     fontSize: Utils().fontSizeMultiplier(23),
-                                    color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
+                                    color: AppTheme().ht_color
                                   )),
                             ),
                           ),
-                          const Icon(
+                          Icon(
                             Icons.location_pin,
-                            color: Colors.black,
+                            color: AppTheme().ht_color,
                             size: 35,
                           ),
                           SizedBox(
@@ -402,7 +403,7 @@ class _LaunchInfoState extends State<LaunchInfo> {
                       style: ElevatedButton.styleFrom(
                         elevation: 10,
                         shadowColor: Colors.grey,
-                        primary: AppTheme().primary_color,
+                        backgroundColor: AppTheme().ebtn_color,
                         padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                         shape: const StadiumBorder(),
                       ),
@@ -414,7 +415,7 @@ class _LaunchInfoState extends State<LaunchInfo> {
                               translate('launch_tab.dlg'),
                               style: TextStyle(
                                   fontSize: Utils().fontSizeMultiplier(20),
-                                  color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
+                                  color: AppTheme().ht_color,
                                   fontWeight: FontWeight.bold
                               )
                           ),
@@ -533,7 +534,7 @@ class BuildRocketInfoItemList extends StatelessWidget {
       width: ScreenConfig.width,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(50),
-        color: AppTheme().primary_color.withOpacity(0.5),
+        color: Colors.white.withAlpha(50),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -550,7 +551,7 @@ class BuildRocketInfoItemList extends StatelessWidget {
                   style: TextStyle(
                       fontFamily: 'GoogleSans',
                       fontSize: Utils().fontSizeMultiplier(30),
-                      color: Colors.white,
+                      color: AppTheme().ht_color,
                       fontWeight: FontWeight.bold
                   ),
                 ),
@@ -574,7 +575,7 @@ class BuildRocketInfoItemList extends StatelessWidget {
                     style: ElevatedButton.styleFrom(
                       elevation: 10,
                       shadowColor: Colors.grey,
-                      primary: AppTheme().primary_color,
+                      backgroundColor: AppTheme().ebtn_color,
                       shape: const StadiumBorder(),
                     ),
                     child: SizedBox(
@@ -585,7 +586,7 @@ class BuildRocketInfoItemList extends StatelessWidget {
                             translate('launchInfo_tab.mi'),
                             style: TextStyle(
                               fontSize: Utils().fontSizeMultiplier(20),
-                              color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
+                              color: AppTheme().ht_color,
                             )
                         ),
                       ),
@@ -598,10 +599,10 @@ class BuildRocketInfoItemList extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 10),
               height: ScreenConfig.heightPercent*56,
               width: ScreenConfig.widthPercent*30,
-              decoration: const BoxDecoration(
+              decoration: BoxDecoration(
                 border: Border(
-                  left: BorderSide(width: 5.0, color: Colors.white),
-                  right: BorderSide(width: 5.0, color: Colors.white),
+                  left: BorderSide(width: 5.0, color: AppTheme().primary_color),
+                  right: BorderSide(width: 5.0, color: AppTheme().primary_color),
                 ),
               ),
               child: Column(
@@ -610,58 +611,58 @@ class BuildRocketInfoItemList extends StatelessWidget {
                 children: [
                   Text(
                     "${translate('launchInfo_tab.rn')}:   ${allLaunches.rocketName}",
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 22,
-                      color: Colors.white,
+                      color: AppTheme().ht_color,
                     ),
                   ),
                   Text(
                     "${translate('launchInfo_tab.date')}:   ${allLaunches.launchDate}",
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 22,
-                      color: Colors.white,
+                      color: AppTheme().ht_color,
                     ),
                   ),
                   Text(
                     "${translate('launchInfo_tab.time')}:   ${allLaunches.launchTime}    UTC",
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 22,
-                      color: Colors.white,
+                      color: AppTheme().ht_color,
                     ),
                   ),
                   Text(
                     "${translate('launchInfo_tab.ls')}:   ${allLaunches.launchPad}",
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 22,
-                      color: Colors.white,
+                      color: AppTheme().ht_color,
                     ),
                   ),
                   Text(
                     "${translate('launchInfo_tab.fn')}:   ${allLaunches.flightNumber}",
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 22,
-                      color: Colors.white,
+                      color: AppTheme().ht_color,
                     ),
                   ),
                   Text(
                     "${translate('launchInfo_tab.py')}:   ${allLaunches.payload}",
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 22,
-                      color: Colors.white,
+                      color: AppTheme().ht_color,
                     ),
                   ),
                   Text(
                     "${translate('launchInfo_tab.n')}:    ${allLaunches.country}",
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 22,
-                      color: Colors.white,
+                      color: AppTheme().ht_color,
                     ),
                   ),
                   Text(
                     "${translate('launchInfo_tab.ct')}:    ${allLaunches.company}",
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 22,
-                      color: Colors.white,
+                      color: AppTheme().ht_color,
                     ),
                   ),
                   // Text(
@@ -681,7 +682,7 @@ class BuildRocketInfoItemList extends StatelessWidget {
                           style: ElevatedButton.styleFrom(
                             elevation: 10,
                             shadowColor: Colors.grey,
-                            primary: AppTheme().primary_color,
+                            backgroundColor: AppTheme().ebtn_color,
                             shape: const StadiumBorder(),
                           ),
                           child: SizedBox(
@@ -692,7 +693,7 @@ class BuildRocketInfoItemList extends StatelessWidget {
                                   translate('launchInfo_tab.art'),
                                   style: TextStyle(
                                     fontSize: 15,
-                                    color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
+                                    color: AppTheme().ht_color,
                                   )
                               ),
                             ),
@@ -705,7 +706,7 @@ class BuildRocketInfoItemList extends StatelessWidget {
                           style: ElevatedButton.styleFrom(
                             elevation: 10,
                             shadowColor: Colors.grey,
-                            primary: AppTheme().primary_color,
+                            primary: AppTheme().ebtn_color,
                             shape: const StadiumBorder(),
                           ),
                           child: SizedBox(
@@ -716,7 +717,7 @@ class BuildRocketInfoItemList extends StatelessWidget {
                                   translate('launchInfo_tab.wiki'),
                                   style: TextStyle(
                                     fontSize: 16,
-                                    color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
+                                    color: AppTheme().ht_color,
                                   )
                               ),
                             ),
@@ -733,7 +734,7 @@ class BuildRocketInfoItemList extends StatelessWidget {
                           style: ElevatedButton.styleFrom(
                             elevation: 10,
                             shadowColor: Colors.grey,
-                            primary: AppTheme().primary_color,
+                            primary: AppTheme().ebtn_color,
                             shape: const StadiumBorder(),
                           ),
                           child: SizedBox(
@@ -744,7 +745,7 @@ class BuildRocketInfoItemList extends StatelessWidget {
                                   translate('launchInfo_tab.img'),
                                   style: TextStyle(
                                     fontSize: 16,
-                                    color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
+                                    color: AppTheme().ht_color,
                                   )
                               ),
                             ),
@@ -787,9 +788,9 @@ class BuildRocketInfoItemList extends StatelessWidget {
                     padding: const EdgeInsets.only(top: 5),
                     height: ScreenConfig.heightPercent*16,
                     width: ScreenConfig.widthPercent*40,
-                    decoration: const BoxDecoration(
+                    decoration: BoxDecoration(
                       border: Border(
-                        bottom: BorderSide(width: 3.0, color: Colors.white),
+                        bottom: BorderSide(width: 3.0, color: AppTheme().primary_color),
                       ),
                     ),
                     child: Column(
@@ -797,9 +798,9 @@ class BuildRocketInfoItemList extends StatelessWidget {
                       children: [
                         Text(
                           "${translate('launchInfo_tab.md')}:",
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontSize: 25,
-                            color: Colors.white,
+                            color: AppTheme().ht_color,
                           ),
                         ),
                         const SizedBox(
@@ -808,9 +809,9 @@ class BuildRocketInfoItemList extends StatelessWidget {
                         Text(
                           allLaunches.missionDes,
                           // translate('launchInfo_tab.md_01'),
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontSize: 15,
-                            color: Colors.white,
+                            color: AppTheme().ht_color,
                           ),
                         ),
                       ],
@@ -825,9 +826,9 @@ class BuildRocketInfoItemList extends StatelessWidget {
                       children: [
                         Text(
                           "${translate('launchInfo_tab.lsd')}:",
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontSize: 25,
-                            color: Colors.white,
+                            color: AppTheme().ht_color,
                           ),
                         ),
                         const SizedBox(
@@ -836,9 +837,9 @@ class BuildRocketInfoItemList extends StatelessWidget {
                         Text(
                           allLaunches.launchPadFullName,
                           // translate('launchInfo_tab.lsfn'),
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontSize: 20,
-                            color: Colors.white,
+                            color: AppTheme().ht_color,
                           ),
                         ),
                         const SizedBox(
@@ -847,9 +848,9 @@ class BuildRocketInfoItemList extends StatelessWidget {
                         Text(
                           // translate(allLaunches.launchPadDes),
                           translate('launchInfo_tab.lsd_0${allLaunches.launchPadDes}'),
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontSize: 15,
-                            color: Colors.white,
+                            color: AppTheme().ht_color,
                           ),
                         ),
                       ],

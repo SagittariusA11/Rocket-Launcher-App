@@ -52,15 +52,16 @@ class AppTheme{
   Color ebtn_color = selectedAppTheme.isLightMode? Color.fromARGB(255, 203, 221, 255):
   selectedAppTheme.isDarkMode? Color.fromARGB(255, 37, 51, 178):
   selectedAppTheme.isRedMode? Color.fromARGB(255, 255, 146, 146):
-  selectedAppTheme.isGreenMode? Color.fromARGB(255, 127, 255, 123):
+  selectedAppTheme.isGreenMode? Color.fromARGB(255, 123, 255, 125):
   Color.fromARGB(255, 86, 138, 255);
 
   //head_text_color
-  Color ht_color = selectedAppTheme.isLightMode? Color.fromARGB(255, 29, 80, 154):
+  Color ht_color = selectedAppTheme.isLightMode? Color.fromARGB(
+      255, 0, 25, 65):
   selectedAppTheme.isDarkMode? Colors.white:
-  selectedAppTheme.isRedMode? Color.fromARGB(255, 176, 0, 0):
-  selectedAppTheme.isGreenMode? Color.fromARGB(255, 30, 70, 17):
-  Color.fromARGB(255, 2, 37, 103);
+  selectedAppTheme.isRedMode? Color.fromARGB(255, 145, 0, 0):
+  selectedAppTheme.isGreenMode? Color.fromARGB(255, 28, 65, 13):
+  Color.fromARGB(255, 1, 27, 79);
 
 }
 
