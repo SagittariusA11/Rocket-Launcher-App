@@ -21,11 +21,8 @@ class InventoryView extends StatefulWidget {
 
 class _InventoryViewState extends State<InventoryView> with SingleTickerProviderStateMixin {
 
-  int length = 10;
   ScrollController rocketScrollController = ScrollController();
   ScrollController satelliteScrollController = ScrollController();
-  TextEditingController _searchController = TextEditingController();
-  bool _isSearching = false;
   bool isSpaceXRocketsChecked = false;
   bool isNASARocketsChecked = false;
   bool isOthersRocketsChecked = false;
@@ -59,18 +56,19 @@ class _InventoryViewState extends State<InventoryView> with SingleTickerProvider
         body: Container(
           width: ScreenConfig.width,
           height: ScreenConfig.height,
-          decoration: BoxDecoration(
-              image: DecorationImage(
-                  image: AssetImage(
-                    selectedAppTheme.isLightMode? ImagePaths.launch_bg_light:
-                    selectedAppTheme.isDarkMode? ImagePaths.launch_bg_dark:
-                    selectedAppTheme.isRedMode? ImagePaths.launch_bg_red:
-                    selectedAppTheme.isGreenMode? ImagePaths.launch_bg_green:
-                    ImagePaths.launch_bg_blue,
-                  ),
-                  fit: BoxFit.cover
-              )
-          ),
+          color: AppTheme().bg_color,
+          // decoration: BoxDecoration(
+          //     image: DecorationImage(
+          //         image: AssetImage(
+          //           selectedAppTheme.isLightMode? ImagePaths.launch_bg_light:
+          //           selectedAppTheme.isDarkMode? ImagePaths.launch_bg_dark:
+          //           selectedAppTheme.isRedMode? ImagePaths.launch_bg_red:
+          //           selectedAppTheme.isGreenMode? ImagePaths.launch_bg_green:
+          //           ImagePaths.launch_bg_blue,
+          //         ),
+          //         fit: BoxFit.cover
+          //     )
+          // ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -94,7 +92,7 @@ class _InventoryViewState extends State<InventoryView> with SingleTickerProvider
                           style: TextStyle(
                               fontFamily: 'GoogleSans',
                               fontSize: Utils().fontSizeMultiplier(30),
-                              color: AppTheme().text,
+                              color: AppTheme().ht_color,
                               fontWeight: FontWeight.bold
                           ),
                         ),
@@ -114,16 +112,16 @@ class _InventoryViewState extends State<InventoryView> with SingleTickerProvider
                         width: ScreenConfig.widthPercent*12,
                         margin: const EdgeInsets.symmetric(horizontal: 30),
                         padding: const EdgeInsets.only(bottom: 5),
-                        decoration: const BoxDecoration(
-                          border: Border(bottom: BorderSide(color: Colors.white, width: 1)),
+                        decoration: BoxDecoration(
+                          border: Border(bottom: BorderSide(color: AppTheme().primary_color, width: 1)),
                         ),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            const Icon(
+                            Icon(
                               Icons.search,
-                              color: Colors.white,
+                              color: AppTheme().primary_color,
                               size: 30,
                             ),
                             SizedBox(
@@ -131,8 +129,8 @@ class _InventoryViewState extends State<InventoryView> with SingleTickerProvider
                             ),
                             Text(
                               translate('inventory.search'),
-                              style: const TextStyle(
-                                  color: Colors.white
+                              style: TextStyle(
+                                  color: AppTheme().ht_color,
                               ),
                             ),
                           ],
@@ -151,7 +149,7 @@ class _InventoryViewState extends State<InventoryView> with SingleTickerProvider
                     height: ScreenConfig.heightPercent*77,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(40),
-                      color: AppTheme().primary_color.withOpacity(0.75),
+                      color: AppTheme().cards_color.withAlpha(50),
                     ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -167,7 +165,7 @@ class _InventoryViewState extends State<InventoryView> with SingleTickerProvider
                                 style: TextStyle(
                                     fontFamily: 'GoogleSans',
                                     fontSize: Utils().fontSizeMultiplier(20),
-                                    color: AppTheme().text,
+                                    color: AppTheme().ht_color,
                                     fontWeight: FontWeight.bold
                                 ),
                               ),
@@ -191,7 +189,7 @@ class _InventoryViewState extends State<InventoryView> with SingleTickerProvider
                                         // fillColor: MaterialStateProperty.resolveWith<Color>((states) {
                                         //   return Colors.grey;
                                         // }),
-                                        activeColor: Colors.green,
+                                        activeColor: AppTheme().primary_color,
                                       ),
                                     ),
                                     Text(
@@ -199,7 +197,7 @@ class _InventoryViewState extends State<InventoryView> with SingleTickerProvider
                                       style: TextStyle(
                                         fontSize: Utils().fontSizeMultiplier(20),
                                         fontWeight: FontWeight.w400,
-                                        color: AppTheme().text,
+                                        color: AppTheme().ht_color,
                                       ),
                                     ),
                                   ],
@@ -225,7 +223,7 @@ class _InventoryViewState extends State<InventoryView> with SingleTickerProvider
                                         // fillColor: MaterialStateProperty.resolveWith<Color>((states) {
                                         //   return Colors.grey;
                                         // }),
-                                        activeColor: Colors.green,
+                                        activeColor: AppTheme().primary_color,
                                       ),
                                     ),
                                     Text(
@@ -233,7 +231,7 @@ class _InventoryViewState extends State<InventoryView> with SingleTickerProvider
                                       style: TextStyle(
                                         fontSize: Utils().fontSizeMultiplier(20),
                                         fontWeight: FontWeight.w400,
-                                        color: AppTheme().text,
+                                        color: AppTheme().ht_color,
                                       ),
                                     ),
                                   ],
@@ -259,7 +257,7 @@ class _InventoryViewState extends State<InventoryView> with SingleTickerProvider
                                         // fillColor: MaterialStateProperty.resolveWith<Color>((states) {
                                         //   return Colors.grey;
                                         // }),
-                                        activeColor: Colors.green,
+                                        activeColor: AppTheme().primary_color,
                                       ),
                                     ),
                                     Text(
@@ -267,7 +265,7 @@ class _InventoryViewState extends State<InventoryView> with SingleTickerProvider
                                       style: TextStyle(
                                         fontSize: Utils().fontSizeMultiplier(20),
                                         fontWeight: FontWeight.w400,
-                                        color: AppTheme().text,
+                                        color: AppTheme().ht_color,
                                       ),
                                     ),
                                   ],
@@ -293,7 +291,7 @@ class _InventoryViewState extends State<InventoryView> with SingleTickerProvider
                                         // fillColor: MaterialStateProperty.resolveWith<Color>((states) {
                                         //   return Colors.grey;
                                         // }),
-                                        activeColor: Colors.green,
+                                        activeColor: AppTheme().primary_color,
                                       ),
                                     ),
                                     Text(
@@ -301,7 +299,7 @@ class _InventoryViewState extends State<InventoryView> with SingleTickerProvider
                                       style: TextStyle(
                                         fontSize: Utils().fontSizeMultiplier(20),
                                         fontWeight: FontWeight.w400,
-                                        color: AppTheme().text,
+                                        color: AppTheme().ht_color,
                                       ),
                                     ),
                                   ],
@@ -320,7 +318,7 @@ class _InventoryViewState extends State<InventoryView> with SingleTickerProvider
                                 style: TextStyle(
                                     fontFamily: 'GoogleSans',
                                     fontSize: Utils().fontSizeMultiplier(20),
-                                    color: AppTheme().text,
+                                    color: AppTheme().ht_color,
                                     fontWeight: FontWeight.bold
                                 ),
                               ),
@@ -344,7 +342,7 @@ class _InventoryViewState extends State<InventoryView> with SingleTickerProvider
                                         // fillColor: MaterialStateProperty.resolveWith<Color>((states) {
                                         //   return Colors.grey;
                                         // }),
-                                        activeColor: Colors.green,
+                                        activeColor: AppTheme().primary_color,
                                       ),
                                     ),
                                     Text(
@@ -352,7 +350,7 @@ class _InventoryViewState extends State<InventoryView> with SingleTickerProvider
                                       style: TextStyle(
                                         fontSize: Utils().fontSizeMultiplier(20),
                                         fontWeight: FontWeight.w400,
-                                        color: AppTheme().text,
+                                        color: AppTheme().ht_color,
                                       ),
                                     ),
                                   ],
@@ -378,7 +376,7 @@ class _InventoryViewState extends State<InventoryView> with SingleTickerProvider
                                         // fillColor: MaterialStateProperty.resolveWith<Color>((states) {
                                         //   return Colors.grey;
                                         // }),
-                                        activeColor: Colors.green,
+                                        activeColor: AppTheme().primary_color,
                                       ),
                                     ),
                                     Text(
@@ -386,7 +384,7 @@ class _InventoryViewState extends State<InventoryView> with SingleTickerProvider
                                       style: TextStyle(
                                         fontSize: Utils().fontSizeMultiplier(20),
                                         fontWeight: FontWeight.w400,
-                                        color: AppTheme().text,
+                                        color: AppTheme().ht_color,
                                       ),
                                     ),
                                   ],
@@ -412,7 +410,7 @@ class _InventoryViewState extends State<InventoryView> with SingleTickerProvider
                                         // fillColor: MaterialStateProperty.resolveWith<Color>((states) {
                                         //   return Colors.grey;
                                         // }),
-                                        activeColor: Colors.green,
+                                        activeColor: AppTheme().primary_color,
                                       ),
                                     ),
                                     Text(
@@ -420,7 +418,7 @@ class _InventoryViewState extends State<InventoryView> with SingleTickerProvider
                                       style: TextStyle(
                                         fontSize: Utils().fontSizeMultiplier(20),
                                         fontWeight: FontWeight.w400,
-                                        color: AppTheme().text,
+                                        color: AppTheme().ht_color,
                                       ),
                                     ),
                                   ],
@@ -446,7 +444,7 @@ class _InventoryViewState extends State<InventoryView> with SingleTickerProvider
                                         // fillColor: MaterialStateProperty.resolveWith<Color>((states) {
                                         //   return Colors.grey;
                                         // }),
-                                        activeColor: Colors.green,
+                                        activeColor: AppTheme().primary_color,
                                       ),
                                     ),
                                     Text(
@@ -454,7 +452,7 @@ class _InventoryViewState extends State<InventoryView> with SingleTickerProvider
                                       style: TextStyle(
                                         fontSize: Utils().fontSizeMultiplier(20),
                                         fontWeight: FontWeight.w400,
-                                        color: AppTheme().text,
+                                        color: AppTheme().ht_color,
                                       ),
                                     ),
                                   ],
@@ -480,7 +478,7 @@ class _InventoryViewState extends State<InventoryView> with SingleTickerProvider
                                         // fillColor: MaterialStateProperty.resolveWith<Color>((states) {
                                         //   return Colors.grey;
                                         // }),
-                                        activeColor: Colors.green,
+                                        activeColor: AppTheme().primary_color,
                                       ),
                                     ),
                                     Text(
@@ -488,7 +486,7 @@ class _InventoryViewState extends State<InventoryView> with SingleTickerProvider
                                       style: TextStyle(
                                         fontSize: Utils().fontSizeMultiplier(20),
                                         fontWeight: FontWeight.w400,
-                                        color: AppTheme().text,
+                                        color: AppTheme().ht_color,
                                       ),
                                     ),
                                   ],
@@ -514,7 +512,7 @@ class _InventoryViewState extends State<InventoryView> with SingleTickerProvider
                                         // fillColor: MaterialStateProperty.resolveWith<Color>((states) {
                                         //   return Colors.grey;
                                         // }),
-                                        activeColor: Colors.green,
+                                        activeColor: AppTheme().primary_color,
                                       ),
                                     ),
                                     Text(
@@ -522,7 +520,7 @@ class _InventoryViewState extends State<InventoryView> with SingleTickerProvider
                                       style: TextStyle(
                                         fontSize: Utils().fontSizeMultiplier(20),
                                         fontWeight: FontWeight.w400,
-                                        color: AppTheme().text,
+                                        color: AppTheme().ht_color,
                                       ),
                                     ),
                                   ],
@@ -550,7 +548,7 @@ class _InventoryViewState extends State<InventoryView> with SingleTickerProvider
                               style: TextStyle(
                                   fontFamily: 'GoogleSans',
                                   fontSize: Utils().fontSizeMultiplier(30),
-                                  color: Colors.white,
+                                  color: AppTheme().ht_color,
                                   fontWeight: FontWeight.bold
                               ),
                             ),
@@ -574,7 +572,7 @@ class _InventoryViewState extends State<InventoryView> with SingleTickerProvider
                               style: TextStyle(
                                   fontFamily: 'GoogleSans',
                                   fontSize: Utils().fontSizeMultiplier(30),
-                                  color: Colors.white,
+                                  color: AppTheme().ht_color,
                                   fontWeight: FontWeight.bold
                               ),
                             ),
@@ -903,7 +901,7 @@ class BuildRocketsItemList extends StatelessWidget {
           width: ScreenConfig.heightPercent*35*0.615,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(25),
-            color: AppTheme().primary_color.withOpacity(0.5),
+            color: AppTheme().cards_color
           ),
           child: Column(
             children: [
@@ -1000,7 +998,7 @@ class BuildStarlinksItemList extends StatelessWidget {
           width: ScreenConfig.heightPercent*28*0.615,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(18),
-            color: AppTheme().primary_color.withOpacity(0.5),
+            color: AppTheme().cards_color
           ),
           child: Column(
             children: [
