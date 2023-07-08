@@ -46,18 +46,19 @@ class _SettingsViewState extends State<SettingsView> with SingleTickerProviderSt
         body: Container(
           width: ScreenConfig.width,
           height: ScreenConfig.height,
-          decoration: BoxDecoration(
-            image: DecorationImage(
-                image: AssetImage(
-                  selectedAppTheme.isLightMode? ImagePaths.settings_bg_light:
-                  selectedAppTheme.isDarkMode? ImagePaths.settings_bg_dark:
-                  selectedAppTheme.isRedMode? ImagePaths.settings_bg_red:
-                  selectedAppTheme.isGreenMode? ImagePaths.settings_bg_green:
-                  ImagePaths.settings_bg_blue,
-                ),
-                fit: BoxFit.cover
-            ),
-          ),
+          color: AppTheme().bg_color,
+          // decoration: BoxDecoration(
+          //   image: DecorationImage(
+          //       image: AssetImage(
+          //         selectedAppTheme.isLightMode? ImagePaths.settings_bg_light:
+          //         selectedAppTheme.isDarkMode? ImagePaths.settings_bg_dark:
+          //         selectedAppTheme.isRedMode? ImagePaths.settings_bg_red:
+          //         selectedAppTheme.isGreenMode? ImagePaths.settings_bg_green:
+          //         ImagePaths.settings_bg_blue,
+          //       ),
+          //       fit: BoxFit.cover
+          //   ),
+          // ),
           child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -79,7 +80,7 @@ class _SettingsViewState extends State<SettingsView> with SingleTickerProviderSt
                         style: TextStyle(
                             fontFamily: 'GoogleSans',
                             fontSize: Utils().fontSizeMultiplier(30),
-                            color: AppTheme().text,
+                            color: AppTheme().ht_color,
                             fontWeight: FontWeight.bold
                         ),
                       ),
@@ -103,7 +104,7 @@ class _SettingsViewState extends State<SettingsView> with SingleTickerProviderSt
                               style: TextStyle(
                                   fontFamily: 'GoogleSans',
                                   fontSize: Utils().fontSizeMultiplier(30),
-                                  color: AppTheme().text,
+                                  color: AppTheme().ht_color,
                                   fontWeight: FontWeight.bold
                               ),
                             ),
@@ -128,11 +129,11 @@ class _SettingsViewState extends State<SettingsView> with SingleTickerProviderSt
                                   style: ElevatedButton.styleFrom(
                                     elevation: 10,
                                     shadowColor: Colors.grey,
-                                    primary: AppTheme().primary_color,
+                                    backgroundColor: AppTheme().ebtn_color,
                                     padding: EdgeInsets.all(15),
                                     shape: StadiumBorder(
                                       side: BorderSide(
-                                        color: selectedAppLanguage.isEn ? Colors.red : Colors.transparent,
+                                        color: selectedAppLanguage.isEn ? AppTheme().primary_color : Colors.transparent,
                                         width: 5.0,
                                       ),
                                     ),
@@ -145,7 +146,7 @@ class _SettingsViewState extends State<SettingsView> with SingleTickerProviderSt
                                           translate('language.name.en'),
                                           style: TextStyle(
                                               fontSize: Utils().fontSizeMultiplier(20),
-                                              color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
+                                              color: AppTheme().ht_color,
                                               fontWeight: FontWeight.bold
                                           )),
                                     ),
@@ -166,11 +167,11 @@ class _SettingsViewState extends State<SettingsView> with SingleTickerProviderSt
                                   style: ElevatedButton.styleFrom(
                                     elevation: 10,
                                     shadowColor: Colors.grey,
-                                    primary: AppTheme().primary_color,
+                                    backgroundColor: AppTheme().ebtn_color,
                                     padding: EdgeInsets.all(15),
                                     shape: StadiumBorder(
                                       side: BorderSide(
-                                        color: selectedAppLanguage.isEs ? Colors.red : Colors.transparent,
+                                        color: selectedAppLanguage.isEs ? AppTheme().primary_color : Colors.transparent,
                                         width: 5.0,
                                       ),
                                     ),
@@ -183,7 +184,7 @@ class _SettingsViewState extends State<SettingsView> with SingleTickerProviderSt
                                           translate('language.name.es'),
                                           style: TextStyle(
                                               fontSize: Utils().fontSizeMultiplier(20),
-                                              color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
+                                              color: AppTheme().ht_color,
                                               fontWeight: FontWeight.bold
                                           )),
                                     ),
@@ -204,11 +205,11 @@ class _SettingsViewState extends State<SettingsView> with SingleTickerProviderSt
                                   style: ElevatedButton.styleFrom(
                                     elevation: 10,
                                     shadowColor: Colors.grey,
-                                    primary: AppTheme().primary_color,
+                                    backgroundColor: AppTheme().ebtn_color,
                                     padding: const EdgeInsets.all(15),
                                     shape: StadiumBorder(
                                       side: BorderSide(
-                                        color: selectedAppLanguage.isHi ? Colors.red : Colors.transparent,
+                                        color: selectedAppLanguage.isHi ? AppTheme().primary_color : Colors.transparent,
                                         width: 5.0,
                                       ),
                                     ),
@@ -221,7 +222,7 @@ class _SettingsViewState extends State<SettingsView> with SingleTickerProviderSt
                                           translate('language.name.hi'),
                                           style: TextStyle(
                                               fontSize: Utils().fontSizeMultiplier(20),
-                                              color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
+                                              color: AppTheme().ht_color,
                                               fontWeight: FontWeight.bold
                                           )),
                                     ),
@@ -241,11 +242,11 @@ class _SettingsViewState extends State<SettingsView> with SingleTickerProviderSt
                                   style: ElevatedButton.styleFrom(
                                     elevation: 10,
                                     shadowColor: Colors.grey,
-                                    primary: AppTheme().primary_color,
+                                    backgroundColor: AppTheme().ebtn_color,
                                     padding: const EdgeInsets.all(15),
                                     shape: StadiumBorder(
                                       side: BorderSide(
-                                        color: selectedAppLanguage.isDe ? Colors.red : Colors.transparent,
+                                        color: selectedAppLanguage.isDe ? AppTheme().primary_color : Colors.transparent,
                                         width: 5.0,
                                       ),
                                     ),
@@ -258,7 +259,7 @@ class _SettingsViewState extends State<SettingsView> with SingleTickerProviderSt
                                           translate('language.name.de'),
                                           style: TextStyle(
                                               fontSize: Utils().fontSizeMultiplier(20),
-                                              color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
+                                              color: AppTheme().ht_color,
                                               fontWeight: FontWeight.bold
                                           )),
                                     ),
@@ -279,11 +280,11 @@ class _SettingsViewState extends State<SettingsView> with SingleTickerProviderSt
                                   style: ElevatedButton.styleFrom(
                                     elevation: 10,
                                     shadowColor: Colors.grey,
-                                    primary: AppTheme().primary_color,
+                                    backgroundColor: AppTheme().ebtn_color,
                                     padding: EdgeInsets.all(15),
                                     shape: StadiumBorder(
                                       side: BorderSide(
-                                        color: selectedAppLanguage.isMore ? Colors.red : Colors.transparent,
+                                        color: selectedAppLanguage.isMore ? AppTheme().primary_color : Colors.transparent,
                                         width: 5.0,
                                       ),
                                     ),
@@ -296,7 +297,7 @@ class _SettingsViewState extends State<SettingsView> with SingleTickerProviderSt
                                           translate('settings.language.more'),
                                           style: TextStyle(
                                               fontSize: Utils().fontSizeMultiplier(20),
-                                              color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
+                                              color: AppTheme().ht_color,
                                               fontWeight: FontWeight.bold
                                           )),
                                     ),
@@ -318,7 +319,7 @@ class _SettingsViewState extends State<SettingsView> with SingleTickerProviderSt
                               style: TextStyle(
                                   fontFamily: 'GoogleSans',
                                   fontSize: Utils().fontSizeMultiplier(30),
-                                  color: AppTheme().text,
+                                  color: AppTheme().ht_color,
                                   fontWeight: FontWeight.bold
                               ),
                             ),
@@ -342,11 +343,11 @@ class _SettingsViewState extends State<SettingsView> with SingleTickerProviderSt
                                   style: ElevatedButton.styleFrom(
                                     elevation: 10,
                                     shadowColor: Colors.grey,
-                                    primary: AppTheme().primary_color,
+                                    backgroundColor: AppTheme().ebtn_color,
                                     padding: EdgeInsets.all(15),
                                     shape: StadiumBorder(
                                       side: BorderSide(
-                                        color: selectedAppTheme.isLightMode ? Colors.red : Colors.transparent,
+                                        color: selectedAppTheme.isLightMode ? AppTheme().primary_color : Colors.transparent,
                                         width: 5.0,
                                       ),
                                     ),
@@ -373,7 +374,7 @@ class _SettingsViewState extends State<SettingsView> with SingleTickerProviderSt
                                               translate('settings.theme.light'),
                                               style: TextStyle(
                                                   fontSize: Utils().fontSizeMultiplier(20),
-                                                  color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
+                                                  color: AppTheme().ht_color,
                                                   fontWeight: FontWeight.bold
                                               )),
                                         ),
@@ -395,11 +396,11 @@ class _SettingsViewState extends State<SettingsView> with SingleTickerProviderSt
                                     style: ElevatedButton.styleFrom(
                                       elevation: 10,
                                       shadowColor: Colors.grey,
-                                      primary: AppTheme().primary_color,
+                                      backgroundColor: AppTheme().ebtn_color,
                                       padding: EdgeInsets.all(15),
                                       shape: StadiumBorder(
                                         side: BorderSide(
-                                          color: selectedAppTheme.isDarkMode ? Colors.red : Colors.transparent,
+                                          color: selectedAppTheme.isDarkMode ? AppTheme().primary_color : Colors.transparent,
                                           width: 5.0,
                                         ),
                                       ),
@@ -426,7 +427,7 @@ class _SettingsViewState extends State<SettingsView> with SingleTickerProviderSt
                                                 translate('settings.theme.dark'),
                                                 style: TextStyle(
                                                     fontSize: Utils().fontSizeMultiplier(20),
-                                                    color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
+                                                    color: AppTheme().ht_color,
                                                     fontWeight: FontWeight.bold
                                                 )),
                                           ),
@@ -448,11 +449,11 @@ class _SettingsViewState extends State<SettingsView> with SingleTickerProviderSt
                                     style: ElevatedButton.styleFrom(
                                       elevation: 10,
                                       shadowColor: Colors.grey,
-                                      primary: AppTheme().primary_color,
+                                      backgroundColor: AppTheme().ebtn_color,
                                       padding: EdgeInsets.all(15),
                                       shape: StadiumBorder(
                                         side: BorderSide(
-                                          color: selectedAppTheme.isRedMode ? Colors.red : Colors.transparent,
+                                          color: selectedAppTheme.isRedMode ? AppTheme().primary_color : Colors.transparent,
                                           width: 5.0,
                                         ),
                                       ),
@@ -479,7 +480,7 @@ class _SettingsViewState extends State<SettingsView> with SingleTickerProviderSt
                                                 translate('settings.theme.red'),
                                                 style: TextStyle(
                                                     fontSize: Utils().fontSizeMultiplier(20),
-                                                    color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
+                                                    color: AppTheme().ht_color,
                                                     fontWeight: FontWeight.bold
                                                 )),
                                           ),
@@ -501,11 +502,11 @@ class _SettingsViewState extends State<SettingsView> with SingleTickerProviderSt
                                     style: ElevatedButton.styleFrom(
                                       elevation: 10,
                                       shadowColor: Colors.grey,
-                                      primary: AppTheme().primary_color,
+                                      backgroundColor: AppTheme().ebtn_color,
                                       padding: EdgeInsets.all(15),
                                       shape: StadiumBorder(
                                         side: BorderSide(
-                                          color: selectedAppTheme.isGreenMode ? Colors.red : Colors.transparent,
+                                          color: selectedAppTheme.isGreenMode ? AppTheme().primary_color : Colors.transparent,
                                           width: 5.0,
                                         ),
                                       ),
@@ -532,7 +533,7 @@ class _SettingsViewState extends State<SettingsView> with SingleTickerProviderSt
                                                 translate('settings.theme.green'),
                                                 style: TextStyle(
                                                     fontSize: Utils().fontSizeMultiplier(20),
-                                                    color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
+                                                    color: AppTheme().ht_color,
                                                     fontWeight: FontWeight.bold
                                                 )),
                                           ),
@@ -554,11 +555,11 @@ class _SettingsViewState extends State<SettingsView> with SingleTickerProviderSt
                                     style: ElevatedButton.styleFrom(
                                       elevation: 10,
                                       shadowColor: Colors.grey,
-                                      primary: AppTheme().primary_color,
+                                      backgroundColor: AppTheme().ebtn_color,
                                       padding: EdgeInsets.all(15),
                                       shape: StadiumBorder(
                                         side: BorderSide(
-                                          color: selectedAppTheme.isBlueMode ? Colors.red : Colors.transparent,
+                                          color: selectedAppTheme.isBlueMode ? AppTheme().primary_color : Colors.transparent,
                                           width: 5.0,
                                         ),
                                       ),
@@ -585,7 +586,7 @@ class _SettingsViewState extends State<SettingsView> with SingleTickerProviderSt
                                                 translate('settings.theme.blue'),
                                                 style: TextStyle(
                                                     fontSize: Utils().fontSizeMultiplier(20),
-                                                    color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
+                                                    color: AppTheme().ht_color,
                                                     fontWeight: FontWeight.bold
                                                 )),
                                           ),
@@ -650,7 +651,7 @@ class _SettingsViewState extends State<SettingsView> with SingleTickerProviderSt
                               style: TextStyle(
                                   fontFamily: 'GoogleSans',
                                   fontSize: Utils().fontSizeMultiplier(30),
-                                  color: AppTheme().text,
+                                  color: AppTheme().ht_color,
                                   fontWeight: FontWeight.bold
                               ),
                             ),
@@ -673,7 +674,7 @@ class _SettingsViewState extends State<SettingsView> with SingleTickerProviderSt
                                           style: TextStyle(
                                               fontFamily: 'GoogleSans',
                                               fontSize: Utils().fontSizeMultiplier(25),
-                                              color: AppTheme().text,
+                                              color: AppTheme().ht_color,
                                               fontWeight: FontWeight.bold
                                           ),
                                         ),
@@ -686,9 +687,9 @@ class _SettingsViewState extends State<SettingsView> with SingleTickerProviderSt
                                                 _app_audio_and_music = value; // Update the switch state
                                               });
                                             },
-                                            activeColor: Colors.white,
+                                            activeColor: AppTheme().primary_color,
                                             inactiveThumbColor: Colors.grey,
-                                            activeTrackColor: Colors.lightBlueAccent,
+                                            activeTrackColor: AppTheme().primary_color.withAlpha(175),
                                             inactiveTrackColor: Colors.grey.shade300,
                                           ),
                                         )
@@ -705,7 +706,7 @@ class _SettingsViewState extends State<SettingsView> with SingleTickerProviderSt
                                           style: TextStyle(
                                               fontFamily: 'GoogleSans',
                                               fontSize: Utils().fontSizeMultiplier(25),
-                                              color: AppTheme().text,
+                                              color: AppTheme().ht_color,
                                               fontWeight: FontWeight.bold
                                           ),
                                         ),
@@ -718,9 +719,9 @@ class _SettingsViewState extends State<SettingsView> with SingleTickerProviderSt
                                                 _text_to_speech = value; // Update the switch state
                                               });
                                             },
-                                            activeColor: Colors.white,
+                                            activeColor: AppTheme().primary_color,
                                             inactiveThumbColor: Colors.grey,
-                                            activeTrackColor: Colors.lightBlueAccent,
+                                            activeTrackColor: AppTheme().primary_color.withAlpha(175),
                                             inactiveTrackColor: Colors.grey.shade300,
                                           ),
                                         )
@@ -737,7 +738,7 @@ class _SettingsViewState extends State<SettingsView> with SingleTickerProviderSt
                                           style: TextStyle(
                                               fontFamily: 'GoogleSans',
                                               fontSize: Utils().fontSizeMultiplier(25),
-                                              color: AppTheme().text,
+                                              color: AppTheme().ht_color,
                                               fontWeight: FontWeight.bold
                                           ),
                                         ),
@@ -750,9 +751,9 @@ class _SettingsViewState extends State<SettingsView> with SingleTickerProviderSt
                                                 _haptic = value; // Update the switch state
                                               });
                                             },
-                                            activeColor: Colors.white,
+                                            activeColor: AppTheme().primary_color,
                                             inactiveThumbColor: Colors.grey,
-                                            activeTrackColor: Colors.lightBlueAccent,
+                                            activeTrackColor: AppTheme().primary_color.withAlpha(175),
                                             inactiveTrackColor: Colors.grey.shade300,
                                           ),
                                         )
@@ -776,7 +777,7 @@ class _SettingsViewState extends State<SettingsView> with SingleTickerProviderSt
                               style: TextStyle(
                                   fontFamily: 'GoogleSans',
                                   fontSize: Utils().fontSizeMultiplier(30),
-                                  color: AppTheme().text,
+                                  color: AppTheme().ht_color,
                                   fontWeight: FontWeight.bold
                               ),
                             ),
@@ -792,7 +793,7 @@ class _SettingsViewState extends State<SettingsView> with SingleTickerProviderSt
                                 child: Container(
                                   height: ScreenConfig.heightPercent*7,
                                   decoration: BoxDecoration(
-                                    color: AppTheme().primary_color,
+                                    color: AppTheme().cards_color.withAlpha(100),
                                     borderRadius: BorderRadius.circular(ScreenConfig.heightPercent*7), // Half the width/height value for a circular shape
                                   ),
                                   child: Row(
@@ -801,12 +802,12 @@ class _SettingsViewState extends State<SettingsView> with SingleTickerProviderSt
                                       SizedBox(
                                         width: 20,
                                       ),
-                                      const Text(
+                                      Text(
                                         "A",
                                         style: TextStyle(
                                             fontFamily: 'GoogleSans',
                                             fontSize: 25,
-                                            color: Colors.white,
+                                            color: AppTheme().ht_color,
                                             fontWeight: FontWeight.bold
                                         ),
                                       ),
@@ -854,17 +855,17 @@ class _SettingsViewState extends State<SettingsView> with SingleTickerProviderSt
                                               selectedFontSizeFactor.full = true;
                                             }
                                           },
-                                          activeColor: Colors.white,
+                                          activeColor: AppTheme().primary_color,
                                           inactiveColor: Colors.grey.shade300,
                                           label: _currentValue.round().toString(),
                                         ),
                                       ),
-                                      const Text(
+                                      Text(
                                         "A",
                                         style: TextStyle(
                                             fontFamily: 'GoogleSans',
                                             fontSize: 30,
-                                            color: Colors.white,
+                                            color: AppTheme().ht_color,
                                             fontWeight: FontWeight.bold
                                         ),
                                       ),
@@ -891,7 +892,7 @@ class _SettingsViewState extends State<SettingsView> with SingleTickerProviderSt
                                 style: TextStyle(
                                     fontFamily: 'GoogleSans',
                                     fontSize: Utils().fontSizeMultiplier(30),
-                                    color: AppTheme().text,
+                                    color: AppTheme().ht_color,
                                     fontWeight: FontWeight.bold
                                 ),
                               ),
@@ -904,9 +905,9 @@ class _SettingsViewState extends State<SettingsView> with SingleTickerProviderSt
                                       _voice_command = value; // Update the switch state
                                     });
                                   },
-                                  activeColor: Colors.white,
+                                  activeColor: AppTheme().primary_color,
                                   inactiveThumbColor: Colors.grey,
-                                  activeTrackColor: Colors.lightBlueAccent,
+                                  activeTrackColor: AppTheme().primary_color.withAlpha(175),
                                   inactiveTrackColor: Colors.grey.shade300,
                                 ),
                               )

@@ -52,7 +52,7 @@ class AppTheme{
   Color ebtn_color = selectedAppTheme.isLightMode? Color.fromARGB(255, 203, 221, 255):
   selectedAppTheme.isDarkMode? Color.fromARGB(255, 37, 51, 178):
   selectedAppTheme.isRedMode? Color.fromARGB(255, 255, 146, 146):
-  selectedAppTheme.isGreenMode? Color.fromARGB(255, 123, 255, 125):
+  selectedAppTheme.isGreenMode? Color.fromARGB(255, 123, 255, 189):
   Color.fromARGB(255, 86, 138, 255);
 
   //head_text_color
