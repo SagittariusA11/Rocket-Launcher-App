@@ -12,6 +12,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../config/appTheme.dart';
 import 'package:timezone/data/latest.dart' as tz;
 
+bool connectionStatus = false;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

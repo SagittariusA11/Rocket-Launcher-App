@@ -1,3 +1,5 @@
+
+
 import 'package:dartssh2/dartssh2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_translate/flutter_translate.dart';
@@ -9,6 +11,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:ui' as ui;
 import '../config/appTheme.dart';
 import '../config/imagePaths.dart';
+import '../main.dart';
 import '../utils/utils.dart';
 import 'errorView.dart';
 
@@ -33,9 +36,9 @@ class _ConnectionManagerViewState extends State<ConnectionManagerView> with Sing
   TextEditingController portNumber = TextEditingController();
   TextEditingController numberofrigs = TextEditingController();
 
-  bool connectionStatus = false;
 
   connect() async {
+    print("1: $connectionStatus");
     SharedPreferences preferences = await SharedPreferences.getInstance();
     await preferences.setString('master_ip', ipAddress.text);
     await preferences.setString('master_username', username.text);
@@ -66,16 +69,51 @@ class _ConnectionManagerViewState extends State<ConnectionManagerView> with Sing
       // open logos
       await LGConnection().openDemoLogos();
       await client;
+      print("2: $connectionStatus");
     } catch (e) {
       showAlertDialog(translate("connection.alert3"),
           '${ipAddress.text} ' + translate("connection.alert4"), false);
       setState(() {
         connectionStatus = false;
       });
+      print("3: $connectionStatus");
+    }
+  }
+
+  disconnect() async {
+
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    await preferences.setString('master_ip', ipAddress.text);
+    await preferences.setString('master_username', '');
+    await preferences.setString('master_password', '');
+    await preferences.setString('master_portNumber', '');
+    await preferences.setString('numberofrigs', '');
+
+    try {
+      SSHClient client = SSHClient(
+        await SSHSocket.connect('', 0),
+        // host: '${credencials['ip']}',
+        // port: int.parse('${credencials['port']}'),
+        username: '',
+        onPasswordRequest: () => '',
+      );
+      await client;
+      // open logos
+      await LGConnection().openDemoLogos();
+      await client;
+    } catch (e) {
+      showAlertDialog(translate("connection.alert7"),
+          '${ipAddress.text} ' + translate("connection.alert8"), false);
+      setState(() {
+        connectionStatus = false;
+        // SharedPreferences preferences = await SharedPreferences.getInstance();
+        // await preferences.setString('master_ip', '');
+      });
     }
   }
 
   checkConnectionStatus() async {
+    print("4: $connectionStatus");
     SharedPreferences preferences = await SharedPreferences.getInstance();
     await preferences.setString('master_ip', ipAddress.text);
     await preferences.setString('master_password', password.text);
@@ -100,24 +138,32 @@ class _ConnectionManagerViewState extends State<ConnectionManagerView> with Sing
       setState(() {
         connectionStatus = true;
       });
+      print("5: $connectionStatus");
       await client;
     } catch (e) {
       ErrorView();
       setState(() {
         connectionStatus = false;
       });
+      print("6: $connectionStatus");
     }
   }
 
   init() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
-    ipAddress.text = preferences.getString('master_ip') ?? '';
-    username.text = preferences.getString('master_username') ?? '';
-    password.text = preferences.getString('master_password') ?? '';
-    portNumber.text = preferences.getString('master_portNumber') ?? '';
-    numberofrigs.text = preferences.getString('numberofrigs') ?? '';
+    ipAddress.text = connectionStatus?preferences.getString('master_ip') ?? '':'';
+    username.text = connectionStatus?preferences.getString('master_username') ?? '':'';
+    password.text = connectionStatus?preferences.getString('master_password') ?? '':'';
+    portNumber.text = connectionStatus?preferences.getString('master_portNumber') ?? '':'';
+    numberofrigs.text = connectionStatus?preferences.getString('numberofrigs') ?? '':'';
     await checkConnectionStatus();
     loaded = true;
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    init();
   }
 
   @override
@@ -320,7 +366,79 @@ class _ConnectionManagerViewState extends State<ConnectionManagerView> with Sing
                   ),
                   Padding(
                     padding: EdgeInsets.symmetric(vertical: 20.0),
-                    child: ElevatedButton(
+                    child: connectionStatus? Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        ElevatedButton(
+                          onPressed: () {
+                            connect();
+                            FocusManager.instance.primaryFocus?.unfocus();
+                          },
+                          style: ElevatedButton.styleFrom(
+                            elevation: 2,
+                            shadowColor: Colors.grey.withOpacity(0.5),
+                            primary: AppTheme().ebtn_color,
+                            padding: EdgeInsets.all(15),
+                            shape: StadiumBorder(),
+                          ),
+                          child: SizedBox(
+                            width: ScreenConfig.widthPercent*35,
+                            child: Center(
+                              child: Wrap(
+                                children: [
+                                  SizedBox(
+                                    width: 10,
+                                  ),
+                                  FittedBox(
+                                    child: Text(
+                                        translate('connection.connect'),
+                                        style: TextStyle(
+                                            fontSize: Utils().fontSizeMultiplier(25),
+                                            color: AppTheme().ht_color,
+                                            fontWeight: FontWeight.bold
+                                        )),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                        ElevatedButton(
+                          onPressed: () {
+                            disconnect();
+                            FocusManager.instance.primaryFocus?.unfocus();
+                          },
+                          style: ElevatedButton.styleFrom(
+                            elevation: 2,
+                            shadowColor: Colors.grey.withOpacity(0.5),
+                            primary: AppTheme().ebtn_color,
+                            padding: EdgeInsets.all(15),
+                            shape: StadiumBorder(),
+                          ),
+                          child: SizedBox(
+                            width: ScreenConfig.widthPercent*35,
+                            child: Center(
+                              child: Wrap(
+                                children: [
+                                  SizedBox(
+                                    width: 10,
+                                  ),
+                                  FittedBox(
+                                    child: Text(
+                                        translate('connection.disconnect'),
+                                        style: TextStyle(
+                                            fontSize: Utils().fontSizeMultiplier(25),
+                                            color: AppTheme().ht_color,
+                                            fontWeight: FontWeight.bold
+                                        )),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        )
+                      ],
+                    ):ElevatedButton(
                       onPressed: () {
                         connect();
                         FocusManager.instance.primaryFocus?.unfocus();
@@ -345,7 +463,7 @@ class _ConnectionManagerViewState extends State<ConnectionManagerView> with Sing
                                   style: TextStyle(
                                       fontSize: Utils().fontSizeMultiplier(25),
                                       color: AppTheme().ht_color,
-                                    fontWeight: FontWeight.bold
+                                      fontWeight: FontWeight.bold
                                   )),
                             ),
                           ],
@@ -550,9 +668,9 @@ class LGConnection {
 				<href>https://raw.githubusercontent.com/SagittariusA11/kml-images_RLA_LiquidGalaxy_GSoC-23/main/all_logos.png</href>
 			</Icon>
 			<overlayXY x="0" y="1" xunits="fraction" yunits="fraction"/>
-			<screenXY x="0" y="0.98" xunits="fraction" yunits="fraction"/>
+			<screenXY x="0.05" y="0.95" xunits="fraction" yunits="fraction"/>
 			<rotationXY x="0" y="0" xunits="fraction" yunits="fraction"/>
-			<size x="0" y="0" xunits="pixels" yunits="fraction"/>
+			<size x="0.6" y="0" xunits="fraction" yunits="fraction"/>
 		</ScreenOverlay>
 	</Folder>
 </Document>

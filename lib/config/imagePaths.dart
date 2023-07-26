@@ -34,6 +34,7 @@ class ImagePaths{
   static const inventory_dark = "assets/icons/menu_icons/warehouse_dark.png";
   static const logout_light = "assets/icons/menu_icons/logout_light.png";
   static const logout_dark = "assets/icons/menu_icons/logout_dark.png";
+  static const orbit = "assets/icons/orbit.png";
 
   //images
   static const fleet_of_rockets = "assets/images/FleetOfRocketOnBoardingPage.png";

@@ -106,10 +106,13 @@
     "mmp": "Master machine Password",
     "number": "Total Machines in the LG Rig",
     "connect": "CONNECT",
+    "disconnect": "DISCONNECT",
     "alert": "Connected!",
     "alert2": "Host is reachable",
     "alert3": "Oops!",
-    "alert4": "Host is not reachable. Check if the information given is correct and if the host can be reached"
+    "alert4": "Host is not reachable. Check if the information given is correct and if the host can be reached",
+    "alert7": "Disconnected!",
+    "alert8": "Host is successfully disconnected"
   },
   "help": {
     "title": "Help",
@@ -137,7 +140,14 @@
     "ls": "Launch Site\nName",
     "so": "Select Option",
     "sd": "Select Date",
-    "sdr": "Select Date Range"
+    "sdr": "Select Date Range",
+    "buildorbit": "Starting Orbit",
+    "stoporbit": "Stopping Orbit",
+    "alert": "No GeoData",
+    "alert2": "It looks like you haven't added any geodata to this project.",
+    "alert3": "Error launching!",
+    "alert4": "An error occurred while trying to connect to LG",
+    "close": "Close"
   },
 
   "launchInfo_tab": {

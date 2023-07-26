@@ -106,10 +106,13 @@
     "mmp": "Contraseña de la máquina maestra",
     "number": "Máquinas totales en la plataforma LG",
     "connect": "Conectar",
+    "disconnect": "Desconectar",
     "alert": "¡Conectado!",
     "alert2": "El anfitrión es alcanzable",
     "alert3": "¡Ups!",
-    "alert4": "El anfitrión no es accesible. Compruebe si la información proporcionada es correcta y si se puede contactar con el host"
+    "alert4": "El anfitrión no es accesible. Compruebe si la información proporcionada es correcta y si se puede contactar con el host",
+    "alert7": "Desconectado!",
+    "alert8": "El host se desconectó con éxito"
   },
   "help": {
     "title": "Ayuda",
@@ -137,7 +140,14 @@
     "ls": "Nombre del sitio\nde lanzamiento",
     "so": "Seleccionar opción",
     "sd": "Seleccione fecha",
-    "sdr": "Seleccionar rango de fechas"
+    "sdr": "Seleccionar rango de fechas",
+    "buildorbit": "Órbita de inicio",
+    "stoporbit": "Detener la órbita",
+    "alert": "Sin geodatos",
+    "alert2": "Parece que no ha agregado datos geográficos a este proyecto.",
+    "alert3": "¡Error de lanzamiento!",
+    "alert4": "Ocurrió un error al intentar conectarse a LG",
+    "close": "Cerrar"
   },
 
   "launchInfo_tab": {

@@ -1,10 +1,13 @@
 
 
+import 'package:dartssh2/dartssh2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
+import 'package:rocket_launcher_app/main.dart';
 import 'package:rocket_launcher_app/views/connectionManager.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../animation/home_view_animation.dart';
 import '../../config/appTheme.dart';
@@ -408,6 +411,7 @@ class _HomeViewState extends State<HomeView> with SingleTickerProviderStateMixin
                 ),
                 GestureDetector(
                   onTap: () {
+                    disconnect();
                     SystemNavigator.pop();
                   },
                   child: Container(
@@ -453,5 +457,93 @@ class _HomeViewState extends State<HomeView> with SingleTickerProviderStateMixin
         ),
       ),
     );
+  }
+
+  disconnect() async {
+    try {
+      SSHClient client = SSHClient(
+        await SSHSocket.connect('', 0),
+        // host: '${credencials['ip']}',
+        // port: int.parse('${credencials['port']}'),
+        username: '',
+        onPasswordRequest: () => '',
+      );
+      await client;
+      // open logos
+      await LGConnection().openDemoLogos();
+      await client;
+    } catch (e) {
+      connectionStatus = false;
+    }
+  }
+}
+
+class LGConnection {
+  _getCredentials() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    String ipAddress = preferences.getString('master_ip') ?? '';
+    String password = preferences.getString('master_password') ?? '';
+    String portNumber = preferences.getString('master_portNumber') ?? '';
+    String username = preferences.getString('master_username') ?? '';
+    String numberofrigs = preferences.getString('numberofrigs') ?? '';
+
+    return {
+      "ip": ipAddress,
+      "pass": password,
+      "port": portNumber,
+      "username": username,
+      "numberofrigs": numberofrigs
+    };
+  }
+
+  Future openDemoLogos() async {
+    dynamic credencials = await _getCredentials();
+
+    SSHClient client = SSHClient(
+      await SSHSocket.connect('${credencials['ip']}', int.parse('${credencials['port']}')),
+      // host: '${credencials['ip']}',
+      // port: int.parse('${credencials['port']}'),
+      username: '${credencials['username']}',
+      onPasswordRequest: () => '${credencials['pass']}',
+    );
+    int rigs = 4;
+    rigs = (int.parse(credencials['numberofrigs']) / 2).floor() + 2;
+    String openLogoKML = '''
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
+<Document>
+	<name>VolTrac</name>
+	<open>1</open>
+	<description>The logo it located in the bottom left hand corner</description>
+	<Folder>
+		<name>tags</name>
+		<Style>
+			<ListStyle>
+				<listItemType>checkHideChildren</listItemType>
+				<bgColor>00ffffff</bgColor>
+				<maxSnippetLines>2</maxSnippetLines>
+			</ListStyle>
+		</Style>
+		<ScreenOverlay id="abc">
+			<name>VolTrac</name>
+			<Icon>
+				<href>https://raw.githubusercontent.com/SagittariusA11/kml-images_RLA_LiquidGalaxy_GSoC-23/main/all_logos.png</href>
+			</Icon>
+			<overlayXY x="0" y="1" xunits="fraction" yunits="fraction"/>
+			<screenXY x="0.05" y="0.95" xunits="fraction" yunits="fraction"/>
+			<rotationXY x="0" y="0" xunits="fraction" yunits="fraction"/>
+			<size x="0.6" y="0" xunits="fraction" yunits="fraction"/>
+		</ScreenOverlay>
+	</Folder>
+</Document>
+</kml>
+  ''';
+    try {
+      await client;
+      await client
+          .execute("echo '$openLogoKML' > /var/www/html/kml/slave_$rigs.kml");
+    } catch (e) {
+      return Future.error(e);
+    }
   }
 }

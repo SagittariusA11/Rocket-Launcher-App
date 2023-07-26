@@ -1,18 +1,25 @@
 import 'dart:convert';
+import 'dart:ui';
+import 'dart:io';
 
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:dartssh2/dartssh2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_translate/flutter_translate.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:rocket_launcher_app/views/moreInfoView/rocketsInfo.dart';
 import 'package:rocket_launcher_app/views/ytLive.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:scroll_snap_list/scroll_snap_list.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../config/imagePaths.dart';
 import '../../config/screenConfig.dart';
 import '../../data/launches_response.dart';
+import '../../utils/kml/LookAt.dart';
+import '../../utils/kml/orbit.dart';
 import '../../utils/utils.dart';
 import '../../config/appTheme.dart';
 import '../../view models/homeViewModels/launchViewModel.dart';
@@ -25,7 +32,7 @@ class LaunchInfo extends StatefulWidget {
   State<LaunchInfo> createState() => _LaunchInfoState();
 }
 
-class _LaunchInfoState extends State<LaunchInfo> {
+class _LaunchInfoState extends State<LaunchInfo> with SingleTickerProviderStateMixin {
 
   GlobalKey __LaunchInfoStateKey = GlobalKey();
 
@@ -35,6 +42,10 @@ class _LaunchInfoState extends State<LaunchInfo> {
   DateTimeRange? selectedDateRange;
   var currentLaunch;
   bool isTapped = false;
+  late AnimationController _rotationiconcontroller;
+  bool isOrbiting = false;
+  double latvalue = 28.608373;
+  double longvalue = -80.604339;
 
   Future<List<AllLaunch>>? _allLaunchesFuture;
   // List<AllLaunch> _allLaunchesFuture = [];
@@ -119,6 +130,10 @@ class _LaunchInfoState extends State<LaunchInfo> {
   @override
   void initState() {
     super.initState();
+    _rotationiconcontroller = AnimationController(
+      duration: const Duration(seconds: 50),
+      vsync: this,
+    );
     // buildRocketInfoList();
     // _buildAllCard();
     // if (!_isDataLoaded) {
@@ -399,27 +414,81 @@ class _LaunchInfoState extends State<LaunchInfo> {
                     width: 20,
                   ),
                   ElevatedButton(
-                      onPressed: () { },
+                      onPressed: () => {
+                        isOrbiting = !isOrbiting,
+                        if (isOrbiting == true)
+                          {
+                            _rotationiconcontroller.forward(),
+                            LGConnection().cleanOrbit().then((value) {
+                              playOrbit().then((value) {
+                                _showToast(translate('launch_tab.buildorbit'));
+                              });
+                            }).catchError((onError) {
+                              _rotationiconcontroller.stop();
+                              print('oh no $onError');
+                              if (onError == 'nogeodata') {
+                                showAlertDialog(
+                                    translate('launch_tab.alert'),
+                                    translate('launch_tab.alert2'));
+                              }
+                              showAlertDialog(
+                                  translate('launch_tab.alert3'),
+                                  translate('launch_tab.alert4'));
+                            }),
+                          }
+                        else
+                          {
+                            _rotationiconcontroller.reset(),
+                            stopOrbit().then((value) {
+                              _showToast(translate('launch_tab.stoporbit'));
+                              LGConnection().cleanOrbit();
+                            }).catchError((onError) {
+                              print('oh no $onError');
+                              if (onError == 'nogeodata') {
+                                showAlertDialog(
+                                    translate('launch_tab.alert'),
+                                    translate('launch_tab.alert2'));
+                              }
+                              showAlertDialog(
+                                  translate('launch_tab.alert3'),
+                                  translate('launch_tab.alert4'));
+                            }),
+                          }
+                      },
                       style: ElevatedButton.styleFrom(
                         elevation: 10,
                         shadowColor: Colors.grey,
                         backgroundColor: AppTheme().ebtn_color,
-                        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                         shape: const StadiumBorder(),
                       ),
-                      child: SizedBox(
-                        width: ScreenConfig.widthPercent*6,
-                        height: ScreenConfig.heightPercent*5,
-                        child: Center(
-                          child: Text(
-                              translate('launch_tab.dlg'),
-                              style: TextStyle(
-                                  fontSize: Utils().fontSizeMultiplier(20),
-                                  color: AppTheme().ht_color,
-                                  fontWeight: FontWeight.bold
-                              )
+                      child: Row(
+                        children: [
+                          Container(
+                            margin: const EdgeInsets.only(top: 10, left: 20, bottom: 10, right: 10),
+                            height: ScreenConfig.heightPercent*5,
+                            child: Center(
+                              child: Text(
+                                  translate('launch_tab.dlg'),
+                                  style: TextStyle(
+                                      fontSize: Utils().fontSizeMultiplier(20),
+                                      color: AppTheme().ht_color,
+                                      fontWeight: FontWeight.bold
+                                  )
+                              ),
+                            ),
                           ),
-                        ),
+                          RotationTransition(
+                            turns: Tween(begin: 0.0, end: 25.0)
+                                .animate(_rotationiconcontroller),
+                            child: Builder(
+                              builder: (context) => IconButton(
+                                icon: Image.asset(ImagePaths.orbit),
+                                iconSize: 40,
+                                onPressed: (){},
+                              ),
+                            ),
+                          ),
+                        ],
                       )
                   ),
                 ],
@@ -456,6 +525,134 @@ class _LaunchInfoState extends State<LaunchInfo> {
           ),
         ],
       ),
+    );
+  }
+
+  playOrbit() async {
+    await LGConnection()
+        .buildOrbit(Orbit.buildOrbit(Orbit.generateOrbitTag(
+        LookAt(longvalue, latvalue, "12340.7995674", "0", "0"))))
+        .then((value) async {
+      await LGConnection().startOrbit();
+    });
+    setState(() {
+      isOrbiting = true;
+    });
+  }
+
+  stopOrbit() async {
+    await LGConnection().stopOrbit();
+    setState(() {
+      isOrbiting = false;
+    });
+  }
+
+  void _showToast(String x) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(
+          "$x",
+          style: TextStyle(
+              fontSize: 24.0,
+              fontWeight: FontWeight.normal,
+              fontFamily: "GoogleSans",
+              color: Colors.white),
+        ),
+        duration: Duration(seconds: 3),
+        backgroundColor: Color.fromARGB(250, 43, 43, 43),
+        width: 500.0,
+        padding: const EdgeInsets.fromLTRB(
+          35,
+          20,
+          15,
+          20,
+        ),
+        behavior: SnackBarBehavior.floating,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10.0),
+        ),
+        action: SnackBarAction(
+          textColor: Color.fromARGB(255, 125, 164, 243),
+          label: translate('launch_tab.close'),
+          onPressed: () {},
+        ),
+      ),
+    );
+  }
+
+  showAlertDialog(String title, String msg) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 4, sigmaY: 3),
+            child: AlertDialog(
+              backgroundColor: Color.fromARGB(255, 33, 33, 33),
+              title: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Padding(
+                      padding: EdgeInsets.only(left: 10),
+                      child: Image.asset(
+                        "assets/sad.png",
+                        width: 250,
+                        height: 250,
+                      )),
+                  Text(
+                    '$title',
+                    style: TextStyle(
+                      fontSize: 25,
+                      color: Color.fromARGB(255, 204, 204, 204),
+                    ),
+                  ),
+                ],
+              ),
+              content: SizedBox(
+                width: 320,
+                height: 180,
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text('$msg',
+                          style: TextStyle(
+                            fontSize: 18,
+                            color: Color.fromARGB(
+                              255,
+                              204,
+                              204,
+                              204,
+                            ),
+                          ),
+                          textAlign: TextAlign.center),
+                      SizedBox(
+                          width: 300,
+                          child: Padding(
+                              padding: EdgeInsets.only(top: 10),
+                              child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  elevation: 2,
+                                  shadowColor: Colors.black,
+                                  primary: Color.fromARGB(255, 220, 220, 220),
+                                  padding: EdgeInsets.all(15),
+                                  shape: StadiumBorder(),
+                                ),
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                                child: Wrap(
+                                  children: <Widget>[
+                                    Text(translate('dismiss'),
+                                        style: TextStyle(
+                                            fontSize: 20, color: Colors.black)),
+                                  ],
+                                ),
+                              ))),
+                    ]),
+              ),
+            ));
+      },
     );
   }
 
@@ -863,6 +1060,134 @@ class BuildRocketInfoItemList extends StatelessWidget {
         ],
       ),
     );
+  }
+}
+
+class LGConnection {
+
+  _getCredentials() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    String ipAddress = preferences.getString('master_ip') ?? '';
+    String password = preferences.getString('master_password') ?? '';
+    String portNumber = preferences.getString('master_portNumber') ?? '';
+    String username = preferences.getString('master_username') ?? '';
+    String numberofrigs = preferences.getString('numberofrigs') ?? '';
+
+    return {
+      "ip": ipAddress,
+      "pass": password,
+      "port": portNumber,
+      "username": username,
+      "numberofrigs": numberofrigs
+    };
+  }
+
+  Future<String> get _localPath async {
+    final directory = await getApplicationDocumentsDirectory();
+
+    return directory.path;
+  }
+
+  buildOrbit(String content) async {
+    dynamic credencials = await _getCredentials();
+
+    String localPath = await _localPath;
+    File localFile = File('$localPath/Orbit.kml');
+    File finalFile = await localFile.writeAsString(content);
+
+    SSHClient client = SSHClient(
+      await SSHSocket.connect('${credencials['ip']}', int.parse('${credencials['port']}')),
+      // host: '${credencials['ip']}',
+      // port: int.parse('${credencials['port']}'),
+      username: '${credencials['username']}',
+      onPasswordRequest: () => '${credencials['pass']}',
+    );
+
+    try {
+      await client;
+      final sftp = await client.sftp();
+      double anyKindofProgressBar;
+      final file = await sftp.open('/var/www/html/Orbit.kml',
+          mode: SftpFileOpenMode.create |
+          SftpFileOpenMode.truncate |
+          SftpFileOpenMode.write);
+      var fileSize = await finalFile.length();
+      await file.write(finalFile.openRead().cast(), onProgress: (progress) {
+        anyKindofProgressBar = progress / fileSize;
+      });
+      // await client.sftpUpload(
+      //   path: filePath,
+      //   toPath: '/var/www/html',
+      //   callback: (progress) {
+      //     print('Sent $progress');
+      //   },
+      // );
+      return await client.execute(
+          "echo '\nhttp://lg1:81/Orbit.kml' >> /var/www/html/kmls.txt");
+    } catch (e) {
+      print('Could not connect to host LG');
+      return Future.error(e);
+    }
+  }
+
+  startOrbit() async {
+    dynamic credencials = await _getCredentials();
+
+    SSHClient client = SSHClient(
+      await SSHSocket.connect('${credencials['ip']}', int.parse('${credencials['port']}')),
+      // host: '${credencials['ip']}',
+      // port: int.parse('${credencials['port']}'),
+      username: '${credencials['username']}',
+      onPasswordRequest: () => '${credencials['pass']}',
+    );
+
+    try {
+      await client;
+      return await client.execute('echo "playtour=Orbit" > /tmp/query.txt');
+    } catch (e) {
+      print('Could not connect to host LG');
+      return Future.error(e);
+    }
+  }
+
+  stopOrbit() async {
+    dynamic credencials = await _getCredentials();
+
+    SSHClient client = SSHClient(
+      await SSHSocket.connect('${credencials['ip']}', int.parse('${credencials['port']}')),
+      // host: '${credencials['ip']}',
+      // port: int.parse('${credencials['port']}'),
+      username: '${credencials['username']}',
+      onPasswordRequest: () => '${credencials['pass']}',
+    );
+
+    try {
+      await client;
+      return await client.execute('echo "exittour=true" > /tmp/query.txt');
+    } catch (e) {
+      print('Could not connect to host LG');
+      return Future.error(e);
+    }
+  }
+
+  cleanOrbit() async {
+    dynamic credencials = await _getCredentials();
+
+    SSHClient client = SSHClient(
+      await SSHSocket.connect('${credencials['ip']}', int.parse('${credencials['port']}')),
+      // host: '${credencials['ip']}',
+      // port: int.parse('${credencials['port']}'),
+      username: '${credencials['username']}',
+      onPasswordRequest: () => '${credencials['pass']}',
+    );
+
+    try {
+      await client;
+      return await client.execute('echo "" > /tmp/query.txt');
+    } catch (e) {
+      print('Could not connect to host LG');
+      return Future.error(e);
+    }
   }
 }
 
