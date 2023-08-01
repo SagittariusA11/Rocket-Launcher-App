@@ -18,8 +18,9 @@ import 'package:url_launcher/url_launcher.dart';
 import '../../config/imagePaths.dart';
 import '../../config/screenConfig.dart';
 import '../../data/launches_response.dart';
-import '../../utils/kml/LookAt.dart';
-import '../../utils/kml/orbit.dart';
+import '../../models/lookAtModel.dart';
+import '../../models/orbitModel.dart';
+import '../../utils/lgTasks.dart';
 import '../../utils/utils.dart';
 import '../../config/appTheme.dart';
 import '../../view models/homeViewModels/launchViewModel.dart';
@@ -46,6 +47,8 @@ class _LaunchInfoState extends State<LaunchInfo> with SingleTickerProviderStateM
   bool isOrbiting = false;
   double latvalue = 28.608373;
   double longvalue = -80.604339;
+  String finalname = "";
+  bool loading = false;
 
   Future<List<AllLaunch>>? _allLaunchesFuture;
   // List<AllLaunch> _allLaunchesFuture = [];
@@ -373,7 +376,54 @@ class _LaunchInfoState extends State<LaunchInfo> with SingleTickerProviderStateM
                     width: 20,
                   ),
                   ElevatedButton(
-                      onPressed: () { },
+                      onPressed: () async {
+                        _showToast(
+                            translate("Track.loading") + "(" + translate('Track.hist').trim() + ")");
+                        await LGConnection().openLaunchBalloon(
+                          'image',
+                          currentLaunch.missionName,
+                          currentLaunch.rocketName,
+                          currentLaunch.launchDate,
+                          currentLaunch.launchTime,
+                          currentLaunch.launchPad,
+                          currentLaunch.flightNumber,
+                          currentLaunch.payload,
+                          currentLaunch.country,
+                          currentLaunch.missionDes,
+                          currentLaunch.launchPadFullName,
+                          currentLaunch.launchPadDes,
+                        );
+                        _showToast(
+                            translate("Track.sending") + "(" + translate('Track.hist').trim() + ")");
+                        LGConnection().sendToLG(kml.mount(), finalname, '-80.60405833', '28.60819722').then((value) async {
+                          LGConnection().cleanVisualization();
+                            _showToast(
+                                translate('Track.Visualize') +
+                                    "(" +
+                                    translate('Track.hist').trim() +
+                                    ")");
+                            await LGConnection().cleanOrbit();
+                            await Future.delayed(Duration(seconds: 6)).then((value) {
+                              _showToast(
+                                  translate('map.buildorbit') +
+                                      "(" +
+                                      translate('Track.hist').trim() +
+                                      ")");
+                              playOrbit();
+                            });
+                        }).catchError((onError) {
+                          print('oh no $onError');
+                          setState(() {
+                            loading = false;
+                          });
+                          if (onError == 'nogeodata') {
+                            showAlertDialog(
+                                translate('Track.alert'), translate('Track.alert2'));
+                          }
+                          showAlertDialog(
+                              translate('Track.alert3'), translate('Track.alert4'));
+                        });
+                      },
                       style: ElevatedButton.styleFrom(
                         elevation: 10,
                         shadowColor: Colors.grey,
@@ -531,7 +581,10 @@ class _LaunchInfoState extends State<LaunchInfo> with SingleTickerProviderStateM
   playOrbit() async {
     await LGConnection()
         .buildOrbit(Orbit.buildOrbit(Orbit.generateOrbitTag(
-        LookAt(longvalue, latvalue, "12340.7995674", "0", "0"))))
+        LookAtLaunch(
+          longvalue,
+          latvalue
+        ))))
         .then((value) async {
       await LGConnection().startOrbit();
     });
@@ -595,7 +648,7 @@ class _LaunchInfoState extends State<LaunchInfo> with SingleTickerProviderStateM
                   Padding(
                       padding: EdgeInsets.only(left: 10),
                       child: Image.asset(
-                        "assets/sad.png",
+                        "assets/images/sad.png",
                         width: 250,
                         height: 250,
                       )),
@@ -1086,6 +1139,265 @@ class LGConnection {
     final directory = await getApplicationDocumentsDirectory();
 
     return directory.path;
+  }
+
+  _createLocalFile(String kml, String projectname, String lng, String lat) async {
+    String localPath = await _localPath;
+    File localFile = File('$localPath/$projectname.kml');
+    localFile.writeAsString(kml);
+    File localFile2 = File('$localPath/kmls.txt');
+    localFile2.writeAsString(kml);
+    return _uploadToLG('$localPath/$projectname.kml', projectname, localFile, lng, lat);
+  }
+
+  _uploadToLG(String localPath, String projectname, File finalFile, String lng, String lat) async {
+    dynamic credencials = await _getCredentials();
+
+    SSHClient client = SSHClient(
+      await SSHSocket.connect('${credencials['ip']}', int.parse('${credencials['port']}')),
+      // host: '${credencials['ip']}',
+      // port: int.parse('${credencials['port']}'),
+      username: '${credencials['username']}',
+      onPasswordRequest: () => '${credencials['pass']}',
+    );
+
+    LookAtLaunch flyto = LookAtLaunch(
+      double.parse(lng),
+      double.parse(lat)
+    );
+    try {
+      await client;
+      await client.execute('> /var/www/html/kmls.txt');
+
+      // upload kml
+      await client;
+      final sftp = await client.sftp();
+      double anyKindofProgressBar;
+      final file = await sftp.open('/var/www/html/Orbit.kml',
+          mode: SftpFileOpenMode.create |
+          SftpFileOpenMode.truncate |
+          SftpFileOpenMode.write);
+      var fileSize = await finalFile.length();
+      await file.write(finalFile.openRead().cast(), onProgress: (progress) {
+        anyKindofProgressBar = progress / fileSize;
+      });
+      // await client.connectSFTP();
+      // await client.sftpUpload(
+      //   path: localPath,
+      //   toPath: '/var/www/html',
+      //   callback: (progress) {
+      //     print('Sent $progress');
+      //   },
+      // );
+
+      // for (int k = 0; k < localimages.length; k++) {
+      //   String imgPath = await _createLocalImage(
+      //       localimages[k], "assets/icons/${localimages[k]}");
+      //   await client.sftpUpload(path: imgPath, toPath: '/var/www/html');
+      // }
+      await client.execute(
+          'echo "http://lg1:81/$projectname.kml" > /var/www/html/kmls.txt');
+
+      return await client.execute(
+          'echo "flytoview=${flyto.generateLinearString()}" > /tmp/query.txt');
+    } catch (e) {
+      print('Could not connect to host LG');
+      return Future.error(e);
+    }
+  }
+
+  Future openLaunchBalloon(
+    String image,
+    String missionName,
+    String rocketName,
+    String date,
+    String time,
+    String launchSite,
+    String flightNumber,
+    String payload,
+    String country,
+    String missionDescription,
+    String launchSiteFullName,
+    String launchSiteDescription,
+      ) async {
+    dynamic credencials = await _getCredentials();
+
+    SSHClient client = SSHClient(
+      await SSHSocket.connect('${credencials['ip']}', int.parse('${credencials['port']}')),
+      // host: '${credencials['ip']}',
+      // port: int.parse('${credencials['port']}'),
+      username: '${credencials['username']}',
+      onPasswordRequest: () => '${credencials['pass']}',
+    );
+    int rigs = 3;
+    rigs = (int.parse(credencials['numberofrigs']) / 2).floor() + 1;
+    String openBalloonKML = '''
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
+<Document>
+    <name>Description</name>
+    <description><![CDATA[
+      <html>
+        <head>
+          <style>
+            body {
+              font-family: 'Helvetica Neue', Arial, sans-serif;
+              background-color: #222222;
+              color: white;
+              padding: 20px;
+              line-height: 1.6;
+            }
+            img {
+              max-width: 100%;
+              border-radius: 8px;
+              box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            }
+            table {
+              border-collapse: collapse;
+              width: 100%;
+              margin-top: 15px;
+              margin-bottom: 15px;
+            }
+            th, td {
+              border: 1px solid #444444;
+              padding: 8px;
+              text-align: left;
+            }
+            th {
+              background-color: #333333;
+              color: #ffffff;
+              font-weight: bold;
+            }
+            .small {
+              font-size: 12px;
+            }
+            .big {
+              font-size: 18px;
+            }
+            .title {
+              background-color: #444444;
+              padding: 10px;
+              border-radius: 8px;
+              margin-top: 20px;
+              margin-bottom: 10px;
+              box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            }
+            .section {
+              margin-top: 20px;
+              margin-bottom: 20px;
+            }
+            .section-title {
+              font-size: 22px;
+              font-weight: bold;
+              color: #cc5500;
+              margin-bottom: 5px;
+            }
+            .highlight-bg {
+              background-color: #1c1c1c;
+              padding: 10px;
+              border-radius: 8px;
+              margin-top: 10px;
+              margin-bottom: 10px;
+            }
+          </style>
+        </head>
+        <body>
+          <div class="section">
+            <img src=$image />
+          </div>
+          <div class="section">
+            <h1>$missionName</h1>
+            <h2>$rocketName</h2>
+          </div>
+          <div class="section">
+            <div class="title">
+              <h3>Mission Details:</h3>
+            </div>
+            <table>
+              <tr>
+                <th>Date</th>
+                <td>$date</td>
+              </tr>
+              <tr>
+                <th>Time</th>
+                <td>$time</td>
+              </tr>
+              <tr>
+                <th>Launch Site</th>
+                <td>$launchSite</td>
+              </tr>
+              <tr>
+                <th>Flight Number</th>
+                <td>$flightNumber</td>
+              </tr>
+              <tr>
+                <th>Payload</th>
+                <td>$payload</td>
+              </tr>
+              <tr>
+                <th>Nationality</th>
+                <td>$country</td>
+              </tr>
+            </table>
+          </div>
+          <div class="section">
+            <div class="title">
+              <h3>Mission Description:</h3>
+            </div>
+              <div class="highlight-bg">
+              <p class="small">$missionDescription</p>
+            </div>
+          </div>
+          <div class="section">
+            <div class="title">
+              <h3>Launch Site Description:</h3>
+            </div>
+            <div class="highlight-bg">
+              <p class="big">$launchSiteFullName</p>
+              <p class="small">$launchSiteDescription</p>
+            </div>
+          </div>
+        </body>
+      </html>
+    ]]></description>
+  </Document>
+</kml>
+''';
+    try {
+      await client;
+      return await client.execute(
+          "echo '$openBalloonKML' > /var/www/html/kml/slave_$rigs.kml");
+    } catch (e) {
+      return Future.error(e);
+    }
+  }
+
+  Future sendToLG(String kml, String projectname, String lng, String lat) async {
+    if (kml.isNotEmpty) {
+      return _createLocalFile(kml, projectname, lng, lat);
+    }
+    return Future.error('nogeodata');
+  }
+
+  Future cleanVisualization() async {
+    dynamic credencials = await _getCredentials();
+
+    SSHClient client = SSHClient(
+      await SSHSocket.connect('${credencials['ip']}', int.parse('${credencials['port']}')),
+      // host: '${credencials['ip']}',
+      // port: int.parse('${credencials['port']}'),
+      username: '${credencials['username']}',
+      onPasswordRequest: () => '${credencials['pass']}',
+    );
+
+    try {
+      await client;
+      stopOrbit();
+      return await client.execute('> /var/www/html/kmls.txt');
+    } catch (e) {
+      print('Could not connect to host LG');
+      return Future.error(e);
+    }
   }
 
   buildOrbit(String content) async {

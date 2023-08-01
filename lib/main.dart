@@ -13,6 +13,7 @@ import '../config/appTheme.dart';
 import 'package:timezone/data/latest.dart' as tz;
 
 bool connectionStatus = false;
+const double earthRadius = 6371000;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

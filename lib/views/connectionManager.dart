@@ -199,7 +199,8 @@ class _ConnectionManagerViewState extends State<ConnectionManagerView> with Sing
                             style: TextStyle(
                                 fontFamily: 'GoogleSans',
                                 fontSize: Utils().fontSizeMultiplier(25),
-                                color: AppTheme().ht_color
+                                color: AppTheme().ht_color,
+                              fontWeight: FontWeight.bold,
                             ),
                           ),
                           Text(
@@ -207,7 +208,8 @@ class _ConnectionManagerViewState extends State<ConnectionManagerView> with Sing
                             style: TextStyle(
                               fontFamily: 'GoogleSans',
                               fontSize: Utils().fontSizeMultiplier(15),
-                              color: AppTheme().ht_color
+                              color: AppTheme().ht_color,
+                              fontWeight: FontWeight.bold,
                             ),
                           ),
                         ],

@@ -14,10 +14,14 @@ class LaunchService {
       for (final launchJson in launchesJson) {
         final rocketId = launchJson['rocket'];
         final launchPadId = launchJson['launchpad'];
-        final futureUpcoming = ExtractNamesAndDetails().extractRocketAndLaunchPadNames(rocketId, launchPadId)
-            .then((rnlpName) {
-          launchJson['rocket'] = rnlpName[0];
-          launchJson['launchpad'] = rnlpName[1];
+        final futureUpcoming = ExtractNamesAndDetails().extractNamesAndDetails(rocketId, launchPadId)
+            .then((rnlpDes) {
+          launchJson['rocket_01'] = rnlpDes[0];
+          launchJson['country'] = rnlpDes[1];
+          launchJson['company'] = rnlpDes[2];
+          launchJson['launchpad'] = rnlpDes[3];
+          launchJson['launchpadFM'] = rnlpDes[4];
+          launchJson['launchpadDes'] = rnlpDes[5];
         });
         futuresUpcoming.add(futureUpcoming);
       }
@@ -27,8 +31,10 @@ class LaunchService {
       final launches = launchesJson.map((json) => UpcomingLaunch.fromJson(json)).toList();
       return launches;
     } else {
-      throw Exception('Failed to fetch upcoming launches.');
+      print('Failed to fetch upcoming launches: ${response.statusCode}');
+      return [];
     }
+
   }
 
   static Future<List<PastLaunch>> fetchPastLaunches() async {

@@ -13,11 +13,18 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../config/imagePaths.dart';
 import '../../config/screenConfig.dart';
 import '../../data/launches_response.dart';
-import '../../utils/kml/LookAt.dart';
-import '../../utils/kml/orbit.dart';
+import '../../main.dart';
+import '../../models/KMLModel.dart';
+import '../../models/balloonModel/launchBalloonModel.dart';
+import '../../models/lookAtModel.dart';
+import '../../models/orbitModel.dart';
+import '../../models/placemarkModel.dart';
+import '../../utils/services/balloonServices.dart';
+import '../../utils/services/lgServices.dart';
 import '../../utils/utils.dart';
 import '../../config/appTheme.dart';
 import '../../view models/homeViewModels/launchViewModel.dart';
+import '../errorView.dart';
 import '../searchScreen.dart';
 
 class LaunchView extends StatefulWidget {
@@ -39,6 +46,9 @@ class _LaunchViewState extends State<LaunchView> with SingleTickerProviderStateM
   bool isOrbiting = false;
   double latvalue = 28.608373;
   double longvalue = -80.604339;
+  // PlacemarkModel? _launchPlacemark;
+  var currentLaunch;
+  bool isTapped = false;
 
   // Future<List<UpcomingLaunch>>? _upcomingLaunchesFuture = LaunchService.fetchUpcomingLaunches();
   // Future<List<PastLaunch>>? _pastLaunchesFuture = LaunchService.fetchPastLaunches();
@@ -79,6 +89,67 @@ class _LaunchViewState extends State<LaunchView> with SingleTickerProviderStateM
     }
   }
 
+  // void _viewLaunchStats(LaunchBalloonModel stats, bool showBalloon, BuildContext context,
+  //     {double orbitPeriod = 2.8, bool updatePosition = true}) async {
+  //   dynamic credentials = await _getCredentials();
+  //   final GlobalBalloonService globeService = GlobalBalloonService();
+  //
+  //   final placemark = globeService.buildLaunchPlacemark(
+  //     stats,
+  //     showBalloon,
+  //     orbitPeriod,
+  //     lookAt: _launchPlacemark != null && !updatePosition
+  //         ? _launchPlacemark!.lookAt
+  //         : null,
+  //     updatePosition: false,
+  //   );
+  //   setState(() {
+  //     _launchPlacemark = placemark;
+  //   });
+  //
+  //   try {
+  //     await LgService().clearKml();
+  //   } catch (e) {
+  //     // ignore: avoid_print
+  //     print(e);
+  //   }
+  //
+  //   final kmlBalloon = KMLModel(
+  //     name: 'RLA-Launch-balloon',
+  //     content: placemark.balloonOnlyTag,
+  //   );
+  //
+  //   try {
+  //     await LgService().sendKMLToSlave(
+  //       LgService().balloonScreen,
+  //       kmlBalloon.body,
+  //     );
+  //   } catch (e) {
+  //     // ignore: avoid_print
+  //     print(e);
+  //   }
+  //
+  //   if (updatePosition) {
+  //     await LgService().flyTo(LookAtModel(
+  //       longitude: -80.60405833,
+  //       latitude: 28.60819722,
+  //       range: 1000,
+  //       tilt: 70,
+  //       altitude: 150,
+  //       heading: 45,
+  //       altitudeMode: 'relativeToGround',
+  //     ));
+  //   }
+  //
+  //   final orbit = globeService.buildOrbit();
+  //
+  //   try {
+  //     await LgService().sendTour(orbit, 'Orbit');
+  //   } catch (e) {
+  //     // ignore: avoid_print
+  //     print(e);
+  //   }
+  // }
 
   @override
   void initState() {
@@ -302,7 +373,37 @@ class _LaunchViewState extends State<LaunchView> with SingleTickerProviderStateM
                     width: ScreenConfig.widthPercent*5,
                   ),
                   ElevatedButton(
-                      onPressed: () { },
+                      onPressed: () {
+                        if(isTapped){
+                          LaunchBalloonModel launch = LaunchBalloonModel(
+                            id: 'Upcoming Launch',
+                            missionName: currentLaunch.missionName,
+                            rocketName: currentLaunch.rocketName,
+                            date: currentLaunch.launchDate,
+                            time: currentLaunch.launchTime,
+                            launchSite: currentLaunch.launchPad,
+                            flightNumber: currentLaunch.flightNumber,
+                            payload: currentLaunch.payload,
+                            nationality: currentLaunch.country,
+                            missionDescription: currentLaunch.missionDes,
+                            launchSiteFullName: currentLaunch.launchPadFullName,
+                            launchSiteDescription: currentLaunch.launchPadDes,
+                          );
+                          print(currentLaunch.missionName);
+                          print(currentLaunch.rocketName);
+                          print(currentLaunch.launchDate);
+                          print(currentLaunch.launchTime);
+                          print(currentLaunch.launchPad);
+                          print(currentLaunch.payload);
+                          print(currentLaunch.country);
+                          print(currentLaunch.missionDes);
+                          print(currentLaunch.launchPadFullName);
+                          print(currentLaunch.launchPadDes);
+                          if(connectionStatus){
+                            // _viewLaunchStats(launch, true, context);
+                          }
+                        }
+                      },
                       style: ElevatedButton.styleFrom(
                         elevation: 10,
                         shadowColor: Colors.grey,
@@ -345,45 +446,45 @@ class _LaunchViewState extends State<LaunchView> with SingleTickerProviderStateM
                   ),
                   ElevatedButton(
                       onPressed: () => {
-                        isOrbiting = !isOrbiting,
-                        if (isOrbiting == true)
-                          {
-                            _rotationiconcontroller.forward(),
-                            LGConnection().cleanOrbit().then((value) {
-                              playOrbit().then((value) {
-                                _showToast(translate('launch_tab.buildorbit'));
-                              });
-                            }).catchError((onError) {
-                              _rotationiconcontroller.stop();
-                              print('oh no $onError');
-                              if (onError == 'nogeodata') {
-                                showAlertDialog(
-                                    translate('launch_tab.alert'),
-                                    translate('launch_tab.alert2'));
-                              }
-                              showAlertDialog(
-                                  translate('launch_tab.alert3'),
-                                  translate('launch_tab.alert4'));
-                            }),
-                          }
-                        else
-                          {
-                            _rotationiconcontroller.reset(),
-                            stopOrbit().then((value) {
-                              _showToast(translate('launch_tab.stoporbit'));
-                              LGConnection().cleanOrbit();
-                            }).catchError((onError) {
-                              print('oh no $onError');
-                              if (onError == 'nogeodata') {
-                                showAlertDialog(
-                                    translate('launch_tab.alert'),
-                                    translate('launch_tab.alert2'));
-                              }
-                              showAlertDialog(
-                                  translate('launch_tab.alert3'),
-                                  translate('launch_tab.alert4'));
-                            }),
-                          }
+                        // isOrbiting = !isOrbiting,
+                        // if (isOrbiting == true)
+                        //   {
+                        //     _rotationiconcontroller.forward(),
+                        //     LGConnection().cleanOrbit().then((value) {
+                        //       playOrbit().then((value) {
+                        //         _showToast(translate('launch_tab.buildorbit'));
+                        //       });
+                        //     }).catchError((onError) {
+                        //       _rotationiconcontroller.stop();
+                        //       print('oh no $onError');
+                        //       if (onError == 'nogeodata') {
+                        //         showAlertDialog(
+                        //             translate('launch_tab.alert'),
+                        //             translate('launch_tab.alert2'));
+                        //       }
+                        //       showAlertDialog(
+                        //           translate('launch_tab.alert3'),
+                        //           translate('launch_tab.alert4'));
+                        //     }),
+                        //   }
+                        // else
+                        //   {
+                        //     _rotationiconcontroller.reset(),
+                        //     stopOrbit().then((value) {
+                        //       _showToast(translate('launch_tab.stoporbit'));
+                        //       LGConnection().cleanOrbit();
+                        //     }).catchError((onError) {
+                        //       print('oh no $onError');
+                        //       if (onError == 'nogeodata') {
+                        //         showAlertDialog(
+                        //             translate('launch_tab.alert'),
+                        //             translate('launch_tab.alert2'));
+                        //       }
+                        //       showAlertDialog(
+                        //           translate('launch_tab.alert3'),
+                        //           translate('launch_tab.alert4'));
+                        //     }),
+                        //   }
                       },
                       style: ElevatedButton.styleFrom(
                         elevation: 10,
@@ -440,7 +541,15 @@ class _LaunchViewState extends State<LaunchView> with SingleTickerProviderStateM
             listController: upcomingScrollController,
             itemBuilder: (BuildContext context, int index) {
               final upcominglaunch = _upcomingLaunches[index];
-              return BuildUpcomingLaunchList(upcomingLaunches: upcominglaunch);
+              return GestureDetector(
+                onTap: (){
+                  currentLaunch = upcominglaunch;
+                  isTapped = true;
+                  print('Index: $index');
+                  print('MNission Name: $upcominglaunch');
+                },
+                child: BuildUpcomingLaunchList(upcomingLaunches: upcominglaunch)
+              );
             },
             itemSize: ScreenConfig.heightPercent*30,
             dynamicItemSize: true,
@@ -520,24 +629,32 @@ class _LaunchViewState extends State<LaunchView> with SingleTickerProviderStateM
   }
 
 
-  playOrbit() async {
-    await LGConnection()
-        .buildOrbit(Orbit.buildOrbit(Orbit.generateOrbitTag(
-        LookAt(longvalue, latvalue, "12340.7995674", "0", "0"))))
-        .then((value) async {
-      await LGConnection().startOrbit();
-    });
-    setState(() {
-      isOrbiting = true;
-    });
-  }
-
-  stopOrbit() async {
-    await LGConnection().stopOrbit();
-    setState(() {
-      isOrbiting = false;
-    });
-  }
+  // playOrbit() async {
+  //   await LGConnection()
+  //       .buildOrbit(OrbitModel.buildOrbit(OrbitModel.generateOrbitTag(
+  //       LookAtModel(
+  //         longitude: longvalue,
+  //         latitude: latvalue,
+  //         range: 12340.7995674,
+  //         tilt: 0,
+  //         altitude: 150,
+  //         heading: 0,
+  //         altitudeMode: 'relativeToGround',
+  //       ))))
+  //       .then((value) async {
+  //     await LGConnection().startOrbit();
+  //   });
+  //   setState(() {
+  //     isOrbiting = true;
+  //   });
+  // }
+  //
+  // stopOrbit() async {
+  //   await LGConnection().stopOrbit();
+  //   setState(() {
+  //     isOrbiting = false;
+  //   });
+  // }
 
   void _showToast(String x) {
     ScaffoldMessenger.of(context).showSnackBar(
@@ -587,7 +704,7 @@ class _LaunchViewState extends State<LaunchView> with SingleTickerProviderStateM
                   Padding(
                       padding: EdgeInsets.only(left: 10),
                       child: Image.asset(
-                        "assets/sad.png",
+                        "assets/images/sad.png",
                         width: 250,
                         height: 250,
                       )),
@@ -646,6 +763,23 @@ class _LaunchViewState extends State<LaunchView> with SingleTickerProviderStateM
             ));
       },
     );
+  }
+
+  _getCredentials() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    String ipAddress = preferences.getString('master_ip') ?? '';
+    String password = preferences.getString('master_password') ?? '';
+    String portNumber = preferences.getString('master_portNumber') ?? '';
+    String username = preferences.getString('master_username') ?? '';
+    String numberofrigs = preferences.getString('numberofrigs') ?? '';
+
+    return {
+      "ip": ipAddress,
+      "pass": password,
+      "port": portNumber,
+      "username": username,
+      "numberofrigs": numberofrigs
+    };
   }
 
 }
@@ -845,133 +979,5 @@ class BuildPastLaunchList extends StatelessWidget {
         )
       ],
     );
-  }
-}
-
-class LGConnection {
-
-  _getCredentials() async {
-    SharedPreferences preferences = await SharedPreferences.getInstance();
-    String ipAddress = preferences.getString('master_ip') ?? '';
-    String password = preferences.getString('master_password') ?? '';
-    String portNumber = preferences.getString('master_portNumber') ?? '';
-    String username = preferences.getString('master_username') ?? '';
-    String numberofrigs = preferences.getString('numberofrigs') ?? '';
-
-    return {
-      "ip": ipAddress,
-      "pass": password,
-      "port": portNumber,
-      "username": username,
-      "numberofrigs": numberofrigs
-    };
-  }
-
-  Future<String> get _localPath async {
-    final directory = await getApplicationDocumentsDirectory();
-
-    return directory.path;
-  }
-
-  buildOrbit(String content) async {
-    dynamic credencials = await _getCredentials();
-
-    String localPath = await _localPath;
-    File localFile = File('$localPath/Orbit.kml');
-    File finalFile = await localFile.writeAsString(content);
-
-    SSHClient client = SSHClient(
-      await SSHSocket.connect('${credencials['ip']}', int.parse('${credencials['port']}')),
-      // host: '${credencials['ip']}',
-      // port: int.parse('${credencials['port']}'),
-      username: '${credencials['username']}',
-      onPasswordRequest: () => '${credencials['pass']}',
-    );
-
-    try {
-      await client;
-      final sftp = await client.sftp();
-      double anyKindofProgressBar;
-      final file = await sftp.open('/var/www/html/Orbit.kml',
-          mode: SftpFileOpenMode.create |
-          SftpFileOpenMode.truncate |
-          SftpFileOpenMode.write);
-      var fileSize = await finalFile.length();
-      await file.write(finalFile.openRead().cast(), onProgress: (progress) {
-        anyKindofProgressBar = progress / fileSize;
-      });
-      // await client.sftpUpload(
-      //   path: filePath,
-      //   toPath: '/var/www/html',
-      //   callback: (progress) {
-      //     print('Sent $progress');
-      //   },
-      // );
-      return await client.execute(
-          "echo '\nhttp://lg1:81/Orbit.kml' >> /var/www/html/kmls.txt");
-    } catch (e) {
-      print('Could not connect to host LG');
-      return Future.error(e);
-    }
-  }
-
-  startOrbit() async {
-    dynamic credencials = await _getCredentials();
-
-    SSHClient client = SSHClient(
-      await SSHSocket.connect('${credencials['ip']}', int.parse('${credencials['port']}')),
-      // host: '${credencials['ip']}',
-      // port: int.parse('${credencials['port']}'),
-      username: '${credencials['username']}',
-      onPasswordRequest: () => '${credencials['pass']}',
-    );
-
-    try {
-      await client;
-      return await client.execute('echo "playtour=Orbit" > /tmp/query.txt');
-    } catch (e) {
-      print('Could not connect to host LG');
-      return Future.error(e);
-    }
-  }
-
-  stopOrbit() async {
-    dynamic credencials = await _getCredentials();
-
-    SSHClient client = SSHClient(
-      await SSHSocket.connect('${credencials['ip']}', int.parse('${credencials['port']}')),
-      // host: '${credencials['ip']}',
-      // port: int.parse('${credencials['port']}'),
-      username: '${credencials['username']}',
-      onPasswordRequest: () => '${credencials['pass']}',
-    );
-
-    try {
-      await client;
-      return await client.execute('echo "exittour=true" > /tmp/query.txt');
-    } catch (e) {
-      print('Could not connect to host LG');
-      return Future.error(e);
-    }
-  }
-
-  cleanOrbit() async {
-    dynamic credencials = await _getCredentials();
-
-    SSHClient client = SSHClient(
-      await SSHSocket.connect('${credencials['ip']}', int.parse('${credencials['port']}')),
-      // host: '${credencials['ip']}',
-      // port: int.parse('${credencials['port']}'),
-      username: '${credencials['username']}',
-      onPasswordRequest: () => '${credencials['pass']}',
-    );
-
-    try {
-      await client;
-      return await client.execute('echo "" > /tmp/query.txt');
-    } catch (e) {
-      print('Could not connect to host LG');
-      return Future.error(e);
-    }
   }
 }

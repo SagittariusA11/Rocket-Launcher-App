@@ -58,6 +58,8 @@ dependencies:
   intl: ^0.17.0
   timezone: ^0.9.2
   flutter_riverpod: ^1.0.3+1
+  permission_handler: ^10.4.3
+  lecle_downloads_path_provider: ^0.0.2+8
 
 dev_dependencies:
   flutter_test:
@@ -99,7 +101,6 @@ flutter:
     - assets/rockets/
     - assets/satellites/
     - assets/i18n/
-    - assets/kml/
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 

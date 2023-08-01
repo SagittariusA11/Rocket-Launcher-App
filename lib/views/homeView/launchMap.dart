@@ -304,7 +304,7 @@ class _MyMapState extends State<MyMap> with SingleTickerProviderStateMixin {
                   Padding(
                       padding: EdgeInsets.only(left: 10),
                       child: Image.asset(
-                        "assets/sad.png",
+                        "assets/images/sad.png",
                         width: 250,
                         height: 250,
                       )),

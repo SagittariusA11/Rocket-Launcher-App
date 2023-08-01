@@ -9,6 +9,13 @@ class UpcomingLaunch {
   final String launchTime;
   final String rocketName;
   final String launchPad;
+  final String flightNumber;
+  final String payload;
+  final String country;
+  final String missionDes;
+  final String launchPadFullName;
+  final String launchPadDes;
+
 
   UpcomingLaunch({
     required this.rocketName,
@@ -16,15 +23,27 @@ class UpcomingLaunch {
     required this.launchDate,
     required this.launchTime,
     required this.launchPad,
+    required this.flightNumber,
+    required this.payload,
+    required this.country,
+    required this.missionDes,
+    required this.launchPadFullName,
+    required this.launchPadDes,
   });
 
   factory UpcomingLaunch.fromJson(Map<String, dynamic> json) {
     return UpcomingLaunch(
-      rocketName: json['rocket'],
+      rocketName: json['rocket_01'],
       missionName: json['name'].toString().length>14?json['name'].toString().substring(0,14):json['name'],
       launchDate: json['date_utc'].toString().substring(0,10),
       launchTime: json['date_utc'].toString().substring(12,19),
       launchPad: json['launchpad'] ?? 'N/A',
+      flightNumber: json['flight_number'].toString(),
+      payload: 'YES',
+      missionDes: json['details'],
+      launchPadFullName: json['launchpadFM'],
+      launchPadDes: json['launchpadDes'],
+      country: json['country'],
     );
   }
 }

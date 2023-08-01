@@ -1,10 +1,10 @@
 
 
-import 'LookAt.dart';
+import 'lookAtModel.dart';
 
 class Orbit {
-  static generateOrbitTag(LookAt marker) {
-    double heading = double.parse(marker.heading);
+  static generateOrbitTag(LookAtLaunch marker) {
+    double heading = 45;
     int orbit = 0;
     String content = '';
     String range = '40000';
@@ -18,7 +18,7 @@ class Orbit {
               <LookAt>
                   <longitude>${marker.lng}</longitude>
                   <latitude>${marker.lat}</latitude>
-                  <heading>$heading</heading>
+                  <heading>45</heading>
                   <tilt>60</tilt>
                   <range>${range}</range>
                   <gx:fovy>60</gx:fovy> 
