@@ -38,7 +38,7 @@ class KMLServices{
     );
     final pw = credentials["pass"];
     final user = credentials["username"];
-    screenAmount = credentials["numberofrigs"];
+    screenAmount = int.parse(credentials["numberofrigs"]);
     final sftp = await client.sftp();
     double anyKindofProgressBar;
     final file = await sftp.open('/var/www/html/$filename',

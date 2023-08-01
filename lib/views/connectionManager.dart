@@ -177,11 +177,11 @@ class _ConnectionManagerViewState extends State<ConnectionManagerView> with Sing
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 SizedBox(
-                  width: ScreenConfig.widthPercent*27,
+                  width: ScreenConfig.widthPercent*28,
                   child: Row(
                     children: [
                       SizedBox(
-                        width: ScreenConfig.widthPercent*1.75,
+                        width: ScreenConfig.widthPercent*1.8,
                       ),
                       Utils.images(
                           ScreenConfig.heightPercent*10,
@@ -230,7 +230,7 @@ class _ConnectionManagerViewState extends State<ConnectionManagerView> with Sing
                   ),
                 ),
                 SizedBox(
-                  width: ScreenConfig.widthPercent*27,
+                  width: ScreenConfig.widthPercent*28,
                 )
               ],
             ),

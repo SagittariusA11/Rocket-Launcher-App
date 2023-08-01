@@ -1,47 +1,42 @@
 
 
-import 'lookAtModel.dart';
 
 
-class OrbitModel {
+import 'lookAt.dart';
 
-  static String tag(LookAtModel lookAt) {
-    String content = '';
-
-
-    double heading = double.parse(lookAt.heading);
+class Orbit {
+  static generateOrbitTag(LookAtLaunch marker) {
+    double heading = 45;
     int orbit = 0;
+    String content = '';
+    String range = '40000';
 
     while (orbit <= 36) {
-      if (heading >= 360) {
-        heading -= 360;
-      }
-
+      if (heading >= 360) heading -= 360;
       content += '''
             <gx:FlyTo>
               <gx:duration>1.2</gx:duration>
               <gx:flyToMode>smooth</gx:flyToMode>
               <LookAt>
-                  <longitude>${lookAt.longitude}</longitude>
-                  <latitude>${lookAt.latitude}</latitude>
-                  <heading>$heading</heading>
+                  <longitude>${marker.lng}</longitude>
+                  <latitude>${marker.lat}</latitude>
+                  <heading>45</heading>
                   <tilt>60</tilt>
-                  <range>${lookAt.range}</range>
-                  <gx:fovy>60</gx:fovy>
-                  <altitude>${lookAt.altitude}</altitude>
-                  <gx:altitudeMode>${lookAt.altitudeMode}</gx:altitudeMode>
+                  <range>${range}</range>
+                  <gx:fovy>60</gx:fovy> 
+                  <altitude>3341.7995674</altitude> 
+                  <gx:altitudeMode>absolute</gx:altitudeMode>
               </LookAt>
             </gx:FlyTo>
           ''';
-
       heading += 10;
       orbit += 1;
     }
-
     return content;
   }
 
-  static String buildOrbit(String content) => '''
+  static buildOrbit(String content) {
+    String kmlOrbit = '''
 <?xml version="1.0" encoding="UTF-8"?>
       <kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
         <gx:Tour>
@@ -52,4 +47,6 @@ class OrbitModel {
         </gx:Tour>
       </kml>
     ''';
+    return kmlOrbit;
+  }
 }

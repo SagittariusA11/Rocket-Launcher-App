@@ -5,7 +5,6 @@ import 'package:rocket_launcher_app/models/tourModel.dart';
 
 import '../../main.dart';
 import '../lineModel.dart';
-import '../lookAtModel.dart';
 
 
 class LaunchBalloonModel {

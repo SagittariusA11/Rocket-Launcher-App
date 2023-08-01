@@ -15,7 +15,8 @@ class UpcomingLaunch {
   final String missionDes;
   final String launchPadFullName;
   final String launchPadDes;
-
+  final String lng;
+  final String lat;
 
   UpcomingLaunch({
     required this.rocketName,
@@ -29,6 +30,8 @@ class UpcomingLaunch {
     required this.missionDes,
     required this.launchPadFullName,
     required this.launchPadDes,
+    required this.lng,
+    required this.lat,
   });
 
   factory UpcomingLaunch.fromJson(Map<String, dynamic> json) {
@@ -44,6 +47,8 @@ class UpcomingLaunch {
       launchPadFullName: json['launchpadFM'],
       launchPadDes: json['launchpadDes'],
       country: json['country'],
+      lat: json['lat'],
+      lng: json['lng']
     );
   }
 }
@@ -82,6 +87,8 @@ class ExtractNamesAndDetails {
       final launchPadJsonData = json.decode(launchPadResponse.body);
       final launchPadName = launchPadJsonData['name'];
       final launchPadFullName = launchPadJsonData['full_name'];
+      final launchPadLat = launchPadJsonData['latitude'].toString();
+      final launchPadLng = launchPadJsonData['longitude'].toString();
       String launchPadDes = "";
       if (launchPadName == "VAFB SLC 3W") {
         launchPadDes = '1';
@@ -99,7 +106,7 @@ class ExtractNamesAndDetails {
         launchPadDes = '7';
       }
 
-      return [rocketName, country, company, launchPadName, launchPadFullName, launchPadDes];
+      return [rocketName, country, company, launchPadName, launchPadFullName, launchPadDes, launchPadLat, launchPadLng];
     } catch (e) {
       print('Failed to extract rocket and launch pad names from API response: $e');
       return ['null', 'null'];

@@ -1,41 +1,61 @@
-class LookAtLaunch {
-  double lng;
-  double lat;
 
-  LookAtLaunch(this.lng, this.lat);
+class LookAtModel {
 
-  generateTag() {
-    return '''
-       <LookAt>
-        <longitude>${this.lng}</longitude>
-        <latitude>${this.lat}</latitude>
-        <range>1000</range>
-        <tilt>70</tilt>
-        <heading>45</heading>
-        <altitude>150</altitude>
-        <gx:altitudeMode>relativeToGround</gx:altitudeMode>
+  double longitude;
+  double latitude;
+  double altitude;
+  String range;
+  String tilt;
+  String heading;
+  String altitudeMode;
+
+  LookAtModel(
+      {required this.longitude,
+        required this.latitude,
+        required this.range,
+        required this.tilt,
+        required this.heading,
+        this.altitude = 0,
+        this.altitudeMode = 'relativeToGround'});
+
+  String get tag => '''
+      <LookAt>
+        <longitude>$longitude</longitude>
+        <latitude>$latitude</latitude>
+        <altitude>$altitude</altitude>
+        <range>$range</range>
+        <tilt>$tilt</tilt>
+        <heading>$heading</heading>
+        <gx:altitudeMode>$altitudeMode</gx:altitudeMode>
       </LookAt>
     ''';
-  }
 
-  generateLinearString() {
-    return '<LookAt><longitude>${this.lng}</longitude><latitude>${this.lat}</latitude><range>1000</range><tilt>70</tilt><heading>45</heading><altitude>150</altitude><gx:altitudeMode>relativeToGround</gx:altitudeMode></LookAt>';
-  }
+  String get linearTag =>
+      '<LookAt><longitude>$longitude</longitude><latitude>$latitude</latitude><altitude>$altitude</altitude><range>$range</range><tilt>$tilt</tilt><heading>$heading</heading><gx:altitudeMode>$altitudeMode</gx:altitudeMode></LookAt>';
 
   toMap() {
     return {
-      "lng": lng,
-      "lat": lat,
+      'lng': longitude,
+      'lat': latitude,
+      'altitude': altitude,
+      'range': range,
+      'tilt': tilt,
+      'heading': heading,
+      'altitudeMode': altitudeMode
     };
   }
 
-  static fromMap(dynamic map) {
-    return LookAtLaunch(
-        map['lng'], map['lat']);
-  }
-
-  @override
-  String toString() {
-    return super.toString();
+  factory LookAtModel.fromMap(Map<String, dynamic> map) {
+    return LookAtModel(
+        longitude: map['lng'],
+        latitude: map['lat'],
+        altitude: map['altitude'],
+        range: map['range'],
+        tilt: map['tilt'],
+        heading: map['heading'],
+        altitudeMode: map['altitudeMode']);
   }
 }
+
+
+

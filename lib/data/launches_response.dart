@@ -22,6 +22,8 @@ class LaunchService {
           launchJson['launchpad'] = rnlpDes[3];
           launchJson['launchpadFM'] = rnlpDes[4];
           launchJson['launchpadDes'] = rnlpDes[5];
+          launchJson['lat'] = rnlpDes[6];
+          launchJson['lng'] = rnlpDes[7];
         });
         futuresUpcoming.add(futureUpcoming);
       }
@@ -81,6 +83,8 @@ class LaunchService {
           launchJson['launchpad'] = NnDes[3];
           launchJson['launchpadFM'] = NnDes[4];
           launchJson['launchpadDes'] = NnDes[5];
+          launchJson['lat'] = NnDes[6];
+          launchJson['lng'] = NnDes[7];
           print("\n\n2: $NnDes\n\n");
         });
         futuresAll.add(futureAll);

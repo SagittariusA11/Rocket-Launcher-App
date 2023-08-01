@@ -17,7 +17,8 @@ import '../../main.dart';
 import '../../models/KMLModel.dart';
 import '../../models/balloonModel/launchBalloonModel.dart';
 import '../../models/lookAtModel.dart';
-import '../../models/orbitModel.dart';
+import '../../utils/kml/lookAt.dart';
+import '../../utils/kml/orbit.dart';
 import '../../models/placemarkModel.dart';
 import '../../utils/services/balloonServices.dart';
 import '../../utils/services/lgServices.dart';
@@ -46,7 +47,7 @@ class _LaunchViewState extends State<LaunchView> with SingleTickerProviderStateM
   bool isOrbiting = false;
   double latvalue = 28.608373;
   double longvalue = -80.604339;
-  // PlacemarkModel? _launchPlacemark;
+  PlacemarkModel? _launchPlacemark;
   var currentLaunch;
   bool isTapped = false;
 
@@ -89,67 +90,71 @@ class _LaunchViewState extends State<LaunchView> with SingleTickerProviderStateM
     }
   }
 
-  // void _viewLaunchStats(LaunchBalloonModel stats, bool showBalloon, BuildContext context,
-  //     {double orbitPeriod = 2.8, bool updatePosition = true}) async {
-  //   dynamic credentials = await _getCredentials();
-  //   final GlobalBalloonService globeService = GlobalBalloonService();
-  //
-  //   final placemark = globeService.buildLaunchPlacemark(
-  //     stats,
-  //     showBalloon,
-  //     orbitPeriod,
-  //     lookAt: _launchPlacemark != null && !updatePosition
-  //         ? _launchPlacemark!.lookAt
-  //         : null,
-  //     updatePosition: false,
-  //   );
-  //   setState(() {
-  //     _launchPlacemark = placemark;
-  //   });
-  //
-  //   try {
-  //     await LgService().clearKml();
-  //   } catch (e) {
-  //     // ignore: avoid_print
-  //     print(e);
-  //   }
-  //
-  //   final kmlBalloon = KMLModel(
-  //     name: 'RLA-Launch-balloon',
-  //     content: placemark.balloonOnlyTag,
-  //   );
-  //
-  //   try {
-  //     await LgService().sendKMLToSlave(
-  //       LgService().balloonScreen,
-  //       kmlBalloon.body,
-  //     );
-  //   } catch (e) {
-  //     // ignore: avoid_print
-  //     print(e);
-  //   }
-  //
-  //   if (updatePosition) {
-  //     await LgService().flyTo(LookAtModel(
-  //       longitude: -80.60405833,
-  //       latitude: 28.60819722,
-  //       range: 1000,
-  //       tilt: 70,
-  //       altitude: 150,
-  //       heading: 45,
-  //       altitudeMode: 'relativeToGround',
-  //     ));
-  //   }
-  //
-  //   final orbit = globeService.buildOrbit();
-  //
-  //   try {
-  //     await LgService().sendTour(orbit, 'Orbit');
-  //   } catch (e) {
-  //     // ignore: avoid_print
-  //     print(e);
-  //   }
-  // }
+  void _viewLaunchStats(LaunchBalloonModel stats, bool showBalloon, BuildContext context,
+      {double orbitPeriod = 2.8, bool updatePosition = true}) async {
+    final GlobalBalloonService globeService = GlobalBalloonService();
+
+    final placemark = globeService.buildLaunchPlacemark(
+      stats,
+      showBalloon,
+      orbitPeriod,
+      lookAt: _launchPlacemark != null && !updatePosition
+          ? _launchPlacemark!.lookAt
+          : null,
+      updatePosition: false,
+    );
+    setState(() {
+      _launchPlacemark = placemark;
+    });
+
+    try {
+      await LgService().clearKml();
+    } catch (e) {
+      // ignore: avoid_print
+      print(e);
+    }
+
+    final kmlBalloon = KMLModel(
+      name: 'RLA-Launch-balloon',
+      content: placemark.balloonOnlyTag,
+    );
+
+    try {
+      await LgService().sendKMLToSlave(
+        LgService().balloonScreen,
+        kmlBalloon.body,
+      );
+    } catch (e) {
+      // ignore: avoid_print
+      print(e);
+    }
+
+    if (updatePosition) {
+      await LgService().flyTo(LookAtModel(
+        longitude: double.parse(currentLaunch.lng),
+        latitude: double.parse(currentLaunch.lat),
+        range: '1000',
+        tilt: '70',
+        altitude: 150,
+        heading: '45',
+        altitudeMode: 'relativeToGround',
+      ));
+    }
+
+    final orbit = globeService.buildOrbit();
+
+    try {
+      await LgService().sendTour(orbit, 'Orbit');
+    } catch (e) {
+      // ignore: avoid_print
+      print(e);
+    }
+
+    playOrbit(
+      double.parse(currentLaunch.lng),
+      double.parse(currentLaunch.lat)
+    );
+  }
 
   @override
   void initState() {
@@ -374,7 +379,7 @@ class _LaunchViewState extends State<LaunchView> with SingleTickerProviderStateM
                   ),
                   ElevatedButton(
                       onPressed: () {
-                        if(isTapped){
+                        if(isTapped && connectionStatus){
                           LaunchBalloonModel launch = LaunchBalloonModel(
                             id: 'Upcoming Launch',
                             missionName: currentLaunch.missionName,
@@ -385,7 +390,7 @@ class _LaunchViewState extends State<LaunchView> with SingleTickerProviderStateM
                             flightNumber: currentLaunch.flightNumber,
                             payload: currentLaunch.payload,
                             nationality: currentLaunch.country,
-                            missionDescription: currentLaunch.missionDes,
+                            missionDescription: currentLaunch.missionDes??"N/A",
                             launchSiteFullName: currentLaunch.launchPadFullName,
                             launchSiteDescription: currentLaunch.launchPadDes,
                           );
@@ -399,8 +404,10 @@ class _LaunchViewState extends State<LaunchView> with SingleTickerProviderStateM
                           print(currentLaunch.missionDes);
                           print(currentLaunch.launchPadFullName);
                           print(currentLaunch.launchPadDes);
+                          print(currentLaunch.lat);
+                          print(currentLaunch.lng);
                           if(connectionStatus){
-                            // _viewLaunchStats(launch, true, context);
+                            _viewLaunchStats(launch, true, context);
                           }
                         }
                       },
@@ -446,45 +453,45 @@ class _LaunchViewState extends State<LaunchView> with SingleTickerProviderStateM
                   ),
                   ElevatedButton(
                       onPressed: () => {
-                        // isOrbiting = !isOrbiting,
-                        // if (isOrbiting == true)
-                        //   {
-                        //     _rotationiconcontroller.forward(),
-                        //     LGConnection().cleanOrbit().then((value) {
-                        //       playOrbit().then((value) {
-                        //         _showToast(translate('launch_tab.buildorbit'));
-                        //       });
-                        //     }).catchError((onError) {
-                        //       _rotationiconcontroller.stop();
-                        //       print('oh no $onError');
-                        //       if (onError == 'nogeodata') {
-                        //         showAlertDialog(
-                        //             translate('launch_tab.alert'),
-                        //             translate('launch_tab.alert2'));
-                        //       }
-                        //       showAlertDialog(
-                        //           translate('launch_tab.alert3'),
-                        //           translate('launch_tab.alert4'));
-                        //     }),
-                        //   }
-                        // else
-                        //   {
-                        //     _rotationiconcontroller.reset(),
-                        //     stopOrbit().then((value) {
-                        //       _showToast(translate('launch_tab.stoporbit'));
-                        //       LGConnection().cleanOrbit();
-                        //     }).catchError((onError) {
-                        //       print('oh no $onError');
-                        //       if (onError == 'nogeodata') {
-                        //         showAlertDialog(
-                        //             translate('launch_tab.alert'),
-                        //             translate('launch_tab.alert2'));
-                        //       }
-                        //       showAlertDialog(
-                        //           translate('launch_tab.alert3'),
-                        //           translate('launch_tab.alert4'));
-                        //     }),
-                        //   }
+                        isOrbiting = !isOrbiting,
+                        if (isOrbiting == true)
+                          {
+                            _rotationiconcontroller.forward(),
+                            LGConnection().cleanOrbit().then((value) {
+                              playOrbit(longvalue, latvalue).then((value) {
+                                _showToast(translate('launch_tab.buildorbit'));
+                              });
+                            }).catchError((onError) {
+                              _rotationiconcontroller.stop();
+                              print('oh no $onError');
+                              if (onError == 'nogeodata') {
+                                showAlertDialog(
+                                    translate('launch_tab.alert'),
+                                    translate('launch_tab.alert2'));
+                              }
+                              showAlertDialog(
+                                  translate('launch_tab.alert3'),
+                                  translate('launch_tab.alert4'));
+                            }),
+                          }
+                        else
+                          {
+                            _rotationiconcontroller.reset(),
+                            stopOrbit().then((value) {
+                              _showToast(translate('launch_tab.stoporbit'));
+                              LGConnection().cleanOrbit();
+                            }).catchError((onError) {
+                              print('oh no $onError');
+                              if (onError == 'nogeodata') {
+                                showAlertDialog(
+                                    translate('launch_tab.alert'),
+                                    translate('launch_tab.alert2'));
+                              }
+                              showAlertDialog(
+                                  translate('launch_tab.alert3'),
+                                  translate('launch_tab.alert4'));
+                            }),
+                          }
                       },
                       style: ElevatedButton.styleFrom(
                         elevation: 10,
@@ -515,7 +522,7 @@ class _LaunchViewState extends State<LaunchView> with SingleTickerProviderStateM
                               builder: (context) => IconButton(
                                 icon: Image.asset(ImagePaths.orbit),
                                 iconSize: 40,
-                                onPressed: (){},
+                                onPressed: (){null;},
                               ),
                             ),
                           ),
@@ -782,6 +789,28 @@ class _LaunchViewState extends State<LaunchView> with SingleTickerProviderStateM
     };
   }
 
+  playOrbit(double lng, double lat) async {
+    await LGConnection()
+        .buildOrbit(Orbit.buildOrbit(Orbit.generateOrbitTag(
+        LookAtLaunch(
+            lng,
+            lat
+        ))))
+        .then((value) async {
+      await LGConnection().startOrbit();
+    });
+    setState(() {
+      isOrbiting = true;
+    });
+  }
+
+  stopOrbit() async {
+    await LGConnection().stopOrbit();
+    setState(() {
+      isOrbiting = false;
+    });
+  }
+
 }
 
 class BuildUpcomingLaunchList extends StatelessWidget {
@@ -979,5 +1008,133 @@ class BuildPastLaunchList extends StatelessWidget {
         )
       ],
     );
+  }
+}
+
+class LGConnection {
+
+  _getCredentials() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    String ipAddress = preferences.getString('master_ip') ?? '';
+    String password = preferences.getString('master_password') ?? '';
+    String portNumber = preferences.getString('master_portNumber') ?? '';
+    String username = preferences.getString('master_username') ?? '';
+    String numberofrigs = preferences.getString('numberofrigs') ?? '';
+
+    return {
+      "ip": ipAddress,
+      "pass": password,
+      "port": portNumber,
+      "username": username,
+      "numberofrigs": numberofrigs
+    };
+  }
+
+  Future<String> get _localPath async {
+    final directory = await getApplicationDocumentsDirectory();
+
+    return directory.path;
+  }
+
+  buildOrbit(String content) async {
+    dynamic credencials = await _getCredentials();
+
+    String localPath = await _localPath;
+    File localFile = File('$localPath/Orbit.kml');
+    File finalFile = await localFile.writeAsString(content);
+
+    SSHClient client = SSHClient(
+      await SSHSocket.connect('${credencials['ip']}', int.parse('${credencials['port']}')),
+      // host: '${credencials['ip']}',
+      // port: int.parse('${credencials['port']}'),
+      username: '${credencials['username']}',
+      onPasswordRequest: () => '${credencials['pass']}',
+    );
+
+    try {
+      await client;
+      final sftp = await client.sftp();
+      double anyKindofProgressBar;
+      final file = await sftp.open('/var/www/html/Orbit.kml',
+          mode: SftpFileOpenMode.create |
+          SftpFileOpenMode.truncate |
+          SftpFileOpenMode.write);
+      var fileSize = await finalFile.length();
+      await file.write(finalFile.openRead().cast(), onProgress: (progress) {
+        anyKindofProgressBar = progress / fileSize;
+      });
+      // await client.sftpUpload(
+      //   path: filePath,
+      //   toPath: '/var/www/html',
+      //   callback: (progress) {
+      //     print('Sent $progress');
+      //   },
+      // );
+      return await client.execute(
+          "echo '\nhttp://lg1:81/Orbit.kml' >> /var/www/html/kmls.txt");
+    } catch (e) {
+      print('Could not connect to host LG');
+      return Future.error(e);
+    }
+  }
+
+  startOrbit() async {
+    dynamic credencials = await _getCredentials();
+
+    SSHClient client = SSHClient(
+      await SSHSocket.connect('${credencials['ip']}', int.parse('${credencials['port']}')),
+      // host: '${credencials['ip']}',
+      // port: int.parse('${credencials['port']}'),
+      username: '${credencials['username']}',
+      onPasswordRequest: () => '${credencials['pass']}',
+    );
+
+    try {
+      await client;
+      return await client.execute('echo "playtour=Orbit" > /tmp/query.txt');
+    } catch (e) {
+      print('Could not connect to host LG');
+      return Future.error(e);
+    }
+  }
+
+  stopOrbit() async {
+    dynamic credencials = await _getCredentials();
+
+    SSHClient client = SSHClient(
+      await SSHSocket.connect('${credencials['ip']}', int.parse('${credencials['port']}')),
+      // host: '${credencials['ip']}',
+      // port: int.parse('${credencials['port']}'),
+      username: '${credencials['username']}',
+      onPasswordRequest: () => '${credencials['pass']}',
+    );
+
+    try {
+      await client;
+      return await client.execute('echo "exittour=true" > /tmp/query.txt');
+    } catch (e) {
+      print('Could not connect to host LG');
+      return Future.error(e);
+    }
+  }
+
+  cleanOrbit() async {
+    dynamic credencials = await _getCredentials();
+
+    SSHClient client = SSHClient(
+      await SSHSocket.connect('${credencials['ip']}', int.parse('${credencials['port']}')),
+      // host: '${credencials['ip']}',
+      // port: int.parse('${credencials['port']}'),
+      username: '${credencials['username']}',
+      onPasswordRequest: () => '${credencials['pass']}',
+    );
+
+    try {
+      await client;
+      return await client.execute('echo "" > /tmp/query.txt');
+    } catch (e) {
+      print('Could not connect to host LG');
+      return Future.error(e);
+    }
   }
 }
