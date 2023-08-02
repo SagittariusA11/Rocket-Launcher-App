@@ -48,10 +48,16 @@ class LaunchService {
       for (final launchJson in launchesJson) {
         final rocketId = launchJson['rocket'];
         final launchPadId = launchJson['launchpad'];
-        final futurePast = ExtractNamesAndDetails().extractRocketAndLaunchPadNames(rocketId, launchPadId)
-            .then((rnlpName) {
-          launchJson['rocket'] = rnlpName[0];
-          launchJson['launchpad'] = rnlpName[1];
+        final futurePast = ExtractNamesAndDetails().extractNamesAndDetails(rocketId, launchPadId)
+            .then((rnlpDes) {
+          launchJson['rocket_01'] = rnlpDes[0];
+          launchJson['country'] = rnlpDes[1];
+          launchJson['company'] = rnlpDes[2];
+          launchJson['launchpad'] = rnlpDes[3];
+          launchJson['launchpadFM'] = rnlpDes[4];
+          launchJson['launchpadDes'] = rnlpDes[5];
+          launchJson['lat'] = rnlpDes[6];
+          launchJson['lng'] = rnlpDes[7];
         });
         futuresPast.add(futurePast);
       }

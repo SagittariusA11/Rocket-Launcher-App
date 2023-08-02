@@ -90,13 +90,12 @@ class _LaunchViewState extends State<LaunchView> with SingleTickerProviderStateM
     }
   }
 
-  void _viewLaunchStats(LaunchBalloonModel stats, bool showBalloon, BuildContext context,
+  void _viewLaunchStats(LaunchBalloonModel stats, BuildContext context,
       {double orbitPeriod = 2.8, bool updatePosition = true}) async {
-    final GlobalBalloonService globeService = GlobalBalloonService();
+    final LaunchBalloonService launchService = LaunchBalloonService();
 
-    final placemark = globeService.buildLaunchPlacemark(
+    final placemark = launchService.buildLaunchPlacemark(
       stats,
-      showBalloon,
       orbitPeriod,
       lookAt: _launchPlacemark != null && !updatePosition
           ? _launchPlacemark!.lookAt
@@ -141,7 +140,22 @@ class _LaunchViewState extends State<LaunchView> with SingleTickerProviderStateM
       ));
     }
 
-    final orbit = globeService.buildOrbit();
+    final orbit = launchService.buildOrbit(
+      lookAt: LookAtModel(
+        longitude: double.parse(currentLaunch.lng),
+        latitude: double.parse(currentLaunch.lat),
+        range: '1000',
+        tilt: '70',
+        altitude: 150,
+        heading: '45',
+        altitudeMode: 'relativeToGround',
+      )
+    );
+
+    playOrbit(
+      double.parse(currentLaunch.lng),
+      double.parse(currentLaunch.lat)
+    );
 
     try {
       await LgService().sendTour(orbit, 'Orbit');
@@ -149,11 +163,6 @@ class _LaunchViewState extends State<LaunchView> with SingleTickerProviderStateM
       // ignore: avoid_print
       print(e);
     }
-
-    playOrbit(
-      double.parse(currentLaunch.lng),
-      double.parse(currentLaunch.lat)
-    );
   }
 
   @override
@@ -406,9 +415,7 @@ class _LaunchViewState extends State<LaunchView> with SingleTickerProviderStateM
                           print(currentLaunch.launchPadDes);
                           print(currentLaunch.lat);
                           print(currentLaunch.lng);
-                          if(connectionStatus){
-                            _viewLaunchStats(launch, true, context);
-                          }
+                          _viewLaunchStats(launch, context);
                         }
                       },
                       style: ElevatedButton.styleFrom(
@@ -586,7 +593,15 @@ class _LaunchViewState extends State<LaunchView> with SingleTickerProviderStateM
             listController: pastScrollController,
             itemBuilder: (BuildContext context, int index) {
               final pastlaunch = _pastLaunches[index];
-              return BuildPastLaunchList(pastLaunches: pastlaunch);
+              return GestureDetector(
+                  onTap: (){
+                    currentLaunch = pastlaunch;
+                    isTapped = true;
+                    print('Index: $index');
+                    print('MNission Name: $pastlaunch');
+                  },
+                child: BuildPastLaunchList(pastLaunches: pastlaunch)
+              );
             },
             itemSize: ScreenConfig.heightPercent*25,
             dynamicItemSize: true,

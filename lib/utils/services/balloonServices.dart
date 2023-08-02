@@ -8,11 +8,10 @@ import '../../models/placemarkModel.dart';
 import '../../models/pointModel.dart';
 import '../../models/tourModel.dart';
 
-class GlobalBalloonService {
+class LaunchBalloonService {
 
   PlacemarkModel buildLaunchPlacemark(
       LaunchBalloonModel launch,
-      bool balloon,
       double orbitPeriod, {
         LookAtModel? lookAt,
         bool updatePosition = true,
@@ -55,7 +54,7 @@ class GlobalBalloonService {
       name: 'Launch Statistics',
       lookAt: updatePosition ? lookAtObj : null,
       point: point,
-      balloonContent: balloon ? launch.balloonContent() : '',
+      balloonContent: launch.balloonContent(),
       icon: 'earth.png',
       line: LineModel(
         id: launch.id,
@@ -68,7 +67,6 @@ class GlobalBalloonService {
 
   String buildOrbit({LookAtModel? lookAt}) {
     LookAtModel lookAtObj;
-
     if (lookAt == null) {
       lookAtObj = LookAtModel(
         longitude: -80.60405833,

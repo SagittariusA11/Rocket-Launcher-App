@@ -122,6 +122,14 @@ class PastLaunch {
   final String launchTime;
   final String rocketName;
   final String launchPad;
+  final String flightNumber;
+  final String payload;
+  final String country;
+  final String missionDes;
+  final String launchPadFullName;
+  final String launchPadDes;
+  final String lng;
+  final String lat;
 
   PastLaunch({
     required this.rocketName,
@@ -129,15 +137,31 @@ class PastLaunch {
     required this.launchDate,
     required this.launchTime,
     required this.launchPad,
+    required this.flightNumber,
+    required this.payload,
+    required this.country,
+    required this.missionDes,
+    required this.launchPadFullName,
+    required this.launchPadDes,
+    required this.lng,
+    required this.lat,
   });
 
   factory PastLaunch.fromJson(Map<String, dynamic> json) {
     return PastLaunch(
-      rocketName: json['rocket'],
-      missionName: json['name'].toString().length>14?json['name'].toString().substring(0,14):json['name'],
-      launchDate: json['date_utc'].toString().substring(0,10),
-      launchTime: json['date_utc'].toString().substring(12,19),
-      launchPad: json['launchpad'] ?? 'N/A',
+        rocketName: json['rocket_01'],
+        missionName: json['name'].toString().length>14?json['name'].toString().substring(0,14):json['name'],
+        launchDate: json['date_utc'].toString().substring(0,10),
+        launchTime: json['date_utc'].toString().substring(12,19),
+        launchPad: json['launchpad'] ?? 'N/A',
+        flightNumber: json['flight_number'].toString(),
+        payload: 'YES',
+        missionDes: json['details'],
+        launchPadFullName: json['launchpadFM'],
+        launchPadDes: json['launchpadDes'],
+        country: json['country'],
+        lat: json['lat'],
+        lng: json['lng']
     );
   }
 }
@@ -206,6 +230,8 @@ class AllLaunch {
   final List imgs;
   final String yt;
   final String rocketID;
+  final String lng;
+  final String lat;
 
   AllLaunch({
     required this.flightNumber,
@@ -224,7 +250,9 @@ class AllLaunch {
     required this.wiki,
     required this.imgs,
     required this.yt,
-    required this.rocketID
+    required this.rocketID,
+    required this.lat,
+    required this.lng
   });
 
   factory AllLaunch.fromJson(Map<String, dynamic> json) {
@@ -238,7 +266,7 @@ class AllLaunch {
       payload: 'YES',
       country: json['country'],
       company: json['company'],
-      missionDes: json['details'],
+      missionDes: json['details']??"N/A",
       launchPadFullName: json['launchpadFM'],
       launchPadDes: json['launchpadDes'],
       article: json['links']['article'],
@@ -246,6 +274,8 @@ class AllLaunch {
       imgs: json['links']['flickr']['original'] ?? [],
       yt: json['links']['webcast'],
       rocketID: json['rocket'],
+      lat: json['lat'],
+      lng: json['lng'],
     );
   }
 

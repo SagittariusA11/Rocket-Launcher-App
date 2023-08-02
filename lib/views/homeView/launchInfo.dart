@@ -20,10 +20,17 @@ import 'package:url_launcher/url_launcher.dart';
 import '../../config/imagePaths.dart';
 import '../../config/screenConfig.dart';
 import '../../data/launches_response.dart';
+import '../../main.dart';
+import '../../models/KMLModel.dart';
+import '../../models/balloonModel/launchBalloonModel.dart';
+import '../../models/lookAtModel.dart';
+import '../../models/placemarkModel.dart';
 import '../../utils/kml/lookAt.dart';
 import '../../utils/kml/orbit.dart';
 import '../../utils/kml/kml.dart';
 import '../../utils/lgTasks.dart';
+import '../../utils/services/balloonServices.dart';
+import '../../utils/services/lgServices.dart';
 import '../../utils/utils.dart';
 import '../../config/appTheme.dart';
 import '../../view models/homeViewModels/launchViewModel.dart';
@@ -50,6 +57,7 @@ class _LaunchInfoState extends State<LaunchInfo> with SingleTickerProviderStateM
   bool isOrbiting = false;
   double latvalue = 28.608373;
   double longvalue = -80.604339;
+  PlacemarkModel? _launchPlacemark;
   String finalname = "";
   bool loading = false;
   KML kml = KML("", "");
@@ -59,7 +67,82 @@ class _LaunchInfoState extends State<LaunchInfo> with SingleTickerProviderStateM
   // List<AllLaunch> _allLaunchesFuture = [];
   late final AllLaunch allLaunches;
   bool _isDataLoaded = false;
-  ScrollController allScrollController = ScrollController();
+  CarouselController allCarouselController = CarouselController();
+
+  void _viewAllLaunchStats(LaunchBalloonModel stats, BuildContext context,
+      {double orbitPeriod = 2.8, bool updatePosition = true}) async {
+    final LaunchBalloonService launchService = LaunchBalloonService();
+
+    final placemark = launchService.buildLaunchPlacemark(
+      stats,
+      orbitPeriod,
+      lookAt: _launchPlacemark != null && !updatePosition
+          ? _launchPlacemark!.lookAt
+          : null,
+      updatePosition: false,
+    );
+    setState(() {
+      _launchPlacemark = placemark;
+    });
+
+    try {
+      await LgService().clearKml();
+    } catch (e) {
+      // ignore: avoid_print
+      print(e);
+    }
+
+    final kmlBalloon = KMLModel(
+      name: 'RLA-Launch-balloon',
+      content: placemark.balloonOnlyTag,
+    );
+
+    try {
+      await LgService().sendKMLToSlave(
+        LgService().balloonScreen,
+        kmlBalloon.body,
+      );
+    } catch (e) {
+      // ignore: avoid_print
+      print(e);
+    }
+
+    if (updatePosition) {
+      await LgService().flyTo(LookAtModel(
+        longitude: double.parse(currentLaunch.lng),
+        latitude: double.parse(currentLaunch.lat),
+        range: '1000',
+        tilt: '70',
+        altitude: 150,
+        heading: '45',
+        altitudeMode: 'relativeToGround',
+      ));
+    }
+
+    final orbit = launchService.buildOrbit(
+        lookAt: LookAtModel(
+          longitude: double.parse(currentLaunch.lng),
+          latitude: double.parse(currentLaunch.lat),
+          range: '1000',
+          tilt: '70',
+          altitude: 150,
+          heading: '45',
+          altitudeMode: 'relativeToGround',
+        )
+    );
+
+    playOrbit(
+        double.parse(currentLaunch.lng),
+        double.parse(currentLaunch.lat)
+    );
+
+    try {
+      await LgService().sendTour(orbit, 'Orbit');
+    } catch (e) {
+      // ignore: avoid_print
+      print(e);
+    }
+  }
 
   Future<void> _selectDate() async {
     final DateTime? picked = await showDatePicker(
@@ -162,7 +245,7 @@ class _LaunchInfoState extends State<LaunchInfo> with SingleTickerProviderStateM
   Widget build(BuildContext context) {
     return Scaffold(
         body: Container(
-          width: ScreenConfig.width,
+          // width: ScreenConfig.width,
           height: ScreenConfig.height,
           color: AppTheme().bg_color,
           // decoration: BoxDecoration(
@@ -315,7 +398,7 @@ class _LaunchInfoState extends State<LaunchInfo> with SingleTickerProviderStateM
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: SizedBox(
                     height: ScreenConfig.heightPercent*62,
-                    // width: ScreenConfig.widthPercent*85,
+                    width: ScreenConfig.width,
                     child: _buildAllCard()
                 ),
               ),
@@ -382,64 +465,35 @@ class _LaunchInfoState extends State<LaunchInfo> with SingleTickerProviderStateM
                   ),
                   ElevatedButton(
                       onPressed: () async {
-                        _showToast(
-                            translate("Track.loading") + "(" + translate('Track.hist').trim() + ")");
-                        await LGConnection().cleanVisualization();
-                        await LGConnection().openLaunchBalloon(
-                          'image',
-                          currentLaunch.missionName,
-                          currentLaunch.rocketName,
-                          currentLaunch.launchDate,
-                          currentLaunch.launchTime,
-                          currentLaunch.launchPad,
-                          currentLaunch.flightNumber,
-                          currentLaunch.payload,
-                          currentLaunch.country,
-                          currentLaunch.missionDes,
-                          currentLaunch.launchPadFullName,
-                          currentLaunch.launchPadDes,
-                        );
-                        kml = KML(currentLaunch.flightNumber, finaltext);
-                        _showToast(
-                            translate("Track.sending") + "(" + translate('Track.hist').trim() + ")");
-                        LGConnection().sendToLG(kml.mount(), finalname, '-80.60405833', '28.60819722').then((value) async {
-                          // LGConnection().cleanVisualization();
-                            _showToast(
-                                translate('Track.Visualize') +
-                                    "(" +
-                                    translate('Track.hist').trim() +
-                                    ")");
-                            await LGConnection().cleanOrbit();
-                            await Future.delayed(Duration(seconds: 6)).then((value) {
-                              _showToast(
-                                  translate('map.buildorbit') +
-                                      "(" +
-                                      translate('Track.hist').trim() +
-                                      ")");
-                              // playOrbit();
-                            });
-                        }).catchError((onError) {
-                          print('oh no $onError');
-                          setState(() {
-                            loading = false;
-                          });
-                          if (onError == 'nogeodata') {
-                            showAlertDialog(
-                                translate('Track.alert'), translate('Track.alert2'));
-                          }
-                          showAlertDialog(
-                              translate('Track.alert3'), translate('Track.alert4'));
-                        });
-                        print(currentLaunch.missionName);
-                        print(currentLaunch.rocketName);
-                        print(currentLaunch.launchDate);
-                        print(currentLaunch.launchTime);
-                        print(currentLaunch.launchPad);
-                        print(currentLaunch.payload);
-                        print(currentLaunch.country);
-                        print(currentLaunch.missionDes);
-                        print(currentLaunch.launchPadFullName);
-                        print(currentLaunch.launchPadDes);
+                        if(isTapped && connectionStatus){
+                          LaunchBalloonModel launch = LaunchBalloonModel(
+                            id: 'All Launch',
+                            missionName: currentLaunch.missionName,
+                            rocketName: currentLaunch.rocketName,
+                            date: currentLaunch.launchDate,
+                            time: currentLaunch.launchTime,
+                            launchSite: currentLaunch.launchPad,
+                            flightNumber: currentLaunch.flightNumber,
+                            payload: currentLaunch.payload,
+                            nationality: currentLaunch.country,
+                            missionDescription: currentLaunch.missionDes??"N/A",
+                            launchSiteFullName: currentLaunch.launchPadFullName,
+                            launchSiteDescription: currentLaunch.launchPadDes,
+                          );
+                          print(currentLaunch.missionName);
+                          print(currentLaunch.rocketName);
+                          print(currentLaunch.launchDate);
+                          print(currentLaunch.launchTime);
+                          print(currentLaunch.launchPad);
+                          print(currentLaunch.payload);
+                          print(currentLaunch.country);
+                          print(currentLaunch.missionDes);
+                          print(currentLaunch.launchPadFullName);
+                          print(currentLaunch.launchPadDes);
+                          print(currentLaunch.lat);
+                          print(currentLaunch.lng);
+                          _viewAllLaunchStats(launch, context);
+                        }
                       },
                       style: ElevatedButton.styleFrom(
                         elevation: 10,
@@ -487,7 +541,7 @@ class _LaunchInfoState extends State<LaunchInfo> with SingleTickerProviderStateM
                           {
                             _rotationiconcontroller.forward(),
                             LGConnection().cleanOrbit().then((value) {
-                              playOrbit().then((value) {
+                              playOrbit(longvalue, latvalue).then((value) {
                                 _showToast(translate('launch_tab.buildorbit'));
                               });
                             }).catchError((onError) {
@@ -595,12 +649,12 @@ class _LaunchInfoState extends State<LaunchInfo> with SingleTickerProviderStateM
     );
   }
 
-  playOrbit() async {
+  playOrbit(double lng, double lat) async {
     await LGConnection()
         .buildOrbit(Orbit.buildOrbit(Orbit.generateOrbitTag(
         LookAtLaunch(
-          longvalue,
-          latvalue
+          lng,
+          lat
         ))))
         .then((value) async {
       await LGConnection().startOrbit();
@@ -745,21 +799,24 @@ class _LaunchInfoState extends State<LaunchInfo> with SingleTickerProviderStateM
           //   itemCount: _allLaunches.length,
           //   scrollDirection: Axis.vertical,
           // );
-          return ListView.builder(
-            controller: allScrollController,
-            itemBuilder: (BuildContext context, int index) {
+          return CarouselSlider.builder(
+            carouselController: allCarouselController,
+            itemBuilder: (BuildContext context, int index, int realIndex) {
               final alllaunch = _allLaunches[index];
               return GestureDetector(
                 onTap: () {
                   currentLaunch = alllaunch;
                   isTapped = true;
                   // print("Here");
+                  print(index);
                 },
                 child: BuildRocketInfoItemList(allLaunches: alllaunch)
               );
             },
             itemCount: _allLaunches.length,
-            scrollDirection: Axis.vertical,
+            options: CarouselOptions(
+              scrollDirection: Axis.vertical,
+            ),
           );
         } else if (snapshot.hasError) {
           print("snapshot.data: ${snapshot.data?.length}");
@@ -798,7 +855,7 @@ class BuildRocketInfoItemList extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
       height: ScreenConfig.heightPercent*60,
-      width: ScreenConfig.width,
+      // width: ScreenConfig.width,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(50),
         color: Colors.white.withAlpha(50),
@@ -823,8 +880,8 @@ class BuildRocketInfoItemList extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  height: ScreenConfig.heightPercent*35,
-                  width: ScreenConfig.heightPercent*35*0.385,
+                  height: ScreenConfig.heightPercent*30,
+                  width: ScreenConfig.heightPercent*30*0.385,
                   decoration: const BoxDecoration(
                     image: DecorationImage(
                         image: AssetImage(ImagePaths.rocket),
@@ -1080,13 +1137,15 @@ class BuildRocketInfoItemList extends StatelessWidget {
                             fontSize: 15,
                             color: AppTheme().ht_color,
                           ),
+                          maxLines: 4,
+                          overflow: TextOverflow.ellipsis,
                         ),
                       ],
                     ),
                   ),
                   Container(
                     padding: const EdgeInsets.only(top: 10),
-                    height: ScreenConfig.heightPercent*30,
+                    height: ScreenConfig.heightPercent*25,
                     width: ScreenConfig.widthPercent*40,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -1119,6 +1178,8 @@ class BuildRocketInfoItemList extends StatelessWidget {
                             fontSize: 15,
                             color: AppTheme().ht_color,
                           ),
+                          maxLines: 4,
+                          overflow: TextOverflow.ellipsis,
                         ),
                       ],
                     ),
