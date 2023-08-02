@@ -816,6 +816,8 @@ class _LaunchInfoState extends State<LaunchInfo> with SingleTickerProviderStateM
             itemCount: _allLaunches.length,
             options: CarouselOptions(
               scrollDirection: Axis.vertical,
+              enlargeCenterPage: true,
+              enlargeFactor: 0.2,
             ),
           );
         } else if (snapshot.hasError) {
@@ -874,7 +876,7 @@ class BuildRocketInfoItemList extends StatelessWidget {
                   textAlign: TextAlign.center,
                   style: TextStyle(
                       fontFamily: 'GoogleSans',
-                      fontSize: Utils().fontSizeMultiplier(30),
+                      fontSize: Utils().fontSizeMultiplier(25),
                       color: AppTheme().ht_color,
                       fontWeight: FontWeight.bold
                   ),

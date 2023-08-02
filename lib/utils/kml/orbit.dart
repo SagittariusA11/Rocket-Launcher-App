@@ -22,8 +22,7 @@ class Orbit {
                   <latitude>${marker.lat}</latitude>
                   <heading>45</heading>
                   <tilt>70</tilt>
-                  <range>${range}</range>
-                  <gx:fovy>60</gx:fovy> 
+                  <range>${range}</range> 
                   <altitude>150</altitude> 
                   <gx:altitudeMode>relativeToGround</gx:altitudeMode>
               </LookAt>
