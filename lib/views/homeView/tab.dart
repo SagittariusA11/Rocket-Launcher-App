@@ -11,6 +11,10 @@ import '../../config/imagePaths.dart';
 import '../../config/screenConfig.dart';
 import '../../utils/utils.dart';
 
+double map_lat = 28.60819722;
+double map_lng = -80.60405833;
+
+
 class TabView extends StatefulWidget {
   const TabView({Key? key}) : super(key: key);
 
@@ -49,7 +53,7 @@ class _TabViewState extends State<TabView> with SingleTickerProviderStateMixin {
                 controller: _tabController,
                 children: [
                   LaunchView(),
-                  LaunchMap(),
+                  LaunchMap(lat: map_lat, lng: map_lat),
                   LaunchInfo()
                 ],
               ),
@@ -63,6 +67,7 @@ class _TabViewState extends State<TabView> with SingleTickerProviderStateMixin {
           setState(() {
             _selectedIndex = index;
             _tabController.index = index;
+            print('Latitude: $map_lat and Longitude: $map_lng');
           });
         },
         backgroundColor: AppTheme().tab_color,

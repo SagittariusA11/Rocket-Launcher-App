@@ -12,13 +12,16 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/gestures.dart';
 import '../../config/imagePaths.dart';
 import '../../config/screenConfig.dart';
+import '../../main.dart';
 import '../../utils/utils.dart';
 import '../../config/appTheme.dart';
 
-void main() => runApp(MyMap());
 
 class LaunchMap extends StatefulWidget {
-  const LaunchMap({Key? key}) : super(key: key);
+  final double lat;
+  final double lng;
+
+  const LaunchMap({Key? key, required this.lat, required this.lng}) : super(key: key);
 
   @override
   State<LaunchMap> createState() => _LaunchMapState();
@@ -28,120 +31,161 @@ class _LaunchMapState extends State<LaunchMap> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Stack(
-          children: [
-            MyMap(),
-            Positioned(
-              left: 0,
-              top: 0,
-              child: Padding(
-                padding: const EdgeInsets.only(top: 10),
-                child: SizedBox(
-                  width: ScreenConfig.widthPercent*35,
-                  child: Row(
-                    children: [
-                      SizedBox(
-                        width: ScreenConfig.widthPercent*1.75,
-                      ),
-                      Utils.images(
-                          ScreenConfig.heightPercent*10,
-                          ScreenConfig.heightPercent*10,
-                          ImagePaths.rla_icon
-                      ),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            translate('connection.label_l1'),
-                            style: TextStyle(
+      body: Stack(
+        children: [
+          MyMap(lat: widget.lat, lng: widget.lng),
+          Positioned(
+            left: 0,
+            top: 0,
+            child: Padding(
+              padding: const EdgeInsets.only(top: 10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  SizedBox(
+                    width: ScreenConfig.widthPercent * 35,
+                    child: Row(
+                      children: [
+                        SizedBox(
+                          width: ScreenConfig.widthPercent * 1.75,
+                        ),
+                        Utils.images(
+                          ScreenConfig.heightPercent * 10,
+                          ScreenConfig.heightPercent * 10,
+                          ImagePaths.rla_icon,
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              translate('connection.label_l1'),
+                              style: TextStyle(
                                 fontFamily: 'GoogleSans',
                                 fontSize: Utils().fontSizeMultiplier(30),
                                 color: Colors.white,
-                                fontWeight: FontWeight.bold
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
-                          ),
-                          Text(
-                            translate('connection.label_l2'),
-                            style: TextStyle(
+                            Text(
+                              translate('connection.label_l2'),
+                              style: TextStyle(
                                 fontFamily: 'GoogleSans',
                                 fontSize: Utils().fontSizeMultiplier(20),
-                                color: Colors.white
+                                color: Colors.white,
+                              ),
                             ),
-                          ),
-                        ],
-                      )
-                    ],
+                          ],
+                        )
+                      ],
+                    ),
                   ),
-                ),
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    width: ScreenConfig.widthPercent * 64,
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Text(
+                          connectionStatus
+                              ? translate('connection.connected')
+                              : translate('connection.disconnected'),
+                          style: TextStyle(
+                              fontSize: Utils().fontSizeMultiplier(20),
+                              color: AppTheme().ht_color
+                          ),
+                        ),
+                        connectionStatus
+                            ? Icon(
+                          Icons.check_circle,
+                          color: Colors.green,
+                          size: 20,
+                        )
+                            : Icon(
+                          Icons.cancel,
+                          color: Colors.red,
+                          size: 20,
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
               ),
             ),
-          ],
-        )
-    );
-  }
-}
-
-class MapView extends StatefulWidget {
-  @override
-  _MapViewState createState() => _MapViewState();
-}
-
-class _MapViewState extends State<MapView> {
-  late GoogleMapController mapController;
-  final Set<Marker> markers = {};
-
-  static final CameraPosition initialCameraPosition = const CameraPosition(
-    target: LatLng(37.7749, -122.4194),
-    zoom: 12.0,
-  );
-
-  void onMapCreated(GoogleMapController controller) {
-    setState(() {
-      mapController = controller;
-    });
-  }
-
-  void zoomIn() {
-    mapController.animateCamera(CameraUpdate.zoomIn());
-  }
-
-  void zoomOut() {
-    mapController.animateCamera(CameraUpdate.zoomOut());
-  }
-
-  // void toggleMapType() {
-  //   final MapType currentType = mapController.mapType;
-  //   final MapType newType = currentType == MapType.normal ? MapType.satellite : MapType.normal;
-  //   mapController.setMapType(newType);
-  // }
-
-  // Function to recenter the map to the initial camera position
-  void recenterMap() {
-    mapController.animateCamera(CameraUpdate.newCameraPosition(initialCameraPosition));
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: GoogleMap(
-        initialCameraPosition: initialCameraPosition,
-        onMapCreated: onMapCreated,
-        markers: markers,
+          ),
+        ],
       ),
     );
   }
 }
 
+// class MapView extends StatefulWidget {
+//   @override
+//   _MapViewState createState() => _MapViewState();
+// }
+//
+// class _MapViewState extends State<MapView> {
+//   late GoogleMapController mapController;
+//   final Set<Marker> markers = {};
+//
+//   static final CameraPosition initialCameraPosition = const CameraPosition(
+//     target: LatLng(37.7749, -122.4194),
+//     zoom: 12.0,
+//   );
+//
+//   void onMapCreated(GoogleMapController controller) {
+//     setState(() {
+//       mapController = controller;
+//     });
+//   }
+//
+//   void zoomIn() {
+//     mapController.animateCamera(CameraUpdate.zoomIn());
+//   }
+//
+//   void zoomOut() {
+//     mapController.animateCamera(CameraUpdate.zoomOut());
+//   }
+//
+//   // void toggleMapType() {
+//   //   final MapType currentType = mapController.mapType;
+//   //   final MapType newType = currentType == MapType.normal ? MapType.satellite : MapType.normal;
+//   //   mapController.setMapType(newType);
+//   // }
+//
+//   // Function to recenter the map to the initial camera position
+//   void recenterMap() {
+//     mapController.animateCamera(CameraUpdate.newCameraPosition(initialCameraPosition));
+//   }
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       body: GoogleMap(
+//         initialCameraPosition: initialCameraPosition,
+//         onMapCreated: onMapCreated,
+//         markers: markers,
+//       ),
+//     );
+//   }
+// }
+
 class MyMap extends StatefulWidget {
+  final double lat;
+  final double lng;
+
+  const MyMap({Key? key, required this.lat, required this.lng}) : super(key: key);
+
   @override
   _MyMapState createState() => _MyMapState();
 }
 
 class _MyMapState extends State<MyMap> with SingleTickerProviderStateMixin {
-  static LatLng _center = const LatLng(25.26245556, 82.98654722);
+
+  late final LatLng _center = LatLng(widget.lat, widget.lat);
   // late AnimationController _rotationiconcontroller;
   final Set<Marker> _markers = {};
   GoogleMapController? mapController;
@@ -150,8 +194,8 @@ class _MyMapState extends State<MyMap> with SingleTickerProviderStateMixin {
   // bool isDemoActive = false;
   int rigcount = 5;
   double zoomvalue = 591657550.500000 / pow(2, 13.15393352508545);
-  double latvalue = 28.65665656297236;
-  double longvalue = -17.885454520583153;
+  late double latvalue = widget.lat;
+  late double longvalue = widget.lat;
   double tiltvalue = 41.82725143432617;
   double bearingvalue = 61.403038024902344; // 2D angle
 

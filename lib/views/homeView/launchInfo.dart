@@ -10,6 +10,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
+import 'package:rocket_launcher_app/views/homeView/tab.dart';
 import 'package:rocket_launcher_app/views/moreInfoView/rocketsInfo.dart';
 import 'package:rocket_launcher_app/views/ytLive.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -91,6 +92,8 @@ class _LaunchInfoState extends State<LaunchInfo> with SingleTickerProviderStateM
       // ignore: avoid_print
       print(e);
     }
+
+    await LGConnection().openDemoLogos();
 
     final kmlBalloon = KMLModel(
       name: 'RLA-Launch-balloon',
@@ -310,6 +313,35 @@ class _LaunchInfoState extends State<LaunchInfo> with SingleTickerProviderStateM
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 20),
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Text(
+                                  connectionStatus
+                                      ? translate('connection.connected')
+                                      : translate('connection.disconnected'),
+                                  style: TextStyle(
+                                      fontSize: Utils().fontSizeMultiplier(20),
+                                      color: AppTheme().ht_color
+                                  ),
+                                ),
+                                connectionStatus
+                                    ? Icon(
+                                  Icons.check_circle,
+                                  color: Colors.green,
+                                  size: 20,
+                                )
+                                    : Icon(
+                                  Icons.cancel,
+                                  color: Colors.red,
+                                  size: 20,
+                                ),
+                              ],
+                            ),
+                          ),
                           IconButton(
                             onPressed: () { print("Filter"); },
                             icon: FaIcon(
@@ -806,6 +838,10 @@ class _LaunchInfoState extends State<LaunchInfo> with SingleTickerProviderStateM
               return GestureDetector(
                 onTap: () {
                   currentLaunch = alllaunch;
+                  setState(() {
+                    map_lat = double.parse(currentLaunch.lat);
+                    map_lng = double.parse(currentLaunch.lng);
+                  });
                   isTapped = true;
                   // print("Here");
                   print(index);
@@ -1580,6 +1616,57 @@ class LGConnection {
       return await client.execute('echo "" > /tmp/query.txt');
     } catch (e) {
       print('Could not connect to host LG');
+      return Future.error(e);
+    }
+  }
+
+  Future openDemoLogos() async {
+    dynamic credencials = await _getCredentials();
+
+    SSHClient client = SSHClient(
+      await SSHSocket.connect('${credencials['ip']}', int.parse('${credencials['port']}')),
+      // host: '${credencials['ip']}',
+      // port: int.parse('${credencials['port']}'),
+      username: '${credencials['username']}',
+      onPasswordRequest: () => '${credencials['pass']}',
+    );
+    int rigs = 4;
+    rigs = (int.parse(credencials['numberofrigs']) / 2).floor() + 2;
+    String openLogoKML = '''
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
+<Document>
+	<name>VolTrac</name>
+	<open>1</open>
+	<description>The logo it located in the bottom left hand corner</description>
+	<Folder>
+		<name>tags</name>
+		<Style>
+			<ListStyle>
+				<listItemType>checkHideChildren</listItemType>
+				<bgColor>00ffffff</bgColor>
+				<maxSnippetLines>2</maxSnippetLines>
+			</ListStyle>
+		</Style>
+		<ScreenOverlay id="abc">
+			<name>VolTrac</name>
+			<Icon>
+				<href>https://raw.githubusercontent.com/SagittariusA11/kml-images_RLA_LiquidGalaxy_GSoC-23/main/all_logos.png</href>
+			</Icon>
+			<overlayXY x="0" y="1" xunits="fraction" yunits="fraction"/>
+			<screenXY x="0.05" y="0.95" xunits="fraction" yunits="fraction"/>
+			<rotationXY x="0" y="0" xunits="fraction" yunits="fraction"/>
+			<size x="0.6" y="0" xunits="fraction" yunits="fraction"/>
+		</ScreenOverlay>
+	</Folder>
+</Document>
+</kml>
+  ''';
+    try {
+      await client;
+      await client
+          .execute("echo '$openLogoKML' > /var/www/html/kml/slave_$rigs.kml");
+    } catch (e) {
       return Future.error(e);
     }
   }

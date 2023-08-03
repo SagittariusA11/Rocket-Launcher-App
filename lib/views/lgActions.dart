@@ -12,6 +12,7 @@ import 'dart:ui' as ui;
 
 import '../config/imagePaths.dart';
 import '../config/screenConfig.dart';
+import '../main.dart';
 import '../utils/utils.dart';
 
 class LGActionsView extends StatefulWidget {
@@ -277,29 +278,63 @@ class _LGActionsView extends State<LGActionsView> with SingleTickerProviderState
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Padding(
-                padding: const EdgeInsets.only(top: 20, left: 20),
-                child: Row(
-                  children: [
-                    Utils.images(
-                        ScreenConfig.heightPercent*10,
-                        ScreenConfig.heightPercent*10,
-                        ImagePaths.rla_icon
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(top: 20, left: 20),
+                    child: Row(
+                      children: [
+                        Utils.images(
+                            ScreenConfig.heightPercent*10,
+                            ScreenConfig.heightPercent*10,
+                            ImagePaths.rla_icon
+                        ),
+                        SizedBox(
+                          width: ScreenConfig.widthPercent*2,
+                        ),
+                        Text(
+                          translate('tasks.LG_tasks'),
+                          style: TextStyle(
+                              fontFamily: 'GoogleSans',
+                              fontSize: Utils().fontSizeMultiplier(30),
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold
+                          ),
+                        ),
+                      ],
                     ),
-                    SizedBox(
-                      width: ScreenConfig.widthPercent*2,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Text(
+                          connectionStatus
+                              ? translate('connection.connected')
+                              : translate('connection.disconnected'),
+                          style: TextStyle(
+                              fontSize: Utils().fontSizeMultiplier(20),
+                              color: AppTheme().ht_color
+                          ),
+                        ),
+                        connectionStatus
+                            ? Icon(
+                          Icons.check_circle,
+                          color: Colors.green,
+                          size: 20,
+                        )
+                            : Icon(
+                          Icons.cancel,
+                          color: Colors.red,
+                          size: 20,
+                        ),
+                      ],
                     ),
-                    Text(
-                      translate('tasks.LG_tasks'),
-                      style: TextStyle(
-                          fontFamily: 'GoogleSans',
-                          fontSize: Utils().fontSizeMultiplier(30),
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold
-                      ),
-                    ),
-                  ],
-                ),
+                  ),
+                ],
               ),
               SizedBox(
                 width: ScreenConfig.widthPercent*60,

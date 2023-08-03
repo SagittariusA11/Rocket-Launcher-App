@@ -12,6 +12,7 @@ import 'dart:ui' as ui;
 import '../config/appTheme.dart';
 import '../config/imagePaths.dart';
 import '../main.dart';
+import '../utils/services/lgServices.dart';
 import '../utils/utils.dart';
 import 'errorView.dart';
 
@@ -81,14 +82,6 @@ class _ConnectionManagerViewState extends State<ConnectionManagerView> with Sing
   }
 
   disconnect() async {
-
-    SharedPreferences preferences = await SharedPreferences.getInstance();
-    await preferences.setString('master_ip', ipAddress.text);
-    await preferences.setString('master_username', '');
-    await preferences.setString('master_password', '');
-    await preferences.setString('master_portNumber', '');
-    await preferences.setString('numberofrigs', '');
-
     try {
       SSHClient client = SSHClient(
         await SSHSocket.connect('', 0),
@@ -98,8 +91,6 @@ class _ConnectionManagerViewState extends State<ConnectionManagerView> with Sing
         onPasswordRequest: () => '',
       );
       await client;
-      // open logos
-      await LGConnection().openDemoLogos();
       await client;
     } catch (e) {
       showAlertDialog(translate("connection.alert7"),
@@ -151,11 +142,11 @@ class _ConnectionManagerViewState extends State<ConnectionManagerView> with Sing
 
   init() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
-    ipAddress.text = connectionStatus?preferences.getString('master_ip') ?? '':'';
-    username.text = connectionStatus?preferences.getString('master_username') ?? '':'';
-    password.text = connectionStatus?preferences.getString('master_password') ?? '':'';
-    portNumber.text = connectionStatus?preferences.getString('master_portNumber') ?? '':'';
-    numberofrigs.text = connectionStatus?preferences.getString('numberofrigs') ?? '':'';
+    ipAddress.text = preferences.getString('master_ip')??'';
+    username.text = preferences.getString('master_username')??'';
+    password.text = preferences.getString('master_password') ??'';
+    portNumber.text = preferences.getString('master_portNumber') ?? '';
+    numberofrigs.text = preferences.getString('numberofrigs') ?? '';
     await checkConnectionStatus();
     loaded = true;
   }
@@ -282,12 +273,6 @@ class _ConnectionManagerViewState extends State<ConnectionManagerView> with Sing
                     ),
                   ),
                   placeholder(
-                    username,
-                    TextInputType.text,
-                    'lg',
-                    translate('connection.mmu'),
-                  ),
-                  placeholder(
                     ipAddress,
                     TextInputType.number,
                     '192.168.56.113',
@@ -298,6 +283,12 @@ class _ConnectionManagerViewState extends State<ConnectionManagerView> with Sing
                     TextInputType.number,
                     '22',
                     translate('connection.mmpn'),
+                  ),
+                  placeholder(
+                    username,
+                    TextInputType.text,
+                    'lg',
+                    translate('connection.mmu'),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(
@@ -407,6 +398,7 @@ class _ConnectionManagerViewState extends State<ConnectionManagerView> with Sing
                         ),
                         ElevatedButton(
                           onPressed: () {
+                            LgService().clearKml();
                             disconnect();
                             FocusManager.instance.primaryFocus?.unfocus();
                           },

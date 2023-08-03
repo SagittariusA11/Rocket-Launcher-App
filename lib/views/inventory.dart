@@ -8,6 +8,7 @@ import 'package:scroll_snap_list/scroll_snap_list.dart';
 import '../config/screenConfig.dart';
 import '../config/imagePaths.dart';
 import '../data/inventory_response.dart';
+import '../main.dart';
 import '../utils/utils.dart';
 import '../config/appTheme.dart';
 import '../view models/inventoryViewModel.dart';
@@ -98,44 +99,74 @@ class _InventoryViewState extends State<InventoryView> with SingleTickerProvider
                         ),
                       ],
                     ),
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => SearchScreen(),
-                          ),
-                        );
-
-                      },
-                      child: Container(
-                        width: ScreenConfig.widthPercent*12,
-                        margin: const EdgeInsets.symmetric(horizontal: 30),
-                        padding: const EdgeInsets.only(bottom: 5),
-                        decoration: BoxDecoration(
-                          border: Border(bottom: BorderSide(color: AppTheme().primary_color, width: 1)),
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
+                    Row(
+                      children: [
+                        Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            Icon(
-                              Icons.search,
-                              color: AppTheme().primary_color,
-                              size: 30,
-                            ),
-                            SizedBox(
-                              width: 10,
-                            ),
                             Text(
-                              translate('inventory.search'),
+                              connectionStatus
+                                  ? translate('connection.connected')
+                                  : translate('connection.disconnected'),
                               style: TextStyle(
-                                  color: AppTheme().ht_color,
+                                  fontSize: Utils().fontSizeMultiplier(20),
+                                  color: AppTheme().ht_color
                               ),
+                            ),
+                            connectionStatus
+                                ? Icon(
+                              Icons.check_circle,
+                              color: Colors.green,
+                              size: 20,
+                            )
+                                : Icon(
+                              Icons.cancel,
+                              color: Colors.red,
+                              size: 20,
                             ),
                           ],
                         ),
-                      ),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => SearchScreen(),
+                              ),
+                            );
+
+                          },
+                          child: Container(
+                            width: ScreenConfig.widthPercent*12,
+                            margin: const EdgeInsets.symmetric(horizontal: 30),
+                            padding: const EdgeInsets.only(bottom: 5),
+                            decoration: BoxDecoration(
+                              border: Border(bottom: BorderSide(color: AppTheme().primary_color, width: 1)),
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Icon(
+                                  Icons.search,
+                                  color: AppTheme().primary_color,
+                                  size: 30,
+                                ),
+                                SizedBox(
+                                  width: 10,
+                                ),
+                                Text(
+                                  translate('inventory.search'),
+                                  style: TextStyle(
+                                      color: AppTheme().ht_color,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),

@@ -13,6 +13,7 @@ import '../../animation/home_view_animation.dart';
 import '../../config/appTheme.dart';
 import '../../config/imagePaths.dart';
 import '../../config/screenConfig.dart';
+import '../../utils/services/lgServices.dart';
 import '../../utils/utils.dart';
 import '../../view models/homeViewModels/home_view_model.dart';
 import '../aboutUs.dart';
@@ -411,6 +412,7 @@ class _HomeViewState extends State<HomeView> with SingleTickerProviderStateMixin
                 ),
                 GestureDetector(
                   onTap: () {
+                    LgService().clearKml();
                     disconnect();
                     SystemNavigator.pop();
                   },

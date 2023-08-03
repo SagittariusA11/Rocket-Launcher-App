@@ -5,6 +5,7 @@ import 'package:rocket_launcher_app/views/translate.dart';
 
 import '../config/imagePaths.dart';
 import '../config/screenConfig.dart';
+import '../main.dart';
 import '../utils/utils.dart';
 import '../config/appTheme.dart';
 import 'package:intl/intl.dart';
@@ -63,29 +64,63 @@ class _SettingsViewState extends State<SettingsView> with SingleTickerProviderSt
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Padding(
-                  padding: const EdgeInsets.only(top: 20, left: 20),
-                  child: Row(
-                    children: [
-                      Utils.images(
-                          ScreenConfig.heightPercent*10,
-                          ScreenConfig.heightPercent*10,
-                          ImagePaths.rla_icon
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(top: 20, left: 20),
+                      child: Row(
+                        children: [
+                          Utils.images(
+                              ScreenConfig.heightPercent*10,
+                              ScreenConfig.heightPercent*10,
+                              ImagePaths.rla_icon
+                          ),
+                          SizedBox(
+                            width: ScreenConfig.widthPercent*2,
+                          ),
+                           Text(
+                            translate('drawer.settings'),
+                            style: TextStyle(
+                                fontFamily: 'GoogleSans',
+                                fontSize: Utils().fontSizeMultiplier(30),
+                                color: AppTheme().ht_color,
+                                fontWeight: FontWeight.bold
+                            ),
+                          ),
+                        ],
                       ),
-                      SizedBox(
-                        width: ScreenConfig.widthPercent*2,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Text(
+                            connectionStatus
+                                ? translate('connection.connected')
+                                : translate('connection.disconnected'),
+                            style: TextStyle(
+                                fontSize: Utils().fontSizeMultiplier(20),
+                                color: AppTheme().ht_color
+                            ),
+                          ),
+                          connectionStatus
+                              ? Icon(
+                            Icons.check_circle,
+                            color: Colors.green,
+                            size: 20,
+                          )
+                              : Icon(
+                            Icons.cancel,
+                            color: Colors.red,
+                            size: 20,
+                          ),
+                        ],
                       ),
-                       Text(
-                        translate('drawer.settings'),
-                        style: TextStyle(
-                            fontFamily: 'GoogleSans',
-                            fontSize: Utils().fontSizeMultiplier(30),
-                            color: AppTheme().ht_color,
-                            fontWeight: FontWeight.bold
-                        ),
-                      ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(60, 10, 50, 10),
