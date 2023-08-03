@@ -412,10 +412,7 @@ class _LGActionsView extends State<LGActionsView> with SingleTickerProviderState
                         ),
                         ElevatedButton(
                           onPressed: () {
-                            showThinkDialog(
-                              translate('tasks.LGReboot'),
-                              translate('tasks.sure'),
-                              translate('tasks.Reboot'));
+                            LGConnection().openDemoLogos();
                           },
                           style: ElevatedButton.styleFrom(
                             elevation: 10,
@@ -429,7 +426,7 @@ class _LGActionsView extends State<LGActionsView> with SingleTickerProviderState
                             height: ScreenConfig.widthPercent*20*0.3,
                             child: Center(
                               child: Text(
-                                  translate('tasks.LGReboot'),
+                                  translate('tasks.ShowLogo'),
                                   style: TextStyle(
                                       fontSize: Utils().fontSizeMultiplier(30),
                                       color: Colors.white,
@@ -479,6 +476,37 @@ class _LGActionsView extends State<LGActionsView> with SingleTickerProviderState
                       children: [
                         SizedBox(
                           width: ScreenConfig.widthPercent*10,
+                        ),
+                        ElevatedButton(
+                          onPressed: () {
+                            showThinkDialog(
+                                translate('tasks.LGReboot'),
+                                translate('tasks.sure'),
+                                translate('tasks.Reboot'));
+                          },
+                          style: ElevatedButton.styleFrom(
+                            elevation: 10,
+                            shadowColor: Colors.grey,
+                            primary: AppTheme().menu_bg_color,
+                            padding: EdgeInsets.all(15),
+                            shape: StadiumBorder(),
+                          ),
+                          child: SizedBox(
+                            width: ScreenConfig.widthPercent*20,
+                            height: ScreenConfig.widthPercent*20*0.3,
+                            child: Center(
+                              child: Text(
+                                  translate('tasks.LGReboot'),
+                                  style: TextStyle(
+                                      fontSize: Utils().fontSizeMultiplier(30),
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold
+                                  )),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          width: ScreenConfig.widthPercent*5,
                         ),
                         ElevatedButton(
                           onPressed: () {
@@ -565,6 +593,57 @@ class LGConnection {
       await client;
       return await client
           .execute("echo '$blank' > /var/www/html/kml/slave_$rigs.kml");
+    } catch (e) {
+      return Future.error(e);
+    }
+  }
+
+  Future openDemoLogos() async {
+    dynamic credencials = await _getCredentials();
+
+    SSHClient client = SSHClient(
+      await SSHSocket.connect('${credencials['ip']}', int.parse('${credencials['port']}')),
+      // host: '${credencials['ip']}',
+      // port: int.parse('${credencials['port']}'),
+      username: '${credencials['username']}',
+      onPasswordRequest: () => '${credencials['pass']}',
+    );
+    int rigs = 4;
+    rigs = (int.parse(credencials['numberofrigs']) / 2).floor() + 2;
+    String openLogoKML = '''
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
+<Document>
+	<name>VolTrac</name>
+	<open>1</open>
+	<description>The logo it located in the bottom left hand corner</description>
+	<Folder>
+		<name>tags</name>
+		<Style>
+			<ListStyle>
+				<listItemType>checkHideChildren</listItemType>
+				<bgColor>00ffffff</bgColor>
+				<maxSnippetLines>2</maxSnippetLines>
+			</ListStyle>
+		</Style>
+		<ScreenOverlay id="abc">
+			<name>VolTrac</name>
+			<Icon>
+				<href>https://raw.githubusercontent.com/SagittariusA11/kml-images_RLA_LiquidGalaxy_GSoC-23/main/all_logos.png</href>
+			</Icon>
+			<overlayXY x="0" y="1" xunits="fraction" yunits="fraction"/>
+			<screenXY x="0.05" y="0.95" xunits="fraction" yunits="fraction"/>
+			<rotationXY x="0" y="0" xunits="fraction" yunits="fraction"/>
+			<size x="0.6" y="0" xunits="fraction" yunits="fraction"/>
+		</ScreenOverlay>
+	</Folder>
+</Document>
+</kml>
+  ''';
+    try {
+      await client;
+      await client
+          .execute("echo '$openLogoKML' > /var/www/html/kml/slave_$rigs.kml");
     } catch (e) {
       return Future.error(e);
     }

@@ -13,6 +13,7 @@ class ImagePaths{
   static const lg_logo = "assets/logos/LOGO LIQUID GALAXY-sq1000- OKnoline.png";
   static const lgeu_logo = "assets/logos/LogoLGEU.png";
   static const pal_logo = "assets/logos/Parc_AgrobioTech_Lleida-removebg-preview.png";
+  static const about_logo = "assets/logos/all_logos_about.png";
 
   //icons
   static const right_arrow = "assets/icons/right-arrow.png";

@@ -460,6 +460,7 @@ class _HomeViewState extends State<HomeView> with SingleTickerProviderStateMixin
   }
 
   disconnect() async {
+    await LGConnection().cleanVisualization();
     try {
       SSHClient client = SSHClient(
         await SSHSocket.connect('', 0),
@@ -470,7 +471,6 @@ class _HomeViewState extends State<HomeView> with SingleTickerProviderStateMixin
       );
       await client;
       // open logos
-      await LGConnection().openDemoLogos();
       await client;
     } catch (e) {
       connectionStatus = false;
@@ -494,6 +494,26 @@ class LGConnection {
       "username": username,
       "numberofrigs": numberofrigs
     };
+  }
+
+  Future cleanVisualization() async {
+    dynamic credencials = await _getCredentials();
+
+    SSHClient client = SSHClient(
+      await SSHSocket.connect('${credencials['ip']}', int.parse('${credencials['port']}')),
+      // host: '${credencials['ip']}',
+      // port: int.parse('${credencials['port']}'),
+      username: '${credencials['username']}',
+      onPasswordRequest: () => '${credencials['pass']}',
+    );
+
+    try {
+      await client;
+      return await client.execute('> /var/www/html/kmls.txt');
+    } catch (e) {
+      print('Could not connect to host LG');
+      return Future.error(e);
+    }
   }
 
   Future openDemoLogos() async {
