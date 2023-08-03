@@ -75,7 +75,7 @@ class selectedAppTheme {
   static Future saveMode(String theme) async =>
       await _preferences?.setString('theme', theme);
 
-  static String? getMode() => _preferences?.getString('theme');
+  static String? getMode() => _preferences?.getString('theme')??'light';
   static bool isDarkMode = selectedAppTheme.getMode() == 'dark'?true:false;
   static bool isLightMode = selectedAppTheme.getMode() == 'light'?true:false;
   static bool isRedMode = selectedAppTheme.getMode() == 'red'?true:false;
