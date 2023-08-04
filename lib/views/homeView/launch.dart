@@ -115,6 +115,22 @@ class _LaunchViewState extends State<LaunchView> with SingleTickerProviderStateM
     }
 
     await LGConnection().openDemoLogos();
+    await LGConnection().openLaunchBalloon(
+      'image',
+      currentLaunch.missionName,
+      currentLaunch.rocketName,
+      currentLaunch.launchDate,
+      currentLaunch.launchTime,
+      currentLaunch.launchPad,
+      currentLaunch.flightNumber,
+      currentLaunch.payload,
+      currentLaunch.country,
+      currentLaunch.missionDes,
+      currentLaunch.launchPadFullName,
+      translate('launchInfo_tab.lsd_0${currentLaunch.launchPadDes}'),
+      currentLaunch.lat,
+      currentLaunch.lng
+    );
 
     final kmlBalloon = KMLModel(
       name: 'RLA-Launch-balloon',
@@ -1240,6 +1256,172 @@ class LGConnection {
       return await client.execute('echo "" > /tmp/query.txt');
     } catch (e) {
       print('Could not connect to host LG');
+      return Future.error(e);
+    }
+  }
+
+  Future openLaunchBalloon(
+      String image,
+      String missionName,
+      String rocketName,
+      String date,
+      String time,
+      String launchSite,
+      String flightNumber,
+      String payload,
+      String country,
+      String missionDescription,
+      String launchSiteFullName,
+      String launchSiteDescription,
+      String lat,
+      String lng
+      ) async {
+    dynamic credencials = await _getCredentials();
+
+    SSHClient client = SSHClient(
+      await SSHSocket.connect('${credencials['ip']}', int.parse('${credencials['port']}')),
+      // host: '${credencials['ip']}',
+      // port: int.parse('${credencials['port']}'),
+      username: '${credencials['username']}',
+      onPasswordRequest: () => '${credencials['pass']}',
+    );
+    int rigs = 3;
+    rigs = (int.parse(credencials['numberofrigs']) / 2).floor() + 1;
+    String openBalloonKML = '''
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
+<Document>
+	<name>Placemark.kml</name>
+	<Schema name="KML Data_CSV" id="S_KML_Data_CSV_SSSSSSSSSDDSSSS">
+		<SimpleField type="string" name="Mission_Name"><displayName>&lt;b&gt;Mission Name&lt;/b&gt;</displayName>
+</SimpleField>
+		<SimpleField type="string" name="Rocket_Name"><displayName>&lt;b&gt;Rocket Name&lt;/b&gt;</displayName>
+</SimpleField>
+		<SimpleField type="string" name="Mission_Details"><displayName>&lt;b&gt;Mission Details&lt;/b&gt;</displayName>
+</SimpleField>
+		<SimpleField type="string" name="Date"><displayName>&lt;b&gt;Date&lt;/b&gt;</displayName>
+</SimpleField>
+		<SimpleField type="string" name="Time"><displayName>&lt;b&gt;Time&lt;/b&gt;</displayName>
+</SimpleField>
+		<SimpleField type="string" name="Launch_SIte"><displayName>&lt;b&gt;Launch SIte&lt;/b&gt;</displayName>
+</SimpleField>
+		<SimpleField type="string" name="Fligh_Number"><displayName>&lt;b&gt;Fligh Number&lt;/b&gt;</displayName>
+</SimpleField>
+		<SimpleField type="string" name="Payload"><displayName>&lt;b&gt;Payload&lt;/b&gt;</displayName>
+</SimpleField>
+		<SimpleField type="string" name="Nationality"><displayName>&lt;b&gt;Nationality&lt;/b&gt;</displayName>
+</SimpleField>
+		<SimpleField type="double" name="Latitude"><displayName>&lt;b&gt;Latitude&lt;/b&gt;</displayName>
+</SimpleField>
+		<SimpleField type="double" name="Longitude"><displayName>&lt;b&gt;Longitude&lt;/b&gt;</displayName>
+</SimpleField>
+		<SimpleField type="string" name="Mission_Description_"><displayName>&lt;b&gt;Mission Description:&lt;/b&gt;</displayName>
+</SimpleField>
+		<SimpleField type="string" name="unnamed"><displayName>&lt;b&gt;&lt;/b&gt;</displayName>
+</SimpleField>
+		<SimpleField type="string" name="Launch_Site_Description_"><displayName>&lt;b&gt;Launch Site Description:&lt;/b&gt;</displayName>
+</SimpleField>
+		<SimpleField type="string" name="unnamed_2"><displayName>&lt;b&gt;&lt;/b&gt;</displayName>
+</SimpleField>
+	</Schema>
+	<Style id="hlightPointStyle">
+		<IconStyle>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle_highlight.png</href>
+			</Icon>
+		</IconStyle>
+		<BalloonStyle>
+			<text><![CDATA[<table border="0">
+  <tr><td><b>Mission Name</b></td><td>$missionName</td></tr>
+  <tr><td><b>Rocket Name</b></td><td>$rocketName</td></tr>
+  <tr><td><b>Date</b></td><td>$date</td></tr>
+  <tr><td><b>Time</b></td><td>$time</td></tr>
+  <tr><td><b>Launch Site</b></td><td>$launchSite</td></tr>
+  <tr><td><b>Flight Number</b></td><td>$flightNumber</td></tr>
+  <tr><td><b>Payload</b></td><td>$payload</td></tr>
+  <tr><td><b>Nationality</b></td><td>$country</td></tr>
+  <tr><td><b>Latitude</b></td><td>$lat</td></tr>
+  <tr><td><b>Longitude</b></td><td>$lng</td></tr>
+  <tr><td><b>Mission Description:</b></td><td>$missionDescription</td></tr>
+  <tr><td><b></b></td><td></td></tr>
+  <tr><td><b>Launch Site Description:</b></td><td>$launchSiteFullName</td></tr>
+  <tr><td><b></b></td><td>$launchSiteDescription</td></tr>
+</table>
+]]></text>
+		</BalloonStyle>
+	</Style>
+	<Style id="normPointStyle">
+		<IconStyle>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href>
+			</Icon>
+		</IconStyle>
+		<BalloonStyle>
+			<text><![CDATA[<table border="0">
+  <tr><td><b>Mission Name</b></td><td>$missionName</td></tr>
+  <tr><td><b>Rocket Name</b></td><td>$rocketName</td></tr>
+  <tr><td><b>Date</b></td><td>$date</td></tr>
+  <tr><td><b>Time</b></td><td>$time</td></tr>
+  <tr><td><b>Launch Site</b></td><td>$launchSite</td></tr>
+  <tr><td><b>Flight Number</b></td><td>$flightNumber</td></tr>
+  <tr><td><b>Payload</b></td><td>$payload</td></tr>
+  <tr><td><b>Nationality</b></td><td>$country</td></tr>
+  <tr><td><b>Latitude</b></td><td>$lat</td></tr>
+  <tr><td><b>Longitude</b></td><td>$lng</td></tr>
+  <tr><td><b>Mission Description:</b></td><td>$missionDescription</td></tr>
+  <tr><td><b></b></td><td></td></tr>
+  <tr><td><b>Launch Site Description:</b></td><td>$launchSiteFullName</td></tr>
+  <tr><td><b></b></td><td>$launchSiteDescription</td></tr>
+</table>
+]]></text>
+		</BalloonStyle>
+	</Style>
+	<StyleMap id="pointStyleMap">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#normPointStyle</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#hlightPointStyle</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Placemark>
+		<styleUrl>#pointStyleMap</styleUrl>
+		<ExtendedData>
+			<SchemaData schemaUrl="#S_KML_Data_CSV_SSSSSSSSSDDSSSS">
+				<SimpleData name="Mission_Name"></SimpleData>
+				<SimpleData name="Rocket_Name"></SimpleData>
+				<SimpleData name="Mission_Details"></SimpleData>
+				<SimpleData name="Date">Date</SimpleData>
+				<SimpleData name="Time">Time</SimpleData>
+				<SimpleData name="Launch_SIte">Launch SIte</SimpleData>
+				<SimpleData name="Fligh_Number">Fligh Number</SimpleData>
+				<SimpleData name="Payload">Payload</SimpleData>
+				<SimpleData name="Nationality">Nationality</SimpleData>
+				<SimpleData name="Latitude">28.6082</SimpleData>
+				<SimpleData name="Longitude">-80.6041</SimpleData>
+				<SimpleData name="Mission_Description_">Engine failure at 33 seconds and loss of vehicle.</SimpleData>
+				<SimpleData name="unnamed"></SimpleData>
+				<SimpleData name="Launch_Site_Description_">Kwajalein Atoll Omelek Island</SimpleData>
+				<SimpleData name="unnamed_2">SpaceX had tentatively planned to upgrade the launch site for use by the Falcon 9 launch vehicle. As of December 2010, the SpaceX launch manifest listed Omelek (Kwajalein) as a potential site for several Falcon 9 launches, the first in 2012, and the Falcon 9 Overview document offered Kwajalein as a launch option. In any event, SpaceX did not make the upgrades necessary to support Falcon 9 launches from the atoll and did not launch Falcon 9 from Omelek. The Site has since been abandoned by SpaceX.</SimpleData>
+			</SchemaData>
+		</ExtendedData>
+		<gx:balloonVisibility>1</gx:balloonVisibility>
+		<Point>
+			<coordinates>-80.60405833,28.60819721999998,0</coordinates>
+		</Point>
+	</Placemark>
+</Document>
+</kml>
+''';
+    try {
+      await client;
+      print("Success");
+      return await client.execute(
+          "echo '$openBalloonKML' > /var/www/html/kml/slave_$rigs.kml");
+    } catch (e) {
+      print("Failure");
       return Future.error(e);
     }
   }

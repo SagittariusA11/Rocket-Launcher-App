@@ -44,130 +44,128 @@ class LaunchBalloonModel {
 
 
   String balloonContent() => '''
-    <description><![CDATA[
-      <html>
-        <head>
-          <style>
-            body {
-              font-family: 'Helvetica Neue', Arial, sans-serif;
-              background-color: #222222;
-              color: white;
-              padding: 20px;
-              line-height: 1.6;
-            }
-            img {
-              max-width: 100%;
-              border-radius: 8px;
-              box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-            }
-            table {
-              border-collapse: collapse;
-              width: 100%;
-              margin-top: 15px;
-              margin-bottom: 15px;
-            }
-            th, td {
-              border: 1px solid #444444;
-              padding: 8px;
-              text-align: left;
-            }
-            th {
-              background-color: #333333;
-              color: #ffffff;
-              font-weight: bold;
-            }
-            .small {
-              font-size: 12px;
-            }
-            .big {
-              font-size: 18px;
-            }
-            .title {
-              background-color: #444444;
-              padding: 10px;
-              border-radius: 8px;
-              margin-top: 20px;
-              margin-bottom: 10px;
-              box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-            }
-            .section {
-              margin-top: 20px;
-              margin-bottom: 20px;
-            }
-            .section-title {
-              font-size: 22px;
-              font-weight: bold;
-              color: #cc5500;
-              margin-bottom: 5px;
-            }
-            .highlight-bg {
-              background-color: #1c1c1c;
-              padding: 10px;
-              border-radius: 8px;
-              margin-top: 10px;
-              margin-bottom: 10px;
-            }
-          </style>
-        </head>
-        <body>
-          <div class="section">
-            <img src=$image />
-          </div>
-          <div class="section">
-            <h1>$missionName</h1>
-            <h2>$rocketName</h2>
-          </div>
-          <div class="section">
-            <div class="title">
-              <h3>Mission Details:</h3>
-            </div>
-            <table>
-              <tr>
-                <th>Date</th>
-                <td>$date</td>
-              </tr>
-              <tr>
-                <th>Time</th>
-                <td>$time</td>
-              </tr>
-              <tr>
-                <th>Launch Site</th>
-                <td>$launchSite</td>
-              </tr>
-              <tr>
-                <th>Flight Number</th>
-                <td>$flightNumber</td>
-              </tr>
-              <tr>
-                <th>Payload</th>
-                <td>$payload</td>
-              </tr>
-              <tr>
-                <th>Nationality</th>
-                <td>$nationality</td>
-              </tr>
-            </table>
-          </div>
-          <div class="section">
-            <div class="title">
-              <h3>Mission Description:</h3>
-            </div>
-              <div class="highlight-bg">
-              <p class="small">$missionDescription</p>
-            </div>
-          </div>
-          <div class="section">
-            <div class="title">
-              <h3>Launch Site Description:</h3>
-            </div>
-            <div class="highlight-bg">
-              <p class="big">$launchSiteFullName</p>
-              <p class="small">$launchSiteDescription</p>
-            </div>
-          </div>
-        </body>
-      </html>
-    ]]></description>
+<html>
+  <head>
+    <style>
+      body {
+        font-family: 'Helvetica Neue', Arial, sans-serif;
+        background-color: #222222;
+        color: white;
+        padding: 20px;
+        line-height: 1.6;
+      }
+      img {
+        max-width: 100%;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+      }
+      table {
+        border-collapse: collapse;
+        width: 100%;
+        margin-top: 15px;
+        margin-bottom: 15px;
+      }
+      th, td {
+        border: 1px solid #444444;
+        padding: 8px;
+        text-align: left;
+      }
+      th {
+        background-color: #333333;
+        color: #ffffff;
+        font-weight: bold;
+      }
+      .small {
+        font-size: 12px;
+      }
+      .big {
+        font-size: 18px;
+      }
+      .title {
+        background-color: #444444;
+        padding: 10px;
+        border-radius: 8px;
+        margin-top: 20px;
+        margin-bottom: 10px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+      }
+      .section {
+        margin-top: 20px;
+        margin-bottom: 20px;
+      }
+      .section-title {
+        font-size: 22px;
+        font-weight: bold;
+        color: #cc5500;
+        margin-bottom: 5px;
+      }
+      .highlight-bg {
+        background-color: #1c1c1c;
+        padding: 10px;
+        border-radius: 8px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="section">
+      <img src=$image />
+    </div>
+    <div class="section">
+      <h1>$missionName</h1>
+      <h2>$rocketName</h2>
+    </div>
+    <div class="section">
+      <div class="title">
+        <h3>Mission Details:</h3>
+      </div>
+      <table>
+        <tr>
+          <th>Date</th>
+          <td>$date</td>
+        </tr>
+        <tr>
+          <th>Time</th>
+          <td>$time</td>
+        </tr>
+        <tr>
+          <th>Launch Site</th>
+          <td>$launchSite</td>
+        </tr>
+        <tr>
+          <th>Flight Number</th>
+          <td>$flightNumber</td>
+        </tr>
+        <tr>
+          <th>Payload</th>
+          <td>$payload</td>
+        </tr>
+        <tr>
+          <th>Nationality</th>
+          <td>$nationality</td>
+        </tr>
+      </table>
+    </div>
+    <div class="section">
+      <div class="title">
+        <h3>Mission Description:</h3>
+      </div>
+        <div class="highlight-bg">
+        <p class="small">$missionDescription</p>
+      </div>
+    </div>
+    <div class="section">
+      <div class="title">
+        <h3>Launch Site Description:</h3>
+      </div>
+      <div class="highlight-bg">
+        <p class="big">$launchSiteFullName</p>
+        <p class="small">$launchSiteDescription</p>
+      </div>
+    </div>
+  </body>
+</html>
   ''';
 
   List<Map<String, double>> getLaunchCoordinates({

@@ -317,7 +317,7 @@ class _LGActionsView extends State<LGActionsView> with SingleTickerProviderState
                               : translate('connection.disconnected'),
                           style: TextStyle(
                               fontSize: Utils().fontSizeMultiplier(20),
-                              color: AppTheme().ht_color
+                              color: Colors.white
                           ),
                         ),
                         connectionStatus

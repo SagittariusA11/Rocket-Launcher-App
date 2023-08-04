@@ -107,7 +107,29 @@ class PlacemarkModel {
   ''';
 
   String get balloonOnlyTag => '''
+  <Style id="balloon">
+  <BalloonStyle>
+    <text><![CDATA[
     $balloonContent
+    ]]></text>
+  </BalloonStyle>
+  <LabelStyle>
+    <scale>0</scale>
+  </LabelStyle>
+  <IconStyle>
+    <scale>0</scale>
+  </IconStyle>
+</Style>
+<Placemark>
+  <name>name-Balloon</name>
+  <styleUrl>#balloon-id</styleUrl>
+  <Point>
+    <gx:drawOrder>1</gx:drawOrder>
+    <gx:altitudeMode>relativeToGround</gx:altitudeMode>
+    <coordinates>-80.60405833,28.60819722,150</coordinates>
+  </Point>
+  <gx:balloonVisibility>0</gx:balloonVisibility>
+</Placemark>
   ''';
 
   Map<String, dynamic> toMap() {
