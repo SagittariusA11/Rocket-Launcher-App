@@ -21,18 +21,19 @@ class AppTheme{
   Color.fromARGB(255, 30, 65, 138);
 
   //bg_color
-  Color bg_color = selectedAppTheme.isLightMode?Color.fromARGB(255, 180, 223, 255):
+  Color bg_color = selectedAppTheme.isLightMode?Color.fromARGB(
+      255, 238, 245, 255):
   selectedAppTheme.isDarkMode? Color.fromARGB(255, 0, 2, 17):
-  selectedAppTheme.isRedMode? Color.fromARGB(255, 255, 182, 182):
-  selectedAppTheme.isGreenMode? Color.fromARGB(255, 172, 255, 205):
-  Color.fromARGB(255, 107, 162, 255);
+  selectedAppTheme.isRedMode? Color.fromARGB(255, 255, 220, 220):
+  selectedAppTheme.isGreenMode? Color.fromARGB(255, 218, 255, 234):
+  Color.fromARGB(255, 200, 218, 255);
 
   //cards_color
   Color cards_color = selectedAppTheme.isLightMode?Color.fromARGB(128, 136, 183, 246):
   selectedAppTheme.isDarkMode? Color.fromARGB(128, 69, 78, 164):
   selectedAppTheme.isRedMode? Color.fromARGB(255, 239, 45, 45):
   selectedAppTheme.isGreenMode? Color.fromARGB(255, 24, 155, 41):
-  Color.fromARGB(255, 18, 69, 161);
+  Color.fromARGB(255, 161, 193, 255);
 
   //tab_color
   Color tab_color = selectedAppTheme.isLightMode? Colors.blue.withOpacity(opacityAnimation.value):

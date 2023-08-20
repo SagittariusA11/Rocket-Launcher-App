@@ -101,31 +101,47 @@ class _InventoryViewState extends State<InventoryView> with SingleTickerProvider
                     ),
                     Row(
                       children: [
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Text(
-                              connectionStatus
-                                  ? translate('connection.connected')
-                                  : translate('connection.disconnected'),
-                              style: TextStyle(
-                                  fontSize: Utils().fontSizeMultiplier(20),
-                                  color: AppTheme().ht_color
+                        Container(
+                          margin: const EdgeInsets.symmetric(horizontal: 20),
+                          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                          decoration: BoxDecoration(
+                            color: AppTheme().ebtn_color,
+                            borderRadius: BorderRadius.circular(20),
+                            boxShadow: [
+                              BoxShadow(
+                                color: AppTheme().menu_bg_color,
+                                spreadRadius: 1,
+                                blurRadius: 1,
+                                offset: const Offset(1, 1),
                               ),
-                            ),
-                            connectionStatus
-                                ? Icon(
-                              Icons.check_circle,
-                              color: Colors.green,
-                              size: 20,
-                            )
-                                : Icon(
-                              Icons.cancel,
-                              color: Colors.red,
-                              size: 20,
-                            ),
-                          ],
+                            ],
+                          ),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Text(
+                                connectionStatus
+                                    ? translate('connection.connected')
+                                    : translate('connection.disconnected'),
+                                style: TextStyle(
+                                    fontSize: Utils().fontSizeMultiplier(20),
+                                    color: AppTheme().ht_color
+                                ),
+                              ),
+                              connectionStatus
+                                  ? Icon(
+                                Icons.check_circle,
+                                color: Colors.green,
+                                size: 20,
+                              )
+                                  : Icon(
+                                Icons.cancel,
+                                color: Colors.red,
+                                size: 20,
+                              ),
+                            ],
+                          ),
                         ),
                         GestureDetector(
                           onTap: () {
@@ -174,395 +190,395 @@ class _InventoryViewState extends State<InventoryView> with SingleTickerProvider
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Container(
-                    margin: const EdgeInsets.only(left: 20),
-                    width: ScreenConfig.widthPercent*20,
-                    height: ScreenConfig.heightPercent*77,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(40),
-                      color: AppTheme().cards_color.withAlpha(50),
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 25),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                translate('inventory.rockets'),
-                                style: TextStyle(
-                                    fontFamily: 'GoogleSans',
-                                    fontSize: Utils().fontSizeMultiplier(20),
-                                    color: AppTheme().ht_color,
-                                    fontWeight: FontWeight.bold
-                                ),
-                              ),
-                              GestureDetector(
-                                onTap: () {
-                                  setState(() {
-                                    isSpaceXRocketsChecked = !isSpaceXRocketsChecked;
-                                  });
-                                },
-                                child: Row(
-                                  children: [
-                                    Transform.scale(
-                                      scale: 1.1,
-                                      child: Checkbox(
-                                        value: isSpaceXRocketsChecked,
-                                        onChanged: (value) {
-                                          setState(() {
-                                            isSpaceXRocketsChecked = value!;
-                                          });
-                                        },
-                                        // fillColor: MaterialStateProperty.resolveWith<Color>((states) {
-                                        //   return Colors.grey;
-                                        // }),
-                                        activeColor: AppTheme().primary_color,
-                                      ),
-                                    ),
-                                    Text(
-                                      translate('inventory.spacex'),
-                                      style: TextStyle(
-                                        fontSize: Utils().fontSizeMultiplier(20),
-                                        fontWeight: FontWeight.w400,
-                                        color: AppTheme().ht_color,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              GestureDetector(
-                                onTap: () {
-                                  setState(() {
-                                    isNASARocketsChecked = !isNASARocketsChecked;
-                                  });
-                                },
-                                child: Row(
-                                  children: [
-                                    Transform.scale(
-                                      scale: 1.1,
-                                      child: Checkbox(
-                                        value: isNASARocketsChecked,
-                                        onChanged: (value) {
-                                          setState(() {
-                                            isNASARocketsChecked = value!;
-                                          });
-                                        },
-                                        // fillColor: MaterialStateProperty.resolveWith<Color>((states) {
-                                        //   return Colors.grey;
-                                        // }),
-                                        activeColor: AppTheme().primary_color,
-                                      ),
-                                    ),
-                                    Text(
-                                      translate('inventory.nasa'),
-                                      style: TextStyle(
-                                        fontSize: Utils().fontSizeMultiplier(20),
-                                        fontWeight: FontWeight.w400,
-                                        color: AppTheme().ht_color,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              GestureDetector(
-                                onTap: () {
-                                  setState(() {
-                                    isOthersRocketsChecked = !isOthersRocketsChecked;
-                                  });
-                                },
-                                child: Row(
-                                  children: [
-                                    Transform.scale(
-                                      scale: 1.1,
-                                      child: Checkbox(
-                                        value: isOthersRocketsChecked,
-                                        onChanged: (value) {
-                                          setState(() {
-                                            isOthersRocketsChecked = value!;
-                                          });
-                                        },
-                                        // fillColor: MaterialStateProperty.resolveWith<Color>((states) {
-                                        //   return Colors.grey;
-                                        // }),
-                                        activeColor: AppTheme().primary_color,
-                                      ),
-                                    ),
-                                    Text(
-                                      translate('inventory.others'),
-                                      style: TextStyle(
-                                        fontSize: Utils().fontSizeMultiplier(20),
-                                        fontWeight: FontWeight.w400,
-                                        color: AppTheme().ht_color,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              GestureDetector(
-                                onTap: () {
-                                  setState(() {
-                                    isAllRocketsChecked = !isAllRocketsChecked;
-                                  });
-                                },
-                                child: Row(
-                                  children: [
-                                    Transform.scale(
-                                      scale: 1.1,
-                                      child: Checkbox(
-                                        value: isAllRocketsChecked,
-                                        onChanged: (value) {
-                                          setState(() {
-                                            isAllRocketsChecked = value!;
-                                          });
-                                        },
-                                        // fillColor: MaterialStateProperty.resolveWith<Color>((states) {
-                                        //   return Colors.grey;
-                                        // }),
-                                        activeColor: AppTheme().primary_color,
-                                      ),
-                                    ),
-                                    Text(
-                                      translate('inventory.all'),
-                                      style: TextStyle(
-                                        fontSize: Utils().fontSizeMultiplier(20),
-                                        fontWeight: FontWeight.w400,
-                                        color: AppTheme().ht_color,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 25),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                translate('inventory.satellites'),
-                                style: TextStyle(
-                                    fontFamily: 'GoogleSans',
-                                    fontSize: Utils().fontSizeMultiplier(20),
-                                    color: AppTheme().ht_color,
-                                    fontWeight: FontWeight.bold
-                                ),
-                              ),
-                              GestureDetector(
-                                onTap: () {
-                                  setState(() {
-                                    isSpaceXSatellitesChecked = !isSpaceXSatellitesChecked;
-                                  });
-                                },
-                                child: Row(
-                                  children: [
-                                    Transform.scale(
-                                      scale: 1.1,
-                                      child: Checkbox(
-                                        value: isSpaceXSatellitesChecked,
-                                        onChanged: (value) {
-                                          setState(() {
-                                            isSpaceXSatellitesChecked = value!;
-                                          });
-                                        },
-                                        // fillColor: MaterialStateProperty.resolveWith<Color>((states) {
-                                        //   return Colors.grey;
-                                        // }),
-                                        activeColor: AppTheme().primary_color,
-                                      ),
-                                    ),
-                                    Text(
-                                      translate('inventory.spacex'),
-                                      style: TextStyle(
-                                        fontSize: Utils().fontSizeMultiplier(20),
-                                        fontWeight: FontWeight.w400,
-                                        color: AppTheme().ht_color,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              GestureDetector(
-                                onTap: () {
-                                  setState(() {
-                                    isNASASatellitesChecked = !isNASASatellitesChecked;
-                                  });
-                                },
-                                child: Row(
-                                  children: [
-                                    Transform.scale(
-                                      scale: 1.1,
-                                      child: Checkbox(
-                                        value: isNASASatellitesChecked,
-                                        onChanged: (value) {
-                                          setState(() {
-                                            isNASASatellitesChecked = value!;
-                                          });
-                                        },
-                                        // fillColor: MaterialStateProperty.resolveWith<Color>((states) {
-                                        //   return Colors.grey;
-                                        // }),
-                                        activeColor: AppTheme().primary_color,
-                                      ),
-                                    ),
-                                    Text(
-                                      translate('inventory.nasa'),
-                                      style: TextStyle(
-                                        fontSize: Utils().fontSizeMultiplier(20),
-                                        fontWeight: FontWeight.w400,
-                                        color: AppTheme().ht_color,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              GestureDetector(
-                                onTap: () {
-                                  setState(() {
-                                    isStarlinkSatellitesChecked = !isStarlinkSatellitesChecked;
-                                  });
-                                },
-                                child: Row(
-                                  children: [
-                                    Transform.scale(
-                                      scale: 1.1,
-                                      child: Checkbox(
-                                        value: isStarlinkSatellitesChecked,
-                                        onChanged: (value) {
-                                          setState(() {
-                                            isStarlinkSatellitesChecked = value!;
-                                          });
-                                        },
-                                        // fillColor: MaterialStateProperty.resolveWith<Color>((states) {
-                                        //   return Colors.grey;
-                                        // }),
-                                        activeColor: AppTheme().primary_color,
-                                      ),
-                                    ),
-                                    Text(
-                                      translate('inventory.starlink'),
-                                      style: TextStyle(
-                                        fontSize: Utils().fontSizeMultiplier(20),
-                                        fontWeight: FontWeight.w400,
-                                        color: AppTheme().ht_color,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              GestureDetector(
-                                onTap: () {
-                                  setState(() {
-                                    isGeostationarySatellitesChecked = !isGeostationarySatellitesChecked;
-                                  });
-                                },
-                                child: Row(
-                                  children: [
-                                    Transform.scale(
-                                      scale: 1.1,
-                                      child: Checkbox(
-                                        value: isGeostationarySatellitesChecked,
-                                        onChanged: (value) {
-                                          setState(() {
-                                            isGeostationarySatellitesChecked = value!;
-                                          });
-                                        },
-                                        // fillColor: MaterialStateProperty.resolveWith<Color>((states) {
-                                        //   return Colors.grey;
-                                        // }),
-                                        activeColor: AppTheme().primary_color,
-                                      ),
-                                    ),
-                                    Text(
-                                      translate('inventory.geo'),
-                                      style: TextStyle(
-                                        fontSize: Utils().fontSizeMultiplier(20),
-                                        fontWeight: FontWeight.w400,
-                                        color: AppTheme().ht_color,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              GestureDetector(
-                                onTap: () {
-                                  setState(() {
-                                    isOthersSatellitesChecked = !isOthersSatellitesChecked;
-                                  });
-                                },
-                                child: Row(
-                                  children: [
-                                    Transform.scale(
-                                      scale: 1.1,
-                                      child: Checkbox(
-                                        value: isOthersSatellitesChecked,
-                                        onChanged: (value) {
-                                          setState(() {
-                                            isOthersSatellitesChecked = value!;
-                                          });
-                                        },
-                                        // fillColor: MaterialStateProperty.resolveWith<Color>((states) {
-                                        //   return Colors.grey;
-                                        // }),
-                                        activeColor: AppTheme().primary_color,
-                                      ),
-                                    ),
-                                    Text(
-                                      translate('inventory.others'),
-                                      style: TextStyle(
-                                        fontSize: Utils().fontSizeMultiplier(20),
-                                        fontWeight: FontWeight.w400,
-                                        color: AppTheme().ht_color,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              GestureDetector(
-                                onTap: () {
-                                  setState(() {
-                                    isAllSatellitesChecked = !isAllSatellitesChecked;
-                                  });
-                                },
-                                child: Row(
-                                  children: [
-                                    Transform.scale(
-                                      scale: 1.1,
-                                      child: Checkbox(
-                                        value: isAllSatellitesChecked,
-                                        onChanged: (value) {
-                                          setState(() {
-                                            isAllSatellitesChecked = value!;
-                                          });
-                                        },
-                                        // fillColor: MaterialStateProperty.resolveWith<Color>((states) {
-                                        //   return Colors.grey;
-                                        // }),
-                                        activeColor: AppTheme().primary_color,
-                                      ),
-                                    ),
-                                    Text(
-                                      translate('inventory.all'),
-                                      style: TextStyle(
-                                        fontSize: Utils().fontSizeMultiplier(20),
-                                        fontWeight: FontWeight.w400,
-                                        color: AppTheme().ht_color,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+                  // Container(
+                  //   margin: const EdgeInsets.only(left: 20),
+                  //   width: ScreenConfig.widthPercent*20,
+                  //   height: ScreenConfig.heightPercent*77,
+                  //   decoration: BoxDecoration(
+                  //     borderRadius: BorderRadius.circular(40),
+                  //     color: AppTheme().cards_color.withAlpha(50),
+                  //   ),
+                  //   child: Column(
+                  //     crossAxisAlignment: CrossAxisAlignment.center,
+                  //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  //     children: [
+                  //       Padding(
+                  //         padding: const EdgeInsets.symmetric(horizontal: 25),
+                  //         child: Column(
+                  //           crossAxisAlignment: CrossAxisAlignment.start,
+                  //           children: [
+                  //             Text(
+                  //               translate('inventory.rockets'),
+                  //               style: TextStyle(
+                  //                   fontFamily: 'GoogleSans',
+                  //                   fontSize: Utils().fontSizeMultiplier(20),
+                  //                   color: AppTheme().ht_color,
+                  //                   fontWeight: FontWeight.bold
+                  //               ),
+                  //             ),
+                  //             GestureDetector(
+                  //               onTap: () {
+                  //                 setState(() {
+                  //                   isSpaceXRocketsChecked = !isSpaceXRocketsChecked;
+                  //                 });
+                  //               },
+                  //               child: Row(
+                  //                 children: [
+                  //                   Transform.scale(
+                  //                     scale: 1.1,
+                  //                     child: Checkbox(
+                  //                       value: isSpaceXRocketsChecked,
+                  //                       onChanged: (value) {
+                  //                         setState(() {
+                  //                           isSpaceXRocketsChecked = value!;
+                  //                         });
+                  //                       },
+                  //                       // fillColor: MaterialStateProperty.resolveWith<Color>((states) {
+                  //                       //   return Colors.grey;
+                  //                       // }),
+                  //                       activeColor: AppTheme().primary_color,
+                  //                     ),
+                  //                   ),
+                  //                   Text(
+                  //                     translate('inventory.spacex'),
+                  //                     style: TextStyle(
+                  //                       fontSize: Utils().fontSizeMultiplier(20),
+                  //                       fontWeight: FontWeight.w400,
+                  //                       color: AppTheme().ht_color,
+                  //                     ),
+                  //                   ),
+                  //                 ],
+                  //               ),
+                  //             ),
+                  //             GestureDetector(
+                  //               onTap: () {
+                  //                 setState(() {
+                  //                   isNASARocketsChecked = !isNASARocketsChecked;
+                  //                 });
+                  //               },
+                  //               child: Row(
+                  //                 children: [
+                  //                   Transform.scale(
+                  //                     scale: 1.1,
+                  //                     child: Checkbox(
+                  //                       value: isNASARocketsChecked,
+                  //                       onChanged: (value) {
+                  //                         setState(() {
+                  //                           isNASARocketsChecked = value!;
+                  //                         });
+                  //                       },
+                  //                       // fillColor: MaterialStateProperty.resolveWith<Color>((states) {
+                  //                       //   return Colors.grey;
+                  //                       // }),
+                  //                       activeColor: AppTheme().primary_color,
+                  //                     ),
+                  //                   ),
+                  //                   Text(
+                  //                     translate('inventory.nasa'),
+                  //                     style: TextStyle(
+                  //                       fontSize: Utils().fontSizeMultiplier(20),
+                  //                       fontWeight: FontWeight.w400,
+                  //                       color: AppTheme().ht_color,
+                  //                     ),
+                  //                   ),
+                  //                 ],
+                  //               ),
+                  //             ),
+                  //             GestureDetector(
+                  //               onTap: () {
+                  //                 setState(() {
+                  //                   isOthersRocketsChecked = !isOthersRocketsChecked;
+                  //                 });
+                  //               },
+                  //               child: Row(
+                  //                 children: [
+                  //                   Transform.scale(
+                  //                     scale: 1.1,
+                  //                     child: Checkbox(
+                  //                       value: isOthersRocketsChecked,
+                  //                       onChanged: (value) {
+                  //                         setState(() {
+                  //                           isOthersRocketsChecked = value!;
+                  //                         });
+                  //                       },
+                  //                       // fillColor: MaterialStateProperty.resolveWith<Color>((states) {
+                  //                       //   return Colors.grey;
+                  //                       // }),
+                  //                       activeColor: AppTheme().primary_color,
+                  //                     ),
+                  //                   ),
+                  //                   Text(
+                  //                     translate('inventory.others'),
+                  //                     style: TextStyle(
+                  //                       fontSize: Utils().fontSizeMultiplier(20),
+                  //                       fontWeight: FontWeight.w400,
+                  //                       color: AppTheme().ht_color,
+                  //                     ),
+                  //                   ),
+                  //                 ],
+                  //               ),
+                  //             ),
+                  //             GestureDetector(
+                  //               onTap: () {
+                  //                 setState(() {
+                  //                   isAllRocketsChecked = !isAllRocketsChecked;
+                  //                 });
+                  //               },
+                  //               child: Row(
+                  //                 children: [
+                  //                   Transform.scale(
+                  //                     scale: 1.1,
+                  //                     child: Checkbox(
+                  //                       value: isAllRocketsChecked,
+                  //                       onChanged: (value) {
+                  //                         setState(() {
+                  //                           isAllRocketsChecked = value!;
+                  //                         });
+                  //                       },
+                  //                       // fillColor: MaterialStateProperty.resolveWith<Color>((states) {
+                  //                       //   return Colors.grey;
+                  //                       // }),
+                  //                       activeColor: AppTheme().primary_color,
+                  //                     ),
+                  //                   ),
+                  //                   Text(
+                  //                     translate('inventory.all'),
+                  //                     style: TextStyle(
+                  //                       fontSize: Utils().fontSizeMultiplier(20),
+                  //                       fontWeight: FontWeight.w400,
+                  //                       color: AppTheme().ht_color,
+                  //                     ),
+                  //                   ),
+                  //                 ],
+                  //               ),
+                  //             ),
+                  //           ],
+                  //         ),
+                  //       ),
+                  //       Padding(
+                  //         padding: const EdgeInsets.symmetric(horizontal: 25),
+                  //         child: Column(
+                  //           crossAxisAlignment: CrossAxisAlignment.start,
+                  //           children: [
+                  //             Text(
+                  //               translate('inventory.satellites'),
+                  //               style: TextStyle(
+                  //                   fontFamily: 'GoogleSans',
+                  //                   fontSize: Utils().fontSizeMultiplier(20),
+                  //                   color: AppTheme().ht_color,
+                  //                   fontWeight: FontWeight.bold
+                  //               ),
+                  //             ),
+                  //             GestureDetector(
+                  //               onTap: () {
+                  //                 setState(() {
+                  //                   isSpaceXSatellitesChecked = !isSpaceXSatellitesChecked;
+                  //                 });
+                  //               },
+                  //               child: Row(
+                  //                 children: [
+                  //                   Transform.scale(
+                  //                     scale: 1.1,
+                  //                     child: Checkbox(
+                  //                       value: isSpaceXSatellitesChecked,
+                  //                       onChanged: (value) {
+                  //                         setState(() {
+                  //                           isSpaceXSatellitesChecked = value!;
+                  //                         });
+                  //                       },
+                  //                       // fillColor: MaterialStateProperty.resolveWith<Color>((states) {
+                  //                       //   return Colors.grey;
+                  //                       // }),
+                  //                       activeColor: AppTheme().primary_color,
+                  //                     ),
+                  //                   ),
+                  //                   Text(
+                  //                     translate('inventory.spacex'),
+                  //                     style: TextStyle(
+                  //                       fontSize: Utils().fontSizeMultiplier(20),
+                  //                       fontWeight: FontWeight.w400,
+                  //                       color: AppTheme().ht_color,
+                  //                     ),
+                  //                   ),
+                  //                 ],
+                  //               ),
+                  //             ),
+                  //             GestureDetector(
+                  //               onTap: () {
+                  //                 setState(() {
+                  //                   isNASASatellitesChecked = !isNASASatellitesChecked;
+                  //                 });
+                  //               },
+                  //               child: Row(
+                  //                 children: [
+                  //                   Transform.scale(
+                  //                     scale: 1.1,
+                  //                     child: Checkbox(
+                  //                       value: isNASASatellitesChecked,
+                  //                       onChanged: (value) {
+                  //                         setState(() {
+                  //                           isNASASatellitesChecked = value!;
+                  //                         });
+                  //                       },
+                  //                       // fillColor: MaterialStateProperty.resolveWith<Color>((states) {
+                  //                       //   return Colors.grey;
+                  //                       // }),
+                  //                       activeColor: AppTheme().primary_color,
+                  //                     ),
+                  //                   ),
+                  //                   Text(
+                  //                     translate('inventory.nasa'),
+                  //                     style: TextStyle(
+                  //                       fontSize: Utils().fontSizeMultiplier(20),
+                  //                       fontWeight: FontWeight.w400,
+                  //                       color: AppTheme().ht_color,
+                  //                     ),
+                  //                   ),
+                  //                 ],
+                  //               ),
+                  //             ),
+                  //             GestureDetector(
+                  //               onTap: () {
+                  //                 setState(() {
+                  //                   isStarlinkSatellitesChecked = !isStarlinkSatellitesChecked;
+                  //                 });
+                  //               },
+                  //               child: Row(
+                  //                 children: [
+                  //                   Transform.scale(
+                  //                     scale: 1.1,
+                  //                     child: Checkbox(
+                  //                       value: isStarlinkSatellitesChecked,
+                  //                       onChanged: (value) {
+                  //                         setState(() {
+                  //                           isStarlinkSatellitesChecked = value!;
+                  //                         });
+                  //                       },
+                  //                       // fillColor: MaterialStateProperty.resolveWith<Color>((states) {
+                  //                       //   return Colors.grey;
+                  //                       // }),
+                  //                       activeColor: AppTheme().primary_color,
+                  //                     ),
+                  //                   ),
+                  //                   Text(
+                  //                     translate('inventory.starlink'),
+                  //                     style: TextStyle(
+                  //                       fontSize: Utils().fontSizeMultiplier(20),
+                  //                       fontWeight: FontWeight.w400,
+                  //                       color: AppTheme().ht_color,
+                  //                     ),
+                  //                   ),
+                  //                 ],
+                  //               ),
+                  //             ),
+                  //             GestureDetector(
+                  //               onTap: () {
+                  //                 setState(() {
+                  //                   isGeostationarySatellitesChecked = !isGeostationarySatellitesChecked;
+                  //                 });
+                  //               },
+                  //               child: Row(
+                  //                 children: [
+                  //                   Transform.scale(
+                  //                     scale: 1.1,
+                  //                     child: Checkbox(
+                  //                       value: isGeostationarySatellitesChecked,
+                  //                       onChanged: (value) {
+                  //                         setState(() {
+                  //                           isGeostationarySatellitesChecked = value!;
+                  //                         });
+                  //                       },
+                  //                       // fillColor: MaterialStateProperty.resolveWith<Color>((states) {
+                  //                       //   return Colors.grey;
+                  //                       // }),
+                  //                       activeColor: AppTheme().primary_color,
+                  //                     ),
+                  //                   ),
+                  //                   Text(
+                  //                     translate('inventory.geo'),
+                  //                     style: TextStyle(
+                  //                       fontSize: Utils().fontSizeMultiplier(20),
+                  //                       fontWeight: FontWeight.w400,
+                  //                       color: AppTheme().ht_color,
+                  //                     ),
+                  //                   ),
+                  //                 ],
+                  //               ),
+                  //             ),
+                  //             GestureDetector(
+                  //               onTap: () {
+                  //                 setState(() {
+                  //                   isOthersSatellitesChecked = !isOthersSatellitesChecked;
+                  //                 });
+                  //               },
+                  //               child: Row(
+                  //                 children: [
+                  //                   Transform.scale(
+                  //                     scale: 1.1,
+                  //                     child: Checkbox(
+                  //                       value: isOthersSatellitesChecked,
+                  //                       onChanged: (value) {
+                  //                         setState(() {
+                  //                           isOthersSatellitesChecked = value!;
+                  //                         });
+                  //                       },
+                  //                       // fillColor: MaterialStateProperty.resolveWith<Color>((states) {
+                  //                       //   return Colors.grey;
+                  //                       // }),
+                  //                       activeColor: AppTheme().primary_color,
+                  //                     ),
+                  //                   ),
+                  //                   Text(
+                  //                     translate('inventory.others'),
+                  //                     style: TextStyle(
+                  //                       fontSize: Utils().fontSizeMultiplier(20),
+                  //                       fontWeight: FontWeight.w400,
+                  //                       color: AppTheme().ht_color,
+                  //                     ),
+                  //                   ),
+                  //                 ],
+                  //               ),
+                  //             ),
+                  //             GestureDetector(
+                  //               onTap: () {
+                  //                 setState(() {
+                  //                   isAllSatellitesChecked = !isAllSatellitesChecked;
+                  //                 });
+                  //               },
+                  //               child: Row(
+                  //                 children: [
+                  //                   Transform.scale(
+                  //                     scale: 1.1,
+                  //                     child: Checkbox(
+                  //                       value: isAllSatellitesChecked,
+                  //                       onChanged: (value) {
+                  //                         setState(() {
+                  //                           isAllSatellitesChecked = value!;
+                  //                         });
+                  //                       },
+                  //                       // fillColor: MaterialStateProperty.resolveWith<Color>((states) {
+                  //                       //   return Colors.grey;
+                  //                       // }),
+                  //                       activeColor: AppTheme().primary_color,
+                  //                     ),
+                  //                   ),
+                  //                   Text(
+                  //                     translate('inventory.all'),
+                  //                     style: TextStyle(
+                  //                       fontSize: Utils().fontSizeMultiplier(20),
+                  //                       fontWeight: FontWeight.w400,
+                  //                       color: AppTheme().ht_color,
+                  //                     ),
+                  //                   ),
+                  //                 ],
+                  //               ),
+                  //             ),
+                  //           ],
+                  //         ),
+                  //       ),
+                  //     ],
+                  //   ),
+                  // ),
                   Column(
                     children: [
                       Padding(
@@ -571,7 +587,7 @@ class _InventoryViewState extends State<InventoryView> with SingleTickerProvider
                           children: [
                             SizedBox(
                                 height: ScreenConfig.heightPercent*37,
-                                width: ScreenConfig.widthPercent*75,
+                                width: ScreenConfig.widthPercent*95,
                                 child: _buildRocketsCard()
                             ),
                             Text(
@@ -595,7 +611,7 @@ class _InventoryViewState extends State<InventoryView> with SingleTickerProvider
                           children: [
                             SizedBox(
                                 height: ScreenConfig.heightPercent*30,
-                                width: ScreenConfig.widthPercent*75,
+                                width: ScreenConfig.widthPercent*95,
                                 child: _buildSatellitesCard()
                             ),
                             Text(
@@ -886,7 +902,17 @@ class _InventoryViewState extends State<InventoryView> with SingleTickerProvider
             listController: allStarlinkScrollController,
             itemBuilder: (BuildContext context, int index) {
               final allStarlink = _allStarlinks[index];
-              return BuildStarlinksItemList(allStarlink: allStarlink);
+              return GestureDetector(
+                  onTap: (){
+                    showDialog(
+                        context: context,
+                        builder: (context) => PayloadInfo(
+                            // RocketID: allStarlink.rocketID
+                        )
+                    );
+                  },
+                  child: BuildStarlinksItemList(allStarlink: allStarlink)
+              );
             },
             itemSize: ScreenConfig.heightPercent*28,
             dynamicItemSize: true,

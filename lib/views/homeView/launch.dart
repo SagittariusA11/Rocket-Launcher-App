@@ -274,8 +274,21 @@ class _LaunchViewState extends State<LaunchView> with SingleTickerProviderStateM
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 20),
+                          Container(
+                            margin: const EdgeInsets.symmetric(horizontal: 20),
+                            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                            decoration: BoxDecoration(
+                              color: AppTheme().ebtn_color,
+                              borderRadius: BorderRadius.circular(20),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: AppTheme().menu_bg_color,
+                                  spreadRadius: 1,
+                                  blurRadius: 1,
+                                  offset: const Offset(1, 1),
+                                ),
+                              ],
+                            ),
                             child: Row(
                               crossAxisAlignment: CrossAxisAlignment.center,
                               mainAxisAlignment: MainAxisAlignment.start,
@@ -303,31 +316,31 @@ class _LaunchViewState extends State<LaunchView> with SingleTickerProviderStateM
                               ],
                             ),
                           ),
-                          IconButton(
-                            onPressed: () { print("Filter"); },
-                            icon: FaIcon(
-                              FontAwesomeIcons.filter,
-                              color: AppTheme().ht_color.withOpacity(0.85),
-                              size: 30,
-                            ),
-                          ),
-                          // const SizedBox(
-                          //   width: 10,
+                          // IconButton(
+                          //   onPressed: () { print("Filter"); },
+                          //   icon: FaIcon(
+                          //     FontAwesomeIcons.filter,
+                          //     color: AppTheme().ht_color.withOpacity(0.85),
+                          //     size: 30,
+                          //   ),
                           // ),
-                          IconButton(
-                            onPressed: () {
-                              showDialog(
-                                  context: context,
-                                  builder: (context) => dateRangePickerButton(context)
-                              );
-                              print("Calander");
-                              },
-                            icon: Icon(
-                              Icons.calendar_month_rounded,
-                              color: AppTheme().ht_color.withOpacity(0.85),
-                              size: 40,
-                            ),
-                          ),
+                          // // const SizedBox(
+                          // //   width: 10,
+                          // // ),
+                          // IconButton(
+                          //   onPressed: () {
+                          //     showDialog(
+                          //         context: context,
+                          //         builder: (context) => dateRangePickerButton(context)
+                          //     );
+                          //     print("Calander");
+                          //     },
+                          //   icon: Icon(
+                          //     Icons.calendar_month_rounded,
+                          //     color: AppTheme().ht_color.withOpacity(0.85),
+                          //     size: 40,
+                          //   ),
+                          // ),
                           GestureDetector(
                             onTap: () {
                               Navigator.push(
@@ -383,13 +396,47 @@ class _LaunchViewState extends State<LaunchView> with SingleTickerProviderStateM
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      translate('launch_tab.upm'),
-                      style: TextStyle(
-                          fontFamily: 'GoogleSans',
-                          fontSize: Utils().fontSizeMultiplier(30),
-                          color: AppTheme().ht_color,
-                          fontWeight: FontWeight.bold
+                    Container(
+                      margin: const EdgeInsets.symmetric(horizontal: 5),
+                      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+                      decoration: BoxDecoration(
+                        color: AppTheme().cards_color,
+                        borderRadius: BorderRadius.circular(20),
+                        boxShadow: [
+                          BoxShadow(
+                            color: AppTheme().menu_bg_color,
+                            spreadRadius: 1,
+                            blurRadius: 1,
+                            offset: const Offset(1, 1),
+                          ),
+                        ],
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Text(
+                            translate('launch_tab.upm'),
+                            style: TextStyle(
+                                fontFamily: 'GoogleSans',
+                                fontSize: Utils().fontSizeMultiplier(25),
+                                color: AppTheme().ht_color,
+                                fontWeight: FontWeight.bold
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Text(
+                            'Surf through \nupcoming \nlaunches\n among the list',
+                            style: TextStyle(
+                                fontFamily: 'GoogleSans',
+                                fontSize: Utils().fontSizeMultiplier(15),
+                                color: AppTheme().ht_color,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                        ],
                       ),
                     ),
                     SizedBox(
@@ -408,13 +455,47 @@ class _LaunchViewState extends State<LaunchView> with SingleTickerProviderStateM
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      translate('launch_tab.pm'),
-                      style: TextStyle(
-                          fontFamily: 'GoogleSans',
-                          fontSize: Utils().fontSizeMultiplier(30),
-                          color: AppTheme().ht_color,
-                          fontWeight: FontWeight.bold
+                    Container(
+                      margin: const EdgeInsets.symmetric(horizontal: 5),
+                      padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
+                      decoration: BoxDecoration(
+                        color: AppTheme().cards_color,
+                        borderRadius: BorderRadius.circular(20),
+                        boxShadow: [
+                          BoxShadow(
+                            color: AppTheme().menu_bg_color,
+                            spreadRadius: 1,
+                            blurRadius: 1,
+                            offset: const Offset(1, 1),
+                          ),
+                        ],
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Text(
+                            translate('launch_tab.pm'),
+                            style: TextStyle(
+                                fontFamily: 'GoogleSans',
+                                fontSize: Utils().fontSizeMultiplier(25),
+                                color: AppTheme().ht_color,
+                                fontWeight: FontWeight.bold
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Text(
+                            'Surf through \npast launches\n among the list',
+                            style: TextStyle(
+                              fontFamily: 'GoogleSans',
+                              fontSize: Utils().fontSizeMultiplier(15),
+                              color: AppTheme().ht_color,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                        ],
                       ),
                     ),
                     SizedBox(
@@ -920,7 +1001,8 @@ class BuildUpcomingLaunchList extends StatelessWidget {
                   // translate('launch_tab.mn'),
                   style: TextStyle(
                     fontSize: 20,
-                    color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
+                      color: AppTheme().ht_color,
+                      fontWeight: FontWeight.bold
                   ),
                   textAlign: TextAlign.center,
                 ),
@@ -936,7 +1018,8 @@ class BuildUpcomingLaunchList extends StatelessWidget {
                     // translate('launch_tab.date'),
                     style: TextStyle(
                       fontSize: 18,
-                      color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
+                        color: AppTheme().ht_color,
+                        fontWeight: FontWeight.bold
                     ),
                   ),
                   const SizedBox(
@@ -947,7 +1030,8 @@ class BuildUpcomingLaunchList extends StatelessWidget {
                     // translate('launch_tab.date'),
                     style: TextStyle(
                       fontSize: 15,
-                      color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
+                      color: AppTheme().ht_color,
+                      fontWeight: FontWeight.bold
                     ),
                   ),
                   const SizedBox(
@@ -959,7 +1043,8 @@ class BuildUpcomingLaunchList extends StatelessWidget {
                     // translate('launch_tab.rn'),
                     style: TextStyle(
                       fontSize: 18,
-                      color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
+                        color: AppTheme().ht_color,
+                        fontWeight: FontWeight.bold
                     ),
                   ),
                   const SizedBox(
@@ -971,7 +1056,8 @@ class BuildUpcomingLaunchList extends StatelessWidget {
                     // translate('launch_tab.ls'),
                     style: TextStyle(
                       fontSize: 18,
-                      color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
+                        color: AppTheme().ht_color,
+                        fontWeight: FontWeight.bold
                     ),
                   ),
                 ],
@@ -1020,7 +1106,8 @@ class BuildPastLaunchList extends StatelessWidget {
                   // translate('launch_tab.mn'),
                   style: TextStyle(
                     fontSize: 17,
-                    color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
+                      color: AppTheme().ht_color,
+                      fontWeight: FontWeight.bold
                   ),
                   textAlign: TextAlign.center,
                 ),
@@ -1036,7 +1123,8 @@ class BuildPastLaunchList extends StatelessWidget {
                     // translate('launch_tab.date'),
                     style: TextStyle(
                       fontSize: 15,
-                      color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
+                        color: AppTheme().ht_color,
+                        fontWeight: FontWeight.bold
                     ),
                   ),
                   const SizedBox(
@@ -1047,7 +1135,8 @@ class BuildPastLaunchList extends StatelessWidget {
                     // translate('launch_tab.date'),
                     style: TextStyle(
                       fontSize: 15,
-                      color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
+                        color: AppTheme().ht_color,
+                        fontWeight: FontWeight.bold
                     ),
                   ),
                   const SizedBox(
@@ -1058,7 +1147,8 @@ class BuildPastLaunchList extends StatelessWidget {
                     // translate('launch_tab.rn'),
                     style: TextStyle(
                       fontSize: 15,
-                      color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
+                        color: AppTheme().ht_color,
+                        fontWeight: FontWeight.bold
                     ),
                   ),
                   const SizedBox(
@@ -1069,7 +1159,8 @@ class BuildPastLaunchList extends StatelessWidget {
                     // translate('launch_tab.ls'),
                     style: TextStyle(
                       fontSize: 15,
-                      color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
+                        color: AppTheme().ht_color,
+                        fontWeight: FontWeight.bold
                     ),
                   ),
                 ],
