@@ -305,11 +305,24 @@ class _LGActionsView extends State<LGActionsView> with SingleTickerProviderState
                       ],
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                  Container(
+                    margin: const EdgeInsets.symmetric(horizontal: 20),
+                    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                    decoration: BoxDecoration(
+                      color: AppTheme().ebtn_color,
+                      borderRadius: BorderRadius.circular(20),
+                      boxShadow: [
+                        BoxShadow(
+                          color: AppTheme().menu_bg_color,
+                          spreadRadius: 1,
+                          blurRadius: 1,
+                          offset: const Offset(1, 1),
+                        ),
+                      ],
+                    ),
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.end,
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Text(
                           connectionStatus
@@ -317,7 +330,7 @@ class _LGActionsView extends State<LGActionsView> with SingleTickerProviderState
                               : translate('connection.disconnected'),
                           style: TextStyle(
                               fontSize: Utils().fontSizeMultiplier(20),
-                              color: Colors.white
+                              color: AppTheme().ht_color
                           ),
                         ),
                         connectionStatus

@@ -57,7 +57,7 @@ class _HomeViewState extends State<HomeView> with SingleTickerProviderStateMixin
       LGActionsView(),
       ConnectionManagerView(),
       SettingsView(),
-      TakeATourView(),
+      // TakeATourView(),
       InventoryView(),
     ];
 
@@ -363,32 +363,32 @@ class _HomeViewState extends State<HomeView> with SingleTickerProviderStateMixin
                       selectedAppTheme.isLightMode?ImagePaths.settings_light:ImagePaths.settings_dark
                   ),
                 ),
+                // ListTile(
+                //   onTap: () {
+                //     if(isDrawerOpen) {
+                //       homeViewController.changeSelectedView(6);
+                //       isDrawerOpen = !isDrawerOpen;
+                //     }
+                //   },
+                //   title: Text(
+                //     translate('drawer.tour'),
+                //     style: TextStyle(
+                //         fontFamily: 'GoogleSans',
+                //         fontSize: Utils().fontSizeMultiplier(25),
+                //         color: Colors.white,
+                //         fontWeight: FontWeight.bold
+                //     ),
+                //   ),
+                //   leading: Utils.images(
+                //       ScreenConfig.widthPercent*2,
+                //       ScreenConfig.widthPercent*2,
+                //       selectedAppTheme.isLightMode?ImagePaths.tour_light:ImagePaths.tour_dark
+                //   ),
+                // ),
                 ListTile(
                   onTap: () {
                     if(isDrawerOpen) {
                       homeViewController.changeSelectedView(6);
-                      isDrawerOpen = !isDrawerOpen;
-                    }
-                  },
-                  title: Text(
-                    translate('drawer.tour'),
-                    style: TextStyle(
-                        fontFamily: 'GoogleSans',
-                        fontSize: Utils().fontSizeMultiplier(25),
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold
-                    ),
-                  ),
-                  leading: Utils.images(
-                      ScreenConfig.widthPercent*2,
-                      ScreenConfig.widthPercent*2,
-                      selectedAppTheme.isLightMode?ImagePaths.tour_light:ImagePaths.tour_dark
-                  ),
-                ),
-                ListTile(
-                  onTap: () {
-                    if(isDrawerOpen) {
-                      homeViewController.changeSelectedView(7);
                       isDrawerOpen = !isDrawerOpen;
                     }
                   },

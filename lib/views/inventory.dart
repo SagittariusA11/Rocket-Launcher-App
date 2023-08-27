@@ -143,45 +143,45 @@ class _InventoryViewState extends State<InventoryView> with SingleTickerProvider
                             ],
                           ),
                         ),
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => SearchScreen(),
-                              ),
-                            );
-
-                          },
-                          child: Container(
-                            width: ScreenConfig.widthPercent*12,
-                            margin: const EdgeInsets.symmetric(horizontal: 30),
-                            padding: const EdgeInsets.only(bottom: 5),
-                            decoration: BoxDecoration(
-                              border: Border(bottom: BorderSide(color: AppTheme().primary_color, width: 1)),
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Icon(
-                                  Icons.search,
-                                  color: AppTheme().primary_color,
-                                  size: 30,
-                                ),
-                                SizedBox(
-                                  width: 10,
-                                ),
-                                Text(
-                                  translate('inventory.search'),
-                                  style: TextStyle(
-                                      color: AppTheme().ht_color,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
+                        // GestureDetector(
+                        //   onTap: () {
+                        //     Navigator.push(
+                        //       context,
+                        //       MaterialPageRoute(
+                        //         builder: (context) => SearchScreen(),
+                        //       ),
+                        //     );
+                        //
+                        //   },
+                        //   child: Container(
+                        //     width: ScreenConfig.widthPercent*12,
+                        //     margin: const EdgeInsets.symmetric(horizontal: 30),
+                        //     padding: const EdgeInsets.only(bottom: 5),
+                        //     decoration: BoxDecoration(
+                        //       border: Border(bottom: BorderSide(color: AppTheme().primary_color, width: 1)),
+                        //     ),
+                        //     child: Row(
+                        //       mainAxisAlignment: MainAxisAlignment.start,
+                        //       crossAxisAlignment: CrossAxisAlignment.center,
+                        //       children: [
+                        //         Icon(
+                        //           Icons.search,
+                        //           color: AppTheme().primary_color,
+                        //           size: 30,
+                        //         ),
+                        //         SizedBox(
+                        //           width: 10,
+                        //         ),
+                        //         Text(
+                        //           translate('inventory.search'),
+                        //           style: TextStyle(
+                        //               color: AppTheme().ht_color,
+                        //           ),
+                        //         ),
+                        //       ],
+                        //     ),
+                        //   ),
+                        // ),
                       ],
                     ),
                   ],
@@ -582,7 +582,7 @@ class _InventoryViewState extends State<InventoryView> with SingleTickerProvider
                   Column(
                     children: [
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 19),
+                        padding: const EdgeInsets.symmetric(horizontal: 19, vertical: 20),
                         child: Stack(
                           children: [
                             SizedBox(

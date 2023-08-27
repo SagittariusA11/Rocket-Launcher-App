@@ -396,45 +396,45 @@ class _LaunchInfoState extends State<LaunchInfo> with SingleTickerProviderStateM
                           //     size: 40,
                           //   ),
                           // ),
-                          GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => SearchScreen(),
-                                ),
-                              );
-
-                            },
-                            child: Container(
-                              width: ScreenConfig.widthPercent*12,
-                              margin: const EdgeInsets.symmetric(horizontal: 15),
-                              padding: const EdgeInsets.only(bottom: 5),
-                              decoration: BoxDecoration(
-                                border: Border(bottom: BorderSide(color: AppTheme().ht_color, width: 1)),
-                              ),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Icon(
-                                    Icons.search,
-                                    color: AppTheme().ht_color,
-                                    size: 30,
-                                  ),
-                                  SizedBox(
-                                    width: 10,
-                                  ),
-                                  Text(
-                                    translate('inventory.search'),
-                                    style: TextStyle(
-                                        color: AppTheme().ht_color,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
+                          // GestureDetector(
+                          //   onTap: () {
+                          //     Navigator.push(
+                          //       context,
+                          //       MaterialPageRoute(
+                          //         builder: (context) => SearchScreen(),
+                          //       ),
+                          //     );
+                          //
+                          //   },
+                          //   child: Container(
+                          //     width: ScreenConfig.widthPercent*12,
+                          //     margin: const EdgeInsets.symmetric(horizontal: 15),
+                          //     padding: const EdgeInsets.only(bottom: 5),
+                          //     decoration: BoxDecoration(
+                          //       border: Border(bottom: BorderSide(color: AppTheme().ht_color, width: 1)),
+                          //     ),
+                          //     child: Row(
+                          //       mainAxisAlignment: MainAxisAlignment.start,
+                          //       crossAxisAlignment: CrossAxisAlignment.center,
+                          //       children: [
+                          //         Icon(
+                          //           Icons.search,
+                          //           color: AppTheme().ht_color,
+                          //           size: 30,
+                          //         ),
+                          //         SizedBox(
+                          //           width: 10,
+                          //         ),
+                          //         Text(
+                          //           translate('inventory.search'),
+                          //           style: TextStyle(
+                          //               color: AppTheme().ht_color,
+                          //           ),
+                          //         ),
+                          //       ],
+                          //     ),
+                          //   ),
+                          // ),
                           const SizedBox(
                             width: 20,
                           ),

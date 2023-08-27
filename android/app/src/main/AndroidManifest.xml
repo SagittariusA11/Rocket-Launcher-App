@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.rocket_launcher_app">
+    package="com.liquidgalaxy.rocket_launcher_app">
    <application
         android:label="Rocket Launcher App"
         android:name="${applicationName}"
