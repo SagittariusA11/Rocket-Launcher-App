@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_cube/flutter_cube.dart';
 import 'package:flutter_translate/flutter_translate.dart';
+import 'package:model_viewer_plus/model_viewer_plus.dart';
 import 'package:rocket_launcher_app/views/moreInfoView/rocketsInfo.dart';
 import 'package:rocket_launcher_app/views/moreInfoView/payloadInfo.dart';
 import 'package:rocket_launcher_app/views/searchScreen.dart';
@@ -39,10 +41,16 @@ class _InventoryViewState extends State<InventoryView> with SingleTickerProvider
   Future<List<StarlinkListInventory>>? _allStarlinkFuture;
   ScrollController allRocketsScrollController = ScrollController();
   ScrollController allStarlinkScrollController = ScrollController();
+  late String starlinkGLB;
+  late String starlinkUSDZ;
+  late Object starlinkOBJ;
 
   @override
   void initState() {
     super.initState();
+    starlinkGLB = "assets/satellites/starlink_spacex_satellite.glb";
+    starlinkUSDZ = "assets/satellites/Starlink_Spacex_Satellite.usdz";
+    starlinkOBJ = Object(fileName: "assets/satellites/starlink.obj");
     _allRocketsFuture = InventoryService.fetchallRockets();
     _allStarlinkFuture = InventoryService.fetchallStarlink();
     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -911,7 +919,12 @@ class _InventoryViewState extends State<InventoryView> with SingleTickerProvider
                         )
                     );
                   },
-                  child: BuildStarlinksItemList(allStarlink: allStarlink)
+                  child: BuildStarlinksItemList(
+                    allStarlink: allStarlink,
+                    starlinkGLB: starlinkGLB,
+                    starlinkUSDZ: starlinkUSDZ,
+                    starlinkOBJ: starlinkOBJ,
+                  )
               );
             },
             itemSize: ScreenConfig.heightPercent*28,
@@ -1031,9 +1044,19 @@ class BuildRocketsItemList extends StatelessWidget {
 }
 
 class BuildStarlinksItemList extends StatelessWidget {
-  const BuildStarlinksItemList({Key? key, required this.allStarlink}) : super(key: key);
+  BuildStarlinksItemList({
+    Key? key,
+    required this.allStarlink,
+    required this.starlinkGLB,
+    required this.starlinkUSDZ,
+    required this.starlinkOBJ
+  }) : super(key: key);
 
   final StarlinkListInventory allStarlink;
+  String starlinkGLB;
+  String starlinkUSDZ;
+  Object starlinkOBJ;
+
 
   @override
   Widget build(BuildContext context) {
@@ -1043,12 +1066,27 @@ class BuildStarlinksItemList extends StatelessWidget {
         Container(
           height: ScreenConfig.heightPercent*33,
           width: ScreenConfig.heightPercent*28*0.385,
-          decoration: const BoxDecoration(
-              image: DecorationImage(
-                  image: AssetImage(ImagePaths.satellites),
-                  fit: BoxFit.fill
-              )
+          // decoration: const BoxDecoration(
+          //     image: DecorationImage(
+          //         image: AssetImage(ImagePaths.satellites),
+          //         fit: BoxFit.fill
+          //     )
+          // ),
+          child: Cube(
+            onSceneCreated: (Scene scene) {
+              scene.world.add(starlinkOBJ);
+              scene.camera.zoom = 10;
+            },
           ),
+          // child: ModelViewer(
+          //   backgroundColor: AppTheme().bg_color,
+          //   src: 'assets/satellites/starlink_spacex_satellite.glb',
+          //   alt: 'A 3D model Starlink',
+          //   ar: true,
+          //   autoRotate: true,
+          //   iosSrc: starlinkUSDZ,
+          //   disableZoom: true,
+          // ),
         ),
         Container(
           height: ScreenConfig.heightPercent*23,
