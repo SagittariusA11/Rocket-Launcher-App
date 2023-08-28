@@ -174,13 +174,6 @@ Here are the screenshots of App UI and Liquid Galaxy visualization.
 ![Rocket Info Screen](https://raw.githubusercontent.com/SagittariusA11/kml-images_RLA_LiquidGalaxy_GSoC-23/main/9.png)
 ![Liquid Galaxy Visualisation](https://raw.githubusercontent.com/SagittariusA11/kml-images_RLA_LiquidGalaxy_GSoC-23/main/8.png)
  
-## Conclusion
-
-I am profoundly appreciative of this enriching experience; it has been an educational journey of immense value, culminating in the development of an application poised to serve the greater good. My commitment to the project extends beyond its culmination, and I remain resolute in my dedication to maintain the codebase, diligently addressing any issues that may arise, thus enhancing the luster of the Rocket Launch Visualizer.
-
-Engaging in the Google Summer of Code program and aligning myself with the esteemed Liquid Galaxy community has indelibly marked my personal and professional growth. Throughout this voyage, I confronted a multitude of challenges and grappled with hitherto unfamiliar complexities. However, my resourcefulness, innovative thinking, and adept utilization of cutting-edge technologies empowered me to surmount these obstacles. This experience has substantially bolstered my confidence in my problem-solving acumen. At present, I stand resolute in the belief that solutions exist for every challenge, and I firmly hold that, with unwavering determination, any obstacle can be surmounted.
-
-I hold a profound affection for this experience, and if the opportunity for a return engagement were to arise, I would embrace it unreservedly. My enthusiasm remains undiminished, and I eagerly anticipate continued contributions to the Liquid Galaxy project beyond the conclusion of the Google Summer of Code program. My heartfelt gratitude extends to my mentors and organizational administrators for their steadfast guidance and unwavering support during the challenging phases of the coding period.
 
 > If you are interested in contributing to Liquid Galaxy projects, you can reach out by sending email to Liquid Galaxy Lab
 > 
