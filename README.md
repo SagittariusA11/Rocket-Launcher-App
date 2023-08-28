@@ -13,35 +13,11 @@ This document serves as the conclusive report for the "**Rocket Launch Visualize
 
 All required details and guidelines for upcoming contributor can be found from above mentioned details **cheers!**
 
-## Project Detail
+## Project Description 
 The project "**Rocket Launch Visualizer**" conducted under the **Liquid Galaxy organization for Google Summer of Code 2023** is a comprehensive endeavor that involves the retrieval and visualization of a wealth of data from the **SpaceX API**. This ambitious undertaking encompasses the retrieval of information regarding SpaceX launches, rockets, landing and launching pads, Starlink satellites, mission specifics, and payload details. This data is elegantly displayed on a **Flutter-based mobile application**, designed for tablet users, with a strong emphasis on accessibility. The application not only presents dynamic and interactive visualizations but also offers diverse color themes, multilingual support, and dynamic font sizing, **enhancing its accessibility to a broad user base**. Furthermore, the integration of Google Maps enriches the user experience by providing geographical context for rocket launch locations. To bridge the physical and digital realms, the project incorporates the transmission of pertinent data to a Liquid Galaxy Rig, enabling the display of launch-related information on this immersive system. The following details provide a deeper technical insight into the various facets of this innovative project.
 
-### Proposed Objectives
-- Retriving data from **SpaceX API** about all launches, all rockets, landing pads, launching pads.
-- Displaying all these data retrived from API on **Flutter App** and displaying them on tablet in imersive UI.
-- Sending all these data from application to **Liquid Galaxy Rig**.
-- Diaplying app logo, launch pad, details about each launch on Liquid Galaxy Rig and executing them.
 
-
-### Achieved Objectives
-- Retriving data from **SpaceX API** about all launches, all rockets, landing pads, launching pads, starlink satellites, rocket details, mission details, launch pad details, payload details.
-- Displaying all these data retrived from API on **Flutter App** and creating data stracture for API response and algorithm to access all these data from API in efficeint manner and displaying them on tablet in imersive UI.
-- Adding accessibility features such as:
-	- Adding **multiple colour theme** to the app for eye comfort of the user.
-	- Adding **multiple language support** in the app for including language diverse users.
-	- Adding **dynamic font size** for visually imared users to give them more assessiblity to the App.
-- Integrated **Google Maps** in the application to show the locations of launches in the app itself.
-- Sending all these data from application to **Liquid Galaxy Rig** using SSH Client method to Liquid Galaxy Main Rig and Liquid Galaxy Slave Rig.
-- Diaplying app logo, launch pad, details about each launch, launch pad, rocket details and mission details on Liquid Galaxy Rig and executing them.
-
-### Additional objectives under development and post GSoC plans
-- Adding more language to the application.
-- Syncing Google Maps in the app with the Google Earth on the Liquid Galaxy Rig, enabiling user to control the google earth on liquid galaxy rig using google maps on the app.
-- Adding voice commands to the applciation and voice control to the Liquid Galaxy Rig.
-- Adding text to speech functionality to the application.
-- Adding hapting touch response to the application.
-
-### Detailed script on objectives achieved
+### Detailed script on festures
 
 1. **Retrieving Data from SpaceX API:**
    - Utilizing the SpaceX API to fetch a wide array of data, including information about launches, rockets, landing pads, launching pads, Starlink satellites, rocket details, mission details, launch pad details, and payload details.
@@ -69,6 +45,13 @@ The project "**Rocket Launch Visualizer**" conducted under the **Liquid Galaxy o
 6. **Displaying Information on Liquid Galaxy Rig:**
    - Rendering the app logo, detailed launch pad information, and comprehensive launch, rocket, and mission details on the Liquid Galaxy Rig.
    - Executing the necessary commands to ensure the seamless display of this information on the Liquid Galaxy setup.
+
+### Additional features under development and post GSoC plans
+- Adding more language to the application.
+- Syncing Google Maps in the app with the Google Earth on the Liquid Galaxy Rig, enabiling user to control the google earth on liquid galaxy rig using google maps on the app.
+- Adding voice commands to the applciation and voice control to the Liquid Galaxy Rig.
+- Adding text to speech functionality to the application.
+- Adding hapting touch response to the application.
 
 Throughout the development process, rigorous testing and optimization has been critical to ensure that the application runs efficiently, providing a smooth and user-friendly experience. Additionally, maintaining a clean and modular codebase will facilitate future enhancements and scalability of the application. Finally, thorough documentation of the project's technical aspects and functionality will aid in project maintenance and knowledge sharing.
 
