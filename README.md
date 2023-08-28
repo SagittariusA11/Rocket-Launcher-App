@@ -2,6 +2,7 @@
 
 ### Overview
 This document serves as the conclusive report for the "**Rocket Launch Visualizer**" project, which was conducted under the auspices of the **Liquid Galaxy organization for Google Summer of Code 2023**. It encompasses an exhaustive documentation of the project's evolution, including a comprehensive work log. Furthermore, it provides essential hyperlinks for quick and easy reference.
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ### Project Details
 -   **Project Title:**  Rocket Launch Visualiser (RLA)
@@ -12,9 +13,60 @@ This document serves as the conclusive report for the "**Rocket Launch Visualize
 - **Organisation Admin:**  [Andreu Ibàñez Perales](https://www.linkedin.com/in/andreuibanez)
 
 All required details and guidelines for upcoming contributor can be found from above mentioned details **cheers!**
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<details open>
+  <summary>Table of Contents</summary>
+  <ol>
+    <li><a href="#overview">Overview</a></li>
+    <li>
+       <a href="#project-details">Project Details</a>
+    </li>
+    <li>
+       <a href="#project-description">project-description</a>
+      <ul>
+        <li><a href="#detailed-script-on-festures">Detailed script on festures</a></li>
+      </ul>
+       <ul>
+        <li><a href="#additional-features-under-development-and-post-gsoc-plans">Additional features under development and post GSoC plans</a></li>
+      </ul>
+       <ul>
+        <li><a href="#running-play-store-app">Running Play Store app</a></li>
+      </ul>
+       <ul>
+        <li><a href="#building-from-source">Building from source</a></li>
+      </ul>
+       <ul>
+        <li><a href="#screenshops-of-application-ui-and-liquid-galaxy-rig">Screenshops of application UI and Liquid Galaxy Rig</a></li>
+      </ul>
+       <ul>
+        <li><a href="#guide-for-open-source-contributors">Guide for Open Source Contributors</a></li>
+      </ul>
+       <ul>
+        <li><a href="#contributing">Contributing</a></li>
+      </ul>
+       <ul>
+        <li><a href="#contact-information">Contact Information</a></li>
+      </ul>
+       <ul>
+        <li><a href="#license">License</a></li>
+      </ul>
+       <ul>
+        <li><a href="#privacy-policy">Privacy Policy</a></li>
+      </ul>
+    </li>
+    <li><a href="#usage">Usage</a></li>
+    <li><a href="#contributing">Contributing</a></li>
+    <li><a href="#license">License</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ol>
+</details>
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## Project Description 
 The project "**Rocket Launch Visualizer**" conducted under the **Liquid Galaxy organization for Google Summer of Code 2023** is a comprehensive endeavor that involves the retrieval and visualization of a wealth of data from the **SpaceX API**. This ambitious undertaking encompasses the retrieval of information regarding SpaceX launches, rockets, landing and launching pads, Starlink satellites, mission specifics, and payload details. This data is elegantly displayed on a **Flutter-based mobile application**, designed for tablet users, with a strong emphasis on accessibility. The application not only presents dynamic and interactive visualizations but also offers diverse color themes, multilingual support, and dynamic font sizing, **enhancing its accessibility to a broad user base**. Furthermore, the integration of Google Maps enriches the user experience by providing geographical context for rocket launch locations. To bridge the physical and digital realms, the project incorporates the transmission of pertinent data to a Liquid Galaxy Rig, enabling the display of launch-related information on this immersive system. The following details provide a deeper technical insight into the various facets of this innovative project.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 ### Detailed script on festures
@@ -45,6 +97,8 @@ The project "**Rocket Launch Visualizer**" conducted under the **Liquid Galaxy o
 6. **Displaying Information on Liquid Galaxy Rig:**
    - Rendering the app logo, detailed launch pad information, and comprehensive launch, rocket, and mission details on the Liquid Galaxy Rig.
    - Executing the necessary commands to ensure the seamless display of this information on the Liquid Galaxy setup.
+  
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ### Additional features under development and post GSoC plans
 - Adding more language to the application.
@@ -54,6 +108,8 @@ The project "**Rocket Launch Visualizer**" conducted under the **Liquid Galaxy o
 - Adding hapting touch response to the application.
 
 Throughout the development process, rigorous testing and optimization has been critical to ensure that the application runs efficiently, providing a smooth and user-friendly experience. Additionally, maintaining a clean and modular codebase will facilitate future enhancements and scalability of the application. Finally, thorough documentation of the project's technical aspects and functionality will aid in project maintenance and knowledge sharing.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ### Running Play Store app
 
@@ -80,7 +136,7 @@ Throughout the development process, rigorous testing and optimization has been c
 -   Git
 
 Documentation on how to set up Flutter SDK and its environment can be found  [here](https://flutter.dev/docs/get-started/install). Make sure to have  [Git](https://git-scm.com/)  and  [Flutter](https://flutter.dev/)  installed in your machine before proceeding.
-
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 #### Steps:
 
 -   Clone the repository via the following terminal command:
@@ -161,7 +217,7 @@ Here are the screenshots of App UI and Liquid Galaxy visualization.
 > If you are interested in contributing to Liquid Galaxy projects, you can reach out by sending email to Liquid Galaxy Lab
 > 
 > Email:  [liquidgalaxylab@gmail.com](mailto:liquidgalaxylab@gmail.com)
-
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 ### Guide for Open Source Contributors
 
 #### To Edit a particular translation
@@ -191,6 +247,7 @@ Here are the screenshots of App UI and Liquid Galaxy visualization.
 ```
 
 -   Make sure to change "en" (present at three places) and flag to the language code and flag of the language you're adding.
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 ### Contributing
 
 Fill up issues, bugs or feature requests in our issue tracker. Please be very descriptive and clear so it is easier to help you. If you want to contribute to this project you can open a pull request at time you like.
