@@ -21,7 +21,7 @@ All required details and guidelines for upcoming contributor can be found from a
        <a href="#project-details">Project Details</a>
     </li>
     <li>
-       <a href="#project-description">project-description</a>
+       <a href="#project-description">Project Description</a>
       <ul>
         <li><a href="#detailed-script-on-festures">Detailed script on festures</a></li>
       </ul>
