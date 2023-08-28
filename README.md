@@ -38,21 +38,16 @@ All required details and guidelines for upcoming contributor can be found from a
         <li><a href="#screenshops-of-application-ui-and-liquid-galaxy-rig">Screenshops of application UI and Liquid Galaxy Rig</a></li>
       </ul>
        <ul>
-        <li><a href="#guide-for-open-source-contributors">Guide for Open Source Contributors</a></li>
-      </ul>
-       <ul>
+    </li>
+    <li>
+    <a href="#guide-for-open-source-contributors">Guide for Open Source Contributors</a>
+      <ul>
         <li><a href="#contributing">Contributing</a></li>
       </ul>
-       <ul>
-        <li><a href="#contact-information">Contact Information</a></li>
-      </ul>
-       <ul>
-        <li><a href="#license">License</a></li>
-      </ul>
-       <ul>
-        <li><a href="#privacy-policy">Privacy Policy</a></li>
-      </ul>
     </li>
+    <li><a href="#contact-information">Contact Information</a></li>
+    <li><a href="#license">License</a></li>
+    <li><a href="#privacy-policy">Privacy Policy</a></li>
   </ol>
 </details>
 
@@ -213,16 +208,16 @@ Here are the screenshots of App UI and Liquid Galaxy visualization.
 > Email:  [liquidgalaxylab@gmail.com](mailto:liquidgalaxylab@gmail.com)
 
 
-### Guide for Open Source Contributors
+## Guide for Open Source Contributors
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-#### To Edit a particular translation
+### To Edit a particular translation
 
 -   Go to JSON file of that particular language, say hi.json in  `assests/i18n folder`  for Hindi.
 -   Translate only the data in right as in left is the "key" of the key-value pairs.
 -   Send a pull request and you're done.
 
-#### To Add a new language
+### To Add a new language
 
 -   If you want to add a new language, say Greek, first google the Language code of the language (for greek it is el).
 -   Go to  `assets/i18n`  and add a new file, name it el.json.
@@ -249,7 +244,7 @@ Here are the screenshots of App UI and Liquid Galaxy visualization.
 
 Fill up issues, bugs or feature requests in our issue tracker. Please be very descriptive and clear so it is easier to help you. If you want to contribute to this project you can open a pull request at time you like.
 
-### Contact Information
+## Contact Information
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 -   **Name:**  Manash Kumar
@@ -258,12 +253,12 @@ Fill up issues, bugs or feature requests in our issue tracker. Please be very de
 -   **Twitter:**  [manashkumar](https://twitter.com/_manashkumar_)
 -  **LinkedIn:** [Manash Kumar](https://www.linkedin.com/in/manash-kumar-b73921222)
 
-### License
+## License
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 The Rocket Launcher Visualiser App is licensed under the  [MIT license](https://opensource.org/licenses/MIT).
 
-### Privacy Policy
+## Privacy Policy
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 Check out our  [Privacy Policy](https://github.com/Alexevers/Alejandro-Android-Application-Refurbishment/blob/GSOC-2022-Apps/La%20Palma%20Volcano%20Tracking%20Tool/PrivacyPolicy.md)  to get more information about the application.
