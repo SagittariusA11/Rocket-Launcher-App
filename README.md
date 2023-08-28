@@ -51,12 +51,11 @@ All required details and guidelines for upcoming contributor can be found from a
 </details>
 
 ## Project Description 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 The project "**Rocket Launch Visualizer**" conducted under the **Liquid Galaxy organization for Google Summer of Code 2023** is a comprehensive endeavor that involves the retrieval and visualization of a wealth of data from the **SpaceX API**. This ambitious undertaking encompasses the retrieval of information regarding SpaceX launches, rockets, landing and launching pads, Starlink satellites, mission specifics, and payload details. This data is elegantly displayed on a **Flutter-based mobile application**, designed for tablet users, with a strong emphasis on accessibility. The application not only presents dynamic and interactive visualizations but also offers diverse color themes, multilingual support, and dynamic font sizing, **enhancing its accessibility to a broad user base**. Furthermore, the integration of Google Maps enriches the user experience by providing geographical context for rocket launch locations. To bridge the physical and digital realms, the project incorporates the transmission of pertinent data to a Liquid Galaxy Rig, enabling the display of launch-related information on this immersive system. The following details provide a deeper technical insight into the various facets of this innovative project.
 
 
-### Detailed script on features
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
+### Detailed script on features
 
 1. **Retrieving Data from SpaceX API:**
    - Utilizing the SpaceX API to fetch a wide array of data, including information about launches, rockets, landing pads, launching pads, Starlink satellites, rocket details, mission details, launch pad details, and payload details.
@@ -86,8 +85,9 @@ The project "**Rocket Launch Visualizer**" conducted under the **Liquid Galaxy o
    - Executing the necessary commands to ensure the seamless display of this information on the Liquid Galaxy setup.
   
 
-### Additional features under development and post GSoC plans
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
+### Additional features under development and post GSoC plans
+
 - Adding more language to the application.
 - Syncing Google Maps in the app with the Google Earth on the Liquid Galaxy Rig, enabiling user to control the google earth on liquid galaxy rig using google maps on the app.
 - Adding voice commands to the applciation and voice control to the Liquid Galaxy Rig.
@@ -97,8 +97,8 @@ The project "**Rocket Launch Visualizer**" conducted under the **Liquid Galaxy o
 Throughout the development process, rigorous testing and optimization has been critical to ensure that the application runs efficiently, providing a smooth and user-friendly experience. Additionally, maintaining a clean and modular codebase will facilitate future enhancements and scalability of the application. Finally, thorough documentation of the project's technical aspects and functionality will aid in project maintenance and knowledge sharing.
 
 
-### Running Play Store app
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
+### Running Play Store app
 
 #### Prerequisites:
 
@@ -112,6 +112,8 @@ Throughout the development process, rigorous testing and optimization has been c
 ![Connection Manager Screen](https://raw.githubusercontent.com/SagittariusA11/kml-images_RLA_LiquidGalaxy_GSoC-23/main/3.png)
 
 -   Now simply explore the wide variety of KML visualizations possible through the different Launches data.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 ### Building from source
 
 #### Prerequisites:
@@ -123,7 +125,7 @@ Throughout the development process, rigorous testing and optimization has been c
 -   Git
 
 Documentation on how to set up Flutter SDK and its environment can be found  [here](https://flutter.dev/docs/get-started/install). Make sure to have  [Git](https://git-scm.com/)  and  [Flutter](https://flutter.dev/)  installed in your machine before proceeding.
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 #### Steps:
 
 -   Clone the repository via the following terminal command:
@@ -188,8 +190,9 @@ In the many buttons present on the LG Tasks screen, you shall see the buttons  `
 > ❗  _Both actions will  **reboot**  your Liquid Galaxy, so the changes may be applied._
 
 
-### Screenshops of application UI and Liquid Galaxy Rig
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
+### Screenshops of application UI and Liquid Galaxy Rig
+
 Here are the screenshots of App UI and Liquid Galaxy visualization.
 ![OnBoarding Screen](https://raw.githubusercontent.com/SagittariusA11/kml-images_RLA_LiquidGalaxy_GSoC-23/main/2.png) ![Connection Manager Screen](https://raw.githubusercontent.com/SagittariusA11/kml-images_RLA_LiquidGalaxy_GSoC-23/main/3.png)
 
@@ -207,8 +210,9 @@ Here are the screenshots of App UI and Liquid Galaxy visualization.
 > Email:  [liquidgalaxylab@gmail.com](mailto:liquidgalaxylab@gmail.com)
 
 
-## Guide for Open Source Contributors
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
+## Guide for Open Source Contributors
+
 
 ### To Edit a particular translation
 
@@ -238,13 +242,16 @@ Here are the screenshots of App UI and Liquid Galaxy visualization.
 
 -   Make sure to change "en" (present at three places) and flag to the language code and flag of the language you're adding.
 
+
 ### Contributing
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 
 Fill up issues, bugs or feature requests in our issue tracker. Please be very descriptive and clear so it is easier to help you. If you want to contribute to this project you can open a pull request at time you like.
 
-## Contact Information
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
+## Contact Information
+
 
 -   **Name:**  Manash Kumar
 -   **Email:**  [manashkumar1216@gmail.com](mailto:manashkumar1216@gmail.com)
@@ -252,13 +259,15 @@ Fill up issues, bugs or feature requests in our issue tracker. Please be very de
 -   **Twitter:**  [manashkumar](https://twitter.com/_manashkumar_)
 -  **LinkedIn:** [Manash Kumar](https://www.linkedin.com/in/manash-kumar-b73921222)
 
-## License
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
+## License
+
 
 The Rocket Launcher Visualiser App is licensed under the  [MIT license](https://opensource.org/licenses/MIT).
 
-## Privacy Policy
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
+## Privacy Policy
+
 
 Check out our  [Privacy Policy](https://github.com/Alexevers/Alejandro-Android-Application-Refurbishment/blob/GSOC-2022-Apps/La%20Palma%20Volcano%20Tracking%20Tool/PrivacyPolicy.md)  to get more information about the application.
 <p align="center">
