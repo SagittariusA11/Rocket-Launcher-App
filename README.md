@@ -211,5 +211,5 @@ The Rocket Launcher Visualiser App is licensed under the  [MIT license](https://
 
 Check out our  [Privacy Policy](https://github.com/Alexevers/Alejandro-Android-Application-Refurbishment/blob/GSOC-2022-Apps/La%20Palma%20Volcano%20Tracking%20Tool/PrivacyPolicy.md)  to get more information about the application.
 <p align="center">
-  Copyright © 2022 <a href="https://github.com/SagittariusA11/" target="_blank">Manash Kumar</a>
+  Copyright © 2023 <a href="https://github.com/SagittariusA11/" target="_blank">Manash Kumar</a>
 </p>
