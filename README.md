@@ -37,7 +37,6 @@ All required details and guidelines for upcoming contributor can be found from a
        <ul>
         <li><a href="#screenshops-of-application-ui-and-liquid-galaxy-rig">Screenshops of application UI and Liquid Galaxy Rig</a></li>
       </ul>
-       <ul>
     </li>
     <li>
     <a href="#guide-for-open-source-contributors">Guide for Open Source Contributors</a>
