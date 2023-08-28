@@ -1,11 +1,9 @@
 # Rocket Launch Visualizer - Liquid Galaxy
 
 ### Overview
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 This document serves as the conclusive report for the "**Rocket Launch Visualizer**" project, which was conducted under the auspices of the **Liquid Galaxy organization for Google Summer of Code 2023**. It encompasses an exhaustive documentation of the project's evolution, including a comprehensive work log. Furthermore, it provides essential hyperlinks for quick and easy reference.
 
 ### Project Details
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 -   **Project Title:**  Rocket Launch Visualiser (RLA)
 -   **Organization:**  Liquid Galaxy, Google Summer of Code 2023
 -   **Project Link:**  [Rocket Launch Visualiser - GSoC 2023](https://summerofcode.withgoogle.com/programs/2023/projects/5ZScXUZt)
@@ -16,7 +14,6 @@ This document serves as the conclusive report for the "**Rocket Launch Visualize
 All required details and guidelines for upcoming contributor can be found from above mentioned details **cheers!**
 
 <details open>
-  <p align="right">(<a href="#readme-top">back to top</a>)</p>
   <summary>Table of Contents</summary>
   <ol>
     <li><a href="#overview">Overview</a></li>
@@ -56,10 +53,6 @@ All required details and guidelines for upcoming contributor can be found from a
         <li><a href="#privacy-policy">Privacy Policy</a></li>
       </ul>
     </li>
-    <li><a href="#usage">Usage</a></li>
-    <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#license">License</a></li>
-    <li><a href="#contact">Contact</a></li>
   </ol>
 </details>
 
