@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:rocket_launcher_app/views/settings.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../config/appTheme.dart';
@@ -28,7 +30,12 @@ class YTLive{
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     IconButton(
-                        onPressed: () => Navigator.of(context).pop(),
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                          if(isHapticOn){
+                            HapticFeedback.lightImpact();
+                          }
+                        },
                         icon: Icon(
                           Icons.cancel_outlined,
                           color: AppTheme().primary_color,
@@ -84,6 +91,9 @@ class YTLive{
                                   ),
                                   IconButton(
                                       onPressed: () {
+                                        if(isHapticOn){
+                                          HapticFeedback.lightImpact();
+                                        }
                                         launchUrl(Uri.parse(YTLiveContent['yt_live_link']!));
                                       },
                                       icon: const Icon(

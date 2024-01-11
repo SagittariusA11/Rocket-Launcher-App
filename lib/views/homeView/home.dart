@@ -75,6 +75,9 @@ class _HomeViewState extends State<HomeView> with SingleTickerProviderStateMixin
                 Color.fromARGB(255, 23, 72, 173).withOpacity(opacityAnimation.value),
                 leading: homeViewController.selectedView == 0?Container():GestureDetector(
                   onTap: () {
+                    if(isHapticOn){
+                      HapticFeedback.heavyImpact();
+                    }
                     homeViewController.changeSelectedView(0);
                     setState(() {
                       homeViewController.selectedView;
@@ -112,6 +115,9 @@ class _HomeViewState extends State<HomeView> with SingleTickerProviderStateMixin
                       opacity: opacityAnimation.value,
                       child: GestureDetector(
                           onTap: (){
+                            if(isHapticOn){
+                              HapticFeedback.mediumImpact();
+                            }
                             if(drawerAnimationController.isCompleted) {
                               drawerAnimationController.reverse();
                             }
@@ -234,6 +240,9 @@ class _HomeViewState extends State<HomeView> with SingleTickerProviderStateMixin
                 ListTile(
                   onTap: () {
                     if(isDrawerOpen) {
+                      if(isHapticOn){
+                        HapticFeedback.selectionClick();
+                      }
                       homeViewController.changeSelectedView(0);
                       isDrawerOpen = !isDrawerOpen;
                     }
@@ -256,6 +265,9 @@ class _HomeViewState extends State<HomeView> with SingleTickerProviderStateMixin
                 ListTile(
                   onTap: () {
                     if(isDrawerOpen) {
+                      if(isHapticOn){
+                        HapticFeedback.selectionClick();
+                      }
                       homeViewController.changeSelectedView(1);
                       isDrawerOpen = !isDrawerOpen;
                     }
@@ -278,6 +290,9 @@ class _HomeViewState extends State<HomeView> with SingleTickerProviderStateMixin
                 ListTile(
                   onTap: () {
                     if(isDrawerOpen) {
+                      if(isHapticOn){
+                        HapticFeedback.selectionClick();
+                      }
                       homeViewController.changeSelectedView(2);
                       isDrawerOpen = !isDrawerOpen;
                     }
@@ -300,6 +315,9 @@ class _HomeViewState extends State<HomeView> with SingleTickerProviderStateMixin
                 ListTile(
                   onTap: () {
                     if(isDrawerOpen) {
+                      if(isHapticOn){
+                        HapticFeedback.selectionClick();
+                      }
                       homeViewController.changeSelectedView(3);
                       isDrawerOpen = !isDrawerOpen;
                     }
@@ -322,6 +340,9 @@ class _HomeViewState extends State<HomeView> with SingleTickerProviderStateMixin
                 ListTile(
                   onTap: () {
                     if(isDrawerOpen) {
+                      if(isHapticOn){
+                        HapticFeedback.selectionClick();
+                      }
                       homeViewController.changeSelectedView(4);
                       isDrawerOpen = !isDrawerOpen;
                     }
@@ -344,6 +365,9 @@ class _HomeViewState extends State<HomeView> with SingleTickerProviderStateMixin
                 ListTile(
                   onTap: () {
                     if(isDrawerOpen) {
+                      if(isHapticOn){
+                        HapticFeedback.selectionClick();
+                      }
                       homeViewController.changeSelectedView(5);
                       isDrawerOpen = !isDrawerOpen;
                     }
@@ -388,6 +412,9 @@ class _HomeViewState extends State<HomeView> with SingleTickerProviderStateMixin
                 ListTile(
                   onTap: () {
                     if(isDrawerOpen) {
+                      if(isHapticOn){
+                        HapticFeedback.selectionClick();
+                      }
                       homeViewController.changeSelectedView(6);
                       isDrawerOpen = !isDrawerOpen;
                     }

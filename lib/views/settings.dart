@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:rocket_launcher_app/views/translate.dart';
@@ -11,6 +12,8 @@ import '../config/appTheme.dart';
 import 'package:intl/intl.dart';
 import 'package:timezone/timezone.dart' as tz;
 
+bool isHapticOn = false;
+
 class SettingsView extends StatefulWidget {
   const SettingsView({Key? key}) : super(key: key);
 
@@ -22,7 +25,6 @@ class _SettingsViewState extends State<SettingsView> with SingleTickerProviderSt
 
   bool _app_audio_and_music = false;
   bool _text_to_speech = false;
-  bool _haptic = false;
   bool _voice_command = false;
   double _currentValue = selectedFontSizeFactor.getMode()??25.0;
 
@@ -164,6 +166,9 @@ class _SettingsViewState extends State<SettingsView> with SingleTickerProviderSt
                               children: [
                                 ElevatedButton(
                                   onPressed: () {
+                                    if(isHapticOn){
+                                      HapticFeedback.selectionClick();
+                                    }
                                     setState(() {
                                       selectedAppLanguage.isEn = true;
                                       selectedAppLanguage.isEs = false;
@@ -202,6 +207,9 @@ class _SettingsViewState extends State<SettingsView> with SingleTickerProviderSt
                                 ),
                                 ElevatedButton(
                                   onPressed: () {
+                                    if(isHapticOn){
+                                      HapticFeedback.selectionClick();
+                                    }
                                     changeLocale(context, "es");
                                     selectedAppLanguage.saveMode('es');
                                     setState(() {
@@ -240,6 +248,9 @@ class _SettingsViewState extends State<SettingsView> with SingleTickerProviderSt
                                 ),
                                 ElevatedButton(
                                   onPressed: () {
+                                    if(isHapticOn){
+                                      HapticFeedback.selectionClick();
+                                    }
                                     changeLocale(context, "hi");
                                     selectedAppLanguage.saveMode('hi');
                                     setState(() {
@@ -278,6 +289,9 @@ class _SettingsViewState extends State<SettingsView> with SingleTickerProviderSt
                                 ),
                                 ElevatedButton(
                                   onPressed: () {
+                                    if(isHapticOn){
+                                      HapticFeedback.selectionClick();
+                                    }
                                     selectedAppLanguage.saveMode('de');
                                     setState(() {
                                       selectedAppLanguage.isEn = false;
@@ -315,6 +329,9 @@ class _SettingsViewState extends State<SettingsView> with SingleTickerProviderSt
                                 ),
                                 ElevatedButton(
                                   onPressed: () {
+                                    if(isHapticOn){
+                                      HapticFeedback.selectionClick();
+                                    }
                                     selectedAppLanguage.saveMode('more');
                                     onActionSheetPress(context, false);
                                     setState(() {
@@ -379,6 +396,9 @@ class _SettingsViewState extends State<SettingsView> with SingleTickerProviderSt
                               children: [
                                 ElevatedButton(
                                   onPressed: () {
+                                    if(isHapticOn){
+                                      HapticFeedback.selectionClick();
+                                    }
                                     setState(() {
                                       selectedAppTheme.isDarkMode = false;
                                       selectedAppTheme.isLightMode = true;
@@ -432,6 +452,9 @@ class _SettingsViewState extends State<SettingsView> with SingleTickerProviderSt
                                 ),
                                 ElevatedButton(
                                     onPressed: () {
+                                      if(isHapticOn){
+                                        HapticFeedback.selectionClick();
+                                      }
                                       setState(() {
                                         selectedAppTheme.isDarkMode = true;
                                         selectedAppTheme.isLightMode = false;
@@ -485,6 +508,9 @@ class _SettingsViewState extends State<SettingsView> with SingleTickerProviderSt
                                 ),
                                 ElevatedButton(
                                     onPressed: () {
+                                      if(isHapticOn){
+                                        HapticFeedback.selectionClick();
+                                      }
                                       setState(() {
                                         selectedAppTheme.isDarkMode = false;
                                         selectedAppTheme.isLightMode = false;
@@ -538,6 +564,9 @@ class _SettingsViewState extends State<SettingsView> with SingleTickerProviderSt
                                 ),
                                 ElevatedButton(
                                     onPressed: () {
+                                      if(isHapticOn){
+                                        HapticFeedback.selectionClick();
+                                      }
                                       setState(() {
                                         selectedAppTheme.isDarkMode = false;
                                         selectedAppTheme.isLightMode = false;
@@ -591,6 +620,9 @@ class _SettingsViewState extends State<SettingsView> with SingleTickerProviderSt
                                 ),
                                 ElevatedButton(
                                     onPressed: () {
+                                      if(isHapticOn){
+                                        HapticFeedback.selectionClick();
+                                      }
                                       setState(() {
                                         selectedAppTheme.isDarkMode = false;
                                         selectedAppTheme.isLightMode = false;
@@ -714,70 +746,70 @@ class _SettingsViewState extends State<SettingsView> with SingleTickerProviderSt
                                 ),
                                 child: Column(
                                   children: [
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(
-                                          translate('settings.audio.aam'),
-                                          style: TextStyle(
-                                              fontFamily: 'GoogleSans',
-                                              fontSize: Utils().fontSizeMultiplier(25),
-                                              color: AppTheme().ht_color,
-                                              fontWeight: FontWeight.bold
-                                          ),
-                                        ),
-                                        Transform.scale(
-                                          scale: 1.25,
-                                          child: Switch(
-                                            value: _app_audio_and_music,
-                                            onChanged: (bool value) {
-                                              setState(() {
-                                                _app_audio_and_music = value; // Update the switch state
-                                              });
-                                            },
-                                            activeColor: AppTheme().primary_color,
-                                            inactiveThumbColor: Colors.grey,
-                                            activeTrackColor: AppTheme().primary_color.withAlpha(175),
-                                            inactiveTrackColor: Colors.grey.shade300,
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                    const SizedBox(
-                                      height: 15,
-                                    ),
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(
-                                          translate('settings.audio.tts'),
-                                          style: TextStyle(
-                                              fontFamily: 'GoogleSans',
-                                              fontSize: Utils().fontSizeMultiplier(25),
-                                              color: AppTheme().ht_color,
-                                              fontWeight: FontWeight.bold
-                                          ),
-                                        ),
-                                        Transform.scale(
-                                          scale: 1.25,
-                                          child: Switch(
-                                            value: _text_to_speech,
-                                            onChanged: (bool value) {
-                                              setState(() {
-                                                _text_to_speech = value; // Update the switch state
-                                              });
-                                            },
-                                            activeColor: AppTheme().primary_color,
-                                            inactiveThumbColor: Colors.grey,
-                                            activeTrackColor: AppTheme().primary_color.withAlpha(175),
-                                            inactiveTrackColor: Colors.grey.shade300,
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                    const SizedBox(
-                                      height: 15,
-                                    ),
+                                    // Row(
+                                    //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    //   children: [
+                                    //     Text(
+                                    //       translate('settings.audio.aam'),
+                                    //       style: TextStyle(
+                                    //           fontFamily: 'GoogleSans',
+                                    //           fontSize: Utils().fontSizeMultiplier(25),
+                                    //           color: AppTheme().ht_color,
+                                    //           fontWeight: FontWeight.bold
+                                    //       ),
+                                    //     ),
+                                    //     Transform.scale(
+                                    //       scale: 1.25,
+                                    //       child: Switch(
+                                    //         value: _app_audio_and_music,
+                                    //         onChanged: (bool value) {
+                                    //           setState(() {
+                                    //             _app_audio_and_music = value; // Update the switch state
+                                    //           });
+                                    //         },
+                                    //         activeColor: AppTheme().primary_color,
+                                    //         inactiveThumbColor: Colors.grey,
+                                    //         activeTrackColor: AppTheme().primary_color.withAlpha(175),
+                                    //         inactiveTrackColor: Colors.grey.shade300,
+                                    //       ),
+                                    //     )
+                                    //   ],
+                                    // ),
+                                    // const SizedBox(
+                                    //   height: 15,
+                                    // ),
+                                    // Row(
+                                    //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    //   children: [
+                                    //     Text(
+                                    //       translate('settings.audio.tts'),
+                                    //       style: TextStyle(
+                                    //           fontFamily: 'GoogleSans',
+                                    //           fontSize: Utils().fontSizeMultiplier(25),
+                                    //           color: AppTheme().ht_color,
+                                    //           fontWeight: FontWeight.bold
+                                    //       ),
+                                    //     ),
+                                    //     Transform.scale(
+                                    //       scale: 1.25,
+                                    //       child: Switch(
+                                    //         value: _text_to_speech,
+                                    //         onChanged: (bool value) {
+                                    //           setState(() {
+                                    //             _text_to_speech = value; // Update the switch state
+                                    //           });
+                                    //         },
+                                    //         activeColor: AppTheme().primary_color,
+                                    //         inactiveThumbColor: Colors.grey,
+                                    //         activeTrackColor: AppTheme().primary_color.withAlpha(175),
+                                    //         inactiveTrackColor: Colors.grey.shade300,
+                                    //       ),
+                                    //     )
+                                    //   ],
+                                    // ),
+                                    // const SizedBox(
+                                    //   height: 15,
+                                    // ),
                                     Row(
                                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                       children: [
@@ -793,10 +825,10 @@ class _SettingsViewState extends State<SettingsView> with SingleTickerProviderSt
                                         Transform.scale(
                                           scale: 1.25,
                                           child: Switch(
-                                            value: _haptic,
+                                            value: isHapticOn,
                                             onChanged: (bool value) {
                                               setState(() {
-                                                _haptic = value; // Update the switch state
+                                                isHapticOn = value; // Update the switch state
                                               });
                                             },
                                             activeColor: AppTheme().primary_color,
@@ -867,6 +899,9 @@ class _SettingsViewState extends State<SettingsView> with SingleTickerProviderSt
                                           max: 100,
                                           divisions: 4, // Number of discrete values - 4 values with 3 intervals
                                           onChanged: (double value) {
+                                            if(isHapticOn){
+                                              HapticFeedback.lightImpact();
+                                            }
                                             setState(() {
                                               _currentValue = value;
                                               selectedFontSizeFactor.saveMode(_currentValue);// Update the current selected value

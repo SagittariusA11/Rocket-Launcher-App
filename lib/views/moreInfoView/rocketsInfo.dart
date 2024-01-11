@@ -1,6 +1,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:model_viewer_plus/model_viewer_plus.dart';
@@ -14,6 +15,7 @@ import '../../data/inventory_response.dart';
 import '../../utils/routeNames.dart';
 import '../../utils/utils.dart';
 import '../../view models/inventoryViewModel.dart';
+import '../settings.dart';
 
 class RocketsInfo extends StatefulWidget {
   const RocketsInfo({Key? key, required this.RocketID}) : super(key: key);
@@ -167,7 +169,12 @@ class RocketInfoCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 IconButton(
-                    onPressed: () => Navigator.of(context).pop(),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                      if(isHapticOn){
+                        HapticFeedback.vibrate();
+                      }
+                    },
                     icon: Icon(
                       Icons.cancel_outlined,
                       color: AppTheme().primary_color,
@@ -238,6 +245,9 @@ class RocketInfoCard extends StatelessWidget {
                                   children: [
                                     IconButton(
                                         onPressed: () {
+                                          if(isHapticOn){
+                                            HapticFeedback.lightImpact();
+                                          }
                                           Navigator.push(
                                             context,
                                             MaterialPageRoute(builder: (context) => ImageGrid(imgs: rocket.imgs)),

@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_cube/flutter_cube.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:model_viewer_plus/model_viewer_plus.dart';
 import 'package:rocket_launcher_app/views/moreInfoView/rocketsInfo.dart';
 import 'package:rocket_launcher_app/views/moreInfoView/payloadInfo.dart';
 import 'package:rocket_launcher_app/views/searchScreen.dart';
+import 'package:rocket_launcher_app/views/settings.dart';
 import 'package:scroll_snap_list/scroll_snap_list.dart';
 
 import '../config/screenConfig.dart';
@@ -789,6 +791,9 @@ class _InventoryViewState extends State<InventoryView> with SingleTickerProvider
               final allRocket = _allRockets[index];
               return GestureDetector(
                   onTap: (){
+                    if(isHapticOn){
+                      HapticFeedback.selectionClick();
+                    }
                     showDialog(
                         context: context,
                         builder: (context) => RocketsInfo(
@@ -912,6 +917,9 @@ class _InventoryViewState extends State<InventoryView> with SingleTickerProvider
               final allStarlink = _allStarlinks[index];
               return GestureDetector(
                   onTap: (){
+                    if(isHapticOn){
+                      HapticFeedback.selectionClick();
+                    }
                     showDialog(
                         context: context,
                         builder: (context) => PayloadInfo(

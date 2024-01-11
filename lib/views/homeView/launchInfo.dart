@@ -37,6 +37,7 @@ import '../../utils/utils.dart';
 import '../../config/appTheme.dart';
 import '../../view models/homeViewModels/launchViewModel.dart';
 import '../searchScreen.dart';
+import '../settings.dart';
 
 class LaunchInfo extends StatefulWidget {
   const LaunchInfo({Key? key}) : super(key: key);
@@ -469,6 +470,9 @@ class _LaunchInfoState extends State<LaunchInfo> with SingleTickerProviderStateM
                 children: [
                   ElevatedButton(
                       onPressed: () {
+                        if(isHapticOn){
+                          HapticFeedback.lightImpact();
+                        }
                         if(isTapped){
                           showDialog(
                               context: context,
@@ -527,6 +531,9 @@ class _LaunchInfoState extends State<LaunchInfo> with SingleTickerProviderStateM
                   ),
                   ElevatedButton(
                       onPressed: () async {
+                        if(isHapticOn){
+                          HapticFeedback.lightImpact();
+                        }
                         if(isTapped && connectionStatus){
                           LaunchBalloonModel launch = LaunchBalloonModel(
                             id: 'All Launch',
@@ -598,6 +605,9 @@ class _LaunchInfoState extends State<LaunchInfo> with SingleTickerProviderStateM
                   ),
                   ElevatedButton(
                       onPressed: () => {
+                        if(isHapticOn){
+                          HapticFeedback.lightImpact()
+                        },
                         isOrbiting = !isOrbiting,
                         if (isOrbiting == true)
                           {
@@ -867,6 +877,9 @@ class _LaunchInfoState extends State<LaunchInfo> with SingleTickerProviderStateM
               final alllaunch = _allLaunches[index];
               return GestureDetector(
                 onTap: () {
+                  if(isHapticOn){
+                    HapticFeedback.selectionClick();
+                  }
                   currentLaunch = alllaunch;
                   setState(() {
                     map_lat = double.parse(currentLaunch.lat);
@@ -1007,6 +1020,9 @@ class BuildRocketInfoItemList extends StatelessWidget {
                 showModels(allLaunches.rocketName),
                 ElevatedButton(
                     onPressed: (){
+                      if(isHapticOn){
+                        HapticFeedback.selectionClick();
+                      }
                       showDialog(
                           context: context,
                           builder: (context) => RocketsInfo(RocketID: allLaunches.rocketID)
@@ -1220,6 +1236,9 @@ class BuildRocketInfoItemList extends StatelessWidget {
                     children: [
                       ElevatedButton(
                           onPressed: () {
+                            if(isHapticOn){
+                              HapticFeedback.selectionClick();
+                            }
                             launchUrl(Uri.parse(allLaunches.article));
                           },
                           style: ElevatedButton.styleFrom(
@@ -1255,6 +1274,9 @@ class BuildRocketInfoItemList extends StatelessWidget {
                       ),
                       ElevatedButton(
                           onPressed: () {
+                            if(isHapticOn){
+                              HapticFeedback.selectionClick();
+                            }
                             launchUrl(Uri.parse(allLaunches.wiki));
                           },
                           style: ElevatedButton.styleFrom(

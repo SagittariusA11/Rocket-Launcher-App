@@ -2,10 +2,12 @@
 
 import 'package:dartssh2/dartssh2.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:provider/provider.dart';
 import 'package:rocket_launcher_app/config/screenConfig.dart';
 import 'package:rocket_launcher_app/utils/routeNames.dart';
+import 'package:rocket_launcher_app/views/settings.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 // import 'package:ssh2/ssh2.dart';
 import 'dart:ui' as ui;
@@ -335,6 +337,9 @@ class _ConnectionManagerViewState extends State<ConnectionManagerView> with Sing
                             suffixIcon: IconButton(
                               icon: Icon(Icons.remove_red_eye, color: _iconColor),
                               onPressed: () {
+                                if(isHapticOn){
+                                  HapticFeedback.lightImpact();
+                                }
                                 setState(
                                       () {
                                     obscurePassword = !obscurePassword;
@@ -366,6 +371,9 @@ class _ConnectionManagerViewState extends State<ConnectionManagerView> with Sing
                       children: [
                         ElevatedButton(
                           onPressed: () {
+                            if(isHapticOn){
+                              HapticFeedback.lightImpact();
+                            }
                             connect();
                             FocusManager.instance.primaryFocus?.unfocus();
                           },
@@ -400,6 +408,9 @@ class _ConnectionManagerViewState extends State<ConnectionManagerView> with Sing
                         ),
                         ElevatedButton(
                           onPressed: () {
+                            if(isHapticOn){
+                              HapticFeedback.lightImpact();
+                            }
                             LgService().clearKml();
                             disconnect();
                             FocusManager.instance.primaryFocus?.unfocus();
@@ -436,6 +447,9 @@ class _ConnectionManagerViewState extends State<ConnectionManagerView> with Sing
                       ],
                     ):ElevatedButton(
                       onPressed: () {
+                        if(isHapticOn){
+                          HapticFeedback.lightImpact();
+                        }
                         connect();
                         FocusManager.instance.primaryFocus?.unfocus();
                       },
@@ -589,6 +603,9 @@ class _ConnectionManagerViewState extends State<ConnectionManagerView> with Sing
                                   shape: StadiumBorder(),
                                 ),
                                 onPressed: () {
+                                  if(isHapticOn){
+                                    HapticFeedback.vibrate();
+                                  }
                                   Navigator.of(context).pop();
                                 },
                                 child: Wrap(

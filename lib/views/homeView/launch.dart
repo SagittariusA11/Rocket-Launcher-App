@@ -4,6 +4,7 @@ import 'dart:io';
 
 import 'package:dartssh2/dartssh2.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:model_viewer_plus/model_viewer_plus.dart';
@@ -29,6 +30,7 @@ import '../../config/appTheme.dart';
 import '../../view models/homeViewModels/launchViewModel.dart';
 import '../errorView.dart';
 import '../searchScreen.dart';
+import '../settings.dart';
 
 class LaunchView extends StatefulWidget {
   const LaunchView({Key? key}) : super(key: key);
@@ -518,6 +520,9 @@ class _LaunchViewState extends State<LaunchView> with SingleTickerProviderStateM
                   ),
                   ElevatedButton(
                       onPressed: () async {
+                        if(isHapticOn){
+                          HapticFeedback.lightImpact();
+                        }
                         if(isTapped && connectionStatus){
                           LaunchBalloonModel launch = LaunchBalloonModel(
                             id: 'Upcoming Launch',
@@ -591,6 +596,9 @@ class _LaunchViewState extends State<LaunchView> with SingleTickerProviderStateM
                   ElevatedButton(
                       onPressed: () => {
                         isOrbiting = !isOrbiting,
+                        if(isHapticOn){
+                          HapticFeedback.lightImpact()
+                        },
                         if (isOrbiting == true)
                           {
                             _rotationiconcontroller.forward(),
@@ -687,6 +695,9 @@ class _LaunchViewState extends State<LaunchView> with SingleTickerProviderStateM
               final upcominglaunch = _upcomingLaunches[index];
               return GestureDetector(
                 onTap: (){
+                  if(isHapticOn){
+                    HapticFeedback.selectionClick();
+                  }
                   currentLaunch = upcominglaunch;
                   setState(() {
                     map_lat = double.parse(currentLaunch.lat);
@@ -729,6 +740,9 @@ class _LaunchViewState extends State<LaunchView> with SingleTickerProviderStateM
               final pastlaunch = _pastLaunches[index];
               return GestureDetector(
                   onTap: (){
+                    if(isHapticOn){
+                      HapticFeedback.selectionClick();
+                    }
                     currentLaunch = pastlaunch;
                     isTapped = true;
                     setState(() {
@@ -908,6 +922,9 @@ class _LaunchViewState extends State<LaunchView> with SingleTickerProviderStateM
                                   shape: StadiumBorder(),
                                 ),
                                 onPressed: () {
+                                  if(isHapticOn){
+                                    HapticFeedback.vibrate();
+                                  }
                                   Navigator.of(context).pop();
                                 },
                                 child: Wrap(

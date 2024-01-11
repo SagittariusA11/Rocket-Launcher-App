@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:rocket_launcher_app/config/appTheme.dart';
+import 'package:rocket_launcher_app/views/settings.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 // import 'package:ssh2/ssh2.dart';
 import 'dart:io';
@@ -86,6 +87,9 @@ class _LGActionsView extends State<LGActionsView> with SingleTickerProviderState
                                   shape: StadiumBorder(),
                                 ),
                                 onPressed: () {
+                                  if(isHapticOn){
+                                    HapticFeedback.vibrate();
+                                  }
                                   Navigator.of(context).pop();
                                 },
                                 child: Wrap(
@@ -169,6 +173,9 @@ class _LGActionsView extends State<LGActionsView> with SingleTickerProviderState
                                   shape: StadiumBorder(),
                                 ),
                                 onPressed: () {
+                                  if(isHapticOn){
+                                    HapticFeedback.mediumImpact();
+                                  }
                                   if (operation == "Relaunch") {
                                     LGConnection().relaunchLG().then((value) {
                                       setState(() {
@@ -237,6 +244,9 @@ class _LGActionsView extends State<LGActionsView> with SingleTickerProviderState
                                   shape: StadiumBorder(),
                                 ),
                                 onPressed: () {
+                                  if(isHapticOn){
+                                    HapticFeedback.mediumImpact();
+                                  }
                                   Navigator.of(context).pop();
                                 },
                                 child: Wrap(
@@ -366,6 +376,9 @@ class _LGActionsView extends State<LGActionsView> with SingleTickerProviderState
                         ),
                         ElevatedButton(
                           onPressed: () {
+                            if(isHapticOn){
+                              HapticFeedback.mediumImpact();
+                            }
                             LGConnection()
                                 .cleanlogos()
                                 .catchError((onError) {
@@ -410,6 +423,9 @@ class _LGActionsView extends State<LGActionsView> with SingleTickerProviderState
                         ),
                         ElevatedButton(
                           onPressed: () {
+                            if(isHapticOn){
+                              HapticFeedback.mediumImpact();
+                            }
                             LGConnection()
                                 .cleanVisualization()
                                 .then((value) {
@@ -460,6 +476,9 @@ class _LGActionsView extends State<LGActionsView> with SingleTickerProviderState
                         ),
                         ElevatedButton(
                           onPressed: () {
+                            if(isHapticOn){
+                              HapticFeedback.mediumImpact();
+                            }
                             LGConnection().openDemoLogos();
                           },
                           style: ElevatedButton.styleFrom(
@@ -488,6 +507,9 @@ class _LGActionsView extends State<LGActionsView> with SingleTickerProviderState
                         ),
                         ElevatedButton(
                           onPressed: () {
+                            if(isHapticOn){
+                              HapticFeedback.mediumImpact();
+                            }
                             showThinkDialog(
                                 translate('tasks.LGRelaunch'),
                                 translate('tasks.sure'),
@@ -527,6 +549,9 @@ class _LGActionsView extends State<LGActionsView> with SingleTickerProviderState
                         ),
                         ElevatedButton(
                           onPressed: () {
+                            if(isHapticOn){
+                              HapticFeedback.mediumImpact();
+                            }
                             showThinkDialog(
                                 translate('tasks.LGReboot'),
                                 translate('tasks.sure'),
@@ -558,6 +583,9 @@ class _LGActionsView extends State<LGActionsView> with SingleTickerProviderState
                         ),
                         ElevatedButton(
                           onPressed: () {
+                            if(isHapticOn){
+                              HapticFeedback.mediumImpact();
+                            }
                             showThinkDialog(
                                 translate('tasks.LGShutdown'),
                                 translate('tasks.sure'),

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:rocket_launcher_app/config/imagePaths.dart';
 import 'package:rocket_launcher_app/config/screenConfig.dart';
+import 'package:rocket_launcher_app/views/settings.dart';
 
 import '../utils/routeNames.dart';
 import '../utils/utils.dart';
@@ -154,7 +156,11 @@ class _OnBoardingState extends State<OnBoarding> {
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         GestureDetector(
-                          onTap: () {Navigator.of(context).pushNamed(RouteNames.homeView);},
+                          onTap: () {
+                            Navigator.of(context).pushNamed(RouteNames.homeView);
+                            if(isHapticOn){
+                              HapticFeedback.heavyImpact();
+                            }},
                           child: Container(
                             height: ScreenConfig.heightPercent*10,
                             width: ScreenConfig.heightPercent*10*1.58,

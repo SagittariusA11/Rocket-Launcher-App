@@ -10,6 +10,7 @@ import '../../config/appTheme.dart';
 import '../../config/imagePaths.dart';
 import '../../config/screenConfig.dart';
 import '../../utils/utils.dart';
+import '../settings.dart';
 
 double map_lat = 28.60819722;
 double map_lng = -80.60405833;
@@ -64,6 +65,9 @@ class _TabViewState extends State<TabView> with SingleTickerProviderStateMixin {
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedIndex,
         onTap: (index) {
+          if(isHapticOn){
+            HapticFeedback.mediumImpact();
+          }
           setState(() {
             _selectedIndex = index;
             _tabController.index = index;
