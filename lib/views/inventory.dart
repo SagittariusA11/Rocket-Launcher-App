@@ -1115,12 +1115,12 @@ class BuildStarlinksItemList extends StatelessWidget {
         Container(
           height: ScreenConfig.heightPercent*33,
           width: ScreenConfig.heightPercent*28*0.385,
-          decoration: const BoxDecoration(
-              image: DecorationImage(
-                  image: AssetImage(ImagePaths.starlink),
-                  fit: BoxFit.fill
-              )
-          ),
+          // decoration: const BoxDecoration(
+          //     image: DecorationImage(
+          //         image: AssetImage(ImagePaths.starlink),
+          //         fit: BoxFit.fill
+          //     )
+          // ),
           // child: Cube(
           //   onSceneCreated: (Scene scene) {
           //     scene.world.add(starlinkOBJ);
