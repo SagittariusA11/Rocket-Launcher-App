@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:model_viewer_plus/model_viewer_plus.dart';
 import 'package:rocket_launcher_app/utils/routes.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -93,6 +94,63 @@ class RocketInfoCard extends StatelessWidget {
       ),
     );
   }
+  String _getImagePath(String rocketName) {
+    switch (rocketName) {
+      case "Falcon 1":
+        return ImagePaths.falcon_1;
+      case "Falcon 9":
+        return ImagePaths.falcon_9;
+      case "Falcon Heavy":
+        return ImagePaths.falcon_heavy;
+      case "Starship":
+        return ImagePaths.starhip;
+      default:
+        return ImagePaths.rocket;
+    }
+  }
+
+  String _get3DModelPath(String rocketName) {
+    switch (rocketName) {
+      case "Falcon 1":
+        return ImagePaths.falcon_1;
+      case "Falcon 9":
+        return ModelPaths.falcon_9;
+      case "Falcon Heavy":
+        return ModelPaths.falcon_heavy;
+      case "Starship":
+        return ModelPaths.starship;
+      default:
+        return ImagePaths.rocket;
+    }
+  }
+
+  Widget showModels(String rocketName){
+    if(rocketName == 'Falcon 1'){
+      return Container(
+        height: ScreenConfig.heightPercent*30,
+        width: ScreenConfig.heightPercent*30*0.385,
+        decoration: BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage(_getImagePath(rocketName)),
+                fit: BoxFit.fill
+            )
+        ),
+      );
+    } else {
+      return SizedBox(
+        height: ScreenConfig.heightPercent*80,
+        width: ScreenConfig.heightPercent*80*0.325,
+        child: ModelViewer(
+          backgroundColor: Colors.transparent,
+          src: _get3DModelPath(rocketName),
+          alt: "3D Model of ${rocketName}",
+          ar: true,
+          autoRotate: true,
+          disableZoom: true,
+        ),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -132,17 +190,7 @@ class RocketInfoCard extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Container(
-                    margin: const EdgeInsets.symmetric(horizontal: 50, vertical: 10),
-                    height: ScreenConfig.heightPercent*80,
-                    width: ScreenConfig.heightPercent*80*0.325,
-                    decoration: const BoxDecoration(
-                      image: DecorationImage(
-                          image: AssetImage(ImagePaths.rocket),
-                          fit: BoxFit.fill
-                      ),
-                    ),
-                  ),
+                  showModels(rocket.rocketName),
                   Container(
                       margin: const EdgeInsets.symmetric(vertical: 20),
                       padding: const EdgeInsets.symmetric(horizontal: 10),

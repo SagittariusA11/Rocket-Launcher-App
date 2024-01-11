@@ -1,6 +1,13 @@
 import 'dart:core';
 import '../config/appTheme.dart';
 
+class ModelPaths {
+  static const falcon_9 = "assets/3DModels/SpaceX_Falcon_9_3D_Model/falcon9.glb";
+  static const falcon_heavy = "assets/3DModels/SpaceX_Falcon_Heavy_Rocket_3D_Model/falcon_heavy.glb";
+  static const starship = "assets/3DModels/SpaceX_Starship_SN20_BN4_3D_Model/starship.glb";
+  static const starlink = "assets/3DModels/Starlink_3D_Model/file-1620560143740.glb";
+}
+
 class ImagePaths{
 
   //logos
@@ -92,9 +99,13 @@ class ImagePaths{
 
   //rockets
   static const rocket = "assets/rockets/rocket.png";
+  static const falcon_1 = "assets/rockets/falcon_1.png";
+  static const falcon_9 = "assets/rockets/falcon_9.png";
+  static const falcon_heavy = "assets/rockets/falcon_heavy.png";
+  static const starhip = "assets/rockets/starship.png";
 
   //satellites
-  static const satellites = "assets/satellites/satellite.png";
+  static const starlink = "assets/satellites/starlink.png";
 
   //YT_Screenshot
   static const yt = "assets/images/YT_Screenshot.png";

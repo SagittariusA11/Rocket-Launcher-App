@@ -6,6 +6,7 @@ import 'package:dartssh2/dartssh2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:model_viewer_plus/model_viewer_plus.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:rocket_launcher_app/views/homeView/tab.dart';
 import 'package:scroll_snap_list/scroll_snap_list.dart';
@@ -970,21 +971,71 @@ class BuildUpcomingLaunchList extends StatelessWidget {
 
   final UpcomingLaunch upcomingLaunches;
 
+  String _get3DModelPath(String rocketName) {
+    switch (rocketName) {
+      case "Falcon 1":
+        return ImagePaths.falcon_1;
+      case "Falcon 9":
+        return ModelPaths.falcon_9;
+      case "Falcon Heavy":
+        return ModelPaths.falcon_heavy;
+      case "Starship":
+        return ModelPaths.starship;
+      default:
+        return ImagePaths.rocket;
+    }
+  }
+
+  String _getImagePath(String rocketName) {
+    switch (rocketName) {
+      case "Falcon 1":
+        return ImagePaths.falcon_1;
+      case "Falcon 9":
+        return ImagePaths.falcon_9;
+      case "Falcon Heavy":
+        return ImagePaths.falcon_heavy;
+      case "Starship":
+        return ImagePaths.starhip;
+      default:
+        return ImagePaths.rocket;
+    }
+  }
+
+  Widget showModels(String rocketName){
+    if(rocketName == 'Falcon 1'){
+      return Container(
+        height: ScreenConfig.heightPercent*30,
+        width: ScreenConfig.heightPercent*30*0.385,
+        decoration: BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage(_getImagePath(rocketName)),
+                fit: BoxFit.fill
+            )
+        ),
+      );
+    } else {
+      return SizedBox(
+        height: ScreenConfig.heightPercent*30,
+        width: ScreenConfig.heightPercent*30*0.385,
+        child: ModelViewer(
+          backgroundColor: Colors.transparent,
+          src: _get3DModelPath(rocketName),
+          alt: "3D Model of ${rocketName}",
+          ar: true,
+          autoRotate: true,
+          disableZoom: true,
+        ),
+      );
+    }
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Container(
-          height: ScreenConfig.heightPercent*30,
-          width: ScreenConfig.heightPercent*30*0.385,
-          decoration: const BoxDecoration(
-              image: DecorationImage(
-                  image: AssetImage(ImagePaths.rocket),
-                  fit: BoxFit.fill
-              )
-          ),
-        ),
+        showModels(upcomingLaunches.rocketName),
         Container(
           height: ScreenConfig.heightPercent*25,
           width: ScreenConfig.heightPercent*30*0.615,
@@ -1074,22 +1125,70 @@ class BuildPastLaunchList extends StatelessWidget {
   const BuildPastLaunchList({Key? key, required this.pastLaunches}) : super(key: key);
 
   final PastLaunch pastLaunches;
+  String _getImagePath(String rocketName) {
+    switch (rocketName) {
+      case "Falcon 1":
+        return ImagePaths.falcon_1;
+      case "Falcon 9":
+        return ImagePaths.falcon_9;
+      case "Falcon Heavy":
+        return ImagePaths.falcon_heavy;
+      case "Starship":
+        return ImagePaths.starhip;
+      default:
+        return ImagePaths.rocket;
+    }
+  }
+
+  String _get3DModelPath(String rocketName) {
+    switch (rocketName) {
+      case "Falcon 1":
+        return ImagePaths.falcon_1;
+      case "Falcon 9":
+        return ModelPaths.falcon_9;
+      case "Falcon Heavy":
+        return ModelPaths.falcon_heavy;
+      case "Starship":
+        return ModelPaths.starship;
+      default:
+        return ImagePaths.rocket;
+    }
+  }
+
+  Widget showModels(String rocketName){
+    if(rocketName == 'Falcon 1'){
+      return Container(
+        height: ScreenConfig.heightPercent*25,
+        width: ScreenConfig.heightPercent*25*0.385,
+        decoration: BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage(_getImagePath(rocketName)),
+                fit: BoxFit.fill
+            )
+        ),
+      );
+    } else {
+      return SizedBox(
+        height: ScreenConfig.heightPercent*25,
+        width: ScreenConfig.heightPercent*25*0.385,
+        child: ModelViewer(
+          backgroundColor: Colors.transparent,
+          src: _get3DModelPath(rocketName),
+          alt: "3D Model of ${rocketName}",
+          ar: true,
+          autoRotate: true,
+          disableZoom: true,
+        ),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Container(
-          height: ScreenConfig.heightPercent*25,
-          width: ScreenConfig.heightPercent*25*0.385,
-          decoration: const BoxDecoration(
-            image: DecorationImage(
-                image: AssetImage(ImagePaths.rocket),
-                fit: BoxFit.fill
-            ),
-          ),
-        ),
+        showModels(pastLaunches.rocketName),
         Container(
           height: ScreenConfig.heightPercent*20,
           width: ScreenConfig.heightPercent*25*0.615,

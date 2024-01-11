@@ -951,21 +951,70 @@ class BuildRocketsItemList extends StatelessWidget {
 
   final RocketListInventory allRockets;
 
+  String _get3DModelPath(String rocketName) {
+    switch (rocketName) {
+      case "Falcon 1":
+        return ImagePaths.falcon_1;
+      case "Falcon 9":
+        return ModelPaths.falcon_9;
+      case "Falcon Heavy":
+        return ModelPaths.falcon_heavy;
+      case "Starship":
+        return ModelPaths.starship;
+      default:
+        return ImagePaths.rocket;
+    }
+  }
+
+  String _getImagePath(String rocketName) {
+    switch (rocketName) {
+      case "Falcon 1":
+        return ImagePaths.falcon_1;
+      case "Falcon 9":
+        return ImagePaths.falcon_9;
+      case "Falcon Heavy":
+        return ImagePaths.falcon_heavy;
+      case "Starship":
+        return ImagePaths.starhip;
+      default:
+        return ImagePaths.rocket;
+    }
+  }
+
+  Widget showModels(String rocketName){
+    if(rocketName == 'Falcon 1'){
+      return Container(
+        height: ScreenConfig.heightPercent*30,
+        width: ScreenConfig.heightPercent*30*0.385,
+        decoration: BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage(_getImagePath(rocketName)),
+                fit: BoxFit.fill
+            )
+        ),
+      );
+    } else {
+      return SizedBox(
+        height: ScreenConfig.heightPercent*30,
+        width: ScreenConfig.heightPercent*30*0.385,
+        child: ModelViewer(
+          backgroundColor: Colors.transparent,
+          src: _get3DModelPath(rocketName),
+          alt: "3D Model of ${rocketName}",
+          ar: true,
+          autoRotate: false,
+          disableZoom: true,
+        ),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Container(
-          height: ScreenConfig.heightPercent*40,
-          width: ScreenConfig.heightPercent*37*0.385,
-          decoration: const BoxDecoration(
-              image: DecorationImage(
-                  image: AssetImage(ImagePaths.rocket),
-                  fit: BoxFit.fill
-              )
-          ),
-        ),
+        showModels(allRockets.rocketName),
         Container(
           height: ScreenConfig.heightPercent*29,
           width: ScreenConfig.heightPercent*35*0.615,
@@ -1066,27 +1115,26 @@ class BuildStarlinksItemList extends StatelessWidget {
         Container(
           height: ScreenConfig.heightPercent*33,
           width: ScreenConfig.heightPercent*28*0.385,
-          // decoration: const BoxDecoration(
-          //     image: DecorationImage(
-          //         image: AssetImage(ImagePaths.satellites),
-          //         fit: BoxFit.fill
-          //     )
-          // ),
-          child: Cube(
-            onSceneCreated: (Scene scene) {
-              scene.world.add(starlinkOBJ);
-              scene.camera.zoom = 10;
-            },
+          decoration: const BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage(ImagePaths.starlink),
+                  fit: BoxFit.fill
+              )
           ),
-          // child: ModelViewer(
-          //   backgroundColor: AppTheme().bg_color,
-          //   src: 'assets/satellites/starlink_spacex_satellite.glb',
-          //   alt: 'A 3D model Starlink',
-          //   ar: true,
-          //   autoRotate: true,
-          //   iosSrc: starlinkUSDZ,
-          //   disableZoom: true,
+          // child: Cube(
+          //   onSceneCreated: (Scene scene) {
+          //     scene.world.add(starlinkOBJ);
+          //     scene.camera.zoom = 10;
+          //   },
           // ),
+          child: ModelViewer(
+            backgroundColor: AppTheme().bg_color,
+            src: ModelPaths.starlink,
+            alt: 'A 3D model Starlink',
+            ar: true,
+            autoRotate: true,
+            disableZoom: true,
+          ),
         ),
         Container(
           height: ScreenConfig.heightPercent*23,

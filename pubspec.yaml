@@ -101,9 +101,14 @@ flutter:
     - assets/images/inventory/
     - assets/images/
     - assets/rockets/
-    - assets/satellites/starlink_spacex_satellite.glb
-    - assets/satellites/starlink_spacex_satellite.usdz
+    - assets/satellites/
     - assets/i18n/
+    - assets/3DModels/SpaceX_Falcon_9_3D_Model/
+    - assets/3DModels/SpaceX_Falcon_Heavy_Rocket_3D_Model/
+    - assets/3DModels/SpaceX_Starship_SN20_BN4_3D_Model/
+    - assets/3DModels/Starlink_3D_Model/
+
+
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 

@@ -646,9 +646,9 @@ class _SettingsViewState extends State<SettingsView> with SingleTickerProviderSt
                             )
                           ],
                         ),
-                        const SizedBox(
-                          height: 30,
-                        ),
+                        // const SizedBox(
+                        //   height: 30,
+                        // ),
                         // Row(
                         //   children: [
                         //     Text(
@@ -687,135 +687,135 @@ class _SettingsViewState extends State<SettingsView> with SingleTickerProviderSt
                         //     ),
                         //   ],
                         // ),
-                        // const SizedBox(
-                        //   height: 30,
-                        // ),
-                        // Column(
-                        //   mainAxisAlignment: MainAxisAlignment.center,
-                        //   crossAxisAlignment: CrossAxisAlignment.start,
-                        //   children: [
-                        //     Text(
-                        //       translate('settings.audio.audio'),
-                        //       style: TextStyle(
-                        //           fontFamily: 'GoogleSans',
-                        //           fontSize: Utils().fontSizeMultiplier(30),
-                        //           color: AppTheme().ht_color,
-                        //           fontWeight: FontWeight.bold
-                        //       ),
-                        //     ),
-                        //     const SizedBox(
-                        //       height: 20,
-                        //     ),
-                        //     SizedBox(
-                        //       width: ScreenConfig.widthPercent*40,
-                        //       child: Padding(
-                        //         padding: EdgeInsets.only(
-                        //           left: ScreenConfig.widthPercent*4,
-                        //         ),
-                        //         child: Column(
-                        //           children: [
-                        //             Row(
-                        //               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        //               children: [
-                        //                 Text(
-                        //                   translate('settings.audio.aam'),
-                        //                   style: TextStyle(
-                        //                       fontFamily: 'GoogleSans',
-                        //                       fontSize: Utils().fontSizeMultiplier(25),
-                        //                       color: AppTheme().ht_color,
-                        //                       fontWeight: FontWeight.bold
-                        //                   ),
-                        //                 ),
-                        //                 Transform.scale(
-                        //                   scale: 1.25,
-                        //                   child: Switch(
-                        //                     value: _app_audio_and_music,
-                        //                     onChanged: (bool value) {
-                        //                       setState(() {
-                        //                         _app_audio_and_music = value; // Update the switch state
-                        //                       });
-                        //                     },
-                        //                     activeColor: AppTheme().primary_color,
-                        //                     inactiveThumbColor: Colors.grey,
-                        //                     activeTrackColor: AppTheme().primary_color.withAlpha(175),
-                        //                     inactiveTrackColor: Colors.grey.shade300,
-                        //                   ),
-                        //                 )
-                        //               ],
-                        //             ),
-                        //             const SizedBox(
-                        //               height: 15,
-                        //             ),
-                        //             Row(
-                        //               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        //               children: [
-                        //                 Text(
-                        //                   translate('settings.audio.tts'),
-                        //                   style: TextStyle(
-                        //                       fontFamily: 'GoogleSans',
-                        //                       fontSize: Utils().fontSizeMultiplier(25),
-                        //                       color: AppTheme().ht_color,
-                        //                       fontWeight: FontWeight.bold
-                        //                   ),
-                        //                 ),
-                        //                 Transform.scale(
-                        //                   scale: 1.25,
-                        //                   child: Switch(
-                        //                     value: _text_to_speech,
-                        //                     onChanged: (bool value) {
-                        //                       setState(() {
-                        //                         _text_to_speech = value; // Update the switch state
-                        //                       });
-                        //                     },
-                        //                     activeColor: AppTheme().primary_color,
-                        //                     inactiveThumbColor: Colors.grey,
-                        //                     activeTrackColor: AppTheme().primary_color.withAlpha(175),
-                        //                     inactiveTrackColor: Colors.grey.shade300,
-                        //                   ),
-                        //                 )
-                        //               ],
-                        //             ),
-                        //             const SizedBox(
-                        //               height: 15,
-                        //             ),
-                        //             Row(
-                        //               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        //               children: [
-                        //                 Text(
-                        //                   translate('settings.audio.hp'),
-                        //                   style: TextStyle(
-                        //                       fontFamily: 'GoogleSans',
-                        //                       fontSize: Utils().fontSizeMultiplier(25),
-                        //                       color: AppTheme().ht_color,
-                        //                       fontWeight: FontWeight.bold
-                        //                   ),
-                        //                 ),
-                        //                 Transform.scale(
-                        //                   scale: 1.25,
-                        //                   child: Switch(
-                        //                     value: _haptic,
-                        //                     onChanged: (bool value) {
-                        //                       setState(() {
-                        //                         _haptic = value; // Update the switch state
-                        //                       });
-                        //                     },
-                        //                     activeColor: AppTheme().primary_color,
-                        //                     inactiveThumbColor: Colors.grey,
-                        //                     activeTrackColor: AppTheme().primary_color.withAlpha(175),
-                        //                     inactiveTrackColor: Colors.grey.shade300,
-                        //                   ),
-                        //                 )
-                        //               ],
-                        //             ),
-                        //           ],
-                        //         ),
-                        //       ),
-                        //     )
-                        //   ],
-                        // ),
-                        // const SizedBox(
-                        //   height: 30,
-                        // ),
+                        const SizedBox(
+                          height: 30,
+                        ),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              translate('settings.audio.audio'),
+                              style: TextStyle(
+                                  fontFamily: 'GoogleSans',
+                                  fontSize: Utils().fontSizeMultiplier(30),
+                                  color: AppTheme().ht_color,
+                                  fontWeight: FontWeight.bold
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 20,
+                            ),
+                            SizedBox(
+                              width: ScreenConfig.widthPercent*40,
+                              child: Padding(
+                                padding: EdgeInsets.only(
+                                  left: ScreenConfig.widthPercent*4,
+                                ),
+                                child: Column(
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                          translate('settings.audio.aam'),
+                                          style: TextStyle(
+                                              fontFamily: 'GoogleSans',
+                                              fontSize: Utils().fontSizeMultiplier(25),
+                                              color: AppTheme().ht_color,
+                                              fontWeight: FontWeight.bold
+                                          ),
+                                        ),
+                                        Transform.scale(
+                                          scale: 1.25,
+                                          child: Switch(
+                                            value: _app_audio_and_music,
+                                            onChanged: (bool value) {
+                                              setState(() {
+                                                _app_audio_and_music = value; // Update the switch state
+                                              });
+                                            },
+                                            activeColor: AppTheme().primary_color,
+                                            inactiveThumbColor: Colors.grey,
+                                            activeTrackColor: AppTheme().primary_color.withAlpha(175),
+                                            inactiveTrackColor: Colors.grey.shade300,
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                    const SizedBox(
+                                      height: 15,
+                                    ),
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                          translate('settings.audio.tts'),
+                                          style: TextStyle(
+                                              fontFamily: 'GoogleSans',
+                                              fontSize: Utils().fontSizeMultiplier(25),
+                                              color: AppTheme().ht_color,
+                                              fontWeight: FontWeight.bold
+                                          ),
+                                        ),
+                                        Transform.scale(
+                                          scale: 1.25,
+                                          child: Switch(
+                                            value: _text_to_speech,
+                                            onChanged: (bool value) {
+                                              setState(() {
+                                                _text_to_speech = value; // Update the switch state
+                                              });
+                                            },
+                                            activeColor: AppTheme().primary_color,
+                                            inactiveThumbColor: Colors.grey,
+                                            activeTrackColor: AppTheme().primary_color.withAlpha(175),
+                                            inactiveTrackColor: Colors.grey.shade300,
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                    const SizedBox(
+                                      height: 15,
+                                    ),
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                          translate('settings.audio.hp'),
+                                          style: TextStyle(
+                                              fontFamily: 'GoogleSans',
+                                              fontSize: Utils().fontSizeMultiplier(25),
+                                              color: AppTheme().ht_color,
+                                              fontWeight: FontWeight.bold
+                                          ),
+                                        ),
+                                        Transform.scale(
+                                          scale: 1.25,
+                                          child: Switch(
+                                            value: _haptic,
+                                            onChanged: (bool value) {
+                                              setState(() {
+                                                _haptic = value; // Update the switch state
+                                              });
+                                            },
+                                            activeColor: AppTheme().primary_color,
+                                            inactiveThumbColor: Colors.grey,
+                                            activeTrackColor: AppTheme().primary_color.withAlpha(175),
+                                            inactiveTrackColor: Colors.grey.shade300,
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 30,
+                        ),
                         Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.start,
