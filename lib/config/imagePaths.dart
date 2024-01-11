@@ -5,7 +5,7 @@ class ModelPaths {
   static const falcon_9 = "assets/3DModels/SpaceX_Falcon_9_3D_Model/falcon9.glb";
   static const falcon_heavy = "assets/3DModels/SpaceX_Falcon_Heavy_Rocket_3D_Model/falcon_heavy.glb";
   static const starship = "assets/3DModels/SpaceX_Starship_SN20_BN4_3D_Model/starship.glb";
-  static const starlink = "assets/3DModels/Starlink_3D_Model/file-1620560143740.glb";
+  static const starlink = "assets/3DModels/Starlink_3D_Model/starlink.glb";
 }
 
 class ImagePaths{

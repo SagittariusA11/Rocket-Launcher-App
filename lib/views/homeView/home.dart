@@ -46,6 +46,10 @@ class _HomeViewState extends State<HomeView> with SingleTickerProviderStateMixin
   void initState() {
     super.initState();
     homeViewAnimation.initiateHomeAnimation(this);
+    homeViewController.changeSelectedView(0);
+    setState(() {
+      AppTheme().primary_color;
+    });
   }
 
   @override

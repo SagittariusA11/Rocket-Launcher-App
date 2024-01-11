@@ -831,7 +831,7 @@ class _SettingsViewState extends State<SettingsView> with SingleTickerProviderSt
                                                 isHapticOn = value; // Update the switch state
                                               });
                                             },
-                                            activeColor: AppTheme().primary_color,
+                                            activeColor: AppTheme().ebtn_color,
                                             inactiveThumbColor: Colors.grey,
                                             activeTrackColor: AppTheme().primary_color.withAlpha(175),
                                             inactiveTrackColor: Colors.grey.shade300,

@@ -1,6 +1,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -8,6 +9,7 @@ import '../../config/appTheme.dart';
 import '../../config/imagePaths.dart';
 import '../../config/screenConfig.dart';
 import '../../utils/utils.dart';
+import '../settings.dart';
 
 
 class PayloadInfo extends StatefulWidget {
@@ -40,7 +42,12 @@ class _PayloadInfoState extends State<PayloadInfo> {
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       IconButton(
-                          onPressed: () => Navigator.of(context).pop(),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                            if(isHapticOn){
+                              HapticFeedback.vibrate();
+                            }
+                          },
                           icon: Icon(
                             Icons.cancel_outlined,
                             color: AppTheme().primary_color,
@@ -150,44 +157,44 @@ class _PayloadInfoState extends State<PayloadInfo> {
                       const SizedBox(
                         height: 15,
                       ),
-                      ElevatedButton(
-                          onPressed: () { },
-                          style: ElevatedButton.styleFrom(
-                            elevation: 10,
-                            shadowColor: Colors.grey,
-                            primary: AppTheme().primary_color,
-                            padding: EdgeInsets.all(10),
-                            shape: StadiumBorder(),
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              SizedBox(
-                                width: ScreenConfig.widthPercent*2,
-                              ),
-                              SizedBox(
-                                width: ScreenConfig.widthPercent*27,
-                                height: ScreenConfig.heightPercent*4,
-                                child: Center(
-                                  child: Text(
-                                      translate('launch_tab.vlg'),
-                                      style: TextStyle(
-                                        fontSize: Utils().fontSizeMultiplier(20),
-                                        color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
-                                      )),
-                                ),
-                              ),
-                              const Icon(
-                                Icons.location_pin,
-                                color: Colors.black,
-                                size: 35,
-                              ),
-                              SizedBox(
-                                width: ScreenConfig.widthPercent*2,
-                              ),
-                            ],
-                          )
-                      ),
+                      // ElevatedButton(
+                      //     onPressed: () { },
+                      //     style: ElevatedButton.styleFrom(
+                      //       elevation: 10,
+                      //       shadowColor: Colors.grey,
+                      //       primary: AppTheme().primary_color,
+                      //       padding: EdgeInsets.all(10),
+                      //       shape: StadiumBorder(),
+                      //     ),
+                      //     child: Row(
+                      //       mainAxisAlignment: MainAxisAlignment.center,
+                      //       children: [
+                      //         SizedBox(
+                      //           width: ScreenConfig.widthPercent*2,
+                      //         ),
+                      //         SizedBox(
+                      //           width: ScreenConfig.widthPercent*27,
+                      //           height: ScreenConfig.heightPercent*4,
+                      //           child: Center(
+                      //             child: Text(
+                      //                 translate('launch_tab.vlg'),
+                      //                 style: TextStyle(
+                      //                   fontSize: Utils().fontSizeMultiplier(20),
+                      //                   color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
+                      //                 )),
+                      //           ),
+                      //         ),
+                      //         const Icon(
+                      //           Icons.location_pin,
+                      //           color: Colors.black,
+                      //           size: 35,
+                      //         ),
+                      //         SizedBox(
+                      //           width: ScreenConfig.widthPercent*2,
+                      //         ),
+                      //       ],
+                      //     )
+                      // ),
                     ],
                   ),
                 ),

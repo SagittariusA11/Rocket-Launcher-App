@@ -44,15 +44,11 @@ class _InventoryViewState extends State<InventoryView> with SingleTickerProvider
   ScrollController allRocketsScrollController = ScrollController();
   ScrollController allStarlinkScrollController = ScrollController();
   late String starlinkGLB;
-  late String starlinkUSDZ;
-  late Object starlinkOBJ;
 
   @override
   void initState() {
     super.initState();
-    starlinkGLB = "assets/satellites/starlink_spacex_satellite.glb";
-    starlinkUSDZ = "assets/satellites/Starlink_Spacex_Satellite.usdz";
-    starlinkOBJ = Object(fileName: "assets/satellites/starlink.obj");
+    starlinkGLB = "assets/3DModels/Starlink_3D_Model/starlink.glb";
     _allRocketsFuture = InventoryService.fetchallRockets();
     _allStarlinkFuture = InventoryService.fetchallStarlink();
     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -930,8 +926,6 @@ class _InventoryViewState extends State<InventoryView> with SingleTickerProvider
                   child: BuildStarlinksItemList(
                     allStarlink: allStarlink,
                     starlinkGLB: starlinkGLB,
-                    starlinkUSDZ: starlinkUSDZ,
-                    starlinkOBJ: starlinkOBJ,
                   )
               );
             },
@@ -1105,14 +1099,10 @@ class BuildStarlinksItemList extends StatelessWidget {
     Key? key,
     required this.allStarlink,
     required this.starlinkGLB,
-    required this.starlinkUSDZ,
-    required this.starlinkOBJ
   }) : super(key: key);
 
   final StarlinkListInventory allStarlink;
   String starlinkGLB;
-  String starlinkUSDZ;
-  Object starlinkOBJ;
 
 
   @override
@@ -1192,7 +1182,7 @@ class BuildStarlinksItemList extends StatelessWidget {
                   Text(
                     "${translate('inventory.velocity')}: ${allStarlink.velocity}  Kms",
                     style: TextStyle(
-                      fontSize: 15,
+                      fontSize: 12,
                       color: selectedAppTheme.isLightMode?Colors.black:Colors.white,
                     ),
                   ),

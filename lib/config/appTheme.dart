@@ -21,8 +21,7 @@ class AppTheme{
   Color.fromARGB(255, 30, 65, 138);
 
   //bg_color
-  Color bg_color = selectedAppTheme.isLightMode?Color.fromARGB(
-      255, 238, 245, 255):
+  Color bg_color = selectedAppTheme.isLightMode?Color.fromARGB(255, 238, 245, 255):
   selectedAppTheme.isDarkMode? Color.fromARGB(255, 0, 2, 17):
   selectedAppTheme.isRedMode? Color.fromARGB(255, 255, 220, 220):
   selectedAppTheme.isGreenMode? Color.fromARGB(255, 218, 255, 234):
